@@ -1196,7 +1196,7 @@ function App() {
                     </div>
                     <div className="flex flex-col">
                         <h1 className="text-[#111418] text-lg font-black leading-tight whitespace-nowrap">Dell AI Healthcare Assistant</h1>
-                        <p className="text-[#617289] text-xs font-medium">v3.4</p>
+                        <p className="text-[#617289] text-xs font-medium">v3.5</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-4 flex-1 max-w-xl mx-8">
@@ -2006,60 +2006,81 @@ function App() {
                                                 )}
                                             </button>
 
-                                            {/* Stats Panel (Light Mode for Triage) */}
-                                            <div className="bg-white rounded-2xl border border-gray-100 p-4 flex items-center justify-between gap-4 shadow-sm mt-4">
-                                                <div className="flex gap-4 w-full">
-                                                    <div className="flex flex-col items-center gap-1 flex-1">
-                                                        <div className="relative w-3 h-10 bg-gray-100 rounded-full overflow-hidden">
-                                                            <div className="absolute bottom-0 left-0 w-full bg-red-400 shadow-[0_0_10px_rgba(248,113,113,0.6)] transition-all duration-1000 rounded-full" style={{ height: `${hwStats.gpu}%` }}></div>
-                                                        </div>
-                                                        <span className="text-[10px] font-bold text-gray-400">GPU</span>
-                                                        <span className="text-[9px] font-mono text-red-500 font-bold">{hwStats.gpu}%</span>
-                                                    </div>
-                                                    <div className="flex flex-col items-center gap-1 flex-1">
-                                                        <div className="relative w-3 h-10 bg-gray-100 rounded-full overflow-hidden">
-                                                            <div className="absolute bottom-0 left-0 w-full bg-orange-400 shadow-[0_0_10px_rgba(251,146,60,0.6)] transition-all duration-1000 rounded-full" style={{ height: `${hwStats.mem}%` }}></div>
-                                                        </div>
-                                                        <span className="text-[10px] font-bold text-gray-400">MEM</span>
-                                                        <span className="text-[9px] font-mono text-orange-500 font-bold">{hwStats.mem}%</span>
-                                                    </div>
-                                                    <div className="border-l border-gray-100 pl-4 flex flex-col justify-center flex-[3]">
-                                                        <span className="text-[10px] uppercase text-gray-400 font-semibold tracking-wider">Throughput</span>
-                                                        <div className="text-3xl font-mono font-bold text-gray-800 flex items-baseline gap-1.5 mt-1">
-                                                            {hwStats.throughput} <span className="text-xs font-sans text-red-500 font-bold bg-red-50 px-1.5 py-0.5 rounded">tokens/s</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+
 
                                         </div>
                                     </div>
 
                                     {/* Triage Result Side */}
-                                    <div className="flex-1 bg-gray-50/50 p-10 flex flex-col items-center justify-center border-l md:border-l-0">
+                                    <div className="flex-1 bg-gray-50/50 p-10 flex flex-col border-l md:border-l-0 overflow-y-auto">
+
+                                        {/* Performance Monitor (Reloj / Gauge Pattern at top right) */}
+                                        <div className="w-full bg-white rounded-3xl border border-gray-100 p-6 shadow-sm mb-8 animate-in fade-in slide-in-from-top-4">
+                                            <div className="flex items-end justify-between w-full h-full gap-8">
+
+                                                {/* GPU Gauge */}
+                                                <div className="flex flex-col items-center justify-end flex-1">
+                                                    <div className="relative w-28 h-14 overflow-hidden flex justify-center">
+                                                        <svg className="w-28 h-28 absolute top-0" viewBox="0 0 100 100">
+                                                            {/* Background Arc */}
+                                                            <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#f3f4f6" strokeWidth="10" strokeLinecap="round" />
+                                                            {/* Progress Arc (Circumference ~ 109.9) */}
+                                                            <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#ef4444" strokeWidth="10" strokeLinecap="round" strokeDasharray="109.95" strokeDashoffset={109.95 - (hwStats.gpu / 100) * 109.95} className="transition-all duration-1000 ease-out drop-shadow-[0_2px_4px_rgba(239,68,68,0.3)]" />
+                                                        </svg>
+                                                        <div className="absolute bottom-0 w-full text-center flex flex-col items-center">
+                                                            <span className="text-sm font-black text-gray-800 tabular-nums">{hwStats.gpu}%</span>
+                                                        </div>
+                                                    </div>
+                                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-2">GPU Usage</span>
+                                                </div>
+
+                                                {/* MEM Gauge */}
+                                                <div className="flex flex-col items-center justify-end flex-1">
+                                                    <div className="relative w-28 h-14 overflow-hidden flex justify-center">
+                                                        <svg className="w-28 h-28 absolute top-0" viewBox="0 0 100 100">
+                                                            <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#f3f4f6" strokeWidth="10" strokeLinecap="round" />
+                                                            <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#f97316" strokeWidth="10" strokeLinecap="round" strokeDasharray="109.95" strokeDashoffset={109.95 - (hwStats.mem / 100) * 109.95} className="transition-all duration-1000 ease-out drop-shadow-[0_2px_4px_rgba(249,115,22,0.3)]" />
+                                                        </svg>
+                                                        <div className="absolute bottom-0 w-full text-center flex flex-col items-center">
+                                                            <span className="text-sm font-black text-gray-800 tabular-nums">{hwStats.mem}%</span>
+                                                        </div>
+                                                    </div>
+                                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-2">Mem Usage</span>
+                                                </div>
+
+                                                {/* Throughput */}
+                                                <div className="border-l border-gray-100 pl-8 flex flex-col justify-end h-16 flex-[2]">
+                                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5 flex items-center gap-1.5"><Zap className="size-3 text-yellow-500 fill-yellow-500" /> Model Throughput</span>
+                                                    <div className="text-4xl font-mono font-black text-gray-900 flex items-baseline gap-2">
+                                                        {hwStats.throughput} <span className="text-[11px] font-sans text-gray-500 font-bold bg-gray-100 px-2 py-1 rounded-lg uppercase tracking-widest">tok/s</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* Status and Error Alerts */}
                                         {error && (
-                                            <div className="w-full mb-6 p-4 bg-red-50 border border-red-100 rounded-2xl flex items-center gap-3 animate-in fade-in slide-in-from-top-4">
+                                            <div className="w-full max-w-lg mb-6 p-4 bg-red-50 border border-red-100 rounded-2xl flex items-center gap-3 animate-in fade-in slide-in-from-top-4">
                                                 <AlertCircle className="text-red-500 size-5" />
                                                 <p className="text-xs font-bold text-red-600">{error}</p>
                                             </div>
                                         )}
 
                                         {!triageResult && !triageLoading && (
-                                            <div className="text-center space-y-4 opacity-30">
+                                            <div className="text-center space-y-4 opacity-30 my-auto">
                                                 <span className="material-symbols-outlined text-8xl">clinical_notes</span>
                                                 <p className="text-xs font-black uppercase tracking-[0.2em]">Scanning Parameters...</p>
                                             </div>
                                         )}
 
                                         {triageLoading && (
-                                            <div className="text-center space-y-6">
+                                            <div className="text-center space-y-6 my-auto">
                                                 <div className="size-24 border-8 border-red-100 border-t-red-600 rounded-full animate-spin mx-auto"></div>
                                                 <p className="text-sm font-black text-red-600 uppercase tracking-widest animate-pulse">Classifying Manchester Severity...</p>
                                             </div>
                                         )}
 
                                         {triageResult && (
-                                            <div className="w-full space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                                            <div className="w-full space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500 mt-2">
                                                 {/* Cabecera de Urgencia (Formato Imagen) */}
                                                 <div className={`p-6 rounded-2xl flex items-center gap-6 shadow-md text-white ${triageResult?.level === 1 ? 'bg-[#ef4444]' :
                                                     triageResult?.level === 2 ? 'bg-[#f97316]' :
