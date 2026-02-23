@@ -1196,7 +1196,7 @@ function App() {
                     </div>
                     <div className="flex flex-col">
                         <h1 className="text-[#111418] text-lg font-black leading-tight whitespace-nowrap">Dell AI Healthcare Assistant</h1>
-                        <p className="text-[#617289] text-xs font-medium">v3.3</p>
+                        <p className="text-[#617289] text-xs font-medium">v3.4</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-4 flex-1 max-w-xl mx-8">
