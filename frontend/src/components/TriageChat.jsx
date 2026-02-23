@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 
 const TriageChat = ({ backendUrl, selectedModel, contextData }) => {
     const [messages, setMessages] = useState([
-        { role: 'assistant', content: 'Hola. Soy tu asistente de triaje. ¿Tienes dudas sobre la clasificación del paciente o el protocolo Manchester?' }
+        { role: 'assistant', content: 'Hello. I am your Triage Assistant. Do you have any questions about the patient\'s classification or the Manchester protocol?' }
     ]);
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
@@ -26,11 +26,11 @@ const TriageChat = ({ backendUrl, selectedModel, contextData }) => {
 
         try {
             // Include context from the current triage evaluation if available
-            let contextStr = "Contexto Triaje: Sin datos previos.";
+            let contextStr = "Triage Context: No previous data.";
             if (contextData) {
-                contextStr = `Contexto Triaje: Paciente ${contextData.priority_name} (Nivel ${contextData.level}). 
-                Justificación: ${contextData.justification}. 
-                Acciones: ${contextData.actions}.`;
+                contextStr = `Triage Context: Patient ${contextData.priority_name} (Level ${contextData.level}). 
+                Justification: ${contextData.justification}. 
+                Actions: ${contextData.actions}.`;
             }
 
             const res = await axios.post(`${backendUrl}/chat`, {
@@ -41,7 +41,7 @@ const TriageChat = ({ backendUrl, selectedModel, contextData }) => {
             });
             setMessages(prev => [...prev, { role: 'assistant', content: res.data.response }]);
         } catch (err) {
-            setMessages(prev => [...prev, { role: 'assistant', content: "Error de conexión." }]);
+            setMessages(prev => [...prev, { role: 'assistant', content: "Connection error." }]);
         } finally {
             setLoading(false);
         }
@@ -52,7 +52,7 @@ const TriageChat = ({ backendUrl, selectedModel, contextData }) => {
             <div className="chat-smart-container">
                 <div className="chat-header-inline" style={{ borderBottom: '2px solid #0ea5e9', background: '#f8fafc' }}>
                     <Activity size={20} style={{ color: '#0ea5e9' }} />
-                    <span style={{ fontWeight: '800', letterSpacing: '-0.02em', color: '#0f172a' }}>ASISTENTE CLÍNICO DE TRIAJE</span>
+                    <span style={{ fontWeight: '800', letterSpacing: '-0.02em', color: '#0f172a' }}>CLINICAL TRIAGE ASSISTANT</span>
                 </div>
 
                 <div className="chat-messages-inline" style={{ padding: '2rem 1.5rem', background: '#fefefe' }}>
@@ -84,7 +84,7 @@ const TriageChat = ({ backendUrl, selectedModel, contextData }) => {
                     ))}
                     {loading && (
                         <div className="chat-msg assistant" style={{ fontStyle: 'italic', color: '#0ea5e9', display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1rem' }}>
-                            <Loader2 className="spin" size={18} /> <strong>Analizando Protocolo Manchester...</strong>
+                            <Loader2 className="spin" size={18} /> <strong>Analyzing Manchester Protocol...</strong>
                         </div>
                     )}
                     <div ref={messagesEndRef} />
@@ -92,16 +92,18 @@ const TriageChat = ({ backendUrl, selectedModel, contextData }) => {
 
                 <form className="chat-input-inline" onSubmit={handleSend}>
                     <input
-                        placeholder="Ej: ¿Por qué fiebre de 40 es Naranja y no Rojo?"
+                        placeholder="e.g.: Why is 40°C fever Orange and not Red?"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         disabled={loading}
                     />
                     <button type="submit" disabled={loading || !input} className="btn-primary" style={{ width: 'auto', padding: '0 1.5rem' }}>
-                        <Send size={18} /> Enviar
+                        <Send size={18} /> Send
                     </button>
                 </form>
             </div>
         </div>
     );
 };
+
+export default TriageChat;

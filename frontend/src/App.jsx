@@ -411,7 +411,7 @@ const MonitorCentral = ({ patients }) => {
                             <td><span className="status-badge estable">ESTABLE</span></td>
                         </tr>
                         <tr>
-                            <td>{patients[0]?.nombre || "Cargando..."}</td>
+                            <td>{patients[0]?.name || "Loading..."}</td>
                             <td>Scanner Abdominal</td>
                             <td>45.1%</td>
                             <td><span className="status-badge revision">EN REVISIÓN</span></td>
@@ -667,9 +667,9 @@ function App() {
         const patient = patients.find(p => p.id === id);
         if (patient) {
             setSelectedPatient(patient);
-            setAge(patient.edad);
-            setSex(patient.sexo);
-            setSymptoms(patient.motivo);
+            setAge(patient.age);
+            setSex(patient.sex);
+            setSymptoms(patient.reason);
         } else {
             setSelectedPatient(null);
             setAge('');
@@ -1947,7 +1947,7 @@ function App() {
                                                     className="w-full bg-gray-50 border-2 border-transparent focus:border-red-100 focus:bg-white rounded-2xl p-4 text-sm font-bold text-gray-800 outline-none transition-all shadow-inner"
                                                 >
                                                     <option value="">Select patient...</option>
-                                                    {patients.map(p => <option key={p.id} value={p.id}>{p.nombre} ({p.id})</option>)}
+                                                    {patients.map(p => <option key={p.id} value={p.id}>{p.name} ({p.id})</option>)}
                                                 </select>
                                             </div>
 
@@ -2107,19 +2107,19 @@ function App() {
                                                     <td className="px-8 py-6 text-xs font-mono font-bold text-gray-400">{p.id}</td>
                                                     <td className="px-8 py-6">
                                                         <div className="flex items-center gap-3">
-                                                            <div className="size-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs uppercase">{p.nombre.substring(0, 2)}</div>
-                                                            <span className="font-black text-gray-900 text-sm group-hover:text-[#0076ce] transition-colors">{p.nombre}</span>
+                                                            <div className="size-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs uppercase">{p.name.substring(0, 2)}</div>
+                                                            <span className="font-black text-gray-900 text-sm group-hover:text-[#0076ce] transition-colors">{p.name}</span>
                                                         </div>
                                                     </td>
                                                     <td className="px-8 py-6">
                                                         <div className="flex items-center gap-2">
-                                                            <span className="bg-gray-100 px-2 py-1 rounded text-[10px] font-black text-gray-600 uppercase tracking-widest">{p.edad} años</span>
-                                                            <span className="text-xs font-bold text-gray-400 uppercase">{p.sexo}</span>
+                                                            <span className="bg-gray-100 px-2 py-1 rounded text-[10px] font-black text-gray-600 uppercase tracking-widest">{p.age} yrs</span>
+                                                            <span className="text-xs font-bold text-gray-400 uppercase">{p.sex}</span>
                                                         </div>
                                                     </td>
-                                                    <td className="px-8 py-6 text-sm font-medium max-w-xs truncate text-gray-600">{p.motivo}</td>
+                                                    <td className="px-8 py-6 text-sm font-medium max-w-xs truncate text-gray-600">{p.reason}</td>
                                                     <td className="px-8 py-6 text-right">
-                                                        <button className="text-[#0076ce] font-black text-[10px] uppercase tracking-widest bg-[#0076ce]/5 border border-[#0076ce]/10 px-5 py-2.5 rounded-xl hover:bg-[#0076ce] hover:text-white transition-all shadow-sm">Abrir Ficha 360º</button>
+                                                        <button className="text-[#0076ce] font-black text-[10px] uppercase tracking-widest bg-[#0076ce]/5 border border-[#0076ce]/10 px-5 py-2.5 rounded-xl hover:bg-[#0076ce] hover:text-white transition-all shadow-sm">Open 360º Record</button>
                                                     </td>
                                                 </tr>
                                             ))}

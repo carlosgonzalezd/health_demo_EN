@@ -4,10 +4,10 @@ import { LayoutDashboard, Users, Activity, FileText, Settings, Plus, LogOut, Cal
 const Sidebar = ({ activeTab, setActiveTab, onNewScan }) => {
     const menuItems = [
         { id: 'dashboard', label: 'Overview', icon: LayoutDashboard },
-        { id: 'triaje', label: 'Triaje Manchester', icon: Activity },
-        { id: 'radiologia', label: 'Radiología AI', icon: FileText },
-        { id: 'pacientes', label: 'Pacientes', icon: Users },
-        { id: 'planillas', label: 'Calendario Turnos', icon: Calendar },
+        { id: 'triaje', label: 'Manchester Triage', icon: Activity },
+        { id: 'radiologia', label: 'Radiology AI', icon: FileText },
+        { id: 'pacientes', label: 'Patients', icon: Users },
+        { id: 'planillas', label: 'Shift Calendar', icon: Calendar },
     ];
 
     return (

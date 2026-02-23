@@ -218,9 +218,9 @@ async def analyze_image(
     file: UploadFile = File(...),
     model: str = Form("llama3"),
     patient_id: str = Form("None"),
-    age: str = Form("Desconocida"),
-    sex: str = Form("Desconocido"),
-    symptoms: str = Form("No especificados"),
+    age: str = Form("Unknown"),
+    sex: str = Form("Unknown"),
+    symptoms: str = Form("Not specified"),
     engine: str = Form("xray")
 ):
     # Patient context
@@ -228,13 +228,13 @@ async def analyze_image(
     
     if patient_data:
         context_prefix = f"""
-PACIENTE: {patient_data['nombre']} (ID: {patient_id})
-PERFIL: {patient_data['edad']} años, {patient_data['sexo']}.
-ANTECEDENTES: {patient_data['historia']}.
-ESTADO ACTUAL: {patient_data['motivo']}.
+PATIENT: {patient_data['name']} (ID: {patient_id})
+PROFILE: {patient_data['age']} years old, {patient_data['sex']}.
+MEDICAL HISTORY: {patient_data['history']}.
+CURRENT STATUS: {patient_data['reason']}.
 """
     else:
-        context_prefix = f"Paciente genérico. Edad: {age}, Sexo: {sex}. Síntomas: {symptoms}."
+        context_prefix = f"Generic patient. Age: {age}, Sex: {sex}. Symptoms: {symptoms}."
 
     # 1. Vision Analysis - Route to selected engine
     image_bytes = await file.read()
@@ -280,55 +280,55 @@ ESTADO ACTUAL: {patient_data['motivo']}.
             detection_parts.append("HALLAZGOS LEVES (10-30%): " + 
                 ", ".join([f"{k}: {v*100:.1f}%" for k, v in sorted(low.items(), key=lambda x: -x[1])]))
         
-        detection_text = "\n".join(detection_parts) if detection_parts else "Sin hallazgos patológicos significativos. Radiografía aparentemente normal."
+        detection_text = "\n".join(detection_parts) if detection_parts else "No significant pathological findings. Radiograph appears normal."
     else:
-        detection_text = ", ".join([f"{d['class']} ({d['confidence']:.2f})" for d in detections]) or "Sin hallazgos detectados."
+        detection_text = ", ".join([f"{d['class']} ({d['confidence']:.2f})" for d in detections]) or "No findings detected."
 
     # 2. System Prompt
-    system_prompt = """Eres un radiólogo especialista y médico internista de alto nivel. Responde SIEMPRE en español.
+    system_prompt = """You are a specialist radiologist and high-level internist. ALWAYS respond in English.
 
-REGLAS DE FORMATO VISUAL (CRÍTICAS):
-1. Usa **ESTRICTAMENTE Markdown** para jerarquía.
-2. Usa **Headers** (### SECCIÓN) para los bloques de información.
-3. **PREFIERE EL USO DE PÁRRAFOS** claros y legibles frente a listas excesivas.
-4. Escribe de forma narrativa y fluida, evitando el formato esquemático o "telegráfico".
-5. Usa **doble salto de línea** entre párrafos para mejorar la legibilidad.
-6. Resalta con **negritas** solo los diagnósticos clave y valores patológicos.
+VISUAL FORMATTING RULES (CRITICAL):
+1. Use **STRICTLY Markdown** for hierarchy.
+2. Use **Headers** (### SECTION) for information blocks.
+3. **PREFER PARAGRAPHS** over excessive lists for legibility.
+4. Write in a narrative and fluid way, avoiding "telegraphic" or schematic formats.
+5. Use **double line breaks** between paragraphs to improve readability.
+6. Highlight key diagnoses and pathological values with **bold**.
 
-NORMAS CLÍNICAS:
-- Correlaciona SIEMPRE los hallazgos de imagen con los antecedentes del paciente.
-- Redacta como un informe médico formal: "Se observa...", "Compatible con...", "Se sugiere...".
-- Si el motor de visión es YOLO (general), advierte que la detección no es clínica.
-- Si el motor es TorchXRayVision, usa las probabilidades para integrarlas en la narrativa diagnóstica.
-- Incluye SIEMPRE recomendaciones de pruebas complementarias en un párrafo final.
+CLINICAL STANDARDS:
+- ALWAYS correlate image findings with the patient's medical history.
+- Write as a formal medical report: "Observed...", "Consistent with...", "Suggests...".
+- If the vision engine is YOLO (general), warn that the detection is not clinical.
+- If the engine is TorchXRayVision, use the probabilities to integrate them into the diagnostic narrative.
+- ALWAYS include recommendations for complementary tests in a final paragraph.
 """
 
     user_prompt = f"""
-MOTOR DE VISIÓN UTILIZADO: {engine_label}
-CONTEXTO CLÍNICO: {context_prefix}
-HALLAZGOS DE IMAGEN: {detection_text}
+VISION ENGINE USED: {engine_label}
+CLINICAL CONTEXT: {context_prefix}
+IMAGE FINDINGS: {detection_text}
 
-Genera un informe estructurado en JSON:
+Generate a structured JSON report:
 
-1. 'clinical_report': Informe técnico para especialistas con estas secciones:
-   ► HALLAZGOS RADIOLÓGICOS: Describe lo detectado por el motor de visión.
-   ► CORRELACIÓN CLÍNICA: Relaciona hallazgos con antecedentes del paciente.
-   ► IMPRESIÓN DIAGNÓSTICA: Diagnóstico diferencial ordenado por probabilidad.
-   ► PLAN DE ACTUACIÓN: Pruebas complementarias y seguimiento recomendado.
-   (Cada sección en un párrafo separado con salto de línea)
+1. 'clinical_report': Technical report for specialists with these sections:
+   ► RADIOLOGICAL FINDINGS: Describe what was detected by the vision engine.
+   ► CLINICAL CORRELATION: Relate findings with the patient's history.
+   ► DIAGNOSTIC IMPRESSION: Differential diagnosis ordered by probability.
+   ► ACTION PLAN: Complementary tests and recommended follow-up.
+   (Each section in a separate paragraph with line breaks)
 
-2. 'patient_explanation': INFORME RADIOLÓGICO (DESTINADO AL PACIENTE):
-   - Redactado como un documento oficial que se entregará al paciente.
-   - Estructura sugerida: "Motivo del estudio", "Hallazgos principales", "Conclusión y recomendaciones".
-   - Lenguaje claro pero manteniendo la seriedad clínica.
-   - Evita infantilizar la explicación; sé objetivo y claro.
-   (Usa párrafos cortos y separados)
+2. 'patient_explanation': RADIOLOGY REPORT (FOR THE PATIENT):
+   - Written as an official document to be delivered to the patient.
+   - Suggested structure: "Reason for study", "Main findings", "Conclusion and recommendations".
+   - Clear language while maintaining clinical seriousness.
+   - Avoid infantilizing the explanation; be objective and clear.
+   (Use short, separate paragraphs)
 
-Responde ESTRICTAMENTE con un objeto JSON válido que contenga exactamente estas dos claves con el contenido generado por ti:
+STRICTLY respond with a valid JSON object containing exactly these two keys with your generated content:
 
 {{
-  "clinical_report": "...escribe aquí el informe técnico detallado para el médico...",
-  "patient_explanation": "...escribe aquí la explicación clara y empática para el paciente..."
+  "clinical_report": "...write the detailed technical report for the doctor here...",
+  "patient_explanation": "...write the clear and empathetic explanation for the patient here..."
 }}
 """
 
@@ -364,7 +364,7 @@ Responde ESTRICTAMENTE con un objeto JSON válido que contenga exactamente estas
                 detections=detections,
                 clinical_report=clin_rep,
                 patient_explanation=pat_exp,
-                findings_context=context_prefix + f"\nMotor: {engine_label}\nHallazgos: {detection_text}",
+                findings_context=context_prefix + f"\nEngine: {engine_label}\nFindings: {detection_text}",
                 engine_used=engine_label,
                 pathologies=pathologies
             )
@@ -372,8 +372,8 @@ Responde ESTRICTAMENTE con un objeto JSON válido que contenga exactamente estas
             print(f"Error in LLM Call: {e}")
             return AnalysisResponse(
                 detections=detections,
-                clinical_report=f"Error técnico en el análisis: {str(e)}",
-                patient_explanation="Lo sentimos, no hemos podido generar el informe en este momento.",
+                clinical_report=f"Technical error in analysis: {str(e)}",
+                patient_explanation="Sorry, we could not generate the report at this time.",
                 findings_context=context_prefix,
                 engine_used=engine_label,
                 pathologies=pathologies
@@ -381,20 +381,20 @@ Responde ESTRICTAMENTE con un objeto JSON válido que contenga exactamente estas
 
 @app.post("/chat")
 async def chat_with_context(req: ChatRequest):
-    system_prompt = f"""Eres un médico experto respondiendo consultas clínicas detalladas.
-Contexto del caso: {req.context}
+    system_prompt = f"""You are an expert doctor responding to detailed clinical queries.
+Case context: {req.context}
 
-REGLAS DE FORMATO (OBLIGATORIAS):
-1. Responde SIEMPRE en ESPAÑOL.
-2. Usa **Markdown** básico (negritas, cursivas, listas).
-3. **PROHIBIDO USAR TABLAS** (formato | Tabla |). Rompen la visualización en móviles.
-4. Para presentar datos estructurados, usa SIEMPRE listas con este formato:
-   - **Dato**: Valor y explicación.
-5. CADA SECCIÓN debe tener un título con emojis (ej: 📊 **METRÍAS UTILIZADAS**).
-6. Explica con DETALLE cada punto. Tu respuesta debe educar y justificar.
-7. Usa DOBLE SALTO DE LÍNEA solo para separar grandes bloques o secciones.
-8. En las listas, usa SALTO SIMPLE para que queden compactas.
-9. Resalta términos médicos o prioritarios con **negrita**.
+FORMATTING RULES (MANDATORY):
+1. ALWAYS respond in ENGLISH.
+2. Use basic **Markdown** (bold, italics, lists).
+3. **DO NOT USE TABLES** (| Table | format). They break mobile display.
+4. To present structured data, ALWAYS use lists with this format:
+   - **Data**: Value and explanation.
+5. EACH SECTION must have a title with emojis (e.g., 📊 **METRICS USED**).
+6. Explain each point in DETAIL. Your response should educate and justify.
+7. Use DOUBLE LINE BREAKS only to separate large blocks or sections.
+8. In lists, use SINGLE LINE BREAKS to keep them compact.
+9. Highlight medical or priority terms with **bold**.
 """
     
     messages = [{"role": "system", "content": system_prompt}] + req.history[-6:] + [{"role": "user", "content": req.message}]
@@ -402,26 +402,26 @@ REGLAS DE FORMATO (OBLIGATORIAS):
         try:
             payload = {"model": req.model, "messages": messages, "stream": False}
             resp = await client.post(f"{req.ollama_url if req.ollama_url else config['OLLAMA_URL']}/api/chat", json=payload, timeout=60.0)
-            return {"response": resp.json().get("message", {}).get("content", "Sin respuesta.")}
+            return {"response": resp.json().get("message", {}).get("content", "No response.")}
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/chat_stream")
 async def chat_with_context_stream(req: ChatRequest):
-    system_prompt = f"""Eres un médico experto respondiendo consultas clínicas detalladas.
-Contexto del caso: {req.context}
+    system_prompt = f"""You are an expert doctor responding to detailed clinical queries.
+Case context: {req.context}
 
-REGLAS DE FORMATO (OBLIGATORIAS):
-1. Responde SIEMPRE en ESPAÑOL.
-2. Usa **Markdown** básico (negritas, cursivas, listas).
-3. **PROHIBIDO USAR TABLAS** (formato | Tabla |). Rompen la visualización en móviles.
-4. Para presentar datos estructurados, usa SIEMPRE listas con este formato:
-   - **Dato**: Valor y explicación.
-5. CADA SECCIÓN debe tener un título con emojis (ej: 📊 **METRÍAS UTILIZADAS**).
-6. Explica con DETALLE cada punto. Tu respuesta debe educar y justificar.
-7. Usa DOBLE SALTO DE LÍNEA solo para separar grandes bloques o secciones.
-8. En las listas, usa SALTO SIMPLE para que queden compactas.
-9. Resalta términos médicos o prioritarios con **negrita**.
+FORMATTING RULES (MANDATORY):
+1. ALWAYS respond in ENGLISH.
+2. Use basic **Markdown** (bold, italics, lists).
+3. **DO NOT USE TABLES** (| Table | format). They break mobile display.
+4. To present structured data, ALWAYS use lists with this format:
+   - **Data**: Value and explanation.
+5. EACH SECTION must have a title with emojis (e.g., 📊 **METRICS USED**).
+6. Explain each point in DETAIL. Your response should educate and justify.
+7. Use DOUBLE LINE BREAKS only to separate large blocks or sections.
+8. In lists, use SINGLE LINE BREAKS to keep them compact.
+9. Highlight medical or priority terms with **bold**.
 """
     
     messages = [{"role": "system", "content": system_prompt}] + req.history[-6:] + [{"role": "user", "content": req.message}]
@@ -442,7 +442,7 @@ REGLAS DE FORMATO (OBLIGATORIAS):
                             except json.JSONDecodeError:
                                 continue
             except Exception as e:
-                yield f"\n\n[Error de conexión con el motor de inferencia: {str(e)}]"
+                yield f"\n\n[Connection error with the inference engine: {str(e)}]"
 
     return StreamingResponse(generate(), media_type="text/plain")
 
@@ -450,40 +450,40 @@ REGLAS DE FORMATO (OBLIGATORIAS):
 async def analyze_triage(req: TriageRequest):
     # Construct Vitals text
     v = req.vitals
-    vitals_text = f"FC: {v.hr or 'N/A'} bpm, TA: {v.bp_sys or '?'}/{v.bp_dia or '?'} mmHg, Temp: {v.temp or 'N/A'}°C, SpO2: {v.spo2 or 'N/A'}%"
+    vitals_text = f"HR: {v.hr or 'N/A'} bpm, BP: {v.bp_sys or '?'}/{v.bp_dia or '?'} mmHg, Temp: {v.temp or 'N/A'}°C, SpO2: {v.spo2 or 'N/A'}%"
     
     # Construct Patient Context
-    patient_text = "NUEVO PACIENTE (SIN ANTECEDENTES)."
+    patient_text = "NEW PATIENT (NO MEDICAL HISTORY)."
     if req.patient_context:
         pc = req.patient_context
-        patient_text = f"PACIENTE: {pc.get('nombre')} ({pc.get('edad')} años, {pc.get('sexo')}). ANTECEDENTES: {pc.get('historia')}."
+        patient_text = f"PATIENT: {pc.get('name')} ({pc.get('age')} years old, {pc.get('sex')}). MEDICAL HISTORY: {pc.get('history')}."
 
     # Single combined prompt (works for both chat and generate APIs)
-    full_prompt = f"""Eres un experto en triaje hospitalario aplicando el Sistema Manchester (MTS).
+    full_prompt = f"""You are a hospital triage expert applying the Manchester Triage System (MTS).
 
-NIVELES DE URGENCIA:
-1=ROJO (Emergencia, riesgo vital inmediato, atención inmediata)
-2=NARANJA (Muy Urgente, riesgo vital potencial, atención en menos de 15 min)
-3=AMARILLO (Urgente, potencialmente grave, atención en menos de 60 min)
-4=VERDE (Estándar, poco urgente, atención en menos de 2h)
+URGENCY LEVELS:
+1=RED (Emergency, immediate life threat, immediate care)
+2=ORANGE (Very Urgent, potential life threat, care within 15 min)
+3=YELLOW (Urgent, potentially serious, care within 60 min)
+4=GREEN (Standard, low urgency, care within 2h)
 
-CRITERIOS DE ALARMA:
-- Temperatura >=40°C → mínimo Nivel 2 (NARANJA), si >=42°C → Nivel 1 (ROJO)
-- Temperatura 38.5-39.9°C → Nivel 2 o 3 (NARANJA/AMARILLO)
-- SpO2 <90% → Nivel 1 (ROJO)
-- SpO2 90-94% → Nivel 2 (NARANJA)
-- FC >120 o <50 bpm → Nivel 2 (NARANJA)
-- TA sistólica >200 o <80 mmHg → Nivel 1 o 2
-- Dolor torácico → mínimo Nivel 2 (NARANJA)
-- Dificultad respiratoria severa → Nivel 1 (ROJO)
+ALARMS CRITERIA:
+- Temperature >=40°C → minimum Level 2 (ORANGE), if >=42°C → Level 1 (RED)
+- Temperature 38.5-39.9°C → Level 2 or 3 (ORANGE/YELLOW)
+- SpO2 <90% → Level 1 (RED)
+- SpO2 90-94% → Level 2 (ORANGE)
+- HR >120 or <50 bpm → Level 2 (ORANGE)
+- Systolic BP >200 or <80 mmHg → Level 1 or 2
+- Chest pain → minimum Level 2 (ORANGE)
+- Severe respiratory distress → Level 1 (RED)
 
-DATOS DEL CASO ACTUAL:
+CURRENT CASE DATA:
 {patient_text}
-CONSTANTES VITALES: {vitals_text}
-MOTIVO DE CONSULTA: {req.complaint}
+VITAL SIGNS: {vitals_text}
+REASON FOR CONSULTATION: {req.complaint}
 
-INSTRUCCIONES: Analiza las constantes vitales del paciente y clasifica según Manchester. 
-Devuelve ÚNICAMENTE un JSON con estas 4 claves: "level" (integer 1-4), "priority_name" (ROJO/NARANJA/AMARILLO/VERDE), "justification" (texto explicativo en español), "actions" (acciones clínicas recomendadas).
+INSTRUCTIONS: Analyze the patient's vital signs and classify according to Manchester. 
+ONLY return a JSON with these 4 keys: "level" (integer 1-4), "priority_name" (RED/ORANGE/YELLOW/GREEN), "justification" (explanatory text in English), "actions" (recommended clinical actions).
 JSON:"""
 
     target_url = (req.ollama_url if req.ollama_url else config["OLLAMA_URL"]).rstrip("/")
@@ -529,7 +529,7 @@ JSON:"""
                 payload_chat = {
                     "model": model_name,
                     "messages": [
-                        {"role": "system", "content": "Eres un experto en triaje Manchester. Analiza las constantes vitales y clasifica al paciente. Devuelve SOLO un JSON válido en español con: level (1-4), priority_name (ROJO/NARANJA/AMARILLO/VERDE), justification, actions."},
+                        {"role": "system", "content": "You are a Manchester Triage expert. Analyze vital signs and classify the patient. ONLY return a valid JSON in English with: level (1-4), priority_name (RED/ORANGE/YELLOW/GREEN), justification, actions."},
                         {"role": "user", "content": full_prompt}
                     ],
                     "stream": False,
@@ -557,16 +557,16 @@ JSON:"""
             print("DEBUG TRIAGE: Both strategies failed. Returning error fallback.")
             return TriageResponse(
                 level=3,
-                priority_name="AMARILLO",
-                justification="El modelo de análisis no pudo procesar la solicitud correctamente. Se asigna nivel AMARILLO por precaución. Requiere valoración manual.",
-                actions="Valoración manual por enfermería de triaje. Reevaluar constantes en 15 min."
+                priority_name="YELLOW",
+                justification="The analysis model failed to process the request correctly. Level YELLOW assigned as a precaution. Requires manual assessment.",
+                actions="Manual assessment by triage nursing. Re-evaluate vital signs in 15 min."
             )
 
         # Handle key variations
         level = parsed.get("level") or parsed.get("triage_level") or parsed.get("Level") or 3
-        priority = parsed.get("priority_name") or parsed.get("priority") or "AMARILLO"
-        justification = parsed.get("justification") or parsed.get("reasoning") or parsed.get("justificacion") or "Clasificación automática."
-        actions = parsed.get("actions") or parsed.get("acciones") or "Toma de constantes y valoración."
+        priority = parsed.get("priority_name") or parsed.get("priority") or "YELLOW"
+        justification = parsed.get("justification") or parsed.get("reasoning") or parsed.get("justificacion") or "Automatic classification."
+        actions = parsed.get("actions") or parsed.get("acciones") or "Vital signs and assessment."
 
         if isinstance(actions, list):
             actions = "; ".join(actions)
@@ -674,19 +674,18 @@ async def schedule_chat(request: ChatRequest):
     if "cambiar" in request.message.lower() or "change" in request.message.lower():
         intent = "modify_schedule"
         return {
-            "response": "He recibido tu solicitud de cambio. Verificando reglas de descanso y cobertura... Cambio aplicado.",
+            "response": "Request received. Verifying rest rules and coverage... Change applied.",
             "action": "trigger_optimization"
         }
     elif "optimizar" in request.message.lower() or "optimize" in request.message.lower():
         intent = "optimize"
         return {
-            "response": "Entendido. Iniciando motor de optimización para rebalancear la carga de trabajo...",
+            "response": "Understood. Starting optimization engine to rebalance workload...",
             "action": "trigger_optimization"
         }
     
     # 2. Respond
     return {
-        "response": f"Soy el asistente de planificación. Puedo ayudarte a optimizar turnos o gestionar cambios. ¿Qué necesitas?",
+        "response": f"I am the scheduling assistant. I can help you optimize shifts or manage changes. What do you need?",
         "action": "none"
     }
-

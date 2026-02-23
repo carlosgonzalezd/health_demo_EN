@@ -1,810 +1,810 @@
 [
   {
     "id": "NHC-10000",
-    "nombre": "Arthur Morgan",
-    "edad": 36,
-    "sexo": "Masculino",
-    "historia": "Tuberculosis avanzada diagnosticada en 1899. Antecedentes de trauma físico severo. Hipertensión arterial.",
-    "motivo": "Tos persistente con hemoptisis"
+    "name": "Arthur Morgan",
+    "age": 36,
+    "sex": "Male",
+    "history": "Advanced tuberculosis diagnosed in 1899. History of severe physical trauma. Arterial hypertension.",
+    "reason": "Persistent cough with hemoptysis"
   },
   {
     "id": "NHC-10001",
-    "nombre": "Jose Perez Alvarez",
-    "edad": 85,
-    "sexo": "Masculino",
-    "historia": "Antecedentes de neumonía en 2021. Colesterol elevado. Fumador de larga duración (1 pq/día)",
-    "motivo": "Dolor costal punzante"
+    "name": "James Parker",
+    "age": 85,
+    "sex": "Male",
+    "history": "History of pneumonia in 2021. Elevated cholesterol. Long-term smoker (1 pack/day)",
+    "reason": "Sharp costal pain"
   },
   {
     "id": "NHC-10002",
-    "nombre": "Isabel Alonso Rodriguez",
-    "edad": 52,
-    "sexo": "Femenino",
-    "historia": "Artritis reumatoide",
-    "motivo": "Control rutinario de empresa"
+    "name": "Elizabeth Reynolds",
+    "age": 52,
+    "sex": "Female",
+    "history": "Rheumatoid arthritis",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10003",
-    "nombre": "Francisco Muñoz Jimenez",
-    "edad": 63,
-    "sexo": "Masculino",
-    "historia": "Antecedentes familiares de cardiopatía. Alergia a la penicilina",
-    "motivo": "Dolor en zona lumbar irradiado"
+    "name": "Frank Mitchell",
+    "age": 63,
+    "sex": "Male",
+    "history": "Family history of heart disease. Penicillin allergy",
+    "reason": "Radiating lower back pain"
   },
   {
     "id": "NHC-10004",
-    "nombre": "Maria Alvarez Romero",
-    "edad": 78,
-    "sexo": "Femenino",
-    "historia": "Ansiedad crónica. Arrítmia cardiaca leve",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Mary Alvarez",
+    "age": 78,
+    "sex": "Female",
+    "history": "Chronic anxiety. Mild cardiac arrhythmia",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10005",
-    "nombre": "Carmen Alonso Diaz",
-    "edad": 48,
-    "sexo": "Femenino",
-    "historia": "Ansiedad crónica. Artritis reumatoide. Colesterol elevado",
-    "motivo": "Fiebre persistente y malestar"
+    "name": "Carol Bennett",
+    "age": 48,
+    "sex": "Female",
+    "history": "Chronic anxiety. Rheumatoid arthritis. Elevated cholesterol",
+    "reason": "Persistent fever and malaise"
   },
   {
     "id": "NHC-10006",
-    "nombre": "Ana Jimenez Alonso",
-    "edad": 68,
-    "sexo": "Femenino",
-    "historia": "Insuficiencia renal leve",
-    "motivo": "Control rutinario de empresa"
+    "name": "Anne Sullivan",
+    "age": 68,
+    "sex": "Female",
+    "history": "Mild renal insufficiency",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10007",
-    "nombre": "Elena Sanchez Muñoz",
-    "edad": 55,
-    "sexo": "Femenino",
-    "historia": "Sin antecedentes de interés. Ansiedad crónica. Asma bronquial crónica",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Helen Sanders",
+    "age": 55,
+    "sex": "Female",
+    "history": "No significant medical history. Chronic anxiety. Chronic bronchial asthma",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10008",
-    "nombre": "Rafael Perez Rodriguez",
-    "edad": 72,
-    "sexo": "Masculino",
-    "historia": "Insuficiencia renal leve. Obesidad grado I. Arrítmia cardiaca leve",
-    "motivo": "Control rutinario de empresa"
+    "name": "Ralph Peterson",
+    "age": 72,
+    "sex": "Male",
+    "history": "Mild renal insufficiency. Grade I obesity. Mild cardiac arrhythmia",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10009",
-    "nombre": "Jose Garcia Fernandez",
-    "edad": 84,
-    "sexo": "Masculino",
-    "historia": "Alergia a la penicilina. Diabetes Mellitus Tipo 2",
-    "motivo": "Seguimiento tras episodio de COVID"
+    "name": "Joseph Garcia",
+    "age": 84,
+    "sex": "Male",
+    "history": "Penicillin allergy. Type 2 Diabetes Mellitus",
+    "reason": "Follow-up after COVID episode"
   },
   {
     "id": "NHC-10010",
-    "nombre": "Juan Fernandez Gutierrez",
-    "edad": 75,
-    "sexo": "Masculino",
-    "historia": "Antecedentes de neumonía en 2021. Artritis reumatoide",
-    "motivo": "Tos seca de 3 semanas de evolución"
+    "name": "John Ferguson",
+    "age": 75,
+    "sex": "Male",
+    "history": "History of pneumonia in 2021. Rheumatoid arthritis",
+    "reason": "Dry cough lasting 3 weeks"
   },
   {
     "id": "NHC-10011",
-    "nombre": "Ana Martin Romero",
-    "edad": 43,
-    "sexo": "Femenino",
-    "historia": "Obesidad grado I. Insuficiencia renal leve. Alergia a la penicilina",
-    "motivo": "Dolor costal punzante"
+    "name": "Anne Martin",
+    "age": 43,
+    "sex": "Female",
+    "history": "Grade I obesity. Mild renal insufficiency. Penicillin allergy",
+    "reason": "Sharp costal pain"
   },
   {
     "id": "NHC-10012",
-    "nombre": "Rafael Jimenez Perez",
-    "edad": 65,
-    "sexo": "Masculino",
-    "historia": "Sedentarismo. Sin antecedentes de interés. Obesidad grado I",
-    "motivo": "Dolor en zona lumbar irradiado"
+    "name": "Ralph Jenkins",
+    "age": 65,
+    "sex": "Male",
+    "history": "Sedentary lifestyle. No significant medical history. Grade I obesity",
+    "reason": "Radiating lower back pain"
   },
   {
     "id": "NHC-10013",
-    "nombre": "Carmen Garcia Alonso",
-    "edad": 52,
-    "sexo": "Femenino",
-    "historia": "Ex-fumador hace 5 años",
-    "motivo": "Tos seca de 3 semanas de evolución"
+    "name": "Carol Gardner",
+    "age": 52,
+    "sex": "Female",
+    "history": "Former smoker (quit 5 years ago)",
+    "reason": "Dry cough lasting 3 weeks"
   },
   {
     "id": "NHC-10014",
-    "nombre": "Dolores Sanchez Martinez",
-    "edad": 78,
-    "sexo": "Femenino",
-    "historia": "Hipertensión arterial controlada. Sin antecedentes de interés",
-    "motivo": "Dificultad respiratoria al caminar"
+    "name": "Dorothy Sanders",
+    "age": 78,
+    "sex": "Female",
+    "history": "Controlled arterial hypertension. No significant medical history",
+    "reason": "Breathing difficulty while walking"
   },
   {
     "id": "NHC-10015",
-    "nombre": "Jose Jimenez Muñoz",
-    "edad": 56,
-    "sexo": "Masculino",
-    "historia": "Obesidad grado I",
-    "motivo": "Control rutinario de empresa"
+    "name": "Joseph Mitchell",
+    "age": 56,
+    "sex": "Male",
+    "history": "Grade I obesity",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10016",
-    "nombre": "Marta Lopez Rodriguez",
-    "edad": 37,
-    "sexo": "Femenino",
-    "historia": "Operado de vesícula en 2019",
-    "motivo": "Control rutinario de empresa"
+    "name": "Martha Lopez",
+    "age": 37,
+    "sex": "Female",
+    "history": "Gallbladder surgery in 2019",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10017",
-    "nombre": "Daniel Garcia Jimenez",
-    "edad": 41,
-    "sexo": "Masculino",
-    "historia": "Antecedentes familiares de cardiopatía. Insuficiencia renal leve",
-    "motivo": "Seguimiento tras episodio de COVID"
+    "name": "Daniel Gardner",
+    "age": 41,
+    "sex": "Male",
+    "history": "Family history of heart disease. Mild renal insufficiency",
+    "reason": "Follow-up after COVID episode"
   },
   {
     "id": "NHC-10018",
-    "nombre": "Laura Moreno Fernandez",
-    "edad": 58,
-    "sexo": "Femenino",
-    "historia": "Diabetes Mellitus Tipo 2",
-    "motivo": "Tos seca de 3 semanas de evolución"
+    "name": "Laura Moreno",
+    "age": 58,
+    "sex": "Female",
+    "history": "Type 2 Diabetes Mellitus",
+    "reason": "Dry cough lasting 3 weeks"
   },
   {
     "id": "NHC-10019",
-    "nombre": "Carmen Alvarez Rodriguez",
-    "edad": 42,
-    "sexo": "Femenino",
-    "historia": "Ex-fumador hace 5 años",
-    "motivo": "Dolor en zona lumbar irradiado"
+    "name": "Carol Alvarez",
+    "age": 42,
+    "sex": "Female",
+    "history": "Former smoker (quit 5 years ago)",
+    "reason": "Radiating lower back pain"
   },
   {
     "id": "NHC-10020",
-    "nombre": "Daniel Gutierrez Alvarez",
-    "edad": 79,
-    "sexo": "Masculino",
-    "historia": "Operado de vesícula en 2019. Sedentarismo",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Daniel Gutierrez",
+    "age": 79,
+    "sex": "Male",
+    "history": "Gallbladder surgery in 2019. Sedentary lifestyle",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10021",
-    "nombre": "Manuel Sanchez Gomez",
-    "edad": 21,
-    "sexo": "Masculino",
-    "historia": "Insuficiencia renal leve",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Manuel Sanders",
+    "age": 21,
+    "sex": "Male",
+    "history": "Mild renal insufficiency",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10022",
-    "nombre": "Javier Moreno Ruiz",
-    "edad": 39,
-    "sexo": "Masculino",
-    "historia": "Insuficiencia renal leve. Ex-fumador hace 5 años",
-    "motivo": "Dolor costal punzante"
+    "name": "Jason Morris",
+    "age": 39,
+    "sex": "Male",
+    "history": "Mild renal insufficiency. Former smoker (quit 5 years ago)",
+    "reason": "Sharp costal pain"
   },
   {
     "id": "NHC-10023",
-    "nombre": "Antonio Lopez Sanchez",
-    "edad": 79,
-    "sexo": "Masculino",
-    "historia": "Sin antecedentes de interés. Colesterol elevado",
-    "motivo": "Dolor en zona lumbar irradiado"
+    "name": "Anthony Lopez",
+    "age": 79,
+    "sex": "Male",
+    "history": "No significant medical history. Elevated cholesterol",
+    "reason": "Radiating lower back pain"
   },
   {
     "id": "NHC-10024",
-    "nombre": "Juan Perez Diaz",
-    "edad": 36,
-    "sexo": "Masculino",
-    "historia": "Obesidad grado I. Artritis reumatoide",
-    "motivo": "Control rutinario de empresa"
+    "name": "John Pierce",
+    "age": 36,
+    "sex": "Male",
+    "history": "Grade I obesity. Rheumatoid arthritis",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10025",
-    "nombre": "Juan Martin Perez",
-    "edad": 73,
-    "sexo": "Masculino",
-    "historia": "Fumador de larga duración (1 pq/día)",
-    "motivo": "Seguimiento tras episodio de COVID"
+    "name": "John Martin",
+    "age": 73,
+    "sex": "Male",
+    "history": "Long-term smoker (1 pack/day)",
+    "reason": "Follow-up after COVID episode"
   },
   {
     "id": "NHC-10026",
-    "nombre": "Javier Moreno Lopez",
-    "edad": 40,
-    "sexo": "Masculino",
-    "historia": "Alergia a la penicilina",
-    "motivo": "Control rutinario de empresa"
+    "name": "Jason Moreno",
+    "age": 40,
+    "sex": "Male",
+    "history": "Penicillin allergy",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10027",
-    "nombre": "Ana Rodriguez Gutierrez",
-    "edad": 76,
-    "sexo": "Femenino",
-    "historia": "Antecedentes de neumonía en 2021. Ansiedad crónica",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Anne Rodriguez",
+    "age": 76,
+    "sex": "Female",
+    "history": "History of pneumonia in 2021. Chronic anxiety",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10028",
-    "nombre": "Manuel Gonzalez Muñoz",
-    "edad": 50,
-    "sexo": "Masculino",
-    "historia": "Sedentarismo. Antecedentes familiares de cardiopatía. Diabetes Mellitus Tipo 2",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Manuel Gonzalez",
+    "age": 50,
+    "sex": "Male",
+    "history": "Sedentary lifestyle. Family history of heart disease. Type 2 Diabetes Mellitus",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10029",
-    "nombre": "Javier Gonzalez Alonso",
-    "edad": 74,
-    "sexo": "Masculino",
-    "historia": "Sin antecedentes de interés",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Jason Gonzalez",
+    "age": 74,
+    "sex": "Male",
+    "history": "No significant medical history",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10030",
-    "nombre": "Cristina Martin Gutierrez",
-    "edad": 22,
-    "sexo": "Femenino",
-    "historia": "Antecedentes familiares de cardiopatía",
-    "motivo": "Seguimiento tras episodio de COVID"
+    "name": "Christina Martin",
+    "age": 22,
+    "sex": "Female",
+    "history": "Family history of heart disease",
+    "reason": "Follow-up after COVID episode"
   },
   {
     "id": "NHC-10031",
-    "nombre": "Dolores Romero Diaz",
-    "edad": 49,
-    "sexo": "Femenino",
-    "historia": "Antecedentes familiares de cardiopatía. Artritis reumatoide",
-    "motivo": "Dolor en zona lumbar irradiado"
+    "name": "Dorothy Romero",
+    "age": 49,
+    "sex": "Female",
+    "history": "Family history of heart disease. Rheumatoid arthritis",
+    "reason": "Radiating lower back pain"
   },
   {
     "id": "NHC-10032",
-    "nombre": "Javier Diaz Fernandez",
-    "edad": 65,
-    "sexo": "Masculino",
-    "historia": "Hipotiroidismo en tratamiento. Diabetes Mellitus Tipo 2",
-    "motivo": "Tos seca de 3 semanas de evolución"
+    "name": "Jason Diaz",
+    "age": 65,
+    "sex": "Male",
+    "history": "Hypothyroidism under treatment. Type 2 Diabetes Mellitus",
+    "reason": "Dry cough lasting 3 weeks"
   },
   {
     "id": "NHC-10033",
-    "nombre": "David Perez Gutierrez",
-    "edad": 18,
-    "sexo": "Masculino",
-    "historia": "Antecedentes familiares de cardiopatía",
-    "motivo": "Seguimiento tras episodio de COVID"
+    "name": "David Peterson",
+    "age": 18,
+    "sex": "Male",
+    "history": "Family history of heart disease",
+    "reason": "Follow-up after COVID episode"
   },
   {
     "id": "NHC-10034",
-    "nombre": "Jose Gonzalez Alonso",
-    "edad": 61,
-    "sexo": "Masculino",
-    "historia": "Hipertensión arterial controlada. Asma bronquial crónica. Insuficiencia renal leve",
-    "motivo": "Control rutinario de empresa"
+    "name": "Joseph Gonzalez",
+    "age": 61,
+    "sex": "Male",
+    "history": "Controlled arterial hypertension. Chronic bronchial asthma. Mild renal insufficiency",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10035",
-    "nombre": "Carlos Diaz Moreno",
-    "edad": 24,
-    "sexo": "Masculino",
-    "historia": "Ansiedad crónica. Operado de vesícula en 2019. Hipertensión arterial controlada",
-    "motivo": "Cansancio extremo sin causa aparente"
+    "name": "Charles Diaz",
+    "age": 24,
+    "sex": "Male",
+    "history": "Chronic anxiety. Gallbladder surgery in 2019. Controlled arterial hypertension",
+    "reason": "Extreme fatigue without apparent cause"
   },
   {
     "id": "NHC-10036",
-    "nombre": "Manuel Jimenez Hernandez",
-    "edad": 37,
-    "sexo": "Masculino",
-    "historia": "Alergia a la penicilina. Colesterol elevado. Artritis reumatoide",
-    "motivo": "Fiebre persistente y malestar"
+    "name": "Manuel Jenkins",
+    "age": 37,
+    "sex": "Male",
+    "history": "Penicillin allergy. Elevated cholesterol. Rheumatoid arthritis",
+    "reason": "Persistent fever and malaise"
   },
   {
     "id": "NHC-10037",
-    "nombre": "Juan Rodriguez Gomez",
-    "edad": 48,
-    "sexo": "Masculino",
-    "historia": "Colesterol elevado. Fumador de larga duración (1 pq/día). Hipotiroidismo en tratamiento",
-    "motivo": "Dificultad respiratoria al caminar"
+    "name": "John Rodriguez",
+    "age": 48,
+    "sex": "Male",
+    "history": "Elevated cholesterol. Long-term smoker (1 pack/day). Hypothyroidism under treatment",
+    "reason": "Breathing difficulty while walking"
   },
   {
     "id": "NHC-10038",
-    "nombre": "Lucia Gomez Sanchez",
-    "edad": 22,
-    "sexo": "Femenino",
-    "historia": "Ansiedad crónica. Hipertensión arterial controlada. Alergia a la penicilina",
-    "motivo": "Dificultad respiratoria al caminar"
+    "name": "Lucy Gomez",
+    "age": 22,
+    "sex": "Female",
+    "history": "Chronic anxiety. Controlled arterial hypertension. Penicillin allergy",
+    "reason": "Breathing difficulty while walking"
   },
   {
     "id": "NHC-10039",
-    "nombre": "Manuel Martinez Gomez",
-    "edad": 82,
-    "sexo": "Masculino",
-    "historia": "Ex-fumador hace 5 años. Diabetes Mellitus Tipo 2. Fumador de larga duración (1 pq/día)",
-    "motivo": "Dolor costal punzante"
+    "name": "Manuel Martinez",
+    "age": 82,
+    "sex": "Male",
+    "history": "Former smoker (quit 5 years ago). Type 2 Diabetes Mellitus. Long-term smoker (1 pack/day)",
+    "reason": "Sharp costal pain"
   },
   {
     "id": "NHC-10040",
-    "nombre": "Maria Jimenez Gutierrez",
-    "edad": 79,
-    "sexo": "Femenino",
-    "historia": "Artritis reumatoide. Episodios de bronquitis recurrente",
-    "motivo": "Dificultad respiratoria al caminar"
+    "name": "Mary Jenkins",
+    "age": 79,
+    "sex": "Female",
+    "history": "Rheumatoid arthritis. Recurrent bronchitis episodes",
+    "reason": "Breathing difficulty while walking"
   },
   {
     "id": "NHC-10041",
-    "nombre": "Jose Muñoz Fernandez",
-    "edad": 58,
-    "sexo": "Masculino",
-    "historia": "Hipotiroidismo en tratamiento. Ansiedad crónica. Antecedentes de neumonía en 2021",
-    "motivo": "Cansancio extremo sin causa aparente"
+    "name": "Joseph Munoz",
+    "age": 58,
+    "sex": "Male",
+    "history": "Hypothyroidism under treatment. Chronic anxiety. History of pneumonia in 2021",
+    "reason": "Extreme fatigue without apparent cause"
   },
   {
     "id": "NHC-10042",
-    "nombre": "Lucia Ruiz Martinez",
-    "edad": 24,
-    "sexo": "Femenino",
-    "historia": "Hipotiroidismo en tratamiento. Ex-fumador hace 5 años. Antecedentes familiares de cardiopatía",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Lucy Ruiz",
+    "age": 24,
+    "sex": "Female",
+    "history": "Hypothyroidism under treatment. Former smoker (quit 5 years ago). Family history of heart disease",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10043",
-    "nombre": "Rafael Muñoz Gutierrez",
-    "edad": 53,
-    "sexo": "Masculino",
-    "historia": "Hipertensión arterial controlada. Operado de vesícula en 2019",
-    "motivo": "Cansancio extremo sin causa aparente"
+    "name": "Ralph Munoz",
+    "age": 53,
+    "sex": "Male",
+    "history": "Controlled arterial hypertension. Gallbladder surgery in 2019",
+    "reason": "Extreme fatigue without apparent cause"
   },
   {
     "id": "NHC-10044",
-    "nombre": "Cristina Hernandez Jimenez",
-    "edad": 37,
-    "sexo": "Femenino",
-    "historia": "Colesterol elevado",
-    "motivo": "Seguimiento tras episodio de COVID"
+    "name": "Christina Hernandez",
+    "age": 37,
+    "sex": "Female",
+    "history": "Elevated cholesterol",
+    "reason": "Follow-up after COVID episode"
   },
   {
     "id": "NHC-10045",
-    "nombre": "Isabel Romero Martinez",
-    "edad": 24,
-    "sexo": "Femenino",
-    "historia": "Operado de vesícula en 2019",
-    "motivo": "Fiebre persistente y malestar"
+    "name": "Elizabeth Romero",
+    "age": 24,
+    "sex": "Female",
+    "history": "Gallbladder surgery in 2019",
+    "reason": "Persistent fever and malaise"
   },
   {
     "id": "NHC-10046",
-    "nombre": "Javier Hernandez Romero",
-    "edad": 47,
-    "sexo": "Masculino",
-    "historia": "Ansiedad crónica",
-    "motivo": "Tos seca de 3 semanas de evolución"
+    "name": "Jason Hernandez",
+    "age": 47,
+    "sex": "Male",
+    "history": "Chronic anxiety",
+    "reason": "Dry cough lasting 3 weeks"
   },
   {
     "id": "NHC-10047",
-    "nombre": "Daniel Lopez Jimenez",
-    "edad": 47,
-    "sexo": "Masculino",
-    "historia": "Ansiedad crónica. Antecedentes de neumonía en 2021. Asma bronquial crónica",
-    "motivo": "Dolor costal punzante"
+    "name": "Daniel Lopez",
+    "age": 47,
+    "sex": "Male",
+    "history": "Chronic anxiety. History of pneumonia in 2021. Chronic bronchial asthma",
+    "reason": "Sharp costal pain"
   },
   {
     "id": "NHC-10048",
-    "nombre": "David Jimenez Muñoz",
-    "edad": 80,
-    "sexo": "Masculino",
-    "historia": "Insuficiencia renal leve",
-    "motivo": "Dificultad respiratoria al caminar"
+    "name": "David Jenkins",
+    "age": 80,
+    "sex": "Male",
+    "history": "Mild renal insufficiency",
+    "reason": "Breathing difficulty while walking"
   },
   {
     "id": "NHC-10049",
-    "nombre": "Francisco Gonzalez Martin",
-    "edad": 78,
-    "sexo": "Masculino",
-    "historia": "Alergia a la penicilina. Fumador de larga duración (1 pq/día). Sin antecedentes de interés",
-    "motivo": "Tos seca de 3 semanas de evolución"
+    "name": "Frank Gonzalez",
+    "age": 78,
+    "sex": "Male",
+    "history": "Penicillin allergy. Long-term smoker (1 pack/day). No significant medical history",
+    "reason": "Dry cough lasting 3 weeks"
   },
   {
     "id": "NHC-10050",
-    "nombre": "Maria Alvarez Garcia",
-    "edad": 30,
-    "sexo": "Femenino",
-    "historia": "Obesidad grado I. Arrítmia cardiaca leve. Operado de vesícula en 2019",
-    "motivo": "Dolor costal punzante"
+    "name": "Mary Alvarez",
+    "age": 30,
+    "sex": "Female",
+    "history": "Grade I obesity. Mild cardiac arrhythmia. Gallbladder surgery in 2019",
+    "reason": "Sharp costal pain"
   },
   {
     "id": "NHC-10051",
-    "nombre": "Cristina Lopez Romero",
-    "edad": 74,
-    "sexo": "Femenino",
-    "historia": "Obesidad grado I. Colesterol elevado. Hipotiroidismo en tratamiento",
-    "motivo": "Dificultad respiratoria al caminar"
+    "name": "Christina Lopez",
+    "age": 74,
+    "sex": "Female",
+    "history": "Grade I obesity. Elevated cholesterol. Hypothyroidism under treatment",
+    "reason": "Breathing difficulty while walking"
   },
   {
     "id": "NHC-10052",
-    "nombre": "Isabel Gonzalez Lopez",
-    "edad": 53,
-    "sexo": "Femenino",
-    "historia": "Ex-fumador hace 5 años. Obesidad grado I. Antecedentes de neumonía en 2021",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Elizabeth Gonzalez",
+    "age": 53,
+    "sex": "Female",
+    "history": "Former smoker (quit 5 years ago). Grade I obesity. History of pneumonia in 2021",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10053",
-    "nombre": "Rafael Sanchez Gutierrez",
-    "edad": 31,
-    "sexo": "Masculino",
-    "historia": "Sin antecedentes de interés. Ansiedad crónica. Alergia a la penicilina",
-    "motivo": "Seguimiento tras episodio de COVID"
+    "name": "Ralph Sanders",
+    "age": 31,
+    "sex": "Male",
+    "history": "No significant medical history. Chronic anxiety. Penicillin allergy",
+    "reason": "Follow-up after COVID episode"
   },
   {
     "id": "NHC-10054",
-    "nombre": "Elena Muñoz Lopez",
-    "edad": 75,
-    "sexo": "Femenino",
-    "historia": "Fumador de larga duración (1 pq/día)",
-    "motivo": "Seguimiento tras episodio de COVID"
+    "name": "Helen Munoz",
+    "age": 75,
+    "sex": "Female",
+    "history": "Long-term smoker (1 pack/day)",
+    "reason": "Follow-up after COVID episode"
   },
   {
     "id": "NHC-10055",
-    "nombre": "Ana Gomez Rodriguez",
-    "edad": 74,
-    "sexo": "Femenino",
-    "historia": "Diabetes Mellitus Tipo 2. Sedentarismo",
-    "motivo": "Dolor en zona lumbar irradiado"
+    "name": "Anne Gomez",
+    "age": 74,
+    "sex": "Female",
+    "history": "Type 2 Diabetes Mellitus. Sedentary lifestyle",
+    "reason": "Radiating lower back pain"
   },
   {
     "id": "NHC-10056",
-    "nombre": "Antonio Diaz Sanchez",
-    "edad": 66,
-    "sexo": "Masculino",
-    "historia": "Episodios de bronquitis recurrente. Antecedentes de neumonía en 2021",
-    "motivo": "Control rutinario de empresa"
+    "name": "Anthony Diaz",
+    "age": 66,
+    "sex": "Male",
+    "history": "Recurrent bronchitis episodes. History of pneumonia in 2021",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10057",
-    "nombre": "Francisco Diaz Muñoz",
-    "edad": 28,
-    "sexo": "Masculino",
-    "historia": "Arrítmia cardiaca leve. Asma bronquial crónica",
-    "motivo": "Control rutinario de empresa"
+    "name": "Frank Diaz",
+    "age": 28,
+    "sex": "Male",
+    "history": "Mild cardiac arrhythmia. Chronic bronchial asthma",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10058",
-    "nombre": "Juan Martinez Rodriguez",
-    "edad": 22,
-    "sexo": "Masculino",
-    "historia": "Ansiedad crónica. Antecedentes familiares de cardiopatía",
-    "motivo": "Fiebre persistente y malestar"
+    "name": "John Martinez",
+    "age": 22,
+    "sex": "Male",
+    "history": "Chronic anxiety. Family history of heart disease",
+    "reason": "Persistent fever and malaise"
   },
   {
     "id": "NHC-10059",
-    "nombre": "Rafael Rodriguez Alvarez",
-    "edad": 38,
-    "sexo": "Masculino",
-    "historia": "Colesterol elevado. Arrítmia cardiaca leve",
-    "motivo": "Tos seca de 3 semanas de evolución"
+    "name": "Ralph Rodriguez",
+    "age": 38,
+    "sex": "Male",
+    "history": "Elevated cholesterol. Mild cardiac arrhythmia",
+    "reason": "Dry cough lasting 3 weeks"
   },
   {
     "id": "NHC-10060",
-    "nombre": "Lucia Fernandez Alvarez",
-    "edad": 72,
-    "sexo": "Femenino",
-    "historia": "Hipertensión arterial controlada. Ex-fumador hace 5 años",
-    "motivo": "Cansancio extremo sin causa aparente"
+    "name": "Lucy Fernandez",
+    "age": 72,
+    "sex": "Female",
+    "history": "Controlled arterial hypertension. Former smoker (quit 5 years ago)",
+    "reason": "Extreme fatigue without apparent cause"
   },
   {
     "id": "NHC-10061",
-    "nombre": "Javier Gomez Martinez",
-    "edad": 68,
-    "sexo": "Masculino",
-    "historia": "Sin antecedentes de interés",
-    "motivo": "Tos seca de 3 semanas de evolución"
+    "name": "Jason Gomez",
+    "age": 68,
+    "sex": "Male",
+    "history": "No significant medical history",
+    "reason": "Dry cough lasting 3 weeks"
   },
   {
     "id": "NHC-10062",
-    "nombre": "Francisco Jimenez Martinez",
-    "edad": 63,
-    "sexo": "Masculino",
-    "historia": "Antecedentes familiares de cardiopatía. Diabetes Mellitus Tipo 2",
-    "motivo": "Control rutinario de empresa"
+    "name": "Frank Jenkins",
+    "age": 63,
+    "sex": "Male",
+    "history": "Family history of heart disease. Type 2 Diabetes Mellitus",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10063",
-    "nombre": "Laura Alvarez Hernandez",
-    "edad": 57,
-    "sexo": "Femenino",
-    "historia": "Antecedentes de neumonía en 2021. Arrítmia cardiaca leve",
-    "motivo": "Seguimiento tras episodio de COVID"
+    "name": "Laura Alvarez",
+    "age": 57,
+    "sex": "Female",
+    "history": "History of pneumonia in 2021. Mild cardiac arrhythmia",
+    "reason": "Follow-up after COVID episode"
   },
   {
     "id": "NHC-10064",
-    "nombre": "Javier Romero Gomez",
-    "edad": 46,
-    "sexo": "Masculino",
-    "historia": "Artritis reumatoide. Hipertensión arterial controlada. Antecedentes de neumonía en 2021",
-    "motivo": "Seguimiento tras episodio de COVID"
+    "name": "Jason Romero",
+    "age": 46,
+    "sex": "Male",
+    "history": "Rheumatoid arthritis. Controlled arterial hypertension. History of pneumonia in 2021",
+    "reason": "Follow-up after COVID episode"
   },
   {
     "id": "NHC-10065",
-    "nombre": "David Gomez Rodriguez",
-    "edad": 47,
-    "sexo": "Masculino",
-    "historia": "Antecedentes familiares de cardiopatía. Fumador de larga duración (1 pq/día)",
-    "motivo": "Dificultad respiratoria al caminar"
+    "name": "David Gomez",
+    "age": 47,
+    "sex": "Male",
+    "history": "Family history of heart disease. Long-term smoker (1 pack/day)",
+    "reason": "Breathing difficulty while walking"
   },
   {
     "id": "NHC-10066",
-    "nombre": "Lucia Jimenez Martin",
-    "edad": 35,
-    "sexo": "Femenino",
-    "historia": "Hipertensión arterial controlada",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Lucy Jenkins",
+    "age": 35,
+    "sex": "Female",
+    "history": "Controlled arterial hypertension",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10067",
-    "nombre": "Antonio Moreno Perez",
-    "edad": 55,
-    "sexo": "Masculino",
-    "historia": "Sin antecedentes de interés. Episodios de bronquitis recurrente. Arrítmia cardiaca leve",
-    "motivo": "Fiebre persistente y malestar"
+    "name": "Anthony Moreno",
+    "age": 55,
+    "sex": "Male",
+    "history": "No significant medical history. Recurrent bronchitis episodes. Mild cardiac arrhythmia",
+    "reason": "Persistent fever and malaise"
   },
   {
     "id": "NHC-10068",
-    "nombre": "Dolores Gomez Gutierrez",
-    "edad": 38,
-    "sexo": "Femenino",
-    "historia": "Obesidad grado I",
-    "motivo": "Fiebre persistente y malestar"
+    "name": "Dorothy Gomez",
+    "age": 38,
+    "sex": "Female",
+    "history": "Grade I obesity",
+    "reason": "Persistent fever and malaise"
   },
   {
     "id": "NHC-10069",
-    "nombre": "Carlos Gomez Lopez",
-    "edad": 73,
-    "sexo": "Masculino",
-    "historia": "Antecedentes de neumonía en 2021",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Charles Gomez",
+    "age": 73,
+    "sex": "Male",
+    "history": "History of pneumonia in 2021",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10070",
-    "nombre": "Antonio Diaz Sanchez",
-    "edad": 26,
-    "sexo": "Masculino",
-    "historia": "Hipotiroidismo en tratamiento. Artritis reumatoide. Hipertensión arterial controlada",
-    "motivo": "Seguimiento tras episodio de COVID"
+    "name": "Anthony Diaz",
+    "age": 26,
+    "sex": "Male",
+    "history": "Hypothyroidism under treatment. Rheumatoid arthritis. Controlled arterial hypertension",
+    "reason": "Follow-up after COVID episode"
   },
   {
     "id": "NHC-10071",
-    "nombre": "Juan Garcia Ruiz",
-    "edad": 31,
-    "sexo": "Masculino",
-    "historia": "Sedentarismo. Diabetes Mellitus Tipo 2. Episodios de bronquitis recurrente",
-    "motivo": "Fiebre persistente y malestar"
+    "name": "John Garcia",
+    "age": 31,
+    "sex": "Male",
+    "history": "Sedentary lifestyle. Type 2 Diabetes Mellitus. Recurrent bronchitis episodes",
+    "reason": "Persistent fever and malaise"
   },
   {
     "id": "NHC-10072",
-    "nombre": "Javier Moreno Hernandez",
-    "edad": 40,
-    "sexo": "Masculino",
-    "historia": "Fumador de larga duración (1 pq/día). Hipertensión arterial controlada",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Jason Moreno",
+    "age": 40,
+    "sex": "Male",
+    "history": "Long-term smoker (1 pack/day). Controlled arterial hypertension",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10073",
-    "nombre": "Jose Diaz Rodriguez",
-    "edad": 25,
-    "sexo": "Masculino",
-    "historia": "Sedentarismo",
-    "motivo": "Tos seca de 3 semanas de evolución"
+    "name": "Joseph Diaz",
+    "age": 25,
+    "sex": "Male",
+    "history": "Sedentary lifestyle",
+    "reason": "Dry cough lasting 3 weeks"
   },
   {
     "id": "NHC-10074",
-    "nombre": "Juan Romero Jimenez",
-    "edad": 70,
-    "sexo": "Masculino",
-    "historia": "Colesterol elevado. Fumador de larga duración (1 pq/día)",
-    "motivo": "Dificultad respiratoria al caminar"
+    "name": "John Romero",
+    "age": 70,
+    "sex": "Male",
+    "history": "Elevated cholesterol. Long-term smoker (1 pack/day)",
+    "reason": "Breathing difficulty while walking"
   },
   {
     "id": "NHC-10075",
-    "nombre": "Carmen Ruiz Martinez",
-    "edad": 75,
-    "sexo": "Femenino",
-    "historia": "Fumador de larga duración (1 pq/día)",
-    "motivo": "Control rutinario de empresa"
+    "name": "Carol Ruiz",
+    "age": 75,
+    "sex": "Female",
+    "history": "Long-term smoker (1 pack/day)",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10076",
-    "nombre": "Antonio Gutierrez Lopez",
-    "edad": 31,
-    "sexo": "Masculino",
-    "historia": "Hipotiroidismo en tratamiento",
-    "motivo": "Seguimiento tras episodio de COVID"
+    "name": "Anthony Gutierrez",
+    "age": 31,
+    "sex": "Male",
+    "history": "Hypothyroidism under treatment",
+    "reason": "Follow-up after COVID episode"
   },
   {
     "id": "NHC-10077",
-    "nombre": "Lucia Romero Moreno",
-    "edad": 67,
-    "sexo": "Femenino",
-    "historia": "Artritis reumatoide. Hipotiroidismo en tratamiento",
-    "motivo": "Seguimiento tras episodio de COVID"
+    "name": "Lucy Romero",
+    "age": 67,
+    "sex": "Female",
+    "history": "Rheumatoid arthritis. Hypothyroidism under treatment",
+    "reason": "Follow-up after COVID episode"
   },
   {
     "id": "NHC-10078",
-    "nombre": "Juan Martinez Martin",
-    "edad": 82,
-    "sexo": "Masculino",
-    "historia": "Hipotiroidismo en tratamiento",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "John Martinez",
+    "age": 82,
+    "sex": "Male",
+    "history": "Hypothyroidism under treatment",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10079",
-    "nombre": "Jose Romero Fernandez",
-    "edad": 81,
-    "sexo": "Masculino",
-    "historia": "Fumador de larga duración (1 pq/día). Episodios de bronquitis recurrente",
-    "motivo": "Cansancio extremo sin causa aparente"
+    "name": "Joseph Romero",
+    "age": 81,
+    "sex": "Male",
+    "history": "Long-term smoker (1 pack/day). Recurrent bronchitis episodes",
+    "reason": "Extreme fatigue without apparent cause"
   },
   {
     "id": "NHC-10080",
-    "nombre": "Juan Garcia Hernandez",
-    "edad": 51,
-    "sexo": "Masculino",
-    "historia": "Ansiedad crónica. Ex-fumador hace 5 años. Antecedentes familiares de cardiopatía",
-    "motivo": "Fiebre persistente y malestar"
+    "name": "John Garcia",
+    "age": 51,
+    "sex": "Male",
+    "history": "Chronic anxiety. Former smoker (quit 5 years ago). Family history of heart disease",
+    "reason": "Persistent fever and malaise"
   },
   {
     "id": "NHC-10081",
-    "nombre": "Marta Gutierrez Romero",
-    "edad": 69,
-    "sexo": "Femenino",
-    "historia": "Fumador de larga duración (1 pq/día). Sin antecedentes de interés",
-    "motivo": "Cansancio extremo sin causa aparente"
+    "name": "Martha Gutierrez",
+    "age": 69,
+    "sex": "Female",
+    "history": "Long-term smoker (1 pack/day). No significant medical history",
+    "reason": "Extreme fatigue without apparent cause"
   },
   {
     "id": "NHC-10082",
-    "nombre": "Laura Diaz Sanchez",
-    "edad": 69,
-    "sexo": "Femenino",
-    "historia": "Antecedentes familiares de cardiopatía. Operado de vesícula en 2019",
-    "motivo": "Control rutinario de empresa"
+    "name": "Laura Diaz",
+    "age": 69,
+    "sex": "Female",
+    "history": "Family history of heart disease. Gallbladder surgery in 2019",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10083",
-    "nombre": "Lucia Martinez Muñoz",
-    "edad": 57,
-    "sexo": "Femenino",
-    "historia": "Ex-fumador hace 5 años. Insuficiencia renal leve",
-    "motivo": "Dificultad respiratoria al caminar"
+    "name": "Lucy Martinez",
+    "age": 57,
+    "sex": "Female",
+    "history": "Former smoker (quit 5 years ago). Mild renal insufficiency",
+    "reason": "Breathing difficulty while walking"
   },
   {
     "id": "NHC-10084",
-    "nombre": "Francisco Rodriguez Martinez",
-    "edad": 62,
-    "sexo": "Masculino",
-    "historia": "Hipertensión arterial controlada",
-    "motivo": "Dolor costal punzante"
+    "name": "Frank Rodriguez",
+    "age": 62,
+    "sex": "Male",
+    "history": "Controlled arterial hypertension",
+    "reason": "Sharp costal pain"
   },
   {
     "id": "NHC-10085",
-    "nombre": "Antonio Gomez Moreno",
-    "edad": 66,
-    "sexo": "Masculino",
-    "historia": "Obesidad grado I",
-    "motivo": "Dolor costal punzante"
+    "name": "Anthony Gomez",
+    "age": 66,
+    "sex": "Male",
+    "history": "Grade I obesity",
+    "reason": "Sharp costal pain"
   },
   {
     "id": "NHC-10086",
-    "nombre": "Ana Romero Perez",
-    "edad": 35,
-    "sexo": "Femenino",
-    "historia": "Colesterol elevado. Sedentarismo. Insuficiencia renal leve",
-    "motivo": "Dificultad respiratoria al caminar"
+    "name": "Anne Romero",
+    "age": 35,
+    "sex": "Female",
+    "history": "Elevated cholesterol. Sedentary lifestyle. Mild renal insufficiency",
+    "reason": "Breathing difficulty while walking"
   },
   {
     "id": "NHC-10087",
-    "nombre": "Manuel Martinez Garcia",
-    "edad": 40,
-    "sexo": "Masculino",
-    "historia": "Ex-fumador hace 5 años. Antecedentes de neumonía en 2021",
-    "motivo": "Control rutinario de empresa"
+    "name": "Manuel Martinez",
+    "age": 40,
+    "sex": "Male",
+    "history": "Former smoker (quit 5 years ago). History of pneumonia in 2021",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10088",
-    "nombre": "Antonio Sanchez Moreno",
-    "edad": 60,
-    "sexo": "Masculino",
-    "historia": "Diabetes Mellitus Tipo 2. Obesidad grado I",
-    "motivo": "Dolor en zona lumbar irradiado"
+    "name": "Anthony Sanders",
+    "age": 60,
+    "sex": "Male",
+    "history": "Type 2 Diabetes Mellitus. Grade I obesity",
+    "reason": "Radiating lower back pain"
   },
   {
     "id": "NHC-10089",
-    "nombre": "Lucia Garcia Hernandez",
-    "edad": 55,
-    "sexo": "Femenino",
-    "historia": "Diabetes Mellitus Tipo 2. Obesidad grado I",
-    "motivo": "Control rutinario de empresa"
+    "name": "Lucy Garcia",
+    "age": 55,
+    "sex": "Female",
+    "history": "Type 2 Diabetes Mellitus. Grade I obesity",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10090",
-    "nombre": "Antonio Moreno Perez",
-    "edad": 76,
-    "sexo": "Masculino",
-    "historia": "Diabetes Mellitus Tipo 2. Hipotiroidismo en tratamiento",
-    "motivo": "Dolor costal punzante"
+    "name": "Anthony Moreno",
+    "age": 76,
+    "sex": "Male",
+    "history": "Type 2 Diabetes Mellitus. Hypothyroidism under treatment",
+    "reason": "Sharp costal pain"
   },
   {
     "id": "NHC-10091",
-    "nombre": "Laura Gomez Lopez",
-    "edad": 66,
-    "sexo": "Femenino",
-    "historia": "Hipertensión arterial controlada",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Laura Gomez",
+    "age": 66,
+    "sex": "Female",
+    "history": "Controlled arterial hypertension",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10092",
-    "nombre": "Francisco Romero Martin",
-    "edad": 30,
-    "sexo": "Masculino",
-    "historia": "Asma bronquial crónica",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Frank Romero",
+    "age": 30,
+    "sex": "Male",
+    "history": "Chronic bronchial asthma",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10093",
-    "nombre": "Daniel Perez Rodriguez",
-    "edad": 21,
-    "sexo": "Masculino",
-    "historia": "Fumador de larga duración (1 pq/día). Sedentarismo",
-    "motivo": "Dificultad respiratoria al caminar"
+    "name": "Daniel Peterson",
+    "age": 21,
+    "sex": "Male",
+    "history": "Long-term smoker (1 pack/day). Sedentary lifestyle",
+    "reason": "Breathing difficulty while walking"
   },
   {
     "id": "NHC-10094",
-    "nombre": "Javier Hernandez Martin",
-    "edad": 68,
-    "sexo": "Masculino",
-    "historia": "Arrítmia cardiaca leve",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Jason Hernandez",
+    "age": 68,
+    "sex": "Male",
+    "history": "Mild cardiac arrhythmia",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10095",
-    "nombre": "Javier Fernandez Gonzalez",
-    "edad": 85,
-    "sexo": "Masculino",
-    "historia": "Hipertensión arterial controlada. Insuficiencia renal leve. Asma bronquial crónica",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Jason Fernandez",
+    "age": 85,
+    "sex": "Male",
+    "history": "Controlled arterial hypertension. Mild renal insufficiency. Chronic bronchial asthma",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10096",
-    "nombre": "Jose Diaz Perez",
-    "edad": 44,
-    "sexo": "Masculino",
-    "historia": "Hipotiroidismo en tratamiento. Colesterol elevado",
-    "motivo": "Tos seca de 3 semanas de evolución"
+    "name": "Joseph Diaz",
+    "age": 44,
+    "sex": "Male",
+    "history": "Hypothyroidism under treatment. Elevated cholesterol",
+    "reason": "Dry cough lasting 3 weeks"
   },
   {
     "id": "NHC-10097",
-    "nombre": "Carlos Lopez Alvarez",
-    "edad": 48,
-    "sexo": "Masculino",
-    "historia": "Sin antecedentes de interés. Episodios de bronquitis recurrente. Fumador de larga duración (1 pq/día)",
-    "motivo": "Dolor en zona lumbar irradiado"
+    "name": "Charles Lopez",
+    "age": 48,
+    "sex": "Male",
+    "history": "No significant medical history. Recurrent bronchitis episodes. Long-term smoker (1 pack/day)",
+    "reason": "Radiating lower back pain"
   },
   {
     "id": "NHC-10098",
-    "nombre": "Elena Gutierrez Alonso",
-    "edad": 34,
-    "sexo": "Femenino",
-    "historia": "Hipotiroidismo en tratamiento. Alergia a la penicilina. Obesidad grado I",
-    "motivo": "Control rutinario de empresa"
+    "name": "Helen Gutierrez",
+    "age": 34,
+    "sex": "Female",
+    "history": "Hypothyroidism under treatment. Penicillin allergy. Grade I obesity",
+    "reason": "Routine workplace check-up"
   },
   {
     "id": "NHC-10099",
-    "nombre": "Carmen Romero Diaz",
-    "edad": 77,
-    "sexo": "Femenino",
-    "historia": "Ansiedad crónica. Colesterol elevado",
-    "motivo": "Palpitaciones ocasionales"
+    "name": "Carol Romero",
+    "age": 77,
+    "sex": "Female",
+    "history": "Chronic anxiety. Elevated cholesterol",
+    "reason": "Occasional palpitations"
   },
   {
     "id": "NHC-10100",
-    "nombre": "Javier Moreno Fernandez",
-    "edad": 26,
-    "sexo": "Masculino",
-    "historia": "Alergia a la penicilina. Operado de vesícula en 2019. Antecedentes de neumonía en 2021",
-    "motivo": "Dificultad respiratoria al caminar"
+    "name": "Jason Moreno",
+    "age": 26,
+    "sex": "Male",
+    "history": "Penicillin allergy. Gallbladder surgery in 2019. History of pneumonia in 2021",
+    "reason": "Breathing difficulty while walking"
   }
 ]

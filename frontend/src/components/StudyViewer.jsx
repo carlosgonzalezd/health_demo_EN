@@ -24,8 +24,8 @@ const StudyViewer = ({ onClose }) => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <Zap size={20} color="#3b82f6" />
                     <div>
-                        <div style={{ fontSize: '0.85rem', fontWeight: 800 }}>ESTACIÓN RADIOLÓGICA GB10</div>
-                        <div style={{ fontSize: '0.6rem', color: '#64748b', fontWeight: 700 }}>VERSIÓN PRO V3.2</div>
+                        <div style={{ fontSize: '0.85rem', fontWeight: 800 }}>GB10 RADIOLOGY STATION</div>
+                        <div style={{ fontSize: '0.6rem', color: '#64748b', fontWeight: 700 }}>PRO VERSION V3.2</div>
                     </div>
                 </div>
                 <button onClick={onClose} style={{ background: 'rgba(239, 68, 68, 0.1)', border: 'none', color: '#ef4444', padding: '8px', borderRadius: '50%', cursor: 'pointer' }}>
@@ -35,14 +35,14 @@ const StudyViewer = ({ onClose }) => {
 
             <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '250px 1fr 300px', overflow: 'hidden' }}>
                 <aside style={{ borderRight: '1px solid var(--border)', padding: '1.5rem' }}>
-                    <h4 style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 800, textTransform: 'uppercase', marginBottom: '1rem' }}>Herramientas</h4>
+                    <h4 style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 800, textTransform: 'uppercase', marginBottom: '1rem' }}>Tools</h4>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem' }}><span>Brillo</span><span>{brightness}%</span></div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem' }}><span>Brightness</span><span>{brightness}%</span></div>
                             <input type="range" min="0" max="200" value={brightness} onChange={e => setBrightness(e.target.value)} />
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem' }}><span>Contraste</span><span>{contrast}%</span></div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem' }}><span>Contrast</span><span>{contrast}%</span></div>
                             <input type="range" min="0" max="200" value={contrast} onChange={e => setContrast(e.target.value)} />
                         </div>
                     </div>
@@ -57,7 +57,7 @@ const StudyViewer = ({ onClose }) => {
                     }}>
                         <img src={studyImage} style={{ width: '100%', height: '100%', objectFit: 'contain' }} alt="MRI" />
                         <div style={{ position: 'absolute', top: '20%', left: '40%', width: '15%', height: '15%', border: '2px dashed #ef4444', background: 'rgba(239, 68, 68, 0.1)' }}>
-                            <div style={{ position: 'absolute', top: '-25px', background: '#ef4444', color: 'white', padding: '2px 6px', fontSize: '0.6rem', fontWeight: 800 }}>MASA AI (88%)</div>
+                            <div style={{ position: 'absolute', top: '-25px', background: '#ef4444', color: 'white', padding: '2px 6px', fontSize: '0.6rem', fontWeight: 800 }}>AI MASS (88%)</div>
                         </div>
                     </div>
                     <div style={{ position: 'absolute', bottom: '20px', left: '20px', fontSize: '0.7rem', color: '#3b82f6', fontWeight: 800 }}>NEUROSEG-AI V4 INFRASTRUCTURE</div>
@@ -66,14 +66,14 @@ const StudyViewer = ({ onClose }) => {
                 <aside style={{ borderLeft: '1px solid var(--border)', padding: '1.5rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#10b981', marginBottom: '1.5rem' }}>
                         <ShieldCheck size={20} />
-                        <h3 style={{ fontSize: '1rem', fontWeight: 800 }}>Reporte AI</h3>
+                        <h3 style={{ fontSize: '1rem', fontWeight: 800 }}>AI Report</h3>
                     </div>
                     <div className="glass-pane" style={{ padding: '1rem', background: 'rgba(16, 185, 129, 0.05)', marginBottom: '1.5rem' }}>
-                        <div style={{ fontSize: '1rem', fontWeight: 800 }}>Glioblastoma Presuntivo</div>
-                        <p style={{ fontSize: '0.8rem', opacity: 0.7, marginTop: '5px' }}>Región frontal izquierda detectada mediante motor de inferencia local.</p>
+                        <div style={{ fontSize: '1rem', fontWeight: 800 }}>Presumptive Glioblastoma</div>
+                        <p style={{ fontSize: '0.8rem', opacity: 0.7, marginTop: '5px' }}>Left frontal region detected using local inference engine.</p>
                     </div>
                     <button className="btn-primary" style={{ width: '100%', background: '#3b82f6', border: 'none', color: 'white', padding: '10px', borderRadius: '8px', fontWeight: 700 }}>
-                        <Download size={16} /> Firmar Informe
+                        <Download size={16} /> Sign Report
                     </button>
                 </aside>
             </div>
