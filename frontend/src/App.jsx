@@ -1933,40 +1933,40 @@ function App() {
                                                 <span className="material-symbols-outlined text-3xl">emergency</span>
                                             </div>
                                             <div>
-                                                <h3 className="text-2xl font-black text-gray-900 leading-tight">Triaje de Urgencias (Manchester)</h3>
-                                                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-0.5">Diagnóstico IA de Prioridad</p>
+                                                <h3 className="text-2xl font-black text-gray-900 leading-tight">Emergency Triage (Manchester)</h3>
+                                                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-0.5">AI Priority Diagnosis</p>
                                             </div>
                                         </div>
 
                                         <div className="space-y-6">
                                             <div className="space-y-2">
-                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Paciente en Admisión</label>
+                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Waiting Room Patient</label>
                                                 <select
                                                     value={(selectedPatient?.id || "")}
                                                     onChange={e => handlePatientSelect(e)}
                                                     className="w-full bg-gray-50 border-2 border-transparent focus:border-red-100 focus:bg-white rounded-2xl p-4 text-sm font-bold text-gray-800 outline-none transition-all shadow-inner"
                                                 >
-                                                    <option value="">-- Seleccionar paciente --</option>
+                                                    <option value="">Select patient...</option>
                                                     {patients.map(p => <option key={p.id} value={p.id}>{p.name} ({p.id})</option>)}
                                                 </select>
                                             </div>
 
                                             <div className="p-5 bg-gray-50/50 rounded-2xl border border-gray-100 flex flex-col gap-4">
-                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Signos Vitales In-Situ</label>
+                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">In-Situ Vital Signs</label>
                                                 <div className="grid grid-cols-2 gap-3">
                                                     <input type="text" value={triageVitals.hr} onChange={e => setTriageVitals({ ...triageVitals, hr: e.target.value })} placeholder="FC (bpm)" className="bg-white border border-gray-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-red-100" />
                                                     <input type="text" value={triageVitals.temp} onChange={e => setTriageVitals({ ...triageVitals, temp: e.target.value })} placeholder="Temp (°C)" className="bg-white border border-gray-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-red-100" />
-                                                    <input type="text" value={triageVitals.bp_sys} onChange={e => setTriageVitals({ ...triageVitals, bp_sys: e.target.value })} placeholder="TA (Sist)" className="bg-white border border-gray-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-red-100" />
+                                                    <input type="text" value={triageVitals.bp_sys} onChange={e => setTriageVitals({ ...triageVitals, bp_sys: e.target.value })} placeholder="BP (SYS)" className="bg-white border border-gray-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-red-100" />
                                                     <input type="text" value={triageVitals.spo2} onChange={e => setTriageVitals({ ...triageVitals, spo2: e.target.value })} placeholder="SpO2 (%)" className="bg-white border border-gray-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-red-100" />
                                                 </div>
                                             </div>
 
                                             <div className="space-y-2">
-                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Motivo / Síntomas (Lenguaje Natural)</label>
+                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Reason / Symptoms (Natural Language)</label>
                                                 <textarea
                                                     value={triageReason}
                                                     onChange={e => setTriageReason(e.target.value)}
-                                                    placeholder="Ej: Dolor torácico opresivo, irradiado a cuello, inicio súbito hace 20 min..."
+                                                    placeholder="E.g: Crushing chest pain, radiating to neck, sudden onset 20 min ago..."
                                                     className="w-full bg-gray-50 border-2 border-transparent focus:border-red-100 focus:bg-white rounded-2xl p-5 text-sm font-medium text-gray-700 h-32 outline-none transition-all resize-none shadow-inner"
                                                 ></textarea>
                                             </div>
@@ -1974,7 +1974,7 @@ function App() {
                                             <div className="p-4 bg-red-900 text-white rounded-2xl border-2 border-red-800 shadow-xl shadow-red-900/40">
                                                 <div className="flex items-center gap-3 mb-3">
                                                     <span className="material-symbols-outlined text-red-400">psychiatry</span>
-                                                    <label className="text-[10px] font-black uppercase tracking-widest text-red-200">Configuración Motor Neural</label>
+                                                    <label className="text-[10px] font-black uppercase tracking-widest text-red-200">Neural Engine Config</label>
                                                 </div>
                                                 <div className="flex flex-col gap-2">
                                                     <select value={selectedCredentialId} onChange={e => handleCredentialChange(e)} className="bg-red-800 border border-red-700 rounded-lg p-2 text-[10px] font-bold text-white outline-none">
@@ -1996,12 +1996,12 @@ function App() {
                                                 {triageLoading ? (
                                                     <>
                                                         <span className="size-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                                                        <span>Inferencia en Curso...</span>
+                                                        <span>Inference in Progress...</span>
                                                     </>
                                                 ) : (
                                                     <>
                                                         <span className="material-symbols-outlined">bolt</span>
-                                                        <span>Analizar Manchester IA</span>
+                                                        <span>Run Manchester AI</span>
                                                     </>
                                                 )}
                                             </button>
@@ -2035,12 +2035,12 @@ function App() {
                                                         <span className="material-symbols-outlined text-4xl">warning</span>
                                                     </div>
                                                     <div>
-                                                        <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80 mb-1">NIVEL DE URGENCIA {triageResult.level}</p>
+                                                        <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80 mb-1">MANCHESTER LEVEL {triageResult.level}</p>
                                                         <h3 className="text-3xl font-black uppercase tracking-tighter">{triageResult.priority_name}</h3>
                                                     </div>
                                                 </div>
 
-                                                {/* Justificación Clínica (Formato Imagen) */}
+                                                {/* Clinical Justification (Formato Imagen) */}
                                                 <div className="bg-white rounded-xl shadow-sm border border-[#dbe0e6] overflow-hidden">
                                                     <div className={`border-l-4 p-5 ${triageResult.level === 1 ? 'border-red-500' :
                                                         triageResult.level === 2 ? 'border-orange-500' :
@@ -2048,7 +2048,7 @@ function App() {
                                                         }`}>
                                                         <div className="flex items-center gap-2 mb-4 text-gray-400">
                                                             <span className="material-symbols-outlined text-lg">content_paste</span>
-                                                            <h4 className="text-[10px] font-black uppercase tracking-[0.1em]">Justificación Clínica</h4>
+                                                            <h4 className="text-[10px] font-black uppercase tracking-[0.1em]">Clinical Justification</h4>
                                                         </div>
                                                         <div className="text-gray-700 text-sm font-medium leading-relaxed">
                                                             <ReactMarkdown>{triageResult.justification}</ReactMarkdown>
@@ -2056,7 +2056,7 @@ function App() {
                                                     </div>
                                                 </div>
 
-                                                {/* Acciones Inmediatas (Formato Imagen) */}
+                                                {/* Immediate Actions (Formato Imagen) */}
                                                 <div className="bg-white rounded-xl shadow-sm border border-[#dbe0e6] overflow-hidden">
                                                     <div className={`border-l-4 p-5 ${triageResult.level === 1 ? 'border-red-600' :
                                                         triageResult.level === 2 ? 'border-orange-600' :
@@ -2064,7 +2064,7 @@ function App() {
                                                         }`}>
                                                         <div className="flex items-center gap-2 mb-4 text-gray-400">
                                                             <span className="material-symbols-outlined text-lg">bolt</span>
-                                                            <h4 className="text-[10px] font-black uppercase tracking-[0.1em]">Acciones Inmediatas</h4>
+                                                            <h4 className="text-[10px] font-black uppercase tracking-[0.1em]">Immediate Actions</h4>
                                                         </div>
                                                         <div className="text-gray-700 text-sm font-medium leading-relaxed">
                                                             <ReactMarkdown>{triageResult.actions}</ReactMarkdown>
@@ -2077,9 +2077,9 @@ function App() {
                                                     <div className="flex items-center gap-2">
                                                         <div className={`size-2 rounded-full animate-pulse ${triageResult.level === 1 ? 'bg-red-500' : 'bg-blue-500'
                                                             }`}></div>
-                                                        <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Inferencia vía {triageAnalysisModel}</span>
+                                                        <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest font-bold">Inference via {triageAnalysisModel}</span>
                                                     </div>
-                                                    <button className="bg-gray-900 text-white px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-black transition-all shadow-lg active:scale-95">Validar y Admitir</button>
+                                                    <button className="bg-gray-900 text-white px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-black transition-all shadow-lg active:scale-95">Validate & Admit</button>
                                                 </div>
                                             </div>
                                         )}
