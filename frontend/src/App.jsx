@@ -2010,6 +2010,13 @@ function App() {
 
                                     {/* Triage Result Side */}
                                     <div className="flex-1 bg-gray-50/50 p-10 flex flex-col items-center justify-center border-l md:border-l-0">
+                                        {error && (
+                                            <div className="w-full mb-6 p-4 bg-red-50 border border-red-100 rounded-2xl flex items-center gap-3 animate-in fade-in slide-in-from-top-4">
+                                                <AlertCircle className="text-red-500 size-5" />
+                                                <p className="text-xs font-bold text-red-600">{error}</p>
+                                            </div>
+                                        )}
+
                                         {!triageResult && !triageLoading && (
                                             <div className="text-center space-y-4 opacity-30">
                                                 <span className="material-symbols-outlined text-8xl">clinical_notes</span>
@@ -2027,47 +2034,47 @@ function App() {
                                         {triageResult && (
                                             <div className="w-full space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
                                                 {/* Cabecera de Urgencia (Formato Imagen) */}
-                                                <div className={`p-6 rounded-2xl flex items-center gap-6 shadow-md text-white ${triageResult.level === 1 ? 'bg-[#ef4444]' :
-                                                    triageResult.level === 2 ? 'bg-[#f97316]' :
-                                                        triageResult.level === 3 ? 'bg-[#eab308]' : 'bg-[#22c55e]'
+                                                <div className={`p-6 rounded-2xl flex items-center gap-6 shadow-md text-white ${triageResult?.level === 1 ? 'bg-[#ef4444]' :
+                                                    triageResult?.level === 2 ? 'bg-[#f97316]' :
+                                                        triageResult?.level === 3 ? 'bg-[#eab308]' : 'bg-[#22c55e]'
                                                     }`}>
                                                     <div className="bg-white/20 p-4 rounded-xl backdrop-blur-sm shadow-inner">
                                                         <span className="material-symbols-outlined text-4xl">warning</span>
                                                     </div>
                                                     <div>
-                                                        <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80 mb-1">MANCHESTER LEVEL {triageResult.level}</p>
-                                                        <h3 className="text-3xl font-black uppercase tracking-tighter">{triageResult.priority_name}</h3>
+                                                        <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80 mb-1">MANCHESTER LEVEL {triageResult?.level || 3}</p>
+                                                        <h3 className="text-3xl font-black uppercase tracking-tighter">{triageResult?.priority_name || 'UNKNOWN'}</h3>
                                                     </div>
                                                 </div>
 
                                                 {/* Clinical Justification (Formato Imagen) */}
                                                 <div className="bg-white rounded-xl shadow-sm border border-[#dbe0e6] overflow-hidden">
-                                                    <div className={`border-l-4 p-5 ${triageResult.level === 1 ? 'border-red-500' :
-                                                        triageResult.level === 2 ? 'border-orange-500' :
-                                                            triageResult.level === 3 ? 'border-yellow-500' : 'border-green-500'
+                                                    <div className={`border-l-4 p-5 ${triageResult?.level === 1 ? 'border-red-500' :
+                                                        triageResult?.level === 2 ? 'border-orange-500' :
+                                                            triageResult?.level === 3 ? 'border-yellow-500' : 'border-green-500'
                                                         }`}>
                                                         <div className="flex items-center gap-2 mb-4 text-gray-400">
                                                             <span className="material-symbols-outlined text-lg">content_paste</span>
                                                             <h4 className="text-[10px] font-black uppercase tracking-[0.1em]">Clinical Justification</h4>
                                                         </div>
                                                         <div className="text-gray-700 text-sm font-medium leading-relaxed">
-                                                            <ReactMarkdown>{triageResult.justification}</ReactMarkdown>
+                                                            <ReactMarkdown>{triageResult?.justification || ''}</ReactMarkdown>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 {/* Immediate Actions (Formato Imagen) */}
                                                 <div className="bg-white rounded-xl shadow-sm border border-[#dbe0e6] overflow-hidden">
-                                                    <div className={`border-l-4 p-5 ${triageResult.level === 1 ? 'border-red-600' :
-                                                        triageResult.level === 2 ? 'border-orange-600' :
-                                                            triageResult.level === 3 ? 'border-yellow-600' : 'border-green-600'
+                                                    <div className={`border-l-4 p-5 ${triageResult?.level === 1 ? 'border-red-600' :
+                                                        triageResult?.level === 2 ? 'border-orange-600' :
+                                                            triageResult?.level === 3 ? 'border-yellow-600' : 'border-green-600'
                                                         }`}>
                                                         <div className="flex items-center gap-2 mb-4 text-gray-400">
                                                             <span className="material-symbols-outlined text-lg">bolt</span>
                                                             <h4 className="text-[10px] font-black uppercase tracking-[0.1em]">Immediate Actions</h4>
                                                         </div>
                                                         <div className="text-gray-700 text-sm font-medium leading-relaxed">
-                                                            <ReactMarkdown>{triageResult.actions}</ReactMarkdown>
+                                                            <ReactMarkdown>{triageResult?.actions || ''}</ReactMarkdown>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2075,9 +2082,9 @@ function App() {
                                                 {/* Footer Info & Final Action */}
                                                 <div className="flex items-center justify-between px-2 mt-6">
                                                     <div className="flex items-center gap-2">
-                                                        <div className={`size-2 rounded-full animate-pulse ${triageResult.level === 1 ? 'bg-red-500' : 'bg-blue-500'
+                                                        <div className={`size-2 rounded-full animate-pulse ${triageResult?.level === 1 ? 'bg-red-500' : 'bg-blue-500'
                                                             }`}></div>
-                                                        <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest font-bold">Inference via {triageAnalysisModel}</span>
+                                                        <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest font-bold">Inference via {triageAnalysisModel || 'N/A'}</span>
                                                     </div>
                                                     <button className="bg-gray-900 text-white px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-black transition-all shadow-lg active:scale-95">Validate & Admit</button>
                                                 </div>

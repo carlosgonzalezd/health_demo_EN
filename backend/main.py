@@ -562,6 +562,11 @@ JSON:"""
                 actions="Manual assessment by triage nursing. Re-evaluate vital signs in 15 min."
             )
 
+        # Ensure parsed is a dict
+        if not isinstance(parsed, dict):
+            print(f"DEBUG TRIAGE: Parsed result is not a dict: {type(parsed)}. Resetting to empty.")
+            parsed = {}
+
         # Handle key variations
         level = parsed.get("level") or parsed.get("triage_level") or parsed.get("Level") or 3
         priority = parsed.get("priority_name") or parsed.get("priority") or "YELLOW"
