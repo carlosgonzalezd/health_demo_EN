@@ -1,9 +1,1 @@
-node_modules/
-dist/
-build/
-.cache/
-*.log
-__pycache__/
-*.pyc
-.env
-.DS_Store
+node_modules/\n.env\n*.log\n/dist\n/.vscode\nc:\n'c:\'

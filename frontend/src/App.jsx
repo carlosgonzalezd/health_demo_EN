@@ -496,17 +496,28 @@ function App() {
         fetchInitData();
     }, []);
 
-    // Poll /stats every 3s when radiology tab is active (host server for nvidia-smi access)
-    const STATS_URL = window.location.hostname === 'localhost' ? 'http://localhost:4202' : `http://${window.location.hostname}:4202`;
+    // Poll /stats every 3s when radiology, triage or dashboard active (host server for nvidia-smi access)
+    // The stats server runs on whichever node the app is on (GB10 or Worki), port 4202.
+    // It figures out the host dynamically - if the credential IP is different, it polls that node's stats.
+    const getStatsUrl = () => {
+        const cred = credentials.find(c => c.id === selectedCredentialId);
+        // If a custom node (Worki, etc.) is selected, poll that node's stats server
+        if (cred && cred.ip && cred.ip !== 'host.docker.internal') {
+            return `http://${cred.ip}:4202`;
+        }
+        // Default: poll current hostname (GB10)
+        return window.location.hostname === 'localhost' ? 'http://localhost:4202' : `http://${window.location.hostname}:4202`;
+    };
     useEffect(() => {
-        if (activeTab !== 'radiology' && activeTab !== 'triage') return;
+        if (activeTab !== 'radiology' && activeTab !== 'triage' && activeTab !== 'dashboard') return;
         const fetchStats = () => {
-            axios.get(`${STATS_URL}/stats`).then(r => setHwStats(r.data)).catch(() => { });
+            const url = getStatsUrl();
+            axios.get(`${url}/stats`).then(r => setHwStats(r.data)).catch(() => { });
         };
         fetchStats();
         const interval = setInterval(fetchStats, 3000);
         return () => clearInterval(interval);
-    }, [activeTab]);
+    }, [activeTab, selectedCredentialId, credentials]);
 
     useEffect(() => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -722,6 +733,10 @@ function App() {
         setError(null);
         setResult(null);
 
+        // Determine the active Ollama URL from the selected credential
+        const activeCred = credentials.find(c => c.id === selectedCredentialId);
+        const activeOllamaUrl = activeCred ? `http://${activeCred.ip}:${activeCred.port}` : null;
+
         const formData = new FormData();
         formData.append('file', file);
         formData.append('model', selectedModel);
@@ -730,6 +745,7 @@ function App() {
         formData.append('sex', sex);
         formData.append('symptoms', symptoms);
         formData.append('engine', selectedEngine);
+        if (activeOllamaUrl) formData.append('ollama_url', activeOllamaUrl);
 
         try {
             const response = await axios.post(`${BACKEND_URL}/analyze-image`, formData);
@@ -1196,7 +1212,7 @@ function App() {
                     </div>
                     <div className="flex flex-col">
                         <h1 className="text-[#111418] text-lg font-black leading-tight whitespace-nowrap">Dell AI Healthcare Assistant</h1>
-                        <p className="text-[#617289] text-xs font-medium">v3.5</p>
+                        <p className="text-[#617289] text-xs font-medium">v3.7</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-4 flex-1 max-w-xl mx-8">
@@ -1482,6 +1498,67 @@ function App() {
 
                                     {/* Right Sidebar Content (Triage Queue) */}
                                     <div className="col-span-12 lg:col-span-12 xl:col-span-5 space-y-8">
+                                        {/* Performance Monitor (Reloj / Gauge Pattern) */}
+                                        <div className="w-full bg-white rounded-3xl border border-gray-100 p-6 shadow-sm mb-4 animate-in fade-in slide-in-from-top-4 relative overflow-hidden group">
+                                            <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                            <div className="flex items-center justify-between mb-6">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="size-8 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
+                                                        <span className="material-symbols-outlined text-[18px]">memory</span>
+                                                    </div>
+                                                    <div>
+                                                        <h3 className="text-sm font-black text-[#111418] uppercase tracking-wider">GB10 STATUS</h3>
+                                                        <p className="text-[10px] font-bold text-gray-400 tracking-wide mt-0.5 flex items-center gap-1">
+                                                            <span className="size-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                                                            Connected to Local Server
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <span className="text-[10px] font-bold bg-blue-50 text-blue-600 px-2.5 py-1 rounded-lg border border-blue-100">Live Telemetry</span>
+                                            </div>
+
+                                            <div className="flex items-end justify-between w-full h-full gap-8">
+
+                                                {/* GPU Gauge */}
+                                                <div className="flex flex-col items-center justify-end flex-1">
+                                                    <div className="relative w-28 h-14 overflow-hidden flex justify-center">
+                                                        <svg className="w-28 h-28 absolute top-0" viewBox="0 0 100 100">
+                                                            {/* Background Arc */}
+                                                            <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#f3f4f6" strokeWidth="10" strokeLinecap="round" />
+                                                            {/* Progress Arc (Circumference ~ 109.9) */}
+                                                            <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#ef4444" strokeWidth="10" strokeLinecap="round" strokeDasharray="109.95" strokeDashoffset={isNaN(hwStats.gpu) ? 109.95 : 109.95 - (hwStats.gpu / 100) * 109.95} className="transition-all duration-1000 ease-out drop-shadow-[0_2px_4px_rgba(239,68,68,0.3)]" />
+                                                        </svg>
+                                                        <div className="absolute bottom-0 w-full text-center flex flex-col items-center">
+                                                            <span className="text-sm font-black text-gray-800 tabular-nums">{hwStats.gpu}%</span>
+                                                        </div>
+                                                    </div>
+                                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-2">GPU Usage</span>
+                                                </div>
+
+                                                {/* MEM Gauge */}
+                                                <div className="flex flex-col items-center justify-end flex-1">
+                                                    <div className="relative w-28 h-14 overflow-hidden flex justify-center">
+                                                        <svg className="w-28 h-28 absolute top-0" viewBox="0 0 100 100">
+                                                            <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#f3f4f6" strokeWidth="10" strokeLinecap="round" />
+                                                            <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#f97316" strokeWidth="10" strokeLinecap="round" strokeDasharray="109.95" strokeDashoffset={isNaN(hwStats.mem) ? 109.95 : 109.95 - (hwStats.mem / 100) * 109.95} className="transition-all duration-1000 ease-out drop-shadow-[0_2px_4px_rgba(249,115,22,0.3)]" />
+                                                        </svg>
+                                                        <div className="absolute bottom-0 w-full text-center flex flex-col items-center">
+                                                            <span className="text-sm font-black text-gray-800 tabular-nums">{hwStats.mem}%</span>
+                                                        </div>
+                                                    </div>
+                                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-2">Mem Usage</span>
+                                                </div>
+
+                                                {/* Throughput */}
+                                                <div className="border-l border-gray-100 pl-8 flex flex-col justify-end h-16 flex-[2]">
+                                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5 flex items-center gap-1.5"><span className="material-symbols-outlined text-[14px] text-yellow-500" style={{ fontVariationSettings: "'FILL' 1" }}>bolt</span> Model Throughput</span>
+                                                    <div className="text-4xl font-mono font-black text-gray-900 flex items-baseline gap-2">
+                                                        {hwStats.throughput} <span className="text-[11px] font-sans text-gray-500 font-bold bg-gray-100 px-2 py-1 rounded-lg uppercase tracking-widest">tok/s</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <section className="space-y-4">
                                             <div className="flex justify-between items-center">
                                                 <h3 className="text-sm font-bold text-[#111418] uppercase tracking-wider">Waiting Room Queue</h3>

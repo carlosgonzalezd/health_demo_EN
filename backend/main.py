@@ -231,7 +231,8 @@ async def analyze_image(
     age: str = Form("Unknown"),
     sex: str = Form("Unknown"),
     symptoms: str = Form("Not specified"),
-    engine: str = Form("xray")
+    engine: str = Form("xray"),
+    ollama_url: Optional[str] = Form(None)
 ):
     # Patient context
     patient_data = next((p for p in patients_db if p['id'] == patient_id), None)
@@ -342,6 +343,10 @@ STRICTLY respond with a valid JSON object containing exactly these two keys with
 }}
 """
 
+    # Determine LLM URL: use passed ollama_url or fallback to config
+    llm_url = (ollama_url.rstrip("/") if ollama_url else config["OLLAMA_URL"].rstrip("/"))
+    print(f"DEBUG ANALYZE-IMAGE: model={model}, llm_url={llm_url}")
+
     async with httpx.AsyncClient() as client:
         try:
             payload = {
@@ -353,7 +358,7 @@ STRICTLY respond with a valid JSON object containing exactly these two keys with
                 "stream": False,
                 "format": "json"
             }
-            ollama_resp = await client.post(f"{config['OLLAMA_URL']}/api/chat", json=payload, timeout=120.0)
+            ollama_resp = await client.post(f"{llm_url}/api/chat", json=payload, timeout=180.0)
             llm_result = ollama_resp.json()
             response_text = llm_result.get("message", {}).get("content", "{}")
 
