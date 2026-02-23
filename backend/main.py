@@ -40,6 +40,16 @@ def build_credentials_from_env():
     pro_max_port = os.getenv("DELL_PRO_MAX_OLLAMA_PORT", "11434")
     if pro_max_ip:
         nodes.append({"id": "dell-pro-max-node", "name": "Dell PRO MAX PLUS", "ip": pro_max_ip, "port": pro_max_port})
+
+    # Load dynamic nodes
+    for key, val in os.environ.items():
+        if key.startswith("CUSTOM_NODE_") and key.endswith("_IP"):
+            # Extract node ID: CUSTOM_NODE_x_IP -> x
+            node_id = key[len("CUSTOM_NODE_"):-len("_IP")]
+            name = os.getenv(f"CUSTOM_NODE_{node_id}_NAME", f"Node {node_id}")
+            port = os.getenv(f"CUSTOM_NODE_{node_id}_PORT", "11434")
+            nodes.append({"id": f"custom-node-{node_id}", "name": name, "ip": val, "port": port})
+
     return nodes
 
 def load_credentials():
