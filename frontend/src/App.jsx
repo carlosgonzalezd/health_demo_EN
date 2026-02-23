@@ -499,7 +499,7 @@ function App() {
     // Poll /stats every 3s when radiology tab is active (host server for nvidia-smi access)
     const STATS_URL = window.location.hostname === 'localhost' ? 'http://localhost:4202' : `http://${window.location.hostname}:4202`;
     useEffect(() => {
-        if (activeTab !== 'radiology') return;
+        if (activeTab !== 'radiology' && activeTab !== 'triage') return;
         const fetchStats = () => {
             axios.get(`${STATS_URL}/stats`).then(r => setHwStats(r.data)).catch(() => { });
         };
@@ -2005,6 +2005,33 @@ function App() {
                                                     </>
                                                 )}
                                             </button>
+
+                                            {/* Stats Panel (Light Mode for Triage) */}
+                                            <div className="bg-white rounded-2xl border border-gray-100 p-4 flex items-center justify-between gap-4 shadow-sm mt-4">
+                                                <div className="flex gap-4 w-full">
+                                                    <div className="flex flex-col items-center gap-1 flex-1">
+                                                        <div className="relative w-3 h-10 bg-gray-100 rounded-full overflow-hidden">
+                                                            <div className="absolute bottom-0 left-0 w-full bg-red-400 shadow-[0_0_10px_rgba(248,113,113,0.6)] transition-all duration-1000 rounded-full" style={{ height: `${hwStats.gpu}%` }}></div>
+                                                        </div>
+                                                        <span className="text-[10px] font-bold text-gray-400">GPU</span>
+                                                        <span className="text-[9px] font-mono text-red-500 font-bold">{hwStats.gpu}%</span>
+                                                    </div>
+                                                    <div className="flex flex-col items-center gap-1 flex-1">
+                                                        <div className="relative w-3 h-10 bg-gray-100 rounded-full overflow-hidden">
+                                                            <div className="absolute bottom-0 left-0 w-full bg-orange-400 shadow-[0_0_10px_rgba(251,146,60,0.6)] transition-all duration-1000 rounded-full" style={{ height: `${hwStats.mem}%` }}></div>
+                                                        </div>
+                                                        <span className="text-[10px] font-bold text-gray-400">MEM</span>
+                                                        <span className="text-[9px] font-mono text-orange-500 font-bold">{hwStats.mem}%</span>
+                                                    </div>
+                                                    <div className="border-l border-gray-100 pl-4 flex flex-col justify-center flex-[3]">
+                                                        <span className="text-[10px] uppercase text-gray-400 font-semibold tracking-wider">Throughput</span>
+                                                        <div className="text-3xl font-mono font-bold text-gray-800 flex items-baseline gap-1.5 mt-1">
+                                                            {hwStats.throughput} <span className="text-xs font-sans text-red-500 font-bold bg-red-50 px-1.5 py-0.5 rounded">tokens/s</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
 
