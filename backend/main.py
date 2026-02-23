@@ -207,6 +207,12 @@ async def engine_status():
     
     return status
 
+@app.get("/stats")
+def get_hw_stats():
+    """Return live hardware stats (GPU, Memory, Throughput)"""
+    from stats import get_system_stats
+    return get_system_stats()
+
 @app.post("/analyze-image", response_model=AnalysisResponse)
 async def analyze_image(
     file: UploadFile = File(...),

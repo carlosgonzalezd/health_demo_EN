@@ -6,42 +6,42 @@ import './App.css';
 
 // Pathology capabilities data
 const XRAY_CAPABILITIES = [
-    { name: "Atelectasis", es: "Atelectasia", desc: "Colapso parcial del pulmón", severity: "⚠️ Media" },
-    { name: "Consolidation", es: "Consolidación", desc: "Neumonía sólida", severity: "🔴 Alta" },
-    { name: "Infiltration", es: "Infiltrado", desc: "Infiltrado pulmonar", severity: "⚠️ Media" },
-    { name: "Pneumothorax", es: "Neumotórax", desc: "Pulmón colapsado (aire en pleura)", severity: "🔴 Urgente" },
-    { name: "Edema", es: "Edema Pulmonar", desc: "Líquido en pulmones (fallo cardíaco)", severity: "🔴 Alta" },
-    { name: "Emphysema", es: "Enfisema", desc: "Destrucción de alvéolos (EPOC)", severity: "⚠️ Crónica" },
-    { name: "Fibrosis", es: "Fibrosis", desc: "Cicatrización pulmonar", severity: "⚠️ Crónica" },
-    { name: "Effusion", es: "Derrame Pleural", desc: "Líquido en la cavidad pleural", severity: "🔴 Alta" },
-    { name: "Pneumonia", es: "Neumonía", desc: "Infección pulmonar", severity: "🔴 Alta" },
-    { name: "Pleural_Thickening", es: "Engrosamiento Pleural", desc: "Engrosamiento de la pleura", severity: "⚠️ Media" },
-    { name: "Cardiomegaly", es: "Cardiomegalia", desc: "Corazón agrandado", severity: "🔴 Alta" },
-    { name: "Nodule", es: "Nódulo Pulmonar", desc: "Nódulo (posible tumor)", severity: "🔴 Alta" },
-    { name: "Mass", es: "Masa Pulmonar", desc: "Masa pulmonar (sospecha cáncer)", severity: "🔴 Crítica" },
-    { name: "Hernia", es: "Hernia Diafragmática", desc: "Hernia del diafragma", severity: "⚠️ Media" },
-    { name: "Lung Lesion", es: "Lesión Pulmonar", desc: "Lesión pulmonar genérica", severity: "⚠️ Variable" },
-    { name: "Fracture", es: "Fractura", desc: "Fractura costal", severity: "⚠️ Media" },
-    { name: "Lung Opacity", es: "Opacidad Pulmonar", desc: "Opacidad (señal genérica)", severity: "⚠️ Variable" },
-    { name: "Enlarged Cardiomediastinum", es: "Mediastino Ensanchado", desc: "Mediastino ensanchado", severity: "🔴 Alta" }
+    { name: "Atelectasis", es: "Atelectasis", desc: "Partial lung collapse", severity: "⚠️ Medium" },
+    { name: "Consolidation", es: "Consolidation", desc: "Solid pneumonia", severity: "🔴 High" },
+    { name: "Infiltration", es: "Infiltration", desc: "Pulmonary infiltrate", severity: "⚠️ Medium" },
+    { name: "Pneumothorax", es: "Pneumothorax", desc: "Collapsed lung (air in pleura)", severity: "🔴 Urgent" },
+    { name: "Edema", es: "Pulmonary Edema", desc: "Fluid in lungs (heart failure)", severity: "🔴 High" },
+    { name: "Emphysema", es: "Emphysema", desc: "Alveolar destruction (COPD)", severity: "⚠️ Chronic" },
+    { name: "Fibrosis", es: "Fibrosis", desc: "Pulmonary scarring", severity: "⚠️ Chronic" },
+    { name: "Effusion", es: "Pleural Effusion", desc: "Fluid in the pleural cavity", severity: "🔴 High" },
+    { name: "Pneumonia", es: "Pneumonia", desc: "Pulmonary infection", severity: "🔴 High" },
+    { name: "Pleural_Thickening", es: "Pleural Thickening", desc: "Thickening of the pleura", severity: "⚠️ Medium" },
+    { name: "Cardiomegaly", es: "Cardiomegaly", desc: "Enlarged heart", severity: "🔴 High" },
+    { name: "Nodule", es: "Pulmonary Nodule", desc: "Nodule (possible tumor)", severity: "🔴 High" },
+    { name: "Mass", es: "Pulmonary Mass", desc: "Lung mass (cancer suspected)", severity: "🔴 Critical" },
+    { name: "Hernia", es: "Diaphragmatic Hernia", desc: "Diaphragm hernia", severity: "⚠️ Medium" },
+    { name: "Lung Lesion", es: "Lung Lesion", desc: "Generic lung lesion", severity: "⚠️ Variable" },
+    { name: "Fracture", es: "Fracture", desc: "Rib fracture", severity: "⚠️ Medium" },
+    { name: "Lung Opacity", es: "Lung Opacity", desc: "Opacity (generic signal)", severity: "⚠️ Variable" },
+    { name: "Enlarged Cardiomediastinum", es: "Enlarged Mediastinum", desc: "Widened mediastinum", severity: "🔴 High" }
 ];
 
 const TRIAGE_CAPABILITIES = [
-    { name: "Emergencia (Rojo)", es: "Emergencia", desc: "Riesgo vital inmediato. Atención inmediata.", severity: "🔴 Crítica" },
-    { name: "Muy Urgente (Naranja)", es: "Muy Urgente", desc: "Riesgo vital potencial. < 10-15 min.", severity: "🟠 Alta" },
-    { name: "Urgente (Amarillo)", es: "Urgente", desc: "Potencialmente grave. < 60 min.", severity: "🟡 Media" },
-    { name: "Estándar (Verde)", es: "Estándar", desc: "Poco urgente. < 2 horas.", severity: "🟢 Baja" },
-    { name: "No Urgente (Azul)", es: "No Urgente", desc: "Sin riesgo. < 4 horas.", severity: "🔵 Mínima" }
+    { name: "Emergency (Red)", es: "Emergency", desc: "Immediate life threat. Immediate care.", severity: "🔴 Critical" },
+    { name: "Very Urgent (Orange)", es: "Very Urgent", desc: "Potential life threat. < 10-15 min.", severity: "🟠 High" },
+    { name: "Urgent (Yellow)", es: "Urgent", desc: "Potentially serious. < 60 min.", severity: "🟡 Medium" },
+    { name: "Standard (Green)", es: "Standard", desc: "Low urgency. < 2 hours.", severity: "🟢 Low" },
+    { name: "Non-Urgent (Blue)", es: "Non-Urgent", desc: "No risk. < 4 hours.", severity: "🔵 Minimal" }
 ];
 
 const YOLO_CAPABILITIES_SUMMARY = [
-    "Persona", "Bicicleta", "Coche", "Moto", "Avión", "Autobús", "Tren", "Camión",
-    "Barco", "Semáforo", "Botella", "Copa", "Tenedor", "Cuchillo", "Cuchara",
-    "Cuenco", "Plátano", "Sándwich", "Portátil", "Ratón", "Teclado", "Teléfono",
-    "Libro", "Reloj", "Tijeras", "Perro", "Gato", "Caballo", "Oveja", "Vaca"
+    "Person", "Bicycle", "Car", "Motorcycle", "Airplane", "Bus", "Train", "Truck",
+    "Boat", "Traffic Light", "Bottle", "Wine Glass", "Fork", "Knife", "Spoon",
+    "Bowl", "Banana", "Sandwich", "Laptop", "Mouse", "Keyboard", "Phone",
+    "Book", "Clock", "Scissors", "Dog", "Cat", "Horse", "Sheep", "Cow"
 ];
 
-// Configuración dinámica del Backend
+// Dynamic Backend Configuration
 const BACKEND_PORT = window.location.port === "4101" ? "4201" : "4200";
 const IS_PRO = window.location.port === "4101";
 const BACKEND_URL = `${window.location.protocol}//${window.location.hostname}:${BACKEND_PORT}`;
@@ -136,7 +136,7 @@ const NurseCalendarView = ({ nurseId, nurses, viewDates, schedule, onBack, curre
 
 const PlanillaChat = ({ backendUrl, selectedModel }) => {
     const [messages, setMessages] = useState([
-        { role: 'assistant', content: 'Hola. Soy tu asistente experto en turnos. Puedo ayudarte a resolver conflictos, cubrir bajas o planificar el próximo mes. ¿Qué necesitas?' }
+        { role: 'assistant', content: 'Hello. I\'m your expert shift scheduling assistant. I can help you resolve conflicts, cover absences, or plan the next month. What do you need?' }
     ]);
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
@@ -211,7 +211,7 @@ const PlanillaChat = ({ backendUrl, selectedModel }) => {
 
                 <form className="chat-input-inline" onSubmit={handleSend}>
                     <input
-                        placeholder="Ej: Necesito cubrir el turno de noche de Ana el martes..."
+                        placeholder="E.g: I need to cover Ana's night shift on Tuesday..."
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         disabled={loading}
@@ -248,11 +248,11 @@ const TriageChat = ({ backendUrl, defaultModel, contextData, activeOllamaUrl }) 
 
         try {
             // Include context from the current triage evaluation if available
-            let contextStr = "Contexto Triaje: Sin datos previos.";
+            let contextStr = "Triage Context: No prior data.";
             if (contextData) {
-                contextStr = `Prioridad: ${contextData.priority_name} (Nivel ${contextData.level}). 
-                Justificación Original: ${contextData.justification}. 
-                Acciones Recomendadas: ${contextData.actions}.`;
+                contextStr = `Priority: ${contextData.priority_name} (Level ${contextData.level}). 
+                Original Justification: ${contextData.justification}. 
+                Recommended Actions: ${contextData.actions}.`;
             }
 
             const res = await axios.post(`${backendUrl}/chat`, {
@@ -264,7 +264,7 @@ const TriageChat = ({ backendUrl, defaultModel, contextData, activeOllamaUrl }) 
             });
             setMessages(prev => [...prev, { role: 'assistant', content: res.data.response }]);
         } catch (err) {
-            setMessages(prev => [...prev, { role: 'assistant', content: "Error de conexión o timeout del modelo." }]);
+            setMessages(prev => [...prev, { role: 'assistant', content: "Connection error or model timeout." }]);
         } finally {
             setLoading(false);
         }
@@ -276,7 +276,7 @@ const TriageChat = ({ backendUrl, defaultModel, contextData, activeOllamaUrl }) 
                 <div className="chat-header-inline">
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <Activity size={20} className="text-primary" />
-                        <span>Asistente Clínico de Triaje</span>
+                        <span>Clinical Triage Assistant</span>
                     </div>
                 </div>
 
@@ -336,7 +336,7 @@ const MonitorCentral = ({ patients }) => {
             <header className="pro-header">
                 <div className="search-bar-pro">
                     <Users size={18} />
-                    <input placeholder="Buscar expediente o NHC..." />
+                    <input placeholder="Search records or NHC..." />
                 </div>
                 <div className="user-profile-pro">
                     <div className="user-info-text">
@@ -348,8 +348,8 @@ const MonitorCentral = ({ patients }) => {
             </header>
 
             <section className="pro-hero">
-                <h1 className="pro-title">Panel de Control Radiológico</h1>
-                <p className="pro-subtitle">Métricas críticas y rendimiento de inferencia local.</p>
+                <h1 className="pro-title">Radiology Control Panel</h1>
+                <p className="pro-subtitle">Critical metrics and local inference performance.</p>
             </section>
 
             <div className="metric-cards-pro">
@@ -386,7 +386,7 @@ const MonitorCentral = ({ patients }) => {
             <div className="card pro-table-card">
                 <div className="card-header-pro">
                     <Activity size={18} />
-                    <h3>Inferencias Recientes</h3>
+                    <h3>Recent Inferences</h3>
                 </div>
                 <table className="pro-table">
                     <thead>
@@ -489,9 +489,24 @@ function App() {
     const canvasRef = useRef(null);
     const imgRef = useRef(null);
 
+    // Hardware stats for live GPU/MEM/Throughput
+    const [hwStats, setHwStats] = useState({ gpu: 0, mem: 0, throughput: 0 });
+
     useEffect(() => {
         fetchInitData();
     }, []);
+
+    // Poll /stats every 3s when radiology tab is active (host server for nvidia-smi access)
+    const STATS_URL = window.location.hostname === 'localhost' ? 'http://localhost:4202' : `http://${window.location.hostname}:4202`;
+    useEffect(() => {
+        if (activeTab !== 'radiology') return;
+        const fetchStats = () => {
+            axios.get(`${STATS_URL}/stats`).then(r => setHwStats(r.data)).catch(() => { });
+        };
+        fetchStats();
+        const interval = setInterval(fetchStats, 3000);
+        return () => clearInterval(interval);
+    }, [activeTab]);
 
     useEffect(() => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -738,18 +753,18 @@ function App() {
 
         const content = `
             <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
-            <head><meta charset='utf-8'><title>Informe Radiológico</title></head>
+            <head><meta charset='utf-8'><title>Radiology Report</title></head>
             <body>
-                <h1 style="color:#0076ce; font-family: sans-serif;">Informe Radiológico Oficial</h1>
+                <h1 style="color:#0076ce; font-family: sans-serif;">Official Radiology Report</h1>
                 <p style="font-family: sans-serif;"><strong>${patientStr}</strong></p>
-                <p style="font-family: sans-serif;"><strong>Motor de Inferencia AI:</strong> ${reportResult.engine}</p>
-                <p style="font-family: sans-serif;"><strong>Modelo de Lenguaje:</strong> ${reportResult.model_used}</p>
+                <p style="font-family: sans-serif;"><strong>AI Inference Engine:</strong> ${reportResult.engine}</p>
+                <p style="font-family: sans-serif;"><strong>Language Model:</strong> ${reportResult.model_used}</p>
                 <hr/>
                 <div style="font-family: sans-serif;">
                     ${formattedReport}
                 </div>
                 <br/><br/>
-                <p style="font-size: 10px; color: gray; font-family: sans-serif;"><em>Autogenerado por Dell AI Healthcare Assistant</em></p>
+                <p style="font-size: 10px; color: gray; font-family: sans-serif;"><em>Auto-generated by Dell AI Healthcare Assistant</em></p>
             </body>
             </html>
         `;
@@ -760,7 +775,7 @@ function App() {
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `Informe_Radiologico_${selectedPatient?.id || 'Nuevo'}.docx`;
+        link.download = `Radiology_Report_${selectedPatient?.id || 'New'}.docx`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -940,7 +955,7 @@ function App() {
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', `planilla_mes_${viewMonth + 1}.csv`);
+        link.setAttribute('download', `schedule_month_${viewMonth + 1}.csv`);
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -978,9 +993,9 @@ function App() {
         return (
             <div className="schedule-stats-panel fade-in">
                 <div className="stats-header">
-                    <h3><BarChart3 size={18} /> Análisis de Carga (IA)</h3>
-                    <div className="fairness-badge" title="Puntuación basada en la varianza de turnos entre enfermeras">
-                        <PieChart size={14} /> Equidad: <strong>{fairnessScore}%</strong>
+                    <h3><BarChart3 size={18} /> Workload Analysis (AI)</h3>
+                    <div className="fairness-badge" title="Score based on shift variance among nurses">
+                        <PieChart size={14} /> Fairness: <strong>{fairnessScore}%</strong>
                     </div>
                 </div>
                 <div className="stats-grid">
@@ -1006,7 +1021,7 @@ function App() {
     };
 
     const renderScheduleGrid = () => {
-        if (scheduleLoading) return <div className="loading-spinner"><Loader2 className="spin" /> Generando planillas...</div>;
+        if (scheduleLoading) return <div className="loading-spinner"><Loader2 className="spin" /> Generating schedules...</div>;
 
         const DAYS_PER_VIEW = 28;
         const startIdx = viewMonth * DAYS_PER_VIEW;
@@ -1059,7 +1074,7 @@ function App() {
                     <aside className="nurse-sidebar">
                         <div className="sidebar-header">
                             <div className="form-group" style={{ marginBottom: 0 }}>
-                                <input placeholder="Buscar enfermera..." style={{ width: '100%', padding: '0.6rem' }} />
+                                <input placeholder="Search nurse..." style={{ width: '100%', padding: '0.6rem' }} />
                             </div>
                         </div>
                         <div className="nurse-list">
@@ -1108,11 +1123,11 @@ function App() {
                                         <button disabled={viewMonth === 2} onClick={() => setViewMonth(viewMonth + 1)}>▶</button>
                                     </div>
                                     <div className="schedule-actions">
-                                        <button className="btn-secondary" onClick={downloadScheduleCSV} title="Descargar CSV">
-                                            <Download size={16} /> Exportar
+                                        <button className="btn-secondary" onClick={downloadScheduleCSV} title="Download CSV">
+                                            <Download size={16} /> Export
                                         </button>
-                                        <button className="btn-highlight" onClick={() => alert("Análisis AI: La distribución es óptima.")}>
-                                            <CheckCircle2 size={16} /> Validar
+                                        <button className="btn-highlight" onClick={() => alert("AI Analysis: Distribution is optimal.")}>
+                                            <CheckCircle2 size={16} /> Validate
                                         </button>
                                     </div>
                                 </div>
@@ -1255,11 +1270,11 @@ function App() {
                                 <section className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
                                     <div>
                                         <nav className="flex items-center gap-2 text-xs font-bold text-[#617289] uppercase tracking-widest mb-2">
-                                            <span>Inicio</span>
+                                            <span>Home</span>
                                             <span className="material-symbols-outlined text-sm">chevron_right</span>
-                                            <span className="text-primary">Visión General de Radiología</span>
+                                            <span className="text-primary">Radiology Overview</span>
                                         </nav>
-                                        <h2 className="text-3xl font-black text-[#111418] tracking-tight">Visión General de Radiología</h2>
+                                        <h2 className="text-3xl font-black text-[#111418] tracking-tight">Radiology Overview</h2>
                                         <p className="text-[#617289] mt-1">Efficiency metrics and study throughput for today.</p>
                                     </div>
                                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 flex-1 max-w-3xl">
@@ -1613,81 +1628,139 @@ function App() {
                                         <span className="material-symbols-outlined text-2xl">radiology</span>
                                     </div>
                                     <div>
-                                        <h2 className="text-2xl font-black text-[#111418] tracking-tight">Análisis Radiológico AI</h2>
-                                        <p className="text-sm font-medium text-[#617289]">Cargue DICOM/PNG para inferencia neural con Dell APEX.</p>
+                                        <h2 className="text-2xl font-black text-[#111418] tracking-tight">AI Radiology Analysis</h2>
+                                        <p className="text-sm font-medium text-[#617289]"><strong>Dell AI Healthcare Assistant</strong> • Powered by <strong>GB10</strong></p>
                                     </div>
                                 </section>
 
                                 {/* Dark container - starts with controls */}
                                 <div className="bg-[#111418] rounded-[2rem] border border-gray-800 p-6 shadow-2xl flex flex-col gap-5 min-h-[750px]">
 
-                                    {/* Controls toolbar */}
-                                    <div className="flex items-stretch gap-3 pb-5 border-b border-gray-800">
+                                    {/* Controls toolbar + Stats Panel in Grid */}
+                                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 pb-5 border-b border-gray-800">
+                                        {/* Dropdowns + Button: 9 cols */}
+                                        <div className="lg:col-span-9 bg-[#121418] rounded-2xl p-2 border border-gray-800 flex flex-col md:flex-row gap-2">
 
-                                        <div className="flex items-center gap-3 bg-gray-900/80 border border-gray-700 rounded-xl px-4 py-3 flex-[1] min-w-0 flex-shrink">
-                                            <span className="material-symbols-outlined text-blue-400 text-[18px]">hub</span>
-                                            <div className="flex flex-col flex-1 min-w-0">
-                                                <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest whitespace-nowrap">Servidor / Nodo</label>
-                                                <select
-                                                    value={selectedCredentialId}
-                                                    onChange={handleCredentialChange}
-                                                    className="bg-transparent border-none text-[13px] font-bold text-gray-200 focus:ring-0 outline-none cursor-pointer p-0 w-full truncate"
+                                            <div className="relative group flex-1 bg-[#1A1D23] rounded-xl border border-gray-800/50 hover:border-[#0076ce]/50 transition-colors">
+                                                <div className="w-full text-left px-4 py-3 flex items-center gap-3">
+                                                    <span className="material-symbols-outlined text-blue-400 text-xl">hub</span>
+                                                    <div className="flex flex-col flex-1 min-w-0">
+                                                        <div className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">Server / Node</div>
+                                                        <select
+                                                            value={selectedCredentialId}
+                                                            onChange={handleCredentialChange}
+                                                            className="bg-transparent border-none text-sm font-medium text-white focus:ring-0 outline-none cursor-pointer p-0 w-full truncate"
+                                                        >
+                                                            {credentials.map(c => (
+                                                                <option key={c.id} value={c.id} className="bg-[#1A1D23] text-gray-200">{c.name}</option>
+                                                            ))}
+                                                            <option value="ADD_NEW" className="bg-[#1A1D23] text-gray-200">➕ Add Node</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex-1 bg-[#1A1D23] rounded-xl border border-gray-800/50 hover:border-[#0076ce]/50 transition-colors">
+                                                <div className="w-full text-left px-4 py-3 flex items-center gap-3">
+                                                    <span className="material-symbols-outlined text-cyan-400 text-xl">smart_toy</span>
+                                                    <div className="flex flex-col flex-1 min-w-0">
+                                                        <div className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">Report Model</div>
+                                                        <select
+                                                            value={selectedModel}
+                                                            onChange={e => setSelectedModel(e.target.value)}
+                                                            className="bg-transparent border-none text-sm font-medium text-white focus:ring-0 outline-none cursor-pointer p-0 w-full truncate"
+                                                        >
+                                                            {models.map(mod => <option key={mod} value={mod} className="bg-[#1A1D23] text-gray-200">{mod}</option>)}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex-1 bg-[#1A1D23] rounded-xl border border-gray-800/50 hover:border-[#0076ce]/50 transition-colors">
+                                                <div className="w-full text-left px-4 py-3 flex items-center gap-3">
+                                                    <span className="material-symbols-outlined text-indigo-400 text-xl">memory</span>
+                                                    <div className="flex flex-col flex-1 min-w-0">
+                                                        <div className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">Vision Engine</div>
+                                                        <select
+                                                            value={selectedEngine}
+                                                            onChange={e => setSelectedEngine(e.target.value)}
+                                                            className="bg-transparent border-none text-sm font-medium text-white focus:ring-0 outline-none cursor-pointer p-0 w-full truncate"
+                                                        >
+                                                            <option value="xray" className="bg-[#1A1D23] text-gray-200">TorchXRay (Chest)</option>
+                                                            <option value="yolo" className="bg-[#1A1D23] text-gray-200">YOLOv11 (General)</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="w-full md:w-auto">
+                                                <button
+                                                    onClick={handleSubmit}
+                                                    disabled={!file || loading}
+                                                    className={`w-full h-full min-h-[60px] md:min-w-[180px] font-semibold rounded-xl flex items-center justify-center gap-2 border transition-all ${!file || loading ? 'bg-[#1F2937] text-gray-500 border-gray-800 cursor-not-allowed' : 'bg-[#1F2937] hover:bg-[#374151] text-gray-300 border-gray-800 hover:border-[#0076ce]/50'}`}
                                                 >
-                                                    {credentials.map(c => (
-                                                        <option key={c.id} value={c.id} className="bg-gray-900 text-gray-200">{c.name}</option>
-                                                    ))}
-                                                    <option value="ADD_NEW" className="bg-gray-900 text-gray-200">➕ Add Node</option>
-                                                </select>
+                                                    {loading ? (
+                                                        <>
+                                                            <span className="size-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                                                            <span className="tracking-wide text-xs">PROCESSING...</span>
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <span className="material-symbols-outlined text-xl">play_circle</span>
+                                                            <span className="tracking-wide text-xs">RUN ANALYSIS</span>
+                                                        </>
+                                                    )}
+                                                </button>
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center gap-3 bg-gray-900/80 border border-gray-700 rounded-xl px-4 py-3 flex-[1.2] min-w-0 flex-shrink">
-                                            <span className="material-symbols-outlined text-blue-400 text-[18px]">smart_toy</span>
-                                            <div className="flex flex-col flex-1 min-w-0">
-                                                <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest whitespace-nowrap">Modelo Redactor</label>
-                                                <select
-                                                    value={selectedModel}
-                                                    onChange={e => setSelectedModel(e.target.value)}
-                                                    className="bg-transparent border-none text-[13px] font-bold text-gray-200 focus:ring-0 outline-none cursor-pointer p-0 w-full truncate"
-                                                >
-                                                    {models.map(mod => <option key={mod} value={mod} className="bg-gray-900 text-gray-200">{mod}</option>)}
-                                                </select>
+                                        {/* Stats Panel: 3 cols - Dark Mode */}
+                                        <div className="lg:col-span-3 bg-[#1A1D23] rounded-2xl border border-gray-800 p-4 flex items-center justify-between gap-4">
+                                            <div className="flex gap-4 w-full">
+                                                <div className="flex flex-col items-center gap-1 flex-1">
+                                                    <div className="relative w-3 h-10 bg-gray-800 rounded-full overflow-hidden">
+                                                        <div className="absolute bottom-0 left-0 w-full bg-blue-400 shadow-[0_0_10px_rgba(56,189,248,0.6)] transition-all duration-1000 rounded-full" style={{ height: `${hwStats.gpu}%` }}></div>
+                                                    </div>
+                                                    <span className="text-[10px] font-bold text-gray-500">GPU</span>
+                                                    <span className="text-[9px] font-mono text-blue-400 font-bold">{hwStats.gpu}%</span>
+                                                </div>
+                                                <div className="flex flex-col items-center gap-1 flex-1">
+                                                    <div className="relative w-3 h-10 bg-gray-800 rounded-full overflow-hidden">
+                                                        <div className="absolute bottom-0 left-0 w-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.6)] transition-all duration-1000 rounded-full" style={{ height: `${hwStats.mem}%` }}></div>
+                                                    </div>
+                                                    <span className="text-[10px] font-bold text-gray-500">MEM</span>
+                                                    <span className="text-[9px] font-mono text-cyan-400 font-bold">{hwStats.mem}%</span>
+                                                </div>
+                                                <div className="border-l border-gray-800 pl-4 flex flex-col justify-center flex-[3]">
+                                                    <span className="text-[10px] uppercase text-gray-500 font-semibold tracking-wider">Throughput</span>
+                                                    <div className="text-3xl font-mono font-bold text-white flex items-baseline gap-1.5 mt-1">
+                                                        {hwStats.throughput} <span className="text-xs font-sans text-[#0076ce] font-bold bg-[#0076ce]/10 px-1.5 py-0.5 rounded">tokens/s</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div className="flex items-center gap-3 bg-gray-900/80 border border-gray-700 rounded-xl px-4 py-3 flex-[1] min-w-0 flex-shrink">
-                                            <span className="material-symbols-outlined text-blue-400 text-[18px]">memory</span>
-                                            <div className="flex flex-col flex-1 min-w-0">
-                                                <label className="text-[9px] font-black text-gray-500 uppercase tracking-widest whitespace-nowrap">Motor / Engine</label>
-                                                <select
-                                                    value={selectedEngine}
-                                                    onChange={e => setSelectedEngine(e.target.value)}
-                                                    className="bg-transparent border-none text-[13px] font-bold text-gray-200 focus:ring-0 outline-none cursor-pointer p-0 w-full truncate"
-                                                >
-                                                    <option value="xray" className="bg-gray-900 text-gray-200">TorchXRay (Chest)</option>
-                                                    <option value="yolo" className="bg-gray-900 text-gray-200">YOLOv11 (General)</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
+                                    {/* Engine Info Bar */}
+                                    <div className="flex items-center justify-between bg-gray-900/50 rounded-xl px-4 py-2.5 border border-gray-800">
+                                        {selectedEngine === 'xray' ? (
+                                            <span className="flex items-center gap-2 text-[11px] font-semibold text-blue-300">
+                                                <span className="material-symbols-outlined text-[14px]">memory</span>
+                                                DenseNet121 · 18 Thoracic Pathologies · Trained on NIH/CheXpert/MIMIC-CXR
+                                            </span>
+                                        ) : (
+                                            <span className="flex items-center gap-2 text-[11px] font-semibold text-yellow-300">
+                                                <span className="material-symbols-outlined text-[14px]">bolt</span>
+                                                YOLO v11 Nano · 80 Generic Classes (COCO) · Ideal for Objects & Scenes
+                                            </span>
+                                        )}
                                         <button
-                                            onClick={handleSubmit}
-                                            disabled={!file || loading}
-                                            className={`px-8 py-3 rounded-xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all flex-[0.8] border whitespace-nowrap ${!file || loading ? 'bg-gray-800 text-gray-500 border-gray-700 cursor-not-allowed' : 'bg-blue-600 text-white border-blue-500 hover:bg-blue-500 shadow-xl shadow-blue-900/20'}`}
+                                            onClick={() => setShowCapabilities(true)}
+                                            className="flex items-center gap-1.5 text-[11px] font-bold text-[#0076ce] hover:text-blue-300 transition-colors bg-[#0076ce]/10 hover:bg-[#0076ce]/20 px-3 py-1.5 rounded-lg border border-[#0076ce]/20"
                                         >
-                                            {loading ? (
-                                                <>
-                                                    <span className="size-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                                                    <span>Procesando...</span>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <span className="material-symbols-outlined text-[18px]">play_circle</span>
-                                                    <span>Iniciar Análisis</span>
-                                                </>
-                                            )}
+                                            <span className="material-symbols-outlined text-[14px]">info</span>
+                                            Model Capabilities
                                         </button>
-
                                     </div>
 
                                     {/* Main Body: Upload Left + Results Right */}
@@ -1705,7 +1778,7 @@ function App() {
                                                         <img src={preview} className="max-h-[350px] object-contain rounded-2xl shadow-2xl mx-auto ring-4 ring-gray-800 bg-black/50" />
                                                         <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-gray-800/90 text-white backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-gray-700 flex items-center gap-2 w-max">
                                                             <span className="size-2 rounded-full bg-green-400 animate-pulse"></span>
-                                                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-200">Contexto Visual Cargado</span>
+                                                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-200">Visual Context Loaded</span>
                                                         </div>
                                                     </div>
                                                 ) : (
@@ -1714,8 +1787,8 @@ function App() {
                                                             <span className="material-symbols-outlined text-5xl text-gray-500 group-hover:text-blue-400">add_photo_alternate</span>
                                                         </div>
                                                         <div>
-                                                            <p className="text-gray-300 font-bold text-sm tracking-wide">Arrastre ficheros DICOM o PNG</p>
-                                                            <p className="text-gray-600 font-medium text-[11px] uppercase tracking-widest mt-2">o haga clic para explorar el sistema</p>
+                                                            <p className="text-gray-300 font-bold text-sm tracking-wide">Drag DICOM or PNG files here</p>
+                                                            <p className="text-gray-600 font-medium text-[11px] uppercase tracking-widest mt-2">or click to browse your system</p>
                                                         </div>
                                                     </div>
                                                 )}
@@ -1730,9 +1803,9 @@ function App() {
                                                     <div className="size-24 rounded-3xl bg-gray-800/50 flex items-center justify-center mb-6">
                                                         <span className="material-symbols-outlined text-6xl text-gray-500">memory</span>
                                                     </div>
-                                                    <h4 className="text-[13px] font-black text-gray-300 uppercase tracking-widest">Esperando Inferencia Neural</h4>
+                                                    <h4 className="text-[13px] font-black text-gray-300 uppercase tracking-widest">Awaiting Neural Inference</h4>
                                                     <p className="text-[11px] text-gray-500 font-medium leading-relaxed mt-3 uppercase tracking-wide max-w-[250px]">
-                                                        Cargue una imagen radiológica e inicie el análisis para ver los hallazgos en tiempo real procesados por GB10.
+                                                        Upload a radiological image and run analysis to view real-time findings processed by GB10.
                                                     </p>
                                                 </div>
                                             )}
@@ -1746,8 +1819,8 @@ function App() {
                                                             <span className="material-symbols-outlined text-blue-500 text-3xl animate-pulse">analytics</span>
                                                         </div>
                                                     </div>
-                                                    <h4 className="text-xs font-black text-blue-400 uppercase tracking-widest mb-2 animate-pulse">Ejecutando Modelos Analíticos</h4>
-                                                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Calculando vectores y capas de convolución...</p>
+                                                    <h4 className="text-xs font-black text-blue-400 uppercase tracking-widest mb-2 animate-pulse">Running Analytical Models</h4>
+                                                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Computing vectors and convolution layers...</p>
                                                 </div>
                                             )}
 
@@ -1756,7 +1829,7 @@ function App() {
                                                     <div className="flex items-center justify-between border-b border-gray-700/50 pb-4 shrink-0">
                                                         <div className="flex items-center gap-2">
                                                             <span className="material-symbols-outlined text-blue-400">check_circle</span>
-                                                            <h4 className="text-[11px] font-black text-white uppercase tracking-widest">Resultados Consolidados</h4>
+                                                            <h4 className="text-[11px] font-black text-white uppercase tracking-widest">Consolidated Results</h4>
                                                         </div>
                                                         <span className="px-3 py-1 bg-blue-500/10 text-blue-400 text-[9px] font-black rounded-full uppercase tracking-widest border border-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.1)]">GB10 Processed</span>
                                                     </div>
@@ -1765,7 +1838,7 @@ function App() {
                                                         {/* XRay Pathologies Bar Chart Representation */}
                                                         {selectedEngine === 'xray' && result.pathologies && (
                                                             <div className="space-y-3">
-                                                                <p className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Predicciones Anatómias Top 5</p>
+                                                                <p className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Top 5 Anatomical Predictions</p>
                                                                 <div className="space-y-3">
                                                                     {Object.entries(result.pathologies)
                                                                         .sort(([, a], [, b]) => b - a)
@@ -1792,7 +1865,7 @@ function App() {
                                                         <div className="space-y-3">
                                                             <p className="text-[9px] font-black text-gray-500 uppercase tracking-widest flex items-center gap-1.5">
                                                                 <span className="material-symbols-outlined text-[14px]">edit_document</span>
-                                                                Resumen Clínico Autogenerado
+                                                                Auto-Generated Clinical Summary
                                                             </p>
                                                             <div className="bg-gray-800/40 rounded-xl p-5 border border-gray-700/50 relative group hover:bg-gray-800/60 transition-colors">
                                                                 <div className="text-[13px] text-gray-300 leading-relaxed font-medium markdown-body" style={{ whiteSpace: 'pre-wrap' }}>
@@ -1807,12 +1880,44 @@ function App() {
 
                                                     <button onClick={() => handleExportDocx(result)} className="w-full shrink-0 py-3 mt-auto bg-white text-black rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-gray-200 transition-all flex items-center justify-center gap-2">
                                                         <span className="material-symbols-outlined text-[16px]">picture_as_pdf</span>
-                                                        Exportar Informe Oficial
+                                                        Export Official Report
                                                     </button>
                                                 </div>
                                             )}
 
                                         </div>
+                                    </div>
+                                </div>
+
+                                {/* Status Footer Bar */}
+                                <div className="bg-white border border-gray-200 rounded-xl p-3 flex flex-wrap gap-4 items-center justify-between text-xs text-gray-500 shadow-sm relative">
+                                    <div className="flex items-center gap-6">
+                                        <div className="flex items-center gap-2">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-[#0076ce]"></span>
+                                            <span className="font-semibold text-gray-700">GB10 Node Active</span>
+                                        </div>
+                                        <div className="hidden md:flex items-center gap-2">
+                                            <span className="material-symbols-outlined text-[14px]">model_training</span>
+                                            <span>Model: {selectedModel}</span>
+                                        </div>
+                                        <div className="hidden md:flex items-center gap-2">
+                                            <span className="material-symbols-outlined text-[14px]">settings_system_daydream</span>
+                                            <span>Engine: {selectedEngine === 'xray' ? 'TorchXRay v2.1' : 'YOLOv11'}</span>
+                                        </div>
+                                    </div>
+                                    <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center gap-4 z-40">
+                                        <div className="flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full border border-gray-200">
+                                            <span className="material-symbols-outlined text-[14px] text-blue-400">speed</span>
+                                            <span className="font-mono text-gray-600">Latency: <span className="font-bold text-gray-800">12ms</span></span>
+                                        </div>
+                                        <div className="flex items-center gap-2 bg-[#0076ce]/10 px-3 py-1 rounded-full border border-[#0076ce]/20">
+                                            <span className="material-symbols-outlined text-[14px] text-[#0076ce]">bolt</span>
+                                            <span className="font-mono text-[#0076ce]">Throughput: <span className="font-bold">{hwStats.throughput} tokens/s</span></span>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-4 font-mono">
+                                        <span className="opacity-50">Batch: 1</span>
+                                        <div className="text-[#0076ce] font-bold">READY</div>
                                     </div>
                                 </div>
                             </div>
@@ -1828,26 +1933,26 @@ function App() {
                                                 <span className="material-symbols-outlined text-3xl">emergency</span>
                                             </div>
                                             <div>
-                                                <h3 className="text-2xl font-black text-gray-900 leading-tight">Triaje Urgencias (Manchester)</h3>
-                                                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-0.5">Diagnóstico Prioritario AI</p>
+                                                <h3 className="text-2xl font-black text-gray-900 leading-tight">Emergency Triage (Manchester)</h3>
+                                                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-0.5">AI Priority Diagnosis</p>
                                             </div>
                                         </div>
 
                                         <div className="space-y-6">
                                             <div className="space-y-2">
-                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Paciente en Sala Espera</label>
+                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Waiting Room Patient</label>
                                                 <select
                                                     value={(selectedPatient?.id || "")}
                                                     onChange={e => handlePatientSelect(e)}
                                                     className="w-full bg-gray-50 border-2 border-transparent focus:border-red-100 focus:bg-white rounded-2xl p-4 text-sm font-bold text-gray-800 outline-none transition-all shadow-inner"
                                                 >
-                                                    <option value="">Seleccionar paciente...</option>
+                                                    <option value="">Select patient...</option>
                                                     {patients.map(p => <option key={p.id} value={p.id}>{p.nombre} ({p.id})</option>)}
                                                 </select>
                                             </div>
 
                                             <div className="p-5 bg-gray-50/50 rounded-2xl border border-gray-100 flex flex-col gap-4">
-                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Constantes Vitales In-Situ</label>
+                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">In-Situ Vital Signs</label>
                                                 <div className="grid grid-cols-2 gap-3">
                                                     <input type="text" value={triageVitals.hr} onChange={e => setTriageVitals({ ...triageVitals, hr: e.target.value })} placeholder="FC (bpm)" className="bg-white border border-gray-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-red-100" />
                                                     <input type="text" value={triageVitals.temp} onChange={e => setTriageVitals({ ...triageVitals, temp: e.target.value })} placeholder="Temp (°C)" className="bg-white border border-gray-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-red-100" />
@@ -1857,11 +1962,11 @@ function App() {
                                             </div>
 
                                             <div className="space-y-2">
-                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Motivo / Síntomas (Lenguaje Natural)</label>
+                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Reason / Symptoms (Natural Language)</label>
                                                 <textarea
                                                     value={triageReason}
                                                     onChange={e => setTriageReason(e.target.value)}
-                                                    placeholder="Ej: Dolor torácico opresivo, irradiación a cuello, inicio súbito hace 20 min..."
+                                                    placeholder="E.g: Crushing chest pain, radiating to neck, sudden onset 20 min ago..."
                                                     className="w-full bg-gray-50 border-2 border-transparent focus:border-red-100 focus:bg-white rounded-2xl p-5 text-sm font-medium text-gray-700 h-32 outline-none transition-all resize-none shadow-inner"
                                                 ></textarea>
                                             </div>
@@ -1891,12 +1996,12 @@ function App() {
                                                 {triageLoading ? (
                                                     <>
                                                         <span className="size-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                                                        <span>Inferencia en Curso...</span>
+                                                        <span>Inference in Progress...</span>
                                                     </>
                                                 ) : (
                                                     <>
                                                         <span className="material-symbols-outlined">bolt</span>
-                                                        <span>Ejecutar Manchester AI</span>
+                                                        <span>Run Manchester AI</span>
                                                     </>
                                                 )}
                                             </button>
@@ -1908,14 +2013,14 @@ function App() {
                                         {!triageResult && !triageLoading && (
                                             <div className="text-center space-y-4 opacity-30">
                                                 <span className="material-symbols-outlined text-8xl">clinical_notes</span>
-                                                <p className="text-xs font-black uppercase tracking-[0.2em]">Escaneando Parámetros...</p>
+                                                <p className="text-xs font-black uppercase tracking-[0.2em]">Scanning Parameters...</p>
                                             </div>
                                         )}
 
                                         {triageLoading && (
                                             <div className="text-center space-y-6">
                                                 <div className="size-24 border-8 border-red-100 border-t-red-600 rounded-full animate-spin mx-auto"></div>
-                                                <p className="text-sm font-black text-red-600 uppercase tracking-widest animate-pulse">Clasificando Gravedad Manchester...</p>
+                                                <p className="text-sm font-black text-red-600 uppercase tracking-widest animate-pulse">Classifying Manchester Severity...</p>
                                             </div>
                                         )}
 
@@ -1928,7 +2033,7 @@ function App() {
                                                 >
                                                     <div className="flex-1 relative z-10">
                                                         <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-60 mb-2">Manchester Level</p>
-                                                        <h3 className="text-6xl font-black tracking-tighter">NIVEL {triageResult.triage_level || '?'}</h3>
+                                                        <h3 className="text-6xl font-black tracking-tighter">LEVEL {triageResult.triage_level || '?'}</h3>
                                                         <p className="mt-2 text-sm font-bold uppercase tracking-widest opacity-80">{triageResult.priority_name}</p>
                                                     </div>
                                                     <div className="size-24 rounded-3xl bg-white/50 backdrop-blur-md flex items-center justify-center shadow-inner relative z-10">
@@ -1940,14 +2045,14 @@ function App() {
                                                 <div className="bg-white rounded-3xl border border-[#dbe0e6] p-8 shadow-sm flex-1">
                                                     <div className="flex items-center gap-2 mb-4">
                                                         <span className="material-symbols-outlined text-gray-400">psychology</span>
-                                                        <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Justificación de la Inferencia</h4>
+                                                        <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Inference Justification</h4>
                                                     </div>
                                                     <p className="text-gray-700 text-sm font-medium leading-relaxed italic border-l-4 border-gray-100 pl-4 py-1">
                                                         "{triageResult.triage_justification || triageResult.justification}"
                                                     </p>
 
                                                     <div className="mt-8 grid grid-cols-1 gap-4">
-                                                        <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Plan de Acción Sugerido</div>
+                                                        <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Suggested Action Plan</div>
                                                         <div className="flex flex-wrap gap-2">
                                                             {triageResult.actions?.split(',').map((act, i) => (
                                                                 <span key={i} className="bg-gray-100 text-gray-600 px-3 py-1.5 rounded-lg text-xs font-bold border border-gray-200 hover:bg-gray-200 transition-colors cursor-default">{act.trim()}</span>
@@ -1959,9 +2064,9 @@ function App() {
                                                 <div className="flex items-center justify-between px-4">
                                                     <div className="flex items-center gap-2">
                                                         <div className="size-2 rounded-full bg-blue-500"></div>
-                                                        <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Inferencia vía {triageModel}</span>
+                                                        <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Inference via {triageModel}</span>
                                                     </div>
-                                                    <button className="bg-green-600 text-white px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-green-700 shadow-lg shadow-green-900/10 transition-all active:scale-95">Validar y Admitir</button>
+                                                    <button className="bg-green-600 text-white px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-green-700 shadow-lg shadow-green-900/10 transition-all active:scale-95">Validate & Admit</button>
                                                 </div>
                                             </div>
                                         )}
@@ -1976,12 +2081,12 @@ function App() {
                                     <div>
                                         <h3 className="font-black text-2xl text-gray-900 flex items-center gap-3">
                                             <span className="material-symbols-outlined text-[#0076ce] text-3xl">folder_shared</span>
-                                            Directorio Clínico Activo
+                                            Active Clinical Directory
                                         </h3>
-                                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Sincronizado vía HL7/FHIR con Base Central</p>
+                                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Synced via HL7/FHIR with Central Database</p>
                                     </div>
                                     <button className="bg-[#0076ce] text-white shadow-xl shadow-blue-900/10 px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest flex items-center gap-2 hover:bg-[#005a9e] transition-all">
-                                        <span className="material-symbols-outlined text-[18px]">person_add</span> Admisión Rápida
+                                        <span className="material-symbols-outlined text-[18px]">person_add</span> Quick Admission
                                     </button>
                                 </div>
 
@@ -2081,7 +2186,7 @@ function App() {
                                                         msg.loading ? (
                                                             <span className="flex items-center gap-2 text-gray-500 animate-pulse">
                                                                 <span className="material-symbols-outlined text-[16px] animate-spin">sync</span>
-                                                                Generando respuesta con {selectedModel}...
+                                                                Generating response with {selectedModel}...
                                                             </span>
                                                         ) : (
                                                             <ReactMarkdown>{msg.content}</ReactMarkdown>
@@ -2093,20 +2198,92 @@ function App() {
                                     </div>
                                     <form onSubmit={handleChatSubmit} className="p-3 bg-white border-t border-[#dbe0e6] flex flex-col gap-2">
                                         <div className="flex items-center gap-2">
-                                            <input type="text" value={chatMessage} onChange={e => setChatMessage(e.target.value)} placeholder="Consultar anomalías..." className="flex-1 text-sm border-2 border-transparent bg-gray-100 rounded-xl px-4 py-3 focus:outline-none focus:border-[#0076ce]/30 focus:bg-white transition-all font-medium text-gray-800 placeholder-gray-400" />
+                                            <input type="text" value={chatMessage} onChange={e => setChatMessage(e.target.value)} placeholder="Query findings..." className="flex-1 text-sm border-2 border-transparent bg-gray-100 rounded-xl px-4 py-3 focus:outline-none focus:border-[#0076ce]/30 focus:bg-white transition-all font-medium text-gray-800 placeholder-gray-400" />
                                             <button type="submit" disabled={!chatMessage.trim()} className="size-11 rounded-xl bg-[#0076ce] text-white flex items-center justify-center transition-all shadow-md"><span className="material-symbols-outlined text-[20px]">send</span></button>
                                         </div>
                                     </form>
                                 </div>
                                 <button onClick={() => setShowChat(!showChat)} className={`fixed bottom-8 right-8 h-16 w-auto px-5 rounded-full bg-[#0076ce] text-white shadow-2xl flex items-center justify-center hover:-translate-y-1 transition-all z-40 border border-white/20 gap-3 ${showChat ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100'}`}>
                                     <span className="material-symbols-outlined text-[28px]">forum</span>
-                                    <span className="text-xs font-black uppercase tracking-widest">Consultar IA</span>
+                                    <span className="text-xs font-black uppercase tracking-widest">Ask AI</span>
                                 </button>
                             </React.Fragment>
                         )
                     }
                 </main>
             </div>
+
+            {/* CAPABILITIES MODAL */}
+            {showCapabilities && (
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4" onClick={() => setShowCapabilities(false)}>
+                    <div className="bg-white rounded-3xl shadow-2xl max-w-3xl w-full max-h-[80vh] overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
+                        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+                            <h2 className="text-lg font-black text-[#111418] flex items-center gap-3">
+                                {selectedEngine === 'xray' ? (
+                                    <><span className="material-symbols-outlined text-[#0076ce]">memory</span> TorchXRayVision — Capabilities</>
+                                ) : (
+                                    <><span className="material-symbols-outlined text-yellow-500">bolt</span> YOLOv11 — Capabilities</>
+                                )}
+                            </h2>
+                            <button onClick={() => setShowCapabilities(false)} className="size-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                                <span className="material-symbols-outlined text-gray-600">close</span>
+                            </button>
+                        </div>
+                        <div className="overflow-y-auto p-6 space-y-4">
+                            {selectedEngine === 'xray' ? (
+                                <>
+                                    <p className="text-sm text-gray-600 leading-relaxed">
+                                        <strong>DenseNet121-res224-all</strong> model trained on
+                                        NIH ChestX-ray14, CheXpert, MIMIC-CXR, PadChest, Google, and OpenI datasets.
+                                        Detects the following <strong>18 thoracic pathologies</strong>:
+                                    </p>
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-sm border-collapse">
+                                            <thead>
+                                                <tr className="bg-gray-50 text-left">
+                                                    <th className="px-3 py-2 font-black text-[10px] uppercase tracking-widest text-gray-500 border-b">#</th>
+                                                    <th className="px-3 py-2 font-black text-[10px] uppercase tracking-widest text-gray-500 border-b">Pathology (EN)</th>
+                                                    <th className="px-3 py-2 font-black text-[10px] uppercase tracking-widest text-gray-500 border-b">Name</th>
+                                                    <th className="px-3 py-2 font-black text-[10px] uppercase tracking-widest text-gray-500 border-b">Description</th>
+                                                    <th className="px-3 py-2 font-black text-[10px] uppercase tracking-widest text-gray-500 border-b">Severity</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {XRAY_CAPABILITIES.map((p, i) => (
+                                                    <tr key={p.name} className="border-b border-gray-100 hover:bg-blue-50/50 transition-colors">
+                                                        <td className="px-3 py-2 text-gray-400 font-mono font-bold text-xs">{i + 1}</td>
+                                                        <td className="px-3 py-2"><code className="text-[11px] bg-gray-100 px-1.5 py-0.5 rounded font-mono">{p.name}</code></td>
+                                                        <td className="px-3 py-2 font-semibold text-gray-700">{p.es}</td>
+                                                        <td className="px-3 py-2 text-gray-500">{p.desc}</td>
+                                                        <td className="px-3 py-2 font-semibold whitespace-nowrap">{p.severity}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div className="flex items-center gap-2 p-3 bg-blue-50 rounded-xl text-sm text-blue-700">
+                                        <span className="material-symbols-outlined text-[16px]">info</span>
+                                        This model is optimized exclusively for <strong>Chest X-Ray images</strong>.
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <p className="text-sm text-gray-600 leading-relaxed">
+                                        <strong>YOLOv11 Nano</strong> model trained on the COCO dataset.
+                                        Detects <strong>80 generic object classes</strong>.
+                                    </p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {YOLO_CAPABILITIES_SUMMARY.map(cls => (
+                                            <span key={cls} className="px-3 py-1.5 bg-gray-100 border border-gray-200 text-gray-700 text-xs font-semibold rounded-full">{cls}</span>
+                                        ))}
+                                        <span className="px-3 py-1.5 bg-yellow-50 border border-yellow-200 text-yellow-700 text-xs font-semibold rounded-full">+50 more...</span>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
