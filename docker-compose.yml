@@ -1,0 +1,52 @@
+services:
+  yolo-service:
+    build: ./yolo_service
+    container_name: health_demo_EN_yolo
+    ports:
+      - "5002:5000"
+    networks:
+      - health_net
+    restart: unless-stopped
+
+  xray-service:
+    build: ./xray_service
+    container_name: health_demo_EN_xray
+    ports:
+      - "5003:5001"
+    networks:
+      - health_net
+    restart: unless-stopped
+
+  backend-service:
+    build: ./backend
+    container_name: health_demo_EN_backend
+    ports:
+      - "4201:8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    env_file:
+      - .env
+    environment:
+      - YOLO_URL=http://yolo-service:5000
+      - XRAY_URL=http://xray-service:5001
+    depends_on:
+      - yolo-service
+      - xray-service
+    networks:
+      - health_net
+    restart: unless-stopped
+
+  frontend-service:
+    build: ./frontend
+    container_name: health_demo_EN_frontend
+    ports:
+      - "4101:80"
+    depends_on:
+      - backend-service
+    networks:
+      - health_net
+    restart: unless-stopped
+
+networks:
+  health_net:
+    driver: bridge

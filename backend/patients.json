@@ -1,0 +1,810 @@
+[
+  {
+    "id": "NHC-10000",
+    "nombre": "Arthur Morgan",
+    "edad": 36,
+    "sexo": "Masculino",
+    "historia": "Tuberculosis avanzada diagnosticada en 1899. Antecedentes de trauma físico severo. Hipertensión arterial.",
+    "motivo": "Tos persistente con hemoptisis"
+  },
+  {
+    "id": "NHC-10001",
+    "nombre": "Jose Perez Alvarez",
+    "edad": 85,
+    "sexo": "Masculino",
+    "historia": "Antecedentes de neumonía en 2021. Colesterol elevado. Fumador de larga duración (1 pq/día)",
+    "motivo": "Dolor costal punzante"
+  },
+  {
+    "id": "NHC-10002",
+    "nombre": "Isabel Alonso Rodriguez",
+    "edad": 52,
+    "sexo": "Femenino",
+    "historia": "Artritis reumatoide",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10003",
+    "nombre": "Francisco Muñoz Jimenez",
+    "edad": 63,
+    "sexo": "Masculino",
+    "historia": "Antecedentes familiares de cardiopatía. Alergia a la penicilina",
+    "motivo": "Dolor en zona lumbar irradiado"
+  },
+  {
+    "id": "NHC-10004",
+    "nombre": "Maria Alvarez Romero",
+    "edad": 78,
+    "sexo": "Femenino",
+    "historia": "Ansiedad crónica. Arrítmia cardiaca leve",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10005",
+    "nombre": "Carmen Alonso Diaz",
+    "edad": 48,
+    "sexo": "Femenino",
+    "historia": "Ansiedad crónica. Artritis reumatoide. Colesterol elevado",
+    "motivo": "Fiebre persistente y malestar"
+  },
+  {
+    "id": "NHC-10006",
+    "nombre": "Ana Jimenez Alonso",
+    "edad": 68,
+    "sexo": "Femenino",
+    "historia": "Insuficiencia renal leve",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10007",
+    "nombre": "Elena Sanchez Muñoz",
+    "edad": 55,
+    "sexo": "Femenino",
+    "historia": "Sin antecedentes de interés. Ansiedad crónica. Asma bronquial crónica",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10008",
+    "nombre": "Rafael Perez Rodriguez",
+    "edad": 72,
+    "sexo": "Masculino",
+    "historia": "Insuficiencia renal leve. Obesidad grado I. Arrítmia cardiaca leve",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10009",
+    "nombre": "Jose Garcia Fernandez",
+    "edad": 84,
+    "sexo": "Masculino",
+    "historia": "Alergia a la penicilina. Diabetes Mellitus Tipo 2",
+    "motivo": "Seguimiento tras episodio de COVID"
+  },
+  {
+    "id": "NHC-10010",
+    "nombre": "Juan Fernandez Gutierrez",
+    "edad": 75,
+    "sexo": "Masculino",
+    "historia": "Antecedentes de neumonía en 2021. Artritis reumatoide",
+    "motivo": "Tos seca de 3 semanas de evolución"
+  },
+  {
+    "id": "NHC-10011",
+    "nombre": "Ana Martin Romero",
+    "edad": 43,
+    "sexo": "Femenino",
+    "historia": "Obesidad grado I. Insuficiencia renal leve. Alergia a la penicilina",
+    "motivo": "Dolor costal punzante"
+  },
+  {
+    "id": "NHC-10012",
+    "nombre": "Rafael Jimenez Perez",
+    "edad": 65,
+    "sexo": "Masculino",
+    "historia": "Sedentarismo. Sin antecedentes de interés. Obesidad grado I",
+    "motivo": "Dolor en zona lumbar irradiado"
+  },
+  {
+    "id": "NHC-10013",
+    "nombre": "Carmen Garcia Alonso",
+    "edad": 52,
+    "sexo": "Femenino",
+    "historia": "Ex-fumador hace 5 años",
+    "motivo": "Tos seca de 3 semanas de evolución"
+  },
+  {
+    "id": "NHC-10014",
+    "nombre": "Dolores Sanchez Martinez",
+    "edad": 78,
+    "sexo": "Femenino",
+    "historia": "Hipertensión arterial controlada. Sin antecedentes de interés",
+    "motivo": "Dificultad respiratoria al caminar"
+  },
+  {
+    "id": "NHC-10015",
+    "nombre": "Jose Jimenez Muñoz",
+    "edad": 56,
+    "sexo": "Masculino",
+    "historia": "Obesidad grado I",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10016",
+    "nombre": "Marta Lopez Rodriguez",
+    "edad": 37,
+    "sexo": "Femenino",
+    "historia": "Operado de vesícula en 2019",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10017",
+    "nombre": "Daniel Garcia Jimenez",
+    "edad": 41,
+    "sexo": "Masculino",
+    "historia": "Antecedentes familiares de cardiopatía. Insuficiencia renal leve",
+    "motivo": "Seguimiento tras episodio de COVID"
+  },
+  {
+    "id": "NHC-10018",
+    "nombre": "Laura Moreno Fernandez",
+    "edad": 58,
+    "sexo": "Femenino",
+    "historia": "Diabetes Mellitus Tipo 2",
+    "motivo": "Tos seca de 3 semanas de evolución"
+  },
+  {
+    "id": "NHC-10019",
+    "nombre": "Carmen Alvarez Rodriguez",
+    "edad": 42,
+    "sexo": "Femenino",
+    "historia": "Ex-fumador hace 5 años",
+    "motivo": "Dolor en zona lumbar irradiado"
+  },
+  {
+    "id": "NHC-10020",
+    "nombre": "Daniel Gutierrez Alvarez",
+    "edad": 79,
+    "sexo": "Masculino",
+    "historia": "Operado de vesícula en 2019. Sedentarismo",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10021",
+    "nombre": "Manuel Sanchez Gomez",
+    "edad": 21,
+    "sexo": "Masculino",
+    "historia": "Insuficiencia renal leve",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10022",
+    "nombre": "Javier Moreno Ruiz",
+    "edad": 39,
+    "sexo": "Masculino",
+    "historia": "Insuficiencia renal leve. Ex-fumador hace 5 años",
+    "motivo": "Dolor costal punzante"
+  },
+  {
+    "id": "NHC-10023",
+    "nombre": "Antonio Lopez Sanchez",
+    "edad": 79,
+    "sexo": "Masculino",
+    "historia": "Sin antecedentes de interés. Colesterol elevado",
+    "motivo": "Dolor en zona lumbar irradiado"
+  },
+  {
+    "id": "NHC-10024",
+    "nombre": "Juan Perez Diaz",
+    "edad": 36,
+    "sexo": "Masculino",
+    "historia": "Obesidad grado I. Artritis reumatoide",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10025",
+    "nombre": "Juan Martin Perez",
+    "edad": 73,
+    "sexo": "Masculino",
+    "historia": "Fumador de larga duración (1 pq/día)",
+    "motivo": "Seguimiento tras episodio de COVID"
+  },
+  {
+    "id": "NHC-10026",
+    "nombre": "Javier Moreno Lopez",
+    "edad": 40,
+    "sexo": "Masculino",
+    "historia": "Alergia a la penicilina",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10027",
+    "nombre": "Ana Rodriguez Gutierrez",
+    "edad": 76,
+    "sexo": "Femenino",
+    "historia": "Antecedentes de neumonía en 2021. Ansiedad crónica",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10028",
+    "nombre": "Manuel Gonzalez Muñoz",
+    "edad": 50,
+    "sexo": "Masculino",
+    "historia": "Sedentarismo. Antecedentes familiares de cardiopatía. Diabetes Mellitus Tipo 2",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10029",
+    "nombre": "Javier Gonzalez Alonso",
+    "edad": 74,
+    "sexo": "Masculino",
+    "historia": "Sin antecedentes de interés",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10030",
+    "nombre": "Cristina Martin Gutierrez",
+    "edad": 22,
+    "sexo": "Femenino",
+    "historia": "Antecedentes familiares de cardiopatía",
+    "motivo": "Seguimiento tras episodio de COVID"
+  },
+  {
+    "id": "NHC-10031",
+    "nombre": "Dolores Romero Diaz",
+    "edad": 49,
+    "sexo": "Femenino",
+    "historia": "Antecedentes familiares de cardiopatía. Artritis reumatoide",
+    "motivo": "Dolor en zona lumbar irradiado"
+  },
+  {
+    "id": "NHC-10032",
+    "nombre": "Javier Diaz Fernandez",
+    "edad": 65,
+    "sexo": "Masculino",
+    "historia": "Hipotiroidismo en tratamiento. Diabetes Mellitus Tipo 2",
+    "motivo": "Tos seca de 3 semanas de evolución"
+  },
+  {
+    "id": "NHC-10033",
+    "nombre": "David Perez Gutierrez",
+    "edad": 18,
+    "sexo": "Masculino",
+    "historia": "Antecedentes familiares de cardiopatía",
+    "motivo": "Seguimiento tras episodio de COVID"
+  },
+  {
+    "id": "NHC-10034",
+    "nombre": "Jose Gonzalez Alonso",
+    "edad": 61,
+    "sexo": "Masculino",
+    "historia": "Hipertensión arterial controlada. Asma bronquial crónica. Insuficiencia renal leve",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10035",
+    "nombre": "Carlos Diaz Moreno",
+    "edad": 24,
+    "sexo": "Masculino",
+    "historia": "Ansiedad crónica. Operado de vesícula en 2019. Hipertensión arterial controlada",
+    "motivo": "Cansancio extremo sin causa aparente"
+  },
+  {
+    "id": "NHC-10036",
+    "nombre": "Manuel Jimenez Hernandez",
+    "edad": 37,
+    "sexo": "Masculino",
+    "historia": "Alergia a la penicilina. Colesterol elevado. Artritis reumatoide",
+    "motivo": "Fiebre persistente y malestar"
+  },
+  {
+    "id": "NHC-10037",
+    "nombre": "Juan Rodriguez Gomez",
+    "edad": 48,
+    "sexo": "Masculino",
+    "historia": "Colesterol elevado. Fumador de larga duración (1 pq/día). Hipotiroidismo en tratamiento",
+    "motivo": "Dificultad respiratoria al caminar"
+  },
+  {
+    "id": "NHC-10038",
+    "nombre": "Lucia Gomez Sanchez",
+    "edad": 22,
+    "sexo": "Femenino",
+    "historia": "Ansiedad crónica. Hipertensión arterial controlada. Alergia a la penicilina",
+    "motivo": "Dificultad respiratoria al caminar"
+  },
+  {
+    "id": "NHC-10039",
+    "nombre": "Manuel Martinez Gomez",
+    "edad": 82,
+    "sexo": "Masculino",
+    "historia": "Ex-fumador hace 5 años. Diabetes Mellitus Tipo 2. Fumador de larga duración (1 pq/día)",
+    "motivo": "Dolor costal punzante"
+  },
+  {
+    "id": "NHC-10040",
+    "nombre": "Maria Jimenez Gutierrez",
+    "edad": 79,
+    "sexo": "Femenino",
+    "historia": "Artritis reumatoide. Episodios de bronquitis recurrente",
+    "motivo": "Dificultad respiratoria al caminar"
+  },
+  {
+    "id": "NHC-10041",
+    "nombre": "Jose Muñoz Fernandez",
+    "edad": 58,
+    "sexo": "Masculino",
+    "historia": "Hipotiroidismo en tratamiento. Ansiedad crónica. Antecedentes de neumonía en 2021",
+    "motivo": "Cansancio extremo sin causa aparente"
+  },
+  {
+    "id": "NHC-10042",
+    "nombre": "Lucia Ruiz Martinez",
+    "edad": 24,
+    "sexo": "Femenino",
+    "historia": "Hipotiroidismo en tratamiento. Ex-fumador hace 5 años. Antecedentes familiares de cardiopatía",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10043",
+    "nombre": "Rafael Muñoz Gutierrez",
+    "edad": 53,
+    "sexo": "Masculino",
+    "historia": "Hipertensión arterial controlada. Operado de vesícula en 2019",
+    "motivo": "Cansancio extremo sin causa aparente"
+  },
+  {
+    "id": "NHC-10044",
+    "nombre": "Cristina Hernandez Jimenez",
+    "edad": 37,
+    "sexo": "Femenino",
+    "historia": "Colesterol elevado",
+    "motivo": "Seguimiento tras episodio de COVID"
+  },
+  {
+    "id": "NHC-10045",
+    "nombre": "Isabel Romero Martinez",
+    "edad": 24,
+    "sexo": "Femenino",
+    "historia": "Operado de vesícula en 2019",
+    "motivo": "Fiebre persistente y malestar"
+  },
+  {
+    "id": "NHC-10046",
+    "nombre": "Javier Hernandez Romero",
+    "edad": 47,
+    "sexo": "Masculino",
+    "historia": "Ansiedad crónica",
+    "motivo": "Tos seca de 3 semanas de evolución"
+  },
+  {
+    "id": "NHC-10047",
+    "nombre": "Daniel Lopez Jimenez",
+    "edad": 47,
+    "sexo": "Masculino",
+    "historia": "Ansiedad crónica. Antecedentes de neumonía en 2021. Asma bronquial crónica",
+    "motivo": "Dolor costal punzante"
+  },
+  {
+    "id": "NHC-10048",
+    "nombre": "David Jimenez Muñoz",
+    "edad": 80,
+    "sexo": "Masculino",
+    "historia": "Insuficiencia renal leve",
+    "motivo": "Dificultad respiratoria al caminar"
+  },
+  {
+    "id": "NHC-10049",
+    "nombre": "Francisco Gonzalez Martin",
+    "edad": 78,
+    "sexo": "Masculino",
+    "historia": "Alergia a la penicilina. Fumador de larga duración (1 pq/día). Sin antecedentes de interés",
+    "motivo": "Tos seca de 3 semanas de evolución"
+  },
+  {
+    "id": "NHC-10050",
+    "nombre": "Maria Alvarez Garcia",
+    "edad": 30,
+    "sexo": "Femenino",
+    "historia": "Obesidad grado I. Arrítmia cardiaca leve. Operado de vesícula en 2019",
+    "motivo": "Dolor costal punzante"
+  },
+  {
+    "id": "NHC-10051",
+    "nombre": "Cristina Lopez Romero",
+    "edad": 74,
+    "sexo": "Femenino",
+    "historia": "Obesidad grado I. Colesterol elevado. Hipotiroidismo en tratamiento",
+    "motivo": "Dificultad respiratoria al caminar"
+  },
+  {
+    "id": "NHC-10052",
+    "nombre": "Isabel Gonzalez Lopez",
+    "edad": 53,
+    "sexo": "Femenino",
+    "historia": "Ex-fumador hace 5 años. Obesidad grado I. Antecedentes de neumonía en 2021",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10053",
+    "nombre": "Rafael Sanchez Gutierrez",
+    "edad": 31,
+    "sexo": "Masculino",
+    "historia": "Sin antecedentes de interés. Ansiedad crónica. Alergia a la penicilina",
+    "motivo": "Seguimiento tras episodio de COVID"
+  },
+  {
+    "id": "NHC-10054",
+    "nombre": "Elena Muñoz Lopez",
+    "edad": 75,
+    "sexo": "Femenino",
+    "historia": "Fumador de larga duración (1 pq/día)",
+    "motivo": "Seguimiento tras episodio de COVID"
+  },
+  {
+    "id": "NHC-10055",
+    "nombre": "Ana Gomez Rodriguez",
+    "edad": 74,
+    "sexo": "Femenino",
+    "historia": "Diabetes Mellitus Tipo 2. Sedentarismo",
+    "motivo": "Dolor en zona lumbar irradiado"
+  },
+  {
+    "id": "NHC-10056",
+    "nombre": "Antonio Diaz Sanchez",
+    "edad": 66,
+    "sexo": "Masculino",
+    "historia": "Episodios de bronquitis recurrente. Antecedentes de neumonía en 2021",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10057",
+    "nombre": "Francisco Diaz Muñoz",
+    "edad": 28,
+    "sexo": "Masculino",
+    "historia": "Arrítmia cardiaca leve. Asma bronquial crónica",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10058",
+    "nombre": "Juan Martinez Rodriguez",
+    "edad": 22,
+    "sexo": "Masculino",
+    "historia": "Ansiedad crónica. Antecedentes familiares de cardiopatía",
+    "motivo": "Fiebre persistente y malestar"
+  },
+  {
+    "id": "NHC-10059",
+    "nombre": "Rafael Rodriguez Alvarez",
+    "edad": 38,
+    "sexo": "Masculino",
+    "historia": "Colesterol elevado. Arrítmia cardiaca leve",
+    "motivo": "Tos seca de 3 semanas de evolución"
+  },
+  {
+    "id": "NHC-10060",
+    "nombre": "Lucia Fernandez Alvarez",
+    "edad": 72,
+    "sexo": "Femenino",
+    "historia": "Hipertensión arterial controlada. Ex-fumador hace 5 años",
+    "motivo": "Cansancio extremo sin causa aparente"
+  },
+  {
+    "id": "NHC-10061",
+    "nombre": "Javier Gomez Martinez",
+    "edad": 68,
+    "sexo": "Masculino",
+    "historia": "Sin antecedentes de interés",
+    "motivo": "Tos seca de 3 semanas de evolución"
+  },
+  {
+    "id": "NHC-10062",
+    "nombre": "Francisco Jimenez Martinez",
+    "edad": 63,
+    "sexo": "Masculino",
+    "historia": "Antecedentes familiares de cardiopatía. Diabetes Mellitus Tipo 2",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10063",
+    "nombre": "Laura Alvarez Hernandez",
+    "edad": 57,
+    "sexo": "Femenino",
+    "historia": "Antecedentes de neumonía en 2021. Arrítmia cardiaca leve",
+    "motivo": "Seguimiento tras episodio de COVID"
+  },
+  {
+    "id": "NHC-10064",
+    "nombre": "Javier Romero Gomez",
+    "edad": 46,
+    "sexo": "Masculino",
+    "historia": "Artritis reumatoide. Hipertensión arterial controlada. Antecedentes de neumonía en 2021",
+    "motivo": "Seguimiento tras episodio de COVID"
+  },
+  {
+    "id": "NHC-10065",
+    "nombre": "David Gomez Rodriguez",
+    "edad": 47,
+    "sexo": "Masculino",
+    "historia": "Antecedentes familiares de cardiopatía. Fumador de larga duración (1 pq/día)",
+    "motivo": "Dificultad respiratoria al caminar"
+  },
+  {
+    "id": "NHC-10066",
+    "nombre": "Lucia Jimenez Martin",
+    "edad": 35,
+    "sexo": "Femenino",
+    "historia": "Hipertensión arterial controlada",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10067",
+    "nombre": "Antonio Moreno Perez",
+    "edad": 55,
+    "sexo": "Masculino",
+    "historia": "Sin antecedentes de interés. Episodios de bronquitis recurrente. Arrítmia cardiaca leve",
+    "motivo": "Fiebre persistente y malestar"
+  },
+  {
+    "id": "NHC-10068",
+    "nombre": "Dolores Gomez Gutierrez",
+    "edad": 38,
+    "sexo": "Femenino",
+    "historia": "Obesidad grado I",
+    "motivo": "Fiebre persistente y malestar"
+  },
+  {
+    "id": "NHC-10069",
+    "nombre": "Carlos Gomez Lopez",
+    "edad": 73,
+    "sexo": "Masculino",
+    "historia": "Antecedentes de neumonía en 2021",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10070",
+    "nombre": "Antonio Diaz Sanchez",
+    "edad": 26,
+    "sexo": "Masculino",
+    "historia": "Hipotiroidismo en tratamiento. Artritis reumatoide. Hipertensión arterial controlada",
+    "motivo": "Seguimiento tras episodio de COVID"
+  },
+  {
+    "id": "NHC-10071",
+    "nombre": "Juan Garcia Ruiz",
+    "edad": 31,
+    "sexo": "Masculino",
+    "historia": "Sedentarismo. Diabetes Mellitus Tipo 2. Episodios de bronquitis recurrente",
+    "motivo": "Fiebre persistente y malestar"
+  },
+  {
+    "id": "NHC-10072",
+    "nombre": "Javier Moreno Hernandez",
+    "edad": 40,
+    "sexo": "Masculino",
+    "historia": "Fumador de larga duración (1 pq/día). Hipertensión arterial controlada",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10073",
+    "nombre": "Jose Diaz Rodriguez",
+    "edad": 25,
+    "sexo": "Masculino",
+    "historia": "Sedentarismo",
+    "motivo": "Tos seca de 3 semanas de evolución"
+  },
+  {
+    "id": "NHC-10074",
+    "nombre": "Juan Romero Jimenez",
+    "edad": 70,
+    "sexo": "Masculino",
+    "historia": "Colesterol elevado. Fumador de larga duración (1 pq/día)",
+    "motivo": "Dificultad respiratoria al caminar"
+  },
+  {
+    "id": "NHC-10075",
+    "nombre": "Carmen Ruiz Martinez",
+    "edad": 75,
+    "sexo": "Femenino",
+    "historia": "Fumador de larga duración (1 pq/día)",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10076",
+    "nombre": "Antonio Gutierrez Lopez",
+    "edad": 31,
+    "sexo": "Masculino",
+    "historia": "Hipotiroidismo en tratamiento",
+    "motivo": "Seguimiento tras episodio de COVID"
+  },
+  {
+    "id": "NHC-10077",
+    "nombre": "Lucia Romero Moreno",
+    "edad": 67,
+    "sexo": "Femenino",
+    "historia": "Artritis reumatoide. Hipotiroidismo en tratamiento",
+    "motivo": "Seguimiento tras episodio de COVID"
+  },
+  {
+    "id": "NHC-10078",
+    "nombre": "Juan Martinez Martin",
+    "edad": 82,
+    "sexo": "Masculino",
+    "historia": "Hipotiroidismo en tratamiento",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10079",
+    "nombre": "Jose Romero Fernandez",
+    "edad": 81,
+    "sexo": "Masculino",
+    "historia": "Fumador de larga duración (1 pq/día). Episodios de bronquitis recurrente",
+    "motivo": "Cansancio extremo sin causa aparente"
+  },
+  {
+    "id": "NHC-10080",
+    "nombre": "Juan Garcia Hernandez",
+    "edad": 51,
+    "sexo": "Masculino",
+    "historia": "Ansiedad crónica. Ex-fumador hace 5 años. Antecedentes familiares de cardiopatía",
+    "motivo": "Fiebre persistente y malestar"
+  },
+  {
+    "id": "NHC-10081",
+    "nombre": "Marta Gutierrez Romero",
+    "edad": 69,
+    "sexo": "Femenino",
+    "historia": "Fumador de larga duración (1 pq/día). Sin antecedentes de interés",
+    "motivo": "Cansancio extremo sin causa aparente"
+  },
+  {
+    "id": "NHC-10082",
+    "nombre": "Laura Diaz Sanchez",
+    "edad": 69,
+    "sexo": "Femenino",
+    "historia": "Antecedentes familiares de cardiopatía. Operado de vesícula en 2019",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10083",
+    "nombre": "Lucia Martinez Muñoz",
+    "edad": 57,
+    "sexo": "Femenino",
+    "historia": "Ex-fumador hace 5 años. Insuficiencia renal leve",
+    "motivo": "Dificultad respiratoria al caminar"
+  },
+  {
+    "id": "NHC-10084",
+    "nombre": "Francisco Rodriguez Martinez",
+    "edad": 62,
+    "sexo": "Masculino",
+    "historia": "Hipertensión arterial controlada",
+    "motivo": "Dolor costal punzante"
+  },
+  {
+    "id": "NHC-10085",
+    "nombre": "Antonio Gomez Moreno",
+    "edad": 66,
+    "sexo": "Masculino",
+    "historia": "Obesidad grado I",
+    "motivo": "Dolor costal punzante"
+  },
+  {
+    "id": "NHC-10086",
+    "nombre": "Ana Romero Perez",
+    "edad": 35,
+    "sexo": "Femenino",
+    "historia": "Colesterol elevado. Sedentarismo. Insuficiencia renal leve",
+    "motivo": "Dificultad respiratoria al caminar"
+  },
+  {
+    "id": "NHC-10087",
+    "nombre": "Manuel Martinez Garcia",
+    "edad": 40,
+    "sexo": "Masculino",
+    "historia": "Ex-fumador hace 5 años. Antecedentes de neumonía en 2021",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10088",
+    "nombre": "Antonio Sanchez Moreno",
+    "edad": 60,
+    "sexo": "Masculino",
+    "historia": "Diabetes Mellitus Tipo 2. Obesidad grado I",
+    "motivo": "Dolor en zona lumbar irradiado"
+  },
+  {
+    "id": "NHC-10089",
+    "nombre": "Lucia Garcia Hernandez",
+    "edad": 55,
+    "sexo": "Femenino",
+    "historia": "Diabetes Mellitus Tipo 2. Obesidad grado I",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10090",
+    "nombre": "Antonio Moreno Perez",
+    "edad": 76,
+    "sexo": "Masculino",
+    "historia": "Diabetes Mellitus Tipo 2. Hipotiroidismo en tratamiento",
+    "motivo": "Dolor costal punzante"
+  },
+  {
+    "id": "NHC-10091",
+    "nombre": "Laura Gomez Lopez",
+    "edad": 66,
+    "sexo": "Femenino",
+    "historia": "Hipertensión arterial controlada",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10092",
+    "nombre": "Francisco Romero Martin",
+    "edad": 30,
+    "sexo": "Masculino",
+    "historia": "Asma bronquial crónica",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10093",
+    "nombre": "Daniel Perez Rodriguez",
+    "edad": 21,
+    "sexo": "Masculino",
+    "historia": "Fumador de larga duración (1 pq/día). Sedentarismo",
+    "motivo": "Dificultad respiratoria al caminar"
+  },
+  {
+    "id": "NHC-10094",
+    "nombre": "Javier Hernandez Martin",
+    "edad": 68,
+    "sexo": "Masculino",
+    "historia": "Arrítmia cardiaca leve",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10095",
+    "nombre": "Javier Fernandez Gonzalez",
+    "edad": 85,
+    "sexo": "Masculino",
+    "historia": "Hipertensión arterial controlada. Insuficiencia renal leve. Asma bronquial crónica",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10096",
+    "nombre": "Jose Diaz Perez",
+    "edad": 44,
+    "sexo": "Masculino",
+    "historia": "Hipotiroidismo en tratamiento. Colesterol elevado",
+    "motivo": "Tos seca de 3 semanas de evolución"
+  },
+  {
+    "id": "NHC-10097",
+    "nombre": "Carlos Lopez Alvarez",
+    "edad": 48,
+    "sexo": "Masculino",
+    "historia": "Sin antecedentes de interés. Episodios de bronquitis recurrente. Fumador de larga duración (1 pq/día)",
+    "motivo": "Dolor en zona lumbar irradiado"
+  },
+  {
+    "id": "NHC-10098",
+    "nombre": "Elena Gutierrez Alonso",
+    "edad": 34,
+    "sexo": "Femenino",
+    "historia": "Hipotiroidismo en tratamiento. Alergia a la penicilina. Obesidad grado I",
+    "motivo": "Control rutinario de empresa"
+  },
+  {
+    "id": "NHC-10099",
+    "nombre": "Carmen Romero Diaz",
+    "edad": 77,
+    "sexo": "Femenino",
+    "historia": "Ansiedad crónica. Colesterol elevado",
+    "motivo": "Palpitaciones ocasionales"
+  },
+  {
+    "id": "NHC-10100",
+    "nombre": "Javier Moreno Fernandez",
+    "edad": 26,
+    "sexo": "Masculino",
+    "historia": "Alergia a la penicilina. Operado de vesícula en 2019. Antecedentes de neumonía en 2021",
+    "motivo": "Dificultad respiratoria al caminar"
+  }
+]

@@ -1,0 +1,7 @@
+flask
+torchxrayvision
+torch
+torchvision
+scikit-image
+numpy
+Pillow

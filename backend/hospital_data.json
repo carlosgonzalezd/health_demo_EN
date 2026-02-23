@@ -1,0 +1,58 @@
+{
+    "doctors": [
+        {
+            "id": "DOC-001",
+            "name": "Dr. Carlos Romero",
+            "specialty": "Neuroradiología",
+            "avatar": "https://ui-avatars.com/api/?name=Carlos+Romero&background=0284c7&color=fff",
+            "status": "Disponible",
+            "patients_count": 124
+        },
+        {
+            "id": "DOC-002",
+            "name": "Dra. Elena Beltrán",
+            "specialty": "Radiología Abdominal",
+            "avatar": "https://ui-avatars.com/api/?name=Elena+Beltran&background=059669&color=fff",
+            "status": "En Cirugía",
+            "patients_count": 89
+        },
+        {
+            "id": "DOC-003",
+            "name": "Dr. Marc Soler",
+            "specialty": "Traumatología",
+            "avatar": "https://ui-avatars.com/api/?name=Marc+Soler&background=4f46e5&color=fff",
+            "status": "Consultas",
+            "patients_count": 210
+        }
+    ],
+    "appointments": [
+        {
+            "id": "APP-1001",
+            "patient_id": "NHC-10001",
+            "doctor_id": "DOC-001",
+            "time": "09:00",
+            "date": "2026-02-19",
+            "status": "Confirmada",
+            "type": "Seguimiento MRI"
+        },
+        {
+            "id": "APP-1002",
+            "patient_id": "NHC-10005",
+            "doctor_id": "DOC-002",
+            "time": "10:30",
+            "date": "2026-02-19",
+            "status": "En Espera",
+            "type": "CT Abdominal"
+        }
+    ],
+    "patient_history": {
+        "NHC-10001": [
+            {
+                "date": "2025-12-10",
+                "event": "Ingreso por Neumonía",
+                "doctor": "Dr. García",
+                "details": "Tratamiento con antibióticos IV, buena evolución."
+            }
+        ]
+    }
+}
