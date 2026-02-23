@@ -94,7 +94,7 @@ const NurseCalendarView = ({ nurseId, nurses, viewDates, schedule, onBack, curre
             </div>
 
             <div className="calendar-days-header">
-                {['lun', 'mar', 'mié', 'jue', 'vie', 'sáb', 'dom'].map(d => (
+                {['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map(d => (
                     <div key={d} className="day-name-header">{d}</div>
                 ))}
             </div>
@@ -111,13 +111,13 @@ const NurseCalendarView = ({ nurseId, nurses, viewDates, schedule, onBack, curre
                     const entry = schedule.find(s => s.nurse_id === nurseId && s.date === dateStr);
 
                     // Determine display class
-                    let shiftClass = "libre";
-                    let shiftLabel = "Libre";
+                    let shiftClass = "off";
+                    let shiftLabel = "Off";
 
                     if (entry) {
-                        if (entry.shift === "Mañana") { shiftClass = "manana"; shiftLabel = "Mañana"; }
-                        else if (entry.shift === "Tarde") { shiftClass = "tarde"; shiftLabel = "Tarde"; }
-                        else if (entry.shift === "Noche") { shiftClass = "noche"; shiftLabel = "Noche"; }
+                        if (entry.shift === "Morning") { shiftClass = "morning"; shiftLabel = "Morning"; }
+                        else if (entry.shift === "Afternoon") { shiftClass = "afternoon"; shiftLabel = "Afternoon"; }
+                        else if (entry.shift === "Night") { shiftClass = "night"; shiftLabel = "Night"; }
                     }
 
                     return (
@@ -159,12 +159,12 @@ const PlanillaChat = ({ backendUrl, selectedModel }) => {
             const res = await axios.post(`${backendUrl}/schedule/chat`, {
                 model: selectedModel,
                 message: userMsg.content,
-                context: "Planilla Management",
+                context: "Schedule Management",
                 history: []
             });
             setMessages(prev => [...prev, { role: 'assistant', content: res.data.response }]);
         } catch (err) {
-            setMessages(prev => [...prev, { role: 'assistant', content: "Lo siento, hubo un error de conexión." }]);
+            setMessages(prev => [...prev, { role: 'assistant', content: "Sorry, there was a connection error." }]);
         } finally {
             setLoading(false);
         }
@@ -175,7 +175,7 @@ const PlanillaChat = ({ backendUrl, selectedModel }) => {
             <div className="chat-smart-container">
                 <div className="chat-header-inline">
                     <Bot size={20} className="text-primary" />
-                    <span>Asistente Inteligente de Planificación</span>
+                    <span>Intelligent Planning Assistant</span>
                 </div>
 
                 <div className="chat-messages-inline" style={{ padding: '2rem 1.5rem', background: '#f8fafc' }}>
@@ -205,7 +205,7 @@ const PlanillaChat = ({ backendUrl, selectedModel }) => {
                             ) : m.content}
                         </div>
                     ))}
-                    {loading && <div className="chat-msg assistant"><Loader2 className="spin" size={14} /> Pensando solución...</div>}
+                    {loading && <div className="chat-msg assistant"><Loader2 className="spin" size={14} /> Thinking...</div>}
                     <div ref={messagesEndRef} />
                 </div>
 
@@ -217,7 +217,7 @@ const PlanillaChat = ({ backendUrl, selectedModel }) => {
                         disabled={loading}
                     />
                     <button type="submit" disabled={loading || !input} className="btn-primary" style={{ width: 'auto', padding: '0 1.5rem' }}>
-                        <Send size={18} /> Enviar
+                        <Send size={18} /> Send
                     </button>
                 </form>
             </div>
@@ -227,7 +227,7 @@ const PlanillaChat = ({ backendUrl, selectedModel }) => {
 
 const TriageChat = ({ backendUrl, defaultModel, contextData, activeOllamaUrl }) => {
     const [messages, setMessages] = useState([
-        { role: 'assistant', content: 'Hola. Soy tu asistente de triaje. ¿Tienes dudas sobre la clasificación del paciente o el protocolo Manchester?' }
+        { role: 'assistant', content: 'Hello. I am your Triage Assistant. Do you have any questions about the patient\'s classification or the Manchester Protocol?' }
     ]);
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
@@ -307,19 +307,19 @@ const TriageChat = ({ backendUrl, defaultModel, contextData, activeOllamaUrl }) 
                             ) : m.content}
                         </div>
                     ))}
-                    {loading && <div className="chat-msg assistant"><Loader2 className="spin" size={14} /> Consultando experto ({defaultModel})...</div>}
+                    {loading && <div className="chat-msg assistant"><Loader2 className="spin" size={14} /> Consulting expert ({defaultModel})...</div>}
                     <div ref={messagesEndRef} />
                 </div>
 
                 <form className="chat-input-inline" onSubmit={handleSend}>
                     <input
-                        placeholder="Ej: ¿Por qué fiebre de 40 es Naranja y no Rojo?"
+                        placeholder="E.g: Why is a fever of 40 Orange and not Red?"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         disabled={loading}
                     />
                     <button type="submit" disabled={loading || !input} className="btn-primary" style={{ width: 'auto', padding: '0 1.5rem' }}>
-                        <Send size={18} /> Enviar
+                        <Send size={18} /> Send
                     </button>
                 </form>
             </div>
@@ -340,7 +340,7 @@ const MonitorCentral = ({ patients }) => {
                 </div>
                 <div className="user-profile-pro">
                     <div className="user-info-text">
-                        <span className="user-name-pro">Dr. Carlos Gonzalez</span>
+                        <span className="user-name-pro">Dr. Charles Gonzalez</span>
                         <span className="user-status-pro">GPU OPTIMIZED • ACTIVE</span>
                     </div>
                     <div className="user-avatar-pro">CG</div>
@@ -354,28 +354,28 @@ const MonitorCentral = ({ patients }) => {
 
             <div className="metric-cards-pro">
                 <div className="metric-card-pro">
-                    <span className="metric-label">ESTUDIOS AI</span>
+                    <span className="metric-label">AI STUDIES</span>
                     <div className="metric-value-row">
                         <span className="metric-value">4,882</span>
                         <span className="metric-trend positive">+12%</span>
                     </div>
                 </div>
                 <div className="metric-card-pro">
-                    <span className="metric-label">PRECISIÓN MODELO</span>
+                    <span className="metric-label">MODEL ACCURACY</span>
                     <div className="metric-value-row">
                         <span className="metric-value">98.8%</span>
                         <span className="metric-trend opt">Opt.</span>
                     </div>
                 </div>
                 <div className="metric-card-pro">
-                    <span className="metric-label">LATENCIA INFERENCIA</span>
+                    <span className="metric-label">INFERENCE LATENCY</span>
                     <div className="metric-value-row">
                         <span className="metric-value">14ms</span>
                         <span className="metric-trend negative">-2ms</span>
                     </div>
                 </div>
                 <div className="metric-card-pro">
-                    <span className="metric-label">ALERTAS TRIAGE</span>
+                    <span className="metric-label">TRIAGE ALERTS</span>
                     <div className="metric-value-row">
                         <span className="metric-value">12</span>
                         <span className="metric-trend active">Act.</span>
@@ -391,37 +391,37 @@ const MonitorCentral = ({ patients }) => {
                 <table className="pro-table">
                     <thead>
                         <tr>
-                            <th>PACIENTE</th>
-                            <th>ESTUDIO</th>
-                            <th>PROBABILIDAD</th>
-                            <th>ESTADO</th>
+                            <th>PATIENT</th>
+                            <th>STUDY</th>
+                            <th>PROBABILITY</th>
+                            <th>STATUS</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Arthur Morgan</td>
-                            <td>RM de Cráneo</td>
+                            <td>Brain MRI</td>
                             <td className="prob-high">88.2%</td>
-                            <td><span className="status-badge prioritario">PRIORITARIO</span></td>
+                            <td><span className="status-badge prioritario">PRIORITY</span></td>
                         </tr>
                         <tr>
                             <td>Jose Perez Alvarez</td>
-                            <td>X-Ray Tórax</td>
+                            <td>Chest X-Ray</td>
                             <td>12.4%</td>
-                            <td><span className="status-badge estable">ESTABLE</span></td>
+                            <td><span className="status-badge estable">STABLE</span></td>
                         </tr>
                         <tr>
                             <td>{patients[0]?.name || "Loading..."}</td>
-                            <td>Scanner Abdominal</td>
+                            <td>Abdominal Scanner</td>
                             <td>45.1%</td>
-                            <td><span className="status-badge revision">EN REVISIÓN</span></td>
+                            <td><span className="status-badge revision">IN REVIEW</span></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             <footer className="pro-footer">
-                HealthOS V3.1 PROFESSIONAL • ENTORNO SEGURO • NODO GB10-C881
+                HealthOS V3.1 PROFESSIONAL • SECURE ENVIRONMENT • NODE GB10-C881
             </footer>
         </div>
     );
@@ -475,12 +475,12 @@ function App() {
     const [error, setError] = useState(null);
 
     const [age, setAge] = useState('');
-    const [sex, setSex] = useState('Masculino');
+    const [sex, setSex] = useState('Male');
     const [symptoms, setSymptoms] = useState('');
 
     const [chatMessage, setChatMessage] = useState("");
     const [chatHistory, setChatHistory] = useState([
-        { role: 'assistant', content: '¡Hola! Soy el **Dell AI Healthcare Assistant**.\n\nEstoy impulsado por inferencia neuronal en el nodo **GB10**.\n\n¿En qué te puedo ayudar hoy con el análisis clínico o radiológico?' }
+        { role: 'assistant', content: 'Hello! I am the **Dell AI Healthcare Assistant**.\n\nI am powered by neural inference on node **GB10**.\n\nHow can I help you today with clinical or radiological analysis?' }
     ]);
     const [chatLoading, setChatLoading] = useState(false);
     const [showChat, setShowChat] = useState(false);
@@ -571,7 +571,7 @@ function App() {
             await fetchNurses();
             fetchSchedule();
         } catch (e) {
-            setConfigError("Conexión con el servidor fallida");
+            setConfigError("Server connection failed");
         } finally {
             setConfigLoading(false);
         }
@@ -607,13 +607,13 @@ function App() {
             setShowCredModal(false);
             await updateBackendConfig(url);
         } catch (e) {
-            alert("Error guardando credencial");
+            alert("Error saving credential");
         }
     };
 
     const deleteCredential = async (e, id) => {
         e.stopPropagation();
-        if (!window.confirm("¿Eliminar esta credencial?")) return;
+        if (!window.confirm("Delete this credential?")) return;
         try {
             const res = await axios.delete(`${BACKEND_URL}/credentials/${id}`);
             setCredentials(res.data.credentials);
@@ -628,7 +628,7 @@ function App() {
                 }
             }
         } catch (e) {
-            alert("Error eliminando credencial");
+            alert("Error deleting credential");
         }
     };
 
@@ -641,7 +641,7 @@ function App() {
             if (modelRes.data.models?.length > 0) setSelectedModel(modelRes.data.models[0]);
             setConfigError(null);
         } catch (e) {
-            setConfigError("Error actualizando configuración.");
+            setConfigError("Error updating configuration.");
         } finally {
             setConfigLoading(false);
         }
@@ -656,7 +656,7 @@ function App() {
             if (modelRes.data.models?.length > 0) setSelectedModel(modelRes.data.models[0]);
             setConfigError(null);
         } catch (e) {
-            setConfigError("Error actualizando configuración.");
+            setConfigError("Error updating configuration.");
         } finally {
             setConfigLoading(false);
         }
@@ -735,7 +735,7 @@ function App() {
             const response = await axios.post(`${BACKEND_URL}/analyze-image`, formData);
             setResult(response.data);
         } catch (err) {
-            setError("Error en el análisis del caso.");
+            setError("Error analyzing the case.");
         } finally {
             setLoading(false);
         }
@@ -743,7 +743,7 @@ function App() {
 
     const handleExportDocx = (reportResult) => {
         if (!reportResult) return;
-        const patientStr = selectedPatient?.id ? `ID Paciente: ${selectedPatient.id}` : 'Paciente Anónimo';
+        const patientStr = selectedPatient?.id ? `Patient ID: ${selectedPatient.id}` : 'Anonymous Patient';
 
         let formattedReport = reportResult.clinical_report
             .replace(/\n\n/g, '<br/><br/>')
@@ -786,7 +786,7 @@ function App() {
         e.preventDefault();
         if (!chatMessage.trim()) return;
 
-        const contextData = result ? result.findings_context : "No hay ninguna imagen cargada actualmente. Habla en base a tu conocimiento general.";
+        const contextData = result ? result.findings_context : "No image is currently loaded. Speak based on your general knowledge.";
 
         const userMsg = { role: 'user', content: chatMessage };
         const assistantMsg = { role: 'assistant', content: '', loading: true };
@@ -853,7 +853,7 @@ function App() {
         return (
             <div className="card pathology-chart fade-in">
                 <div className="card-header">
-                    <Cpu size={18} /> <h4>Probabilidades por Patología (Top 10)</h4>
+                    <Cpu size={18} /> <h4>Pathology Probabilities (Top 10)</h4>
                 </div>
                 <div className="chart-body">
                     {sorted.map(([name, prob]) => (
@@ -895,7 +895,7 @@ function App() {
             setTriageResult(resp.data);
         } catch (err) {
             console.error(err);
-            setError("Error al procesar el triaje. Verifique la conexión con el backend.");
+            setError("Error processing triage. Please check backend connection.");
         } finally {
             setTriageLoading(false);
         }
@@ -941,7 +941,7 @@ function App() {
 
 
         nurses.forEach(nurse => {
-            const role = nurse.id <= 40 ? "Noche" : "Día";
+            const role = nurse.id <= 40 ? "Night" : "Day";
             let row = `"${nurse.name}","${role}"`;
 
             viewDates.forEach(date => {
@@ -976,7 +976,7 @@ function App() {
         schedule.forEach(s => {
             if (viewDates.includes(s.date)) {
                 stats.totalShifts++;
-                if (s.shift === 'Noche') stats.nightShifts++;
+                if (s.shift === 'Night') stats.nightShifts++;
                 else stats.dayShifts++;
                 if (stats.nurseLoads[s.nurse_id] !== undefined) stats.nurseLoads[s.nurse_id]++;
             }
@@ -1000,19 +1000,19 @@ function App() {
                 </div>
                 <div className="stats-grid">
                     <div className="stat-item">
-                        <span className="stat-label">Total Turnos</span>
+                        <span className="stat-label">Total Shifts</span>
                         <span className="stat-value">{stats.totalShifts}</span>
                     </div>
                     <div className="stat-item">
-                        <span className="stat-label">Turnos Noche</span>
+                        <span className="stat-label">Night Shifts</span>
                         <span className="stat-value night">{stats.nightShifts}</span>
                     </div>
                     <div className="stat-item">
-                        <span className="stat-label">Turnos Día</span>
+                        <span className="stat-label">Day Shifts</span>
                         <span className="stat-value day">{stats.dayShifts}</span>
                     </div>
                     <div className="stat-item">
-                        <span className="stat-label">Promedio/Enf</span>
+                        <span className="stat-label">Avg/Nurse</span>
                         <span className="stat-value">{mean.toFixed(1)}</span>
                     </div>
                 </div>
@@ -1054,12 +1054,12 @@ function App() {
             viewDates.push(d.toISOString().split('T')[0]);
         }
 
-        let currentMonthLabel = "Cargando...";
+        let currentMonthLabel = "Loading...";
         let currentYearLabel = "";
 
         if (viewDates.length > 0) {
             const midDate = new Date(viewDates[Math.floor(viewDates.length / 2)]);
-            currentMonthLabel = midDate.toLocaleDateString('es-ES', { month: 'long' });
+            currentMonthLabel = midDate.toLocaleDateString('en-US', { month: 'long' });
             currentYearLabel = midDate.getFullYear();
         }
 
@@ -1079,7 +1079,7 @@ function App() {
                         </div>
                         <div className="nurse-list">
                             {nurses.map(nurse => {
-                                const role = nurse.id <= 20 ? "Noche" : "Día";
+                                const role = nurse.id <= 20 ? "Night" : "Day";
                                 const isSelected = selectedNurseId === nurse.id;
                                 return (
                                     <div
@@ -1090,8 +1090,8 @@ function App() {
                                         <div className="nurse-avatar">{nurse.name.substring(0, 2).toUpperCase()}</div>
                                         <div className="nurse-info-col">
                                             <span className="nurse-name">{nurse.name}</span>
-                                            <span className={`nurse-role-badge ${role === 'Noche' ? 'night' : 'day'}`}>
-                                                {role === 'Noche' ? '🌙 Turno Noche' : '☀️ Turno Diurno'}
+                                            <span className={`nurse-role-badge ${role === 'Night' ? 'night' : 'day'}`}>
+                                                {role === 'Night' ? '🌙 Night Shift' : '☀️ Day Shift'}
                                             </span>
                                         </div>
                                     </div>
@@ -1136,12 +1136,12 @@ function App() {
                                     <table className="schedule-table">
                                         <thead>
                                             <tr>
-                                                <th style={{ minWidth: '180px', textAlign: 'left', paddingLeft: '1rem' }}>Enfermera</th>
+                                                <th style={{ minWidth: '180px', textAlign: 'left', paddingLeft: '1rem' }}>Nurse</th>
                                                 {viewDates.map(d => {
                                                     const dateObj = new Date(d);
-                                                    const dayName = dateObj.toLocaleDateString('es-ES', { weekday: 'short' });
+                                                    const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
                                                     const dayNum = dateObj.getDate();
-                                                    return <th key={d} className={dayName === 'sá' || dayName === 'do' ? 'weekend' : ''}>
+                                                    return <th key={d} className={dayName === 'Sat' || dayName === 'Sun' ? 'weekend' : ''}>
                                                         <div className="th-day">{dayName}</div>
                                                         <div className="th-num">{dayNum}</div>
                                                     </th>;
@@ -1156,12 +1156,12 @@ function App() {
                                                     <tr key={nurse.id} onClick={() => setSelectedNurseId(nurse.id)} style={{ cursor: 'pointer' }}>
                                                         <td className="fixed-col" style={{ textAlign: 'left', paddingLeft: '1rem' }}>
                                                             <strong>{nurse.name}</strong>
-                                                            <div className="nurse-role">{nurse.id <= 20 ? '🌙 Rot. Noche' : '☀️ Diurno'}</div>
+                                                            <div className="nurse-role">{nurse.id <= 20 ? '🌙 Night Rot.' : '☀️ Day Shift'}</div>
                                                         </td>
                                                         {viewDates.map(dateStr => {
                                                             const entry = schedule.find(s => s.nurse_id === nurse.id && s.date === dateStr);
                                                             if (!entry) return <td key={dateStr} className="cell-empty"></td>;
-                                                            const shortShift = entry.shift === 'Mañana' ? 'M' : entry.shift === 'Tarde' ? 'T' : 'N';
+                                                            const shortShift = entry.shift === 'Morning' ? 'M' : entry.shift === 'Afternoon' ? 'A' : 'N';
                                                             return (
                                                                 <td key={dateStr} className="cell-shift" style={{ backgroundColor: entry.color, color: 'white', fontWeight: 'bold' }}>
                                                                     {shortShift}
@@ -1521,7 +1521,7 @@ function App() {
                                         {/* Daily Schedule - Wait Rooms */}
                                         <section className="space-y-4">
                                             <div className="flex justify-between items-center">
-                                                <h3 className="text-sm font-bold text-[#111418] uppercase tracking-wider">Salas de Espera / Appointments</h3>
+                                                <h3 className="text-sm font-bold text-[#111418] uppercase tracking-wider">Waiting Rooms / Appointments</h3>
                                                 <button className="text-xs text-[#0076ce] font-bold">Today</button>
                                             </div>
                                             <div className="bg-white rounded-xl border border-gray-200/80 p-5 space-y-4 shadow-sm">
@@ -1566,7 +1566,7 @@ function App() {
                                         {/* Specialists On-Call */}
                                         <section className="space-y-4">
                                             <div className="flex justify-between items-center">
-                                                <h3 className="text-sm font-bold text-[#111418] uppercase tracking-wider">Especialistas Activos</h3>
+                                                <h3 className="text-sm font-bold text-[#111418] uppercase tracking-wider">Active Specialists</h3>
                                                 <button className="text-[11px] text-[#0076ce] bg-blue-50 hover:bg-blue-100 transition-colors shadow-sm rounded-lg px-3 py-1.5 font-bold flex items-center gap-1 border border-blue-100">Live</button>
                                             </div>
                                             <div className="grid grid-cols-2 gap-3">
@@ -2095,10 +2095,10 @@ function App() {
                                         <thead className="bg-gray-100/50 border-b border-[#dbe0e6]">
                                             <tr>
                                                 <th className="px-8 py-5 text-[10px] uppercase font-black tracking-widest text-gray-400">ID / NHC</th>
-                                                <th className="px-8 py-5 text-[10px] uppercase font-black tracking-widest text-gray-400">Paciente</th>
-                                                <th className="px-8 py-5 text-[10px] uppercase font-black tracking-widest text-gray-400">Demografía</th>
-                                                <th className="px-8 py-5 text-[10px] uppercase font-black tracking-widest text-gray-400">Motivo Consulta</th>
-                                                <th className="px-8 py-5 text-[10px] uppercase font-black tracking-widest text-gray-400 text-right">Manejo</th>
+                                                <th className="px-8 py-5 text-[10px] uppercase font-black tracking-widest text-gray-400">Patient</th>
+                                                <th className="px-8 py-5 text-[10px] uppercase font-black tracking-widest text-gray-400">Demographics</th>
+                                                <th className="px-8 py-5 text-[10px] uppercase font-black tracking-widest text-gray-400">Reason for Visit</th>
+                                                <th className="px-8 py-5 text-[10px] uppercase font-black tracking-widest text-gray-400 text-right">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-gray-100">
@@ -2135,10 +2135,10 @@ function App() {
                                     <span className="material-symbols-outlined text-5xl animate-bounce">event_note</span>
                                 </div>
                                 <div className="space-y-4">
-                                    <h3 className="text-3xl font-black text-gray-900 leading-tight">Planificación Inteligente de Enfermería</h3>
-                                    <p className="text-gray-400 max-w-md mx-auto text-sm font-medium">El sistema Dell Pro de rotación dinámica (80 perfiles, IA optimizada) está procesando el despliegue a la nueva interfaz gráfica.</p>
+                                    <h3 className="text-3xl font-black text-gray-900 leading-tight">Intelligent Nursing Planning</h3>
+                                    <p className="text-gray-400 max-w-md mx-auto text-sm font-medium">The Dell Pro dynamic rotation system (80 profiles, AI optimized) is processing the deployment to the new graphical interface.</p>
                                 </div>
-                                <button className="px-10 py-4 bg-gray-900 hover:bg-black text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl transition-all shadow-xl shadow-gray-900/20 active:scale-95">Ver Estado de Compilación</button>
+                                <button className="px-10 py-4 bg-gray-900 hover:bg-black text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl transition-all shadow-xl shadow-gray-900/20 active:scale-95">View Compilation Status</button>
                             </div>
                         )}
                     </div>
