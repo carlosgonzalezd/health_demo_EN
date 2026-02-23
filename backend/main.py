@@ -483,7 +483,7 @@ VITAL SIGNS: {vitals_text}
 REASON FOR CONSULTATION: {req.complaint}
 
 INSTRUCTIONS: Analyze the patient's vital signs and classify according to Manchester. 
-ONLY return a JSON with these 4 keys: "level" (integer 1-4), "priority_name" (RED/ORANGE/YELLOW/GREEN), "justification" (explanatory text in English), "actions" (recommended clinical actions).
+ONLY return a JSON with these 4 keys: "level" (integer 1-4), "priority_name" (ROJO/NARANJA/AMARILLO/VERDE), "justification" (explanatory text in Spanish), "actions" (recommended clinical actions in Spanish).
 JSON:"""
 
     target_url = (req.ollama_url if req.ollama_url else config["OLLAMA_URL"]).rstrip("/")
