@@ -2,7 +2,7 @@
 """Lightweight stats server that runs on the HOST (not inside Docker).
 Exposes GPU / RAM / throughput data for the frontend to poll.
 Run: python3 host_stats_server.py
-Listens on port 4202.
+Listens on port 4102.
 
 Optimized for Dell GB10 (Grace Hopper) which uses unified memory (LPDDR5X).
 nvidia-smi reports memory as "Not Supported", so we use psutil for system RAM.
@@ -81,6 +81,6 @@ class StatsHandler(BaseHTTPRequestHandler):
         pass  # Suppress logs
 
 if __name__ == '__main__':
-    server = HTTPServer(('0.0.0.0', 4202), StatsHandler)
-    print("Stats server running on :4202 (GB10 optimized)")
+    server = HTTPServer(('0.0.0.0', 4102), StatsHandler)
+    print("Stats server running on :4102 (GB10 optimized)")
     server.serve_forever()

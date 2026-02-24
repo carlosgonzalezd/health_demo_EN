@@ -480,7 +480,7 @@ function App() {
 
     const [chatMessage, setChatMessage] = useState("");
     const [chatHistory, setChatHistory] = useState([
-        { role: 'assistant', content: 'Hello! I am the **Dell AI Healthcare Assistant**.\n\nI am powered by neural inference on node **GB10**.\n\nHow can I help you today with clinical or radiological analysis?' }
+        { role: 'assistant', content: 'Hello! I am your **AI Healthcare Assistant**.\n\nI am ready to help you with clinical triage or radiological analysis. How can I assist you today?' }
     ]);
     const [chatLoading, setChatLoading] = useState(false);
     const [showChat, setShowChat] = useState(false);
@@ -497,16 +497,16 @@ function App() {
     }, []);
 
     // Poll /stats every 3s when radiology, triage or dashboard active (host server for nvidia-smi access)
-    // The stats server runs on whichever node the app is on (GB10 or Worki), port 4202.
+    // The stats server runs on whichever node the app is on (GB10 or Worki), port 4102.
     // It figures out the host dynamically - if the credential IP is different, it polls that node's stats.
     const getStatsUrl = () => {
         const cred = credentials.find(c => c.id === selectedCredentialId);
         // If a custom node (Worki, etc.) is selected, poll that node's stats server
         if (cred && cred.ip && cred.ip !== 'host.docker.internal') {
-            return `http://${cred.ip}:4202`;
+            return `http://${cred.ip}:4102`;
         }
         // Default: poll current hostname (GB10)
-        return window.location.hostname === 'localhost' ? 'http://localhost:4202' : `http://${window.location.hostname}:4202`;
+        return window.location.hostname === 'localhost' ? 'http://localhost:4102' : `http://${window.location.hostname}:4102`;
     };
     useEffect(() => {
         if (activeTab !== 'radiology' && activeTab !== 'triage' && activeTab !== 'dashboard') return;
@@ -1212,7 +1212,7 @@ function App() {
                     </div>
                     <div className="flex flex-col">
                         <h1 className="text-[#111418] text-lg font-black leading-tight whitespace-nowrap">Dell AI Healthcare Assistant</h1>
-                        <p className="text-[#617289] text-xs font-medium">v3.7</p>
+                        <p className="text-[#617289] text-xs font-medium">v3.9</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-4 flex-1 max-w-xl mx-8">
@@ -2318,7 +2318,14 @@ function App() {
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <button onClick={() => setShowChat(false)} className="size-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+                                            <button
+                                                onClick={() => {
+                                                    setShowChat(false);
+                                                    setChatHistory([]); // Clear history immediately on close
+                                                    setChatMessage("");
+                                                }}
+                                                className="size-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+                                            >
                                                 <span className="material-symbols-outlined text-sm">close</span>
                                             </button>
                                         </div>
@@ -2348,7 +2355,19 @@ function App() {
                                         </div>
                                     </form>
                                 </div>
-                                <button onClick={() => setShowChat(!showChat)} className={`fixed bottom-8 right-8 h-16 w-auto px-5 rounded-full bg-[#0076ce] text-white shadow-2xl flex items-center justify-center hover:-translate-y-1 transition-all z-40 border border-white/20 gap-3 ${showChat ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100'}`}>
+                                <button
+                                    onClick={() => {
+                                        const willShow = !showChat;
+                                        setShowChat(willShow);
+                                        if (willShow && chatHistory.length === 0) {
+                                            const greeting = activeTab === 'radiology'
+                                                ? `Hello! I am **${selectedModel}**, your **Radiological Expert Assistant**.\n\nMy neural engine is ready. How can I help you analyze these findings or clinical context?`
+                                                : `Hello! I am **${triageInteractionModel || 'BioMistral'}**, your **Clinical Triage Assistant**.\n\nI am ready to help you with Manchester protocol classification. What would you like to know?`;
+                                            setChatHistory([{ role: 'assistant', content: greeting }]);
+                                        }
+                                    }}
+                                    className={`fixed bottom-8 right-8 h-16 w-auto px-5 rounded-full bg-[#0076ce] text-white shadow-2xl flex items-center justify-center hover:-translate-y-1 transition-all z-40 border border-white/20 gap-3 ${showChat ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100'}`}
+                                >
                                     <span className="material-symbols-outlined text-[28px]">forum</span>
                                     <span className="text-xs font-black uppercase tracking-widest">Ask AI</span>
                                 </button>
