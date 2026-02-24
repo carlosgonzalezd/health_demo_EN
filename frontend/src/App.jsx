@@ -1470,7 +1470,7 @@ function App() {
                                             {/* Study Card 6 */}
                                             <div className="bg-gray-50/50 rounded-2xl border border-gray-200/80 overflow-hidden hover:border-[#0076ce]/50 transition-all group shadow-sm">
                                                 <div className="h-40 bg-gray-200 relative overflow-hidden">
-                                                    <div className="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1000&auto=format&fit=crop')" }}></div>
+                                                    <div className="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1599045118108-bf9954418b76?q=80&w=1000&auto=format&fit=crop')" }}></div>
                                                     <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-white/90 text-[#111418] border border-gray-200/50 shadow-sm text-[9px] font-black uppercase tracking-widest backdrop-blur-md">X-Ray • Knee</div>
                                                     <div className="absolute top-3 right-3 px-2 py-1 rounded text-[9px] font-black uppercase tracking-widest bg-green-100 text-green-700 border border-green-200 shadow-sm">Reviewed</div>
                                                 </div>
