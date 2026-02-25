@@ -1,0 +1,9 @@
+
+Tokens Saved via Dell AI Factory (GB10)
+
+By delegating heavy inference tasks (like generating UI structural prompts and massive data simulation) to the local GB10 cluster instead of using public cloud models, we are saving considerable resources.
+Total Tokens Saved: 1598
+
+Detailed Inference Log
+Date/Time	Task Description	Model Used	Tokens
+2026-02-25 19:18	Generation of 50 synthetic smart city nodes	gpt-oss:20b	1598

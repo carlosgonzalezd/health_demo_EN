@@ -1,0 +1,393 @@
+<html class="dark"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0076ce",
+                        "dell-blue": "#0076ce",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#060606",
+                        "card-dark": "#121212",
+                    },
+                    fontFamily: {
+                        "display": ["Roboto", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0px", "lg": "2px", "xl": "4px", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+:root {
+  --primary-color: #0076ce;
+}
+.glass-panel {
+    background: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.neon-border-blue {
+    box-shadow: 0 0 15px rgba(0, 118, 206, 0.15);
+    border: 1px solid rgba(0, 118, 206, 0.4);
+}
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.dell-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 2px solid #0076ce;
+    border-radius: 50%;
+    position: relative;
+}
+.dell-logo-e {
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 1;
+    transform: rotate(-15deg);
+    margin-left: 1px;
+    color: #0076ce;
+}
+.dell-logo-text {
+    font-weight: 900;
+    font-size: 10px;
+    letter-spacing: -0.5px;
+    color: #0076ce;
+    display: flex;
+    align-items: center;
+}
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-white/5 bg-black/90 backdrop-blur-md px-8 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="dell-logo-container">
+<div class="dell-logo-text">D<span class="dell-logo-e">E</span>LL</div>
+</div>
+<div class="flex flex-col">
+<h2 class="text-white text-xl font-bold leading-tight tracking-tight uppercase">Dell AI <span class="text-slate-400 font-light">Smart City</span></h2>
+<span class="text-[9px] uppercase tracking-[0.2em] text-dell-blue font-bold">Official Command Center</span>
+</div>
+</div>
+<div class="h-8 w-[1px] bg-white/10 mx-2"></div>
+<label class="flex flex-col min-w-72 !h-10">
+<div class="flex w-full flex-1 items-stretch rounded-sm h-full bg-white/5 border border-white/10 focus-within:border-dell-blue transition-all">
+<div class="text-slate-400 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:ring-0 text-sm text-white placeholder:text-slate-500" placeholder="Search infrastructure nodes..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<nav class="flex items-center gap-10 mr-4">
+<a class="text-dell-blue text-sm font-bold border-b-2 border-dell-blue pb-1 uppercase tracking-wider" href="#">Dashboard</a>
+<a class="text-slate-400 hover:text-white text-sm font-bold transition-colors uppercase tracking-wider" href="#">Digital Twin</a>
+<a class="text-slate-400 hover:text-white text-sm font-bold transition-colors uppercase tracking-wider" href="#">Fleet</a>
+<a class="text-slate-400 hover:text-white text-sm font-bold transition-colors uppercase tracking-wider" href="#">Settings</a>
+</nav>
+<button class="flex min-w-[140px] cursor-pointer items-center justify-center rounded-sm h-11 px-6 bg-dell-blue hover:bg-[#0066b3] text-white text-sm font-bold transition-all uppercase tracking-widest">
+<span class="material-symbols-outlined mr-2 text-lg">admin_panel_settings</span>
+            Admin Console
+        </button>
+<div class="relative group">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-dell-blue/30" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC73vqboBPGXRQs_XrXXUlHUIhBNEJht4Y00xciOC9P6oVpehguJpOX8L3LWJUXCxKTmEQzLP0MeQYKS8QMxuN8qr1i2cpqLmxLrIJMw19fHOvDI11fod0MM4escolYE0W_hcIPlAijjfVmHXQPjb9gR3UnRhlfs1Ay6FNg58XSSd1KXCM02uLM0ub-Hk7jGoROSM6ftacSbQ_pdUMsx368fhsF3NGqg5pQx_YXw98AUj-VeDa8h_HtsYluWuHXU2vSmVTzizjhRXc");'></div>
+<div class="absolute bottom-0 right-0 size-3 bg-green-500 rounded-full border-2 border-black"></div>
+</div>
+</div>
+</header>
+<main class="p-8 grid grid-cols-12 gap-8 max-w-[2400px] mx-auto">
+<div class="col-span-12 lg:col-span-3 flex flex-col gap-8">
+<div class="glass-panel rounded-lg p-6 flex flex-col gap-5 border-l-4 border-l-dell-blue">
+<div class="flex items-center justify-between">
+<h3 class="text-slate-400 text-xs font-bold uppercase tracking-widest">Live Traffic Intensity</h3>
+<span class="material-symbols-outlined text-dell-blue text-xl">sensors</span>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<p class="text-white text-4xl font-black tracking-tight">604 <span class="text-slate-500 text-lg font-normal">veh/h</span></p>
+<p class="text-green-500 text-sm font-bold flex items-center mt-2">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span>+28% VS PREVIOUS
+                    </p>
+</div>
+<div class="h-14 w-28 bg-white/5 rounded-sm border-b-2 border-dell-blue flex items-end px-1 pb-1 gap-1">
+<div class="bg-dell-blue/30 w-full h-[40%]"></div>
+<div class="bg-dell-blue/50 w-full h-[60%]"></div>
+<div class="bg-dell-blue/70 w-full h-[80%]"></div>
+<div class="bg-dell-blue w-full h-[100%]"></div>
+</div>
+</div>
+</div>
+<div class="glass-panel rounded-lg p-6 flex flex-col gap-5 border-l-4 border-l-dell-blue">
+<div class="flex items-center justify-between">
+<h3 class="text-slate-400 text-xs font-bold uppercase tracking-widest">Traffic Density</h3>
+<span class="material-symbols-outlined text-dell-blue text-xl">grid_view</span>
+</div>
+<div>
+<p class="text-white text-4xl font-black tracking-tight">532 <span class="text-slate-500 text-lg font-normal">veh/km</span></p>
+<div class="w-full bg-white/10 h-1.5 rounded-full mt-6 overflow-hidden">
+<div class="bg-dell-blue h-full w-[64%] shadow-[0_0_12px_rgba(0,118,206,0.6)]"></div>
+</div>
+</div>
+</div>
+<div class="glass-panel rounded-lg p-6 flex-1">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-slate-400 text-xs font-bold uppercase tracking-widest">Temporal Activity</h3>
+<select class="bg-black/40 border border-white/10 rounded-sm text-[10px] text-slate-300 font-bold uppercase px-2 py-1 focus:ring-1 focus:ring-dell-blue cursor-pointer">
+<option>Last 7 Days</option>
+</select>
+</div>
+<div class="grid grid-cols-7 gap-2">
+<script>
+                    for(let i=0; i<35; i++) {
+                        const opacity = [0.1, 0.2, 0.4, 0.6, 0.8, 1.0][Math.floor(Math.random() * 6)];
+                        document.write(`<div class="aspect-square rounded-sm bg-dell-blue transition-all hover:scale-110" style="opacity: ${opacity}"></div>`);
+                    }
+                </script>
+</div>
+<div class="flex justify-between mt-6 text-[10px] text-slate-500 font-black tracking-widest">
+<span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span>
+</div>
+</div>
+<div class="glass-panel rounded-lg p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-slate-400 text-xs font-bold uppercase tracking-widest">Fleet Movement</h3>
+<span class="text-white text-xs font-black">14.2K <span class="text-green-500 ml-1">+5.4%</span></span>
+</div>
+<div class="flex items-end justify-between h-36 gap-2.5">
+<div class="flex-1 bg-white/5 rounded-t-sm relative group">
+<div class="absolute bottom-0 w-full bg-dell-blue/60 rounded-t-sm h-[80%] transition-all group-hover:bg-dell-blue"></div>
+</div>
+<div class="flex-1 bg-white/5 rounded-t-sm relative group">
+<div class="absolute bottom-0 w-full bg-dell-blue/60 rounded-t-sm h-[95%] transition-all group-hover:bg-dell-blue"></div>
+</div>
+<div class="flex-1 bg-white/5 rounded-t-sm relative group">
+<div class="absolute bottom-0 w-full bg-dell-blue/60 rounded-t-sm h-[70%] transition-all group-hover:bg-dell-blue"></div>
+</div>
+<div class="flex-1 bg-white/5 rounded-t-sm relative group">
+<div class="absolute bottom-0 w-full bg-dell-blue/60 rounded-t-sm h-[40%] transition-all group-hover:bg-dell-blue"></div>
+</div>
+<div class="flex-1 bg-white/5 rounded-t-sm relative group">
+<div class="absolute bottom-0 w-full bg-dell-blue/60 rounded-t-sm h-[85%] transition-all group-hover:bg-dell-blue"></div>
+</div>
+<div class="flex-1 bg-white/5 rounded-t-sm relative group">
+<div class="absolute bottom-0 w-full bg-dell-blue/60 rounded-t-sm h-[60%] transition-all group-hover:bg-dell-blue"></div>
+</div>
+<div class="flex-1 bg-white/5 rounded-t-sm relative group">
+<div class="absolute bottom-0 w-full bg-dell-blue/60 rounded-t-sm h-[30%] transition-all group-hover:bg-dell-blue"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-6 flex flex-col gap-8">
+<div class="glass-panel rounded-lg overflow-hidden relative flex-1 min-h-[650px] border-dell-blue/20">
+<div class="absolute inset-0 bg-[#020202] overflow-hidden">
+<div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_#0076ce_0%,_transparent_70%)]"></div>
+<div class="absolute inset-0" style="background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 32px 32px;">
+<div class="absolute top-[30%] left-[40%] flex flex-col items-center">
+<div class="size-6 bg-dell-blue/20 rounded-full flex items-center justify-center animate-ping absolute"></div>
+<div class="size-3 bg-dell-blue rounded-full shadow-[0_0_20px_#0076ce]"></div>
+<div class="mt-2 px-2 py-0.5 bg-black/80 border border-dell-blue/50 text-[8px] text-white font-bold uppercase">Node_482</div>
+</div>
+<div class="absolute top-[60%] left-[25%] flex flex-col items-center">
+<div class="size-3 bg-dell-blue rounded-full shadow-[0_0_15px_#0076ce]"></div>
+</div>
+<div class="absolute bottom-[20%] right-[35%] flex flex-col items-center">
+<div class="size-4 bg-dell-blue/20 rounded-full flex items-center justify-center animate-ping absolute"></div>
+<div class="size-3 bg-dell-blue rounded-full shadow-[0_0_15px_#0076ce]"></div>
+</div>
+<div class="absolute top-[25%] right-[20%] size-2.5 bg-green-500 rounded-full shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
+<div class="absolute top-[50%] right-[40%] size-2.5 bg-red-600 rounded-full shadow-[0_0_10px_rgba(220,38,38,0.5)]"></div>
+<div class="absolute top-[65%] right-[15%] size-2.5 bg-amber-500 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
+<div class="absolute top-8 left-8 p-5 glass-panel rounded-sm border-white/10 flex flex-col gap-3">
+<div class="flex items-center gap-2">
+<span class="size-1.5 bg-dell-blue rounded-full animate-pulse"></span>
+<h4 class="text-white text-xs font-bold tracking-[0.2em] uppercase">Digital Twin Live</h4>
+</div>
+<div class="flex gap-6 border-t border-white/5 pt-3">
+<div class="flex flex-col">
+<span class="text-[9px] text-slate-500 font-bold uppercase">Latency</span>
+<span class="text-xs text-green-500 font-black">12.4 MS</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[9px] text-slate-500 font-bold uppercase">Sync Stat</span>
+<span class="text-xs text-dell-blue font-black uppercase tracking-widest">Active</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-8 right-8 flex flex-col gap-3">
+<button class="size-11 glass-panel rounded-sm flex items-center justify-center text-white hover:bg-dell-blue transition-all">
+<span class="material-symbols-outlined font-bold">add</span>
+</button>
+<button class="size-11 glass-panel rounded-sm flex items-center justify-center text-white hover:bg-dell-blue transition-all">
+<span class="material-symbols-outlined font-bold">remove</span>
+</button>
+<button class="size-11 glass-panel rounded-sm flex items-center justify-center text-dell-blue border-dell-blue/50 hover:bg-dell-blue hover:text-white transition-all">
+<span class="material-symbols-outlined font-bold">my_location</span>
+</button>
+</div>
+</div>
+<div class="glass-panel rounded-lg p-8">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-white text-sm font-black uppercase tracking-[0.25em]">Critical Congestion Index</h3>
+<span class="text-[10px] text-slate-500 font-bold">REAL-TIME TELEMETRY AUTO-REFRESH</span>
+</div>
+<div class="space-y-8">
+<div class="space-y-3">
+<div class="flex justify-between text-xs font-black uppercase tracking-wider">
+<span class="text-white">M-40 Orbital Motorway (Sector A)</span>
+<span class="text-dell-blue">82% Load</span>
+</div>
+<div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-dell-blue w-[82%] shadow-[0_0_15px_rgba(0,118,206,0.8)]"></div>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-xs font-black uppercase tracking-wider">
+<span class="text-white">Fuencarral District Hub</span>
+<span class="text-amber-500">45% Load</span>
+</div>
+<div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-amber-500 w-[45%] shadow-[0_0_15px_rgba(245,158,11,0.6)]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-3 flex flex-col gap-8">
+<div class="glass-panel rounded-lg p-6 flex flex-col gap-8">
+<h3 class="text-slate-400 text-xs font-bold uppercase tracking-widest">Compute Performance</h3>
+<div class="flex flex-col gap-8">
+<div class="flex items-center gap-5">
+<div class="size-14 flex items-center justify-center relative">
+<svg class="size-full absolute -rotate-90">
+<circle class="text-white/5" cx="28" cy="28" fill="none" r="24" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-dell-blue" cx="28" cy="28" fill="none" r="24" stroke="currentColor" stroke-dasharray="150.8" stroke-dashoffset="36.2" stroke-width="4"></circle>
+</svg>
+<span class="text-xs font-black text-white">76%</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">GPU Load</span>
+<span class="text-sm text-white font-bold">RTX-6000 Ada Gen</span>
+</div>
+</div>
+<div class="flex items-center gap-5">
+<div class="size-14 flex items-center justify-center relative">
+<svg class="size-full absolute -rotate-90">
+<circle class="text-white/5" cx="28" cy="28" fill="none" r="24" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-dell-blue" cx="28" cy="28" fill="none" r="24" stroke="currentColor" stroke-dasharray="150.8" stroke-dashoffset="72.4" stroke-width="4"></circle>
+</svg>
+<span class="text-xs font-black text-white">52%</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">VRAM Usage</span>
+<span class="text-sm text-white font-bold">24.1 GB / 48 GB</span>
+</div>
+</div>
+<div class="neon-border-blue rounded-sm p-5 bg-dell-blue/10">
+<div class="flex justify-between items-center mb-2">
+<span class="text-[10px] text-dell-blue font-bold uppercase tracking-[0.2em]">Inference Speed</span>
+<span class="material-symbols-outlined text-dell-blue text-lg">bolt</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-white">124.5</span>
+<span class="text-xs text-slate-500 font-bold uppercase">TOK/SEC</span>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-panel rounded-lg p-6 flex flex-col items-center">
+<h3 class="text-slate-400 text-xs font-bold uppercase tracking-widest w-full mb-8">Infrastructure Health</h3>
+<div class="relative size-44">
+<svg class="size-full -rotate-90" viewBox="0 0 100 100">
+<circle class="text-white/5" cx="50" cy="50" fill="none" r="42" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-green-500" cx="50" cy="50" fill="none" r="42" stroke="currentColor" stroke-dasharray="263.8" stroke-dashoffset="52" stroke-width="6"></circle>
+<circle class="text-amber-500" cx="50" cy="50" fill="none" r="42" stroke="currentColor" stroke-dasharray="263.8" stroke-dashoffset="180" stroke-width="6"></circle>
+<circle class="text-red-600" cx="50" cy="50" fill="none" r="42" stroke="currentColor" stroke-dasharray="263.8" stroke-dashoffset="230" stroke-width="6"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-3xl font-black text-white">92%</span>
+<span class="text-[9px] text-green-500 font-black uppercase tracking-widest">Optimal</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-5 mt-8 w-full px-2">
+<div class="flex items-center gap-3">
+<div class="size-2 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.4)]"></div>
+<span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Fluid</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-2 bg-amber-500 rounded-full shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+<span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Moderate</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-2 bg-red-600 rounded-full shadow-[0_0_8px_rgba(220,38,38,0.4)]"></div>
+<span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Congested</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-2 bg-slate-600 rounded-full shadow-[0_0_8px_rgba(71,85,105,0.4)]"></div>
+<span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Closed</span>
+</div>
+</div>
+</div>
+<div class="glass-panel rounded-lg p-6 flex-1 flex flex-col gap-5 border-t-4 border-t-dell-blue bg-dell-blue/5">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-sm bg-dell-blue flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl">smart_toy</span>
+</div>
+<div>
+<h4 class="text-sm font-black text-white uppercase tracking-widest">Dell City AI</h4>
+<div class="flex items-center gap-1.5 mt-0.5">
+<div class="size-1.5 bg-green-500 rounded-full animate-pulse"></div>
+<span class="text-[9px] text-green-500 font-black uppercase tracking-tighter">Llama-3-70B Active</span>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 space-y-4 hide-scrollbar">
+<div class="bg-white/5 border border-white/5 rounded-sm p-4 text-xs leading-relaxed text-slate-200">
+                    Infrastructure analysis complete. Bottleneck detected at M-40 Northbound intersection. Autonomous rerouting protocols available. 
+                    <br/><br/>
+<span class="text-dell-blue font-bold uppercase text-[10px]">Action required: Fleet 04 Re-route</span>
+</div>
+</div>
+<div class="relative">
+<input class="w-full bg-black border border-white/10 rounded-sm py-3 px-4 text-xs text-white placeholder:text-slate-600 focus:ring-1 focus:ring-dell-blue focus:border-dell-blue transition-all pr-12" placeholder="COMMAND INTERFACE..." type="text"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-dell-blue hover:text-white transition-colors">
+<span class="material-symbols-outlined font-bold">send</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<footer class="fixed bottom-0 left-0 right-0 bg-black/95 backdrop-blur-lg border-t border-white/5 px-8 py-3 flex items-center justify-between text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] z-50">
+<div class="flex gap-10">
+<div class="flex gap-2.5 items-center">
+<span class="text-green-500">●</span> System: <span class="text-white ml-1">Nominal</span>
+</div>
+<div class="flex gap-2.5 items-center">
+<span class="text-dell-blue">●</span> Net throughput: <span class="text-white ml-1">10.2 Gbps</span>
+</div>
+<div class="flex gap-2.5 items-center">
+<span class="text-dell-blue">●</span> Active Nodes: <span class="text-white ml-1">4,892 Units</span>
+</div>
+</div>
+<div class="flex gap-8 items-center">
+<span>2024-05-24 14:24:08 UTC</span>
+<div class="h-4 w-[1px] bg-white/10"></div>
+<span class="text-white font-black tracking-[0.3em]">PowerEdge V8 // Dell AI Infrastructure</span>
+</div>
+</footer>
+
+</body></html>

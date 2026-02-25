@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: 'Manrope', sans-serif;
-}
-
-.sidebar-item-active {
-  background-color: #136dec20;
-  color: #136dec;
-}
-
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
