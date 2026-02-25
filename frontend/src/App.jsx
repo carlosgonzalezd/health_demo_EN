@@ -1226,10 +1226,10 @@ function App() {
                         <h1 className="text-[#364356] text-[22px] font-outfit tracking-widest leading-none font-medium mt-1 uppercase">AI HEALTHCARE ASSISTANT</h1>
                     </div>
                 </div>
-                <div className="flex items-center gap-4 flex-1 max-w-xl mx-8">
+                <div className="flex items-center gap-4 flex-1 max-w-2xl mx-12">
                     <div className="relative w-full group">
-                        <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xl group-focus-within:text-primary transition-colors">search</span>
-                        <input className="w-full bg-[#f0f2f4] border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none" placeholder="Search patients, studies, or reports..." type="text" />
+                        <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-2xl group-focus-within:text-primary transition-colors">search</span>
+                        <input className="w-full bg-[#f0f2f4] border-none rounded-xl pl-12 pr-6 py-3 text-base focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none h-12" placeholder="Search patients, studies, or reports..." type="text" />
                     </div>
                 </div>
                 <div className="flex items-center gap-6 shrink-0">
@@ -1251,7 +1251,7 @@ function App() {
             </header>
 
             <div className="flex flex-1 overflow-hidden relative">
-                <aside className="w-64 bg-white border-r border-[#dbe0e6] flex flex-col justify-between p-4 shrink-0 shadow-sm z-10">
+                <aside className="w-72 bg-white border-r border-[#dbe0e6] flex flex-col justify-between p-6 shrink-0 shadow-sm z-10">
                     <div className="flex flex-col gap-1 mt-2">
                         <nav className="flex flex-col gap-1">
                             <button onClick={() => setActiveTab('dashboard')} className={`flex items-center gap-3 px-3 py-2.5 rounded-lg w-full text-left transition-colors ${activeTab === 'dashboard' ? 'sidebar-item-active font-semibold' : 'text-[#617289] hover:bg-gray-50 font-semibold'}`}>
@@ -1291,47 +1291,47 @@ function App() {
                 <main className="flex-1 flex flex-col overflow-hidden relative bg-[#F5F6F7]">
                     {/* Scrollable Dashboard Area */}
                     <div className="flex-1 overflow-y-auto bg-[#F5F6F7] relative w-full">
-                        <div className="p-8 space-y-8 max-w-[1536px] w-full mx-auto pb-40">
+                        <div className="p-12 space-y-10 max-w-[1800px] w-full mx-auto pb-44">
                             {activeTab === 'dashboard' && (
                                 <div className="fade-in space-y-8">
                                     {/* Top Section: Welcome & Stats */}
                                     <section className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
                                         <div>
-                                            <nav className="flex items-center gap-2 text-xs font-bold text-[#617289] uppercase tracking-widest mb-2">
+                                            <nav className="flex items-center gap-2 text-[13px] font-bold text-[#617289] uppercase tracking-widest mb-3">
                                                 <span>Home</span>
                                                 <span className="material-symbols-outlined text-sm">chevron_right</span>
-                                                <span className="text-primary">Radiology Overview</span>
+                                                <span className="text-primary font-outfit">Radiology Overview</span>
                                             </nav>
-                                            <h2 className="text-3xl font-extrabold text-[#111418] tracking-tight font-outfit">Radiology Overview</h2>
-                                            <p className="text-[#617289] mt-1">Efficiency metrics and study throughput for today.</p>
+                                            <h2 className="text-4xl font-extrabold text-[#111418] tracking-tight font-outfit">Radiology Overview</h2>
+                                            <p className="text-[#617289] mt-2 text-base">Efficiency metrics and study throughput for today.</p>
                                         </div>
-                                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 flex-1 max-w-3xl">
-                                            <div className="bg-white p-4 rounded-xl border border-[#dbe0e6] shadow-sm">
-                                                <p className="text-[10px] font-bold text-[#617289] uppercase tracking-wider">Pending Review</p>
-                                                <div className="flex items-baseline gap-2 mt-1">
-                                                    <span className="text-2xl font-extrabold font-mono">12</span>
-                                                    <span className="text-xs font-bold text-green-600 font-mono">+5%</span>
+                                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 flex-1 max-w-5xl">
+                                            <div className="bg-white p-5 rounded-2xl border border-[#dbe0e6] shadow-sm">
+                                                <p className="text-[11px] font-bold text-[#617289] uppercase tracking-wider">Pending Review</p>
+                                                <div className="flex items-baseline gap-2 mt-2">
+                                                    <span className="text-3xl font-extrabold font-mono text-[#111418]">12</span>
+                                                    <span className="text-sm font-bold text-green-600 font-mono">+5%</span>
                                                 </div>
                                             </div>
-                                            <div className="bg-white p-4 rounded-xl border border-[#dbe0e6] shadow-sm">
-                                                <p className="text-[10px] font-bold text-[#617289] uppercase tracking-wider">Completed</p>
-                                                <div className="flex items-baseline gap-2 mt-1">
-                                                    <span className="text-2xl font-extrabold font-mono">48</span>
-                                                    <span className="text-xs font-bold text-red-500 font-mono">-2%</span>
+                                            <div className="bg-white p-5 rounded-2xl border border-[#dbe0e6] shadow-sm hover:shadow-md transition-shadow">
+                                                <p className="text-[11px] font-bold text-[#617289] uppercase tracking-wider">Completed</p>
+                                                <div className="flex items-baseline gap-2 mt-2">
+                                                    <span className="text-3xl font-extrabold font-mono text-[#111418]">48</span>
+                                                    <span className="text-sm font-bold text-red-500 font-mono">-2%</span>
                                                 </div>
                                             </div>
-                                            <div className="bg-white p-4 rounded-xl border border-[#dbe0e6] shadow-sm">
-                                                <p className="text-[10px] font-bold text-[#617289] uppercase tracking-wider">Urgent Cases</p>
-                                                <div className="flex items-baseline gap-2 mt-1">
-                                                    <span className="text-2xl font-extrabold text-red-600 font-mono">03</span>
-                                                    <span className="text-xs font-bold text-green-600 uppercase tracking-widest">Active</span>
+                                            <div className="bg-white p-5 rounded-2xl border border-[#dbe0e6] shadow-sm hover:shadow-md transition-shadow">
+                                                <p className="text-[11px] font-bold text-[#617289] uppercase tracking-wider">Urgent Cases</p>
+                                                <div className="flex items-baseline gap-2 mt-2">
+                                                    <span className="text-3xl font-extrabold text-red-600 font-mono">03</span>
+                                                    <span className="text-sm font-bold text-green-600 uppercase tracking-widest">Active</span>
                                                 </div>
                                             </div>
-                                            <div className="bg-white p-4 rounded-xl border border-[#dbe0e6] shadow-sm">
-                                                <p className="text-[10px] font-bold text-[#617289] uppercase tracking-wider">Avg Turnaround</p>
-                                                <div className="flex items-baseline gap-2 mt-1">
-                                                    <span className="text-2xl font-extrabold font-mono">14m</span>
-                                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Stable</span>
+                                            <div className="bg-white p-5 rounded-2xl border border-[#dbe0e6] shadow-sm hover:shadow-md transition-shadow">
+                                                <p className="text-[11px] font-bold text-[#617289] uppercase tracking-wider">Avg Turnaround</p>
+                                                <div className="flex items-baseline gap-2 mt-2">
+                                                    <span className="text-3xl font-extrabold font-mono text-[#111418]">14m</span>
+                                                    <span className="text-sm font-bold text-gray-400 uppercase tracking-widest">Stable</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1341,9 +1341,9 @@ function App() {
                                     <div className="grid grid-cols-12 gap-8">
                                         {/* Recent Studies (Left 7 Columns) */}
                                         <div className="col-span-12 lg:col-span-12 xl:col-span-7 p-6 bg-white rounded-3xl shadow-sm border border-gray-200/80 space-y-6">
-                                            <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-                                                <h3 className="text-lg font-extrabold text-[#111418] flex items-center gap-3 font-outfit">
-                                                    <span className="material-symbols-outlined text-[#007db8] bg-blue-50 p-2 rounded-xl">analytics</span>
+                                            <div className="flex items-center justify-between border-b border-gray-100 pb-5">
+                                                <h3 className="text-xl font-extrabold text-[#111418] flex items-center gap-3 font-outfit">
+                                                    <span className="material-symbols-outlined text-[#007db8] bg-blue-50 p-3 rounded-xl text-2xl">analytics</span>
                                                     Recent Imaging Studies
                                                 </h3>
                                                 <button className="text-[11px] font-bold text-white bg-[#007db8] hover:bg-blue-600 transition-colors uppercase tracking-widest px-4 py-2 rounded-lg">View All Studies</button>
@@ -1710,15 +1710,15 @@ function App() {
                             )}
 
                             {activeTab === 'radiology' && (
-                                <div className="fade-in space-y-6">
+                                <div className="fade-in space-y-10">
                                     {/* Page Title - Outside dark container */}
-                                    <section className="flex items-center gap-4">
-                                        <div className="size-12 rounded-2xl bg-blue-50 text-[#007db8] flex items-center justify-center">
-                                            <span className="material-symbols-outlined text-2xl">radiology</span>
+                                    <section className="flex items-center gap-6">
+                                        <div className="size-16 rounded-[1.5rem] bg-blue-50 text-[#007db8] flex items-center justify-center shadow-sm">
+                                            <span className="material-symbols-outlined text-4xl">radiology</span>
                                         </div>
                                         <div>
-                                            <h2 className="text-2xl font-extrabold text-[#111418] tracking-tight font-outfit">AI Radiology Analysis</h2>
-                                            <p className="text-sm font-medium text-[#617289]"><strong>Dell AI Healthcare Assistant</strong> • Powered by <strong>GB10</strong></p>
+                                            <h2 className="text-4xl font-extrabold text-[#111418] tracking-tight font-outfit">AI Radiology Analysis</h2>
+                                            <p className="text-base font-medium text-[#617289] mt-1"><strong>Dell AI Healthcare Assistant</strong> • Powered by <strong>GB10</strong></p>
                                         </div>
                                     </section>
 
@@ -2013,7 +2013,7 @@ function App() {
                             )}
 
                             {activeTab === 'triage' && (
-                                <div className="fade-in max-w-5xl mx-auto">
+                                <div className="fade-in max-w-7xl mx-auto py-4">
                                     <div className="bg-white/90 rounded-[2.5rem] border border-black/5 shadow-sm backdrop-blur-xl overflow-hidden flex flex-col md:flex-row min-h-[650px]">
                                         {/* Triage Input Side */}
                                         <div className="w-full md:w-[450px] p-10 border-r border-[#dbe0e6] space-y-8">
