@@ -1,11 +1,11 @@
 # Healthcare AI Demo (GB10 Edition)
 
-This is a demonstration of a healthcare application integrating Computer Vision (YOLO) and Large Language Models (Ollama) to analyze medical images.
+This is a demonstration of a healthcare application integrating Computer Vision (**XTraY specialized in Chest Radiography**) and Large Language Models (Ollama) to analyze medical images.
 
 ## Features
 
 - **Medical Image Analysis**: Upload X-rays or scans.
-- **Computer Vision**: Detects structures/abnormalities using YOLOv8.
+- **Computer Vision**: Detects structures/abnormalities using **XTraY** (DenseNet121 specialized engine).
 - **Clinical Reports**: Generates professional clinical summaries using a local LLM.
 - **Patient Explanation**: Translates medical jargon into simple language for patients.
 - **Privacy-First**: All processing happens locally on your GB10 device.
@@ -14,7 +14,7 @@ This is a demonstration of a healthcare application integrating Computer Vision 
 
 - **Frontend**: React + Vite (Port 80)
 - **Backend**: FastAPI (Port 8000)
-- **Vision Service**: YOLOv8 / Ultralytics (Port 5000)
+- **Vision Service**: XTraY Engine / TorchXRayVision (Port 5001)
 - **LLM Service**: Connects to your existing local Ollama instance (Port 11434)
 
 ## Prerequisites
@@ -56,4 +56,4 @@ This is a demonstration of a healthcare application integrating Computer Vision 
 ## Disclaimer
 
 **For Demonstration Purposes Only.**
-This tool is a proof-of-concept. The AI models (YOLO standard and generic LLMs) are not certified for medical diagnosis. Do not use for real clinical decision making.
+This tool is a proof-of-concept. The AI models (XTraY specialized engine and generic LLMs) are not certified for medical diagnosis. Do not use for real clinical decision making.

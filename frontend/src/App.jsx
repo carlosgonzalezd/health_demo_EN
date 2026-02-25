@@ -480,7 +480,7 @@ function App() {
 
     const [chatMessage, setChatMessage] = useState("");
     const [chatHistory, setChatHistory] = useState([
-        { role: 'assistant', content: 'Hello! I am your **AI Healthcare Assistant**.\n\nI am ready to help you with clinical triage or radiological analysis. How can I assist you today?' }
+        { role: 'assistant', content: 'Hello! I am the **Dell AI Healthcare Assistant**.\n\nI am ready to help you with clinical triage or radiological analysis. How can I assist you today?' }
     ]);
     const [chatLoading, setChatLoading] = useState(false);
     const [showChat, setShowChat] = useState(false);
@@ -829,6 +829,7 @@ function App() {
             const decoder = new TextDecoder("utf-8");
 
             setChatHistory(prev => {
+                if (prev.length === 0) return prev;
                 const newHist = [...prev];
                 newHist[newHist.length - 1].loading = false;
                 return newHist;
@@ -839,17 +840,24 @@ function App() {
                 if (done) break;
 
                 const chunk = decoder.decode(value, { stream: true });
+                let wasCleared = false;
                 setChatHistory(prev => {
+                    if (prev.length === 0) {
+                        wasCleared = true;
+                        return prev;
+                    }
                     const newHist = [...prev];
                     newHist[newHist.length - 1].content += chunk;
                     return newHist;
                 });
+                if (wasCleared) break;
             }
 
         } catch (err) {
             setChatHistory(prev => {
+                if (prev.length === 0) return prev;
                 const newHist = [...prev];
-                newHist[newHist.length - 1].content = "Error de red al consultar con el modelo AI.";
+                newHist[newHist.length - 1].content = "Error communicating with AI model.";
                 newHist[newHist.length - 1].loading = false;
                 return newHist;
             });
@@ -1411,7 +1419,7 @@ function App() {
                                                             </div>
                                                             <span className="text-[11px] font-bold text-[#617289]">Dr. Vance</span>
                                                         </div>
-                                                        <button className="text-[10px] font-black uppercase tracking-widest text-[#617289] px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-200 hover:bg-gray-200 transition-colors cursor-pointer relative z-10 w-auto">Details</button>
+                                                        <button onClick={() => alert('Patient details module currently under construction.')} className="text-[10px] font-black uppercase tracking-widest text-[#617289] px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-200 hover:bg-gray-200 transition-colors cursor-pointer relative z-10 w-auto">Details</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1489,7 +1497,7 @@ function App() {
                                                             </div>
                                                             <span className="text-[11px] font-bold text-[#617289]">Dr. Davis</span>
                                                         </div>
-                                                        <button className="text-[10px] font-black uppercase tracking-widest text-[#617289] px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-200 hover:bg-gray-200 transition-colors cursor-pointer relative z-10 w-auto">Details</button>
+                                                        <button onClick={() => alert('Patient details module currently under construction.')} className="text-[10px] font-black uppercase tracking-widest text-[#617289] px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-200 hover:bg-gray-200 transition-colors cursor-pointer relative z-10 w-auto">Details</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1763,8 +1771,8 @@ function App() {
                                                             onChange={e => setSelectedEngine(e.target.value)}
                                                             className="bg-transparent border-none text-sm font-medium text-white focus:ring-0 outline-none cursor-pointer p-0 w-full truncate"
                                                         >
-                                                            <option value="xray" className="bg-[#1A1D23] text-gray-200">TorchXRay (Chest)</option>
-                                                            <option value="yolo" className="bg-[#1A1D23] text-gray-200">YOLOv11 (General)</option>
+                                                            <option value="xray" className="bg-[#1A1D23] text-gray-200">XTraY (Chest Radiography)</option>
+                                                            <option value="yolo" className="bg-[#1A1D23] text-gray-200">YOLO v11 (General)</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -1823,7 +1831,7 @@ function App() {
                                         {selectedEngine === 'xray' ? (
                                             <span className="flex items-center gap-2 text-[11px] font-semibold text-blue-300">
                                                 <span className="material-symbols-outlined text-[14px]">memory</span>
-                                                DenseNet121 · 18 Thoracic Pathologies · Trained on NIH/CheXpert/MIMIC-CXR
+                                                XTraY Engine · Specialized Chest Radiography · DenseNet121
                                             </span>
                                         ) : (
                                             <span className="flex items-center gap-2 text-[11px] font-semibold text-yellow-300">
@@ -1979,7 +1987,7 @@ function App() {
                                         </div>
                                         <div className="hidden md:flex items-center gap-2">
                                             <span className="material-symbols-outlined text-[14px]">settings_system_daydream</span>
-                                            <span>Engine: {selectedEngine === 'xray' ? 'TorchXRay v2.1' : 'YOLOv11'}</span>
+                                            <span>Engine: {selectedEngine === 'xray' ? 'XTraY Specialized Chest' : 'YOLO v11'}</span>
                                         </div>
                                     </div>
                                     <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center gap-4 z-40">
@@ -2006,7 +2014,7 @@ function App() {
                                     {/* Triage Input Side */}
                                     <div className="w-full md:w-[450px] p-10 border-r border-[#dbe0e6] space-y-8">
                                         <div className="flex items-center gap-4 mb-2">
-                                            <div className="size-14 rounded-2xl bg-red-50 text-red-500 flex items-center justify-center shadow-inner">
+                                            <div className="size-14 rounded-2xl bg-blue-50 text-[#0076ce] flex items-center justify-center shadow-inner">
                                                 <span className="material-symbols-outlined text-3xl">emergency</span>
                                             </div>
                                             <div>
@@ -2021,7 +2029,7 @@ function App() {
                                                 <select
                                                     value={(selectedPatient?.id || "")}
                                                     onChange={e => handlePatientSelect(e)}
-                                                    className="w-full bg-gray-50 border-2 border-transparent focus:border-red-100 focus:bg-white rounded-2xl p-4 text-sm font-bold text-gray-800 outline-none transition-all shadow-inner"
+                                                    className="w-full bg-gray-50 border-2 border-transparent focus:border-[#0076ce]/30 focus:bg-white rounded-2xl p-4 text-sm font-bold text-gray-800 outline-none transition-all shadow-inner"
                                                 >
                                                     <option value="">Select patient...</option>
                                                     {patients.map(p => <option key={p.id} value={p.id}>{p.name} ({p.id})</option>)}
@@ -2031,10 +2039,10 @@ function App() {
                                             <div className="p-5 bg-gray-50/50 rounded-2xl border border-gray-100 flex flex-col gap-4">
                                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">In-Situ Vital Signs</label>
                                                 <div className="grid grid-cols-2 gap-3">
-                                                    <input type="text" value={triageVitals.hr} onChange={e => setTriageVitals({ ...triageVitals, hr: e.target.value })} placeholder="FC (bpm)" className="bg-white border border-gray-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-red-100" />
-                                                    <input type="text" value={triageVitals.temp} onChange={e => setTriageVitals({ ...triageVitals, temp: e.target.value })} placeholder="Temp (°C)" className="bg-white border border-gray-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-red-100" />
-                                                    <input type="text" value={triageVitals.bp_sys} onChange={e => setTriageVitals({ ...triageVitals, bp_sys: e.target.value })} placeholder="BP (SYS)" className="bg-white border border-gray-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-red-100" />
-                                                    <input type="text" value={triageVitals.spo2} onChange={e => setTriageVitals({ ...triageVitals, spo2: e.target.value })} placeholder="SpO2 (%)" className="bg-white border border-gray-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-red-100" />
+                                                    <input type="text" value={triageVitals.hr} onChange={e => setTriageVitals({ ...triageVitals, hr: e.target.value })} placeholder="FC (bpm)" className="bg-white border border-gray-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#0076ce]/30" />
+                                                    <input type="text" value={triageVitals.temp} onChange={e => setTriageVitals({ ...triageVitals, temp: e.target.value })} placeholder="Temp (°C)" className="bg-white border border-gray-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#0076ce]/30" />
+                                                    <input type="text" value={triageVitals.bp_sys} onChange={e => setTriageVitals({ ...triageVitals, bp_sys: e.target.value })} placeholder="BP (SYS)" className="bg-white border border-gray-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#0076ce]/30" />
+                                                    <input type="text" value={triageVitals.spo2} onChange={e => setTriageVitals({ ...triageVitals, spo2: e.target.value })} placeholder="SpO2 (%)" className="bg-white border border-gray-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#0076ce]/30" />
                                                 </div>
                                             </div>
 
@@ -2044,22 +2052,22 @@ function App() {
                                                     value={triageReason}
                                                     onChange={e => setTriageReason(e.target.value)}
                                                     placeholder="E.g: Crushing chest pain, radiating to neck, sudden onset 20 min ago..."
-                                                    className="w-full bg-gray-50 border-2 border-transparent focus:border-red-100 focus:bg-white rounded-2xl p-5 text-sm font-medium text-gray-700 h-32 outline-none transition-all resize-none shadow-inner"
+                                                    className="w-full bg-gray-50 border-2 border-transparent focus:border-[#0076ce]/30 focus:bg-white rounded-2xl p-5 text-sm font-medium text-gray-700 h-32 outline-none transition-all resize-none shadow-inner"
                                                 ></textarea>
                                             </div>
 
-                                            <div className="p-4 bg-red-900 text-white rounded-2xl border-2 border-red-800 shadow-xl shadow-red-900/40">
+                                            <div className="p-4 bg-[#003B66] text-white rounded-2xl border-2 border-[#002f52] shadow-xl shadow-[#003B66]/40">
                                                 <div className="flex items-center gap-3 mb-3">
-                                                    <span className="material-symbols-outlined text-red-400">psychiatry</span>
-                                                    <label className="text-[10px] font-black uppercase tracking-widest text-red-200">Neural Engine Config</label>
+                                                    <span className="material-symbols-outlined text-blue-300">psychiatry</span>
+                                                    <label className="text-[10px] font-black uppercase tracking-widest text-blue-200">Neural Engine Config</label>
                                                 </div>
                                                 <div className="flex flex-col gap-2">
-                                                    <select value={selectedCredentialId} onChange={e => handleCredentialChange(e)} className="bg-red-800 border border-red-700 rounded-lg p-2 text-[10px] font-bold text-white outline-none">
+                                                    <select value={selectedCredentialId} onChange={e => handleCredentialChange(e)} className="bg-[#004880] border border-[#005a9e] rounded-lg p-2 text-[10px] font-bold text-white outline-none">
                                                         {credentials.map(c => (
-                                                            <option key={c.id} value={c.id} className="bg-red-900 text-white">{c.name} ({c.ip}:{c.port})</option>
+                                                            <option key={c.id} value={c.id} className="bg-[#003B66] text-white">{c.name} ({c.ip}:{c.port})</option>
                                                         ))}
                                                     </select>
-                                                    <select value={triageAnalysisModel} onChange={e => { setTriageAnalysisModel(e.target.value); setTriageInteractionModel(e.target.value); }} className="bg-red-800 border border-red-700 rounded-lg p-2 text-[10px] font-bold text-white outline-none">
+                                                    <select value={triageAnalysisModel} onChange={e => { setTriageAnalysisModel(e.target.value); setTriageInteractionModel(e.target.value); }} className="bg-[#004880] border border-[#005a9e] rounded-lg p-2 text-[10px] font-bold text-white outline-none">
                                                         {models.map(mod => <option key={mod} value={mod}>{mod}</option>)}
                                                     </select>
                                                 </div>
@@ -2068,7 +2076,7 @@ function App() {
                                             <button
                                                 onClick={handleTriageSubmit}
                                                 disabled={triageLoading || !triageReason || !(selectedPatient?.id || "")}
-                                                className={`w-full py-5 rounded-2xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all shadow-xl ${triageLoading || !triageReason || !(selectedPatient?.id || "") ? 'bg-gray-100 text-gray-300' : 'bg-red-600 text-white hover:bg-red-700 hover:-translate-y-1 shadow-red-600/20'}`}
+                                                className={`w-full py-5 rounded-2xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all shadow-xl ${triageLoading || !triageReason || !(selectedPatient?.id || "") ? 'bg-gray-100 text-gray-300' : 'bg-[#0076ce] text-white hover:bg-[#005a9e] hover:-translate-y-1 shadow-[#0076ce]/20'}`}
                                             >
                                                 {triageLoading ? (
                                                     <>
@@ -2151,8 +2159,8 @@ function App() {
 
                                         {triageLoading && (
                                             <div className="text-center space-y-6 my-auto">
-                                                <div className="size-24 border-8 border-red-100 border-t-red-600 rounded-full animate-spin mx-auto"></div>
-                                                <p className="text-sm font-black text-red-600 uppercase tracking-widest animate-pulse">Classifying Manchester Severity...</p>
+                                                <div className="size-24 border-8 border-blue-50 border-t-[#0076ce] rounded-full animate-spin mx-auto"></div>
+                                                <p className="text-sm font-black text-[#0076ce] uppercase tracking-widest animate-pulse">Classifying Manchester Severity...</p>
                                             </div>
                                         )}
 
@@ -2211,7 +2219,7 @@ function App() {
                                                             }`}></div>
                                                         <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest font-bold">Inference via {triageAnalysisModel || 'N/A'}</span>
                                                     </div>
-                                                    <button className="bg-gray-900 text-white px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-black transition-all shadow-lg active:scale-95">Validate & Admit</button>
+                                                    <button onClick={() => { alert('Patient validated and admitted to emergency queue.'); setTriageResult(null); setTriageReason(''); }} className="bg-gray-900 text-white px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-black transition-all shadow-lg active:scale-95">Validate & Admit</button>
                                                 </div>
                                             </div>
                                         )}
@@ -2230,7 +2238,7 @@ function App() {
                                         </h3>
                                         <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Synced via HL7/FHIR with Central Database</p>
                                     </div>
-                                    <button className="bg-[#0076ce] text-white shadow-xl shadow-blue-900/10 px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest flex items-center gap-2 hover:bg-[#005a9e] transition-all">
+                                    <button onClick={() => alert('Quick admission interface initiated.')} className="bg-[#0076ce] text-white shadow-xl shadow-blue-900/10 px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest flex items-center gap-2 hover:bg-[#005a9e] transition-all">
                                         <span className="material-symbols-outlined text-[18px]">person_add</span> Quick Admission
                                     </button>
                                 </div>
@@ -2264,7 +2272,7 @@ function App() {
                                                     </td>
                                                     <td className="px-8 py-6 text-sm font-medium max-w-xs truncate text-gray-600">{p.reason}</td>
                                                     <td className="px-8 py-6 text-right">
-                                                        <button className="text-[#0076ce] font-black text-[10px] uppercase tracking-widest bg-[#0076ce]/5 border border-[#0076ce]/10 px-5 py-2.5 rounded-xl hover:bg-[#0076ce] hover:text-white transition-all shadow-sm">Open 360º Record</button>
+                                                        <button onClick={() => alert(`Opening 360º Record for ${p.name}`)} className="text-[#0076ce] font-black text-[10px] uppercase tracking-widest bg-[#0076ce]/5 border border-[#0076ce]/10 px-5 py-2.5 rounded-xl hover:bg-[#0076ce] hover:text-white transition-all shadow-sm">Open 360º Record</button>
                                                     </td>
                                                 </tr>
                                             ))}
@@ -2361,8 +2369,8 @@ function App() {
                                         setShowChat(willShow);
                                         if (willShow && chatHistory.length === 0) {
                                             const greeting = activeTab === 'radiology'
-                                                ? `Hello! I am **${selectedModel}**, your **Radiological Expert Assistant**.\n\nMy neural engine is ready. How can I help you analyze these findings or clinical context?`
-                                                : `Hello! I am **${triageInteractionModel || 'BioMistral'}**, your **Clinical Triage Assistant**.\n\nI am ready to help you with Manchester protocol classification. What would you like to know?`;
+                                                ? `Hello! I am the **Dell AI Healthcare Assistant** (via ${selectedModel}).\n\nMy neural engine is ready. How can I help you analyze these findings or clinical context?`
+                                                : `Hello! I am the **Dell AI Healthcare Assistant** (via ${triageInteractionModel || 'BioMistral'}).\n\nI am ready to help you with the Manchester protocol classification. What would you like to know?`;
                                             setChatHistory([{ role: 'assistant', content: greeting }]);
                                         }
                                     }}

@@ -9,8 +9,8 @@ This document tracks the different versions, architectural changes, and key feat
 *   **Purpose**: Initial Medical AI Proof of Concept.
 *   **Stack**: FastAPI, React (Vite), Vanilla CSS.
 *   **Core Systems**:
-    *   **Vision Engine**: TorchXRayVision (DenseNet121) for 18 chest pathologies.
-    *   **Object Detection**: YOLOv8 Nano for general object identification.
+    *   **Vision Engine**: XTraY (specialized engine for Chest Radiography).
+    *   **Object Detection**: YOLOv11 for general object identification.
     *   **Triage**: Initial logic for patient classification.
     *   **Scheduling**: Baseline shift management for nurses.
 

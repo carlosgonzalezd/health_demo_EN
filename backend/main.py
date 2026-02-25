@@ -196,24 +196,24 @@ async def engine_status():
         # Check YOLO
         try:
             resp = await client.get(f"{config['YOLO_URL']}/detect", timeout=3.0)
-            status["yolo"] = {"available": True, "name": "YOLO v8 (General)"}
+            status["yolo"] = {"available": True, "name": "YOLO v11 (General)"}
         except:
-            status["yolo"] = {"available": True, "name": "YOLO v8 (General)"}  # Service exists even if GET not supported
+            status["yolo"] = {"available": True, "name": "YOLO v11 (General)"}  # Service exists even if GET not supported
         
-        # Check TorchXRayVision
+        # Check XTraY
         try:
             resp = await client.get(f"{config['XRAY_URL']}/health", timeout=3.0)
             if resp.status_code == 200:
                 data = resp.json()
                 status["xray"] = {
                     "available": True,
-                    "name": f"TorchXRayVision ({data.get('model', 'DenseNet121')})",
+                    "name": f"XTraY (Specialized Chest Radiography)",
                     "pathologies_count": data.get("pathologies_count", 18)
                 }
             else:
-                status["xray"] = {"available": False, "name": "TorchXRayVision"}
+                status["xray"] = {"available": False, "name": "XTraY"}
         except:
-            status["xray"] = {"available": False, "name": "TorchXRayVision"}
+            status["xray"] = {"available": False, "name": "XTraY"}
     
     return status
 
@@ -255,8 +255,8 @@ CURRENT STATUS: {patient_data['reason']}.
 
     async with httpx.AsyncClient() as client:
         if engine == "xray":
-            # TorchXRayVision (medical-specific)
-            engine_label = "TorchXRayVision (DenseNet121)"
+            # XTraY Engine (medical-specific)
+            engine_label = "XTraY (Specialized Chest Radiography)"
             try:
                 files = {'file': (file.filename, image_bytes, file.content_type)}
                 xray_resp = await client.post(f"{config['XRAY_URL']}/detect", files=files, timeout=60.0)
@@ -268,7 +268,7 @@ CURRENT STATUS: {patient_data['reason']}.
                 detections = []
         else:
             # YOLO (general purpose)
-            engine_label = "YOLO v8 (General)"
+            engine_label = "YOLO v11 (General)"
             try:
                 files = {'file': (file.filename, image_bytes, file.content_type)}
                 yolo_resp = await client.post(f"{config['YOLO_URL']}/detect", files=files, timeout=30.0)
@@ -309,8 +309,8 @@ VISUAL FORMATTING RULES (CRITICAL):
 CLINICAL STANDARDS:
 - ALWAYS correlate image findings with the patient's medical history.
 - Write as a formal medical report: "Observed...", "Consistent with...", "Suggests...".
-- If the vision engine is YOLO (general), warn that the detection is not clinical.
-- If the engine is TorchXRayVision, use the probabilities to integrate them into the diagnostic narrative.
+- If the vision engine is generic (YOLO), warn that the detection is not clinical.
+- If the engine is XTraY (Specialized Chest), use the probabilities to integrate them into the diagnostic narrative.
 - ALWAYS include recommendations for complementary tests in a final paragraph.
 """
 
