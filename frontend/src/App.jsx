@@ -58,16 +58,16 @@ const MRI_CAPABILITIES = [
 
 const RADIOLOGY_SAMPLES = {
     xray: [
-        { name: "Chest PA Sample", url: "https://raw.githubusercontent.com/ieee8023/covid-chestxray-dataset/master/images/000001-2.jpg" },
-        { name: "Chest Lat Sample", url: "https://raw.githubusercontent.com/ieee8023/covid-chestxray-dataset/master/images/000001-4.jpg" }
+        { name: "Premium Chest PA", url: "/radiology_samples/xray/premium_sample.jpg" },
+        { name: "Clinical Case #042", url: "/radiology_samples/xray/sample1.jpg" }
     ],
     ct: [
-        { name: "Lung CT Sample", url: "https://raw.githubusercontent.com/ieee8023/covid-chestxray-dataset/master/images/000006.jpg" },
-        { name: "Brain CT Sample", url: "https://raw.githubusercontent.com/sharmisthasarkar/Brain-CT-Scan-Images-Dataset/master/test/Normal/1.jpg" }
+        { name: "Premium Abdominal CT", url: "/radiology_samples/ct/premium_sample.jpg" },
+        { name: "Axial Body Scan", url: "/radiology_samples/ct/sample1.jpg" }
     ],
     mri: [
-        { name: "Brain MRI Tumor", url: "https://raw.githubusercontent.com/giacomodeodato/BrainMRIDataset/master/example.png" },
-        { name: "Brain MRI Normal", url: "https://raw.githubusercontent.com/Sartaj007/Brain-Tumor-Classification-DataSet/master/Training/no_tumor/1.jpg" }
+        { name: "Premium Brain MRI", url: "/radiology_samples/mri/premium_sample.jpg" },
+        { name: "High-Res T2 Axial", url: "/radiology_samples/mri/sample1.jpg" }
     ]
 };
 
@@ -2171,7 +2171,11 @@ function App() {
                                                     <div className="flex items-center justify-between border-b border-gray-100 pb-6 shrink-0">
                                                         <div className="flex items-center gap-3">
                                                             <span className="material-symbols-outlined text-[#007db8] text-2xl">check_circle</span>
-                                                            <h4 className="text-lg font-extrabold text-[#111418] uppercase tracking-widest font-outfit">Consolidated Results</h4>
+                                                            <h4 className="text-lg font-extrabold text-[#111418] uppercase tracking-widest font-outfit">
+                                                                {selectedEngine === 'xray' ? 'Thoracic Analysis Report' :
+                                                                    selectedEngine === 'ct_totalseg' ? '3D Anatomical Mapping' :
+                                                                        selectedEngine === 'mri_brats' ? 'Tumor Volumetric Summary' : 'AI Scene Analysis'}
+                                                            </h4>
                                                         </div>
                                                         <span className="px-4 py-1.5 bg-blue-50 text-[#007db8] text-[10px] font-extrabold rounded-full uppercase tracking-widest border border-blue-100">GB10 Processed</span>
                                                     </div>
@@ -2180,7 +2184,7 @@ function App() {
                                                         {/* XRay Pathologies Bar Chart Representation */}
                                                         {selectedEngine === 'xray' && result.pathologies && (
                                                             <div className="space-y-4">
-                                                                <p className="text-[11px] font-bold text-[#617289] uppercase tracking-widest font-outfit mb-4">Top Anatomical Predictions</p>
+                                                                <p className="text-[11px] font-bold text-[#617289] uppercase tracking-widest font-outfit mb-4">Top Pathological Predictions</p>
                                                                 <div className="space-y-5">
                                                                     {Object.entries(result.pathologies)
                                                                         .sort(([, a], [, b]) => b - a)
@@ -2296,7 +2300,11 @@ function App() {
                                             <div className="hidden md:flex items-center gap-2">
                                                 <span className="material-symbols-outlined text-[16px] text-gray-400">settings_suggest</span>
                                                 <span className="font-bold text-gray-500 uppercase tracking-widest text-[9px]">Engine:</span>
-                                                <span className="font-bold text-slate-700">{selectedEngine === 'xray' ? 'XTraY Specialized Chest' : 'YOLO v11'}</span>
+                                                <span className="font-bold text-slate-700">
+                                                    {selectedEngine === 'xray' ? 'XTraY Specialized Chest' :
+                                                        selectedEngine === 'ct_totalseg' ? 'TotalSegmentator AI' :
+                                                            selectedEngine === 'mri_brats' ? 'BraTS Brain Tumor' : 'YOLO v11'}
+                                                </span>
                                             </div>
                                         </div>
                                         <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center gap-4">
@@ -2746,7 +2754,7 @@ function App() {
                             <div className="flex items-center justify-between p-6 border-b border-gray-200">
                                 <h2 className="text-lg font-extrabold text-[#111418] flex items-center gap-3">
                                     {selectedEngine === 'xray' ? (
-                                        <><span className="material-symbols-outlined text-[#007db8]">memory</span> TorchXRayVision — Capabilities</>
+                                        <><span className="material-symbols-outlined text-[#007db8]">memory</span> XTraY Engine — Capabilities</>
                                     ) : selectedEngine === 'ct_totalseg' ? (
                                         <><span className="material-symbols-outlined text-green-500">body_system</span> TotalSegmentator — Capabilities</>
                                     ) : selectedEngine === 'mri_brats' ? (
