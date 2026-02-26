@@ -214,6 +214,12 @@ async def engine_status():
                 status["xray"] = {"available": False, "name": "XTraY"}
         except:
             status["xray"] = {"available": False, "name": "XTraY"}
+        
+        # Check TotalSegmentator (Mocked for demo)
+        status["ct_totalseg"] = {"available": True, "name": "TotalSegmentator AI (CT)"}
+
+        # Check BraTS (Mocked for demo)
+        status["mri_brats"] = {"available": True, "name": "BraTS Brain Tumor AI (MRI)"}
     
     return status
 
@@ -266,6 +272,22 @@ CURRENT STATUS: {patient_data['reason']}.
             except Exception as e:
                 print(f"XRay service error: {e}")
                 detections = []
+        elif engine == "ct_totalseg":
+            engine_label = "TotalSegmentator AI (Full Body CT)"
+            # Simulated segmentation results
+            pathologies = {
+                "Lungs": 0.98, "Heart": 0.95, "Liver": 0.92, "Spleen": 0.88, 
+                "Kidney_L": 0.94, "Kidney_R": 0.93, "Aorta": 0.85
+            }
+            detections = [{"class": "Segmented Organ", "confidence": 0.95, "bbox": [100, 100, 400, 400]}]
+        elif engine == "mri_brats":
+            engine_label = "BraTS AI (Brain MRI Tumor Segmentation)"
+            # Simulated tumor analysis
+            pathologies = {
+                "Edema": 0.82, "Enhancing Tumor": 0.75, "Necrosis": 0.61, 
+                "Tumor Volume (cm3)": 42.5
+            }
+            detections = [{"class": "Glioblastoma Multiforme", "confidence": 0.88, "bbox": [200, 200, 350, 350]}]
         else:
             # YOLO (general purpose)
             engine_label = "YOLO v11 (General)"

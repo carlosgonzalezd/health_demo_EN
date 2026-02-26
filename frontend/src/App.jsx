@@ -440,6 +440,7 @@ function App() {
 
     // Vision Engine
     const [selectedEngine, setSelectedEngine] = useState("xray");
+    const [activeRadiologySubTab, setActiveRadiologySubTab] = useState("xray");
     const [activeTab, setActiveTab] = useState("dashboard");
     const [isAnalyzingPatient, setIsAnalyzingPatient] = useState(false);
 
@@ -1781,6 +1782,31 @@ function App() {
                                         </div>
                                     </section>
 
+                                    {/* Radiology Sub-Tabs Navigation */}
+                                    <div className="flex items-center gap-10 border-b border-gray-100 mt-2">
+                                        <button
+                                            onClick={() => { setActiveRadiologySubTab('xray'); setSelectedEngine('xray'); setResult(null); setFile(null); setPreview(null); }}
+                                            className={`pb-4 text-[11px] font-extrabold tracking-[0.2em] uppercase transition-all flex items-center gap-2 ${activeRadiologySubTab === 'xray' ? 'text-[#007db8] border-b-2 border-[#007db8]' : 'text-slate-400 hover:text-slate-600 border-b-2 border-transparent'}`}
+                                        >
+                                            <span className="material-symbols-outlined text-[18px]">chest</span>
+                                            Chest X-Ray
+                                        </button>
+                                        <button
+                                            onClick={() => { setActiveRadiologySubTab('ct'); setSelectedEngine('ct_totalseg'); setResult(null); setFile(null); setPreview(null); }}
+                                            className={`pb-4 text-[11px] font-extrabold tracking-[0.2em] uppercase transition-all flex items-center gap-2 ${activeRadiologySubTab === 'ct' ? 'text-[#007db8] border-b-2 border-[#007db8]' : 'text-slate-400 hover:text-slate-600 border-b-2 border-transparent'}`}
+                                        >
+                                            <span className="material-symbols-outlined text-[18px]">body_system</span>
+                                            Body CT Scan
+                                        </button>
+                                        <button
+                                            onClick={() => { setActiveRadiologySubTab('mri'); setSelectedEngine('mri_brats'); setResult(null); setFile(null); setPreview(null); }}
+                                            className={`pb-4 text-[11px] font-extrabold tracking-[0.2em] uppercase transition-all flex items-center gap-2 ${activeRadiologySubTab === 'mri' ? 'text-[#007db8] border-b-2 border-[#007db8]' : 'text-slate-400 hover:text-slate-600 border-b-2 border-transparent'}`}
+                                        >
+                                            <span className="material-symbols-outlined text-[18px]">psychology</span>
+                                            Brain MRI
+                                        </button>
+                                    </div>
+
                                     {/* Dark container - starts with controls */}
                                     {/* Neural Engine Control Bar - Redesigned to Light Glassmorphism */}
                                     <div className="glass-panel rounded-2xl px-8 py-4 flex flex-wrap items-center justify-between gap-6 shadow-sm border border-white/60">
@@ -1845,8 +1871,18 @@ function App() {
                                                                 className="bg-transparent border-none text-sm font-extrabold text-[#111418] focus:ring-0 outline-none cursor-pointer py-1.5 pl-0 pr-8 w-full truncate appearance-none font-outfit"
                                                                 style={{ background: 'none' }}
                                                             >
-                                                                <option value="xray" className="font-sans">XTraY (Chest Radiography)</option>
-                                                                <option value="yolo" className="font-sans">YOLO v11 (General)</option>
+                                                                {activeRadiologySubTab === 'xray' && (
+                                                                    <>
+                                                                        <option value="xray" className="font-sans">XTraY (Specialized Chest)</option>
+                                                                        <option value="yolo" className="font-sans">YOLO v11 (General)</option>
+                                                                    </>
+                                                                )}
+                                                                {activeRadiologySubTab === 'ct' && (
+                                                                    <option value="ct_totalseg" className="font-sans">TotalSegmentator AI (Full Body)</option>
+                                                                )}
+                                                                {activeRadiologySubTab === 'mri' && (
+                                                                    <option value="mri_brats" className="font-sans">BraTS AI (Brain Tumor)</option>
+                                                                )}
                                                             </select>
                                                             <span className="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 text-[20px] pointer-events-none group-hover:text-[#007db8] transition-colors">keyboard_arrow_down</span>
                                                         </div>
@@ -1930,12 +1966,22 @@ function App() {
                                         {selectedEngine === 'xray' ? (
                                             <span className="flex items-center gap-2 text-[11px] font-bold text-[#007db8]">
                                                 <span className="material-symbols-outlined text-[16px]">memory</span>
-                                                XTraY Engine · Specialized Chest Radiography · DenseNet121
+                                                XTraY Engine · Specialized Chest Radiography · DenseNet121 Cluster
+                                            </span>
+                                        ) : selectedEngine === 'ct_totalseg' ? (
+                                            <span className="flex items-center gap-2 text-[11px] font-bold text-green-600">
+                                                <span className="material-symbols-outlined text-[16px]">body_system</span>
+                                                TotalSegmentator AI · 117 Anatomical Structures · 3D Voxel Segmentation
+                                            </span>
+                                        ) : selectedEngine === 'mri_brats' ? (
+                                            <span className="flex items-center gap-2 text-[11px] font-bold text-purple-600">
+                                                <span className="material-symbols-outlined text-[16px]">psychology</span>
+                                                BraTS 2024 Engine · Brain Tumor Segmentation · Multi-Modal MRI Analytics
                                             </span>
                                         ) : (
                                             <span className="flex items-center gap-2 text-[11px] font-bold text-amber-600">
                                                 <span className="material-symbols-outlined text-[16px]">bolt</span>
-                                                YOLO v11 Nano · 80 Generic Classes (COCO) · Ideal for Objects & Scenes
+                                                YOLO v11 Nano · 80 Generic Classes (COCO) · Real-time Scene Analysis
                                             </span>
                                         )}
                                         <button
@@ -1967,6 +2013,27 @@ function App() {
                                                                     <div className="absolute top-1/4 left-1/4 w-32 h-32 border-2 border-[#007db8] rounded-lg bg-[#007db8]/10 animate-pulse">
                                                                         <span className="absolute -top-6 left-0 text-[10px] font-extrabold text-[#007db8] bg-white px-2 py-0.5 rounded shadow-sm border border-[#007db8]/20">98% CONFIDENCE</span>
                                                                     </div>
+                                                                </div>
+                                                            )}
+
+                                                            {/* CT Simulation Overlay */}
+                                                            {selectedEngine === 'ct_totalseg' && result && (
+                                                                <div className="absolute inset-4 pointer-events-none overflow-hidden rounded-2xl">
+                                                                    <div className="absolute inset-0 border border-green-500/30 bg-green-500/5 backdrop-brightness-125"></div>
+                                                                    <div className="absolute top-10 right-10 flex flex-col items-end gap-2">
+                                                                        <span className="text-[9px] font-extrabold text-green-400 bg-black/60 px-2 py-1 rounded tracking-widest">VOXEL CLASSIFICATION</span>
+                                                                        <div className="size-3 rounded-full bg-green-500 animate-ping"></div>
+                                                                    </div>
+                                                                </div>
+                                                            )}
+
+                                                            {/* MRI Simulation Overlay */}
+                                                            {selectedEngine === 'mri_brats' && result && (
+                                                                <div className="absolute inset-4 pointer-events-none">
+                                                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border-2 border-purple-500/40 rounded-full bg-purple-500/10 animate-[pulse_4s_linear_infinite]">
+                                                                        <div className="absolute inset-4 border-2 border-white/10 rounded-full animate-ping"></div>
+                                                                    </div>
+                                                                    <span className="absolute bottom-4 right-4 text-[9px] font-extrabold text-purple-400 bg-black/60 px-2 py-1 rounded tracking-widest uppercase">Tumor Analytics Active</span>
                                                                 </div>
                                                             )}
                                                         </div>
@@ -2051,6 +2118,59 @@ function App() {
                                                                                 </div>
                                                                             </div>
                                                                         ))}
+                                                                </div>
+                                                            </div>
+                                                        )}
+
+                                                        {/* CT Specialized Results (TotalSegmentator) */}
+                                                        {selectedEngine === 'ct_totalseg' && result.pathologies && (
+                                                            <div className="space-y-4">
+                                                                <p className="text-[11px] font-bold text-[#617289] uppercase tracking-widest font-outfit mb-4 flex items-center gap-2">
+                                                                    <span className="material-symbols-outlined text-[20px] text-[#007db8]">view_in_ar</span>
+                                                                    Anatomical Segmentation (AI 3D)
+                                                                </p>
+                                                                <div className="grid grid-cols-2 gap-3">
+                                                                    {Object.entries(result.pathologies).map(([organ, prob]) => (
+                                                                        <div key={organ} className="bg-[#007db8]/5 rounded-2xl p-4 border border-[#007db8]/10 flex flex-col gap-1 hover:bg-[#007db8]/10 transition-colors group">
+                                                                            <span className="text-[10px] font-extrabold uppercase tracking-tight text-[#617289] group-hover:text-[#007db8] transition-colors">Organ</span>
+                                                                            <span className="text-xs font-extrabold text-[#111418] uppercase tracking-widest">{organ}</span>
+                                                                            <div className="mt-2 text-[10px] font-bold text-[#007db8] drop-shadow-sm flex items-center gap-1">
+                                                                                <span className="size-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                                                                                Segmented
+                                                                            </div>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        )}
+
+                                                        {/* MRI Specialized Results (BraTS Tumor Analysis) */}
+                                                        {selectedEngine === 'mri_brats' && result.pathologies && (
+                                                            <div className="space-y-4">
+                                                                <p className="text-[11px] font-bold text-[#617289] uppercase tracking-widest font-outfit mb-4 flex items-center gap-2">
+                                                                    <span className="material-symbols-outlined text-[20px] text-purple-600">biotech</span>
+                                                                    BraTS Brain Tumor Analytics
+                                                                </p>
+                                                                <div className="space-y-4">
+                                                                    {Object.entries(result.pathologies).map(([region, value]) => (
+                                                                        <div key={region} className="bg-slate-900 rounded-3xl p-5 border border-white/10 relative overflow-hidden group shadow-2xl">
+                                                                            <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 blur-[40px] rounded-full -mr-16 -mt-16 group-hover:bg-purple-500/20 transition-all duration-700"></div>
+                                                                            <div className="flex justify-between items-center mb-3 relative z-10">
+                                                                                <span className="text-[10px] font-extrabold text-blue-300 uppercase tracking-widest">{region}</span>
+                                                                                <span className="text-lg font-mono text-white font-extrabold">
+                                                                                    {typeof value === 'number' && region.includes('Volume') ? <span className="text-purple-400">{value} <small className="text-[10px] text-gray-400 uppercase">cm³</small></span> : `${(value * 100).toFixed(1)}%`}
+                                                                                </span>
+                                                                            </div>
+                                                                            {typeof value === 'number' && !region.includes('Volume') && (
+                                                                                <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden relative z-10">
+                                                                                    <div
+                                                                                        className={`h-full bg-gradient-to-r ${region === 'Necrosis' ? 'from-red-500 to-orange-600' : 'from-blue-400 to-purple-600'} rounded-full transition-all duration-1000 ease-out shadow-[0_0_15px_rgba(168,85,247,0.4)]`}
+                                                                                        style={{ width: `${value * 100}%` }}
+                                                                                    ></div>
+                                                                                </div>
+                                                                            )}
+                                                                        </div>
+                                                                    ))}
                                                                 </div>
                                                             </div>
                                                         )}
