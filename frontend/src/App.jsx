@@ -1579,7 +1579,7 @@ function App() {
                                                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                                 <div className="flex items-center justify-between mb-6">
                                                     <div className="flex items-center gap-3">
-                                                        <div className="size-8 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
+                                                        <div className="size-8 rounded-xl bg-[#007db8]/10 text-[#007db8] flex items-center justify-center border border-[#007db8]/10">
                                                             <span className="material-symbols-outlined text-[18px]">memory</span>
                                                         </div>
                                                         <div>
@@ -1590,7 +1590,7 @@ function App() {
                                                             </p>
                                                         </div>
                                                     </div>
-                                                    <span className="text-[10px] font-bold bg-blue-50 text-blue-600 px-2.5 py-1 rounded-lg border border-blue-100">Live Telemetry</span>
+                                                    <span className="text-[10px] font-bold bg-[#007db8]/5 text-[#007db8] px-2.5 py-1 rounded-lg border border-[#007db8]/10 backdrop-blur-sm shadow-sm whitespace-nowrap">Live Telemetry</span>
                                                 </div>
 
                                                 <div className="flex items-end justify-between w-full h-full gap-8">
@@ -1873,44 +1873,53 @@ function App() {
                                             </button>
                                         </div>
 
-                                        <div className="flex items-center gap-8 bg-white/40 rounded-xl px-8 py-3 border border-white/60 shadow-inner ml-4 backdrop-blur-md">
-                                            {/* GPU Gauge */}
-                                            <div className="flex flex-col items-center justify-center">
-                                                <div className="relative w-16 h-8 overflow-hidden flex justify-center">
-                                                    <svg className="w-16 h-16 absolute top-0" viewBox="0 0 100 100">
-                                                        <path d="M 20 50 A 30 30 0 0 1 80 50" fill="none" stroke="#f3f4f6" strokeWidth="12" strokeLinecap="round" />
-                                                        <path d="M 20 50 A 30 30 0 0 1 80 50" fill="none" stroke="#ef4444" strokeWidth="12" strokeLinecap="round" strokeDasharray="94.2" strokeDashoffset={isNaN(hwStats.gpu) ? 94.2 : 94.2 - (hwStats.gpu / 100) * 94.2} className="transition-all duration-1000 ease-out drop-shadow-[0_1px_2px_rgba(239,68,68,0.3)]" />
-                                                    </svg>
-                                                    <div className="absolute bottom-0 w-full text-center flex flex-col items-center">
-                                                        <span className="text-[10px] font-extrabold text-[#111418] tabular-nums">{hwStats.gpu}%</span>
-                                                    </div>
+                                        <div className="flex flex-col gap-2 ml-4">
+                                            <div className="flex items-center justify-between px-1">
+                                                <div className="flex items-center gap-2">
+                                                    <span className="size-1 rounded-full bg-green-500 animate-pulse"></span>
+                                                    <span className="text-[9px] font-extrabold text-slate-500 uppercase tracking-widest font-outfit">GB10 Live Inference</span>
                                                 </div>
-                                                <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mt-1">GPU Load</span>
+                                                <span className="text-[8px] font-bold bg-[#007db8]/5 text-[#007db8] px-2 py-0.5 rounded border border-[#007db8]/10">Live Telemetry</span>
                                             </div>
-
-                                            {/* MEM Gauge */}
-                                            <div className="flex flex-col items-center justify-center">
-                                                <div className="relative w-16 h-8 overflow-hidden flex justify-center">
-                                                    <svg className="w-16 h-16 absolute top-0" viewBox="0 0 100 100">
-                                                        <path d="M 20 50 A 30 30 0 0 1 80 50" fill="none" stroke="#f3f4f6" strokeWidth="12" strokeLinecap="round" />
-                                                        <path d="M 20 50 A 30 30 0 0 1 80 50" fill="none" stroke="#f97316" strokeWidth="12" strokeLinecap="round" strokeDasharray="94.2" strokeDashoffset={isNaN(hwStats.mem) ? 94.2 : 94.2 - (hwStats.mem / 100) * 94.2} className="transition-all duration-1000 ease-out drop-shadow-[0_1px_2px_rgba(249,115,22,0.3)]" />
-                                                    </svg>
-                                                    <div className="absolute bottom-0 w-full text-center flex flex-col items-center">
-                                                        <span className="text-[10px] font-extrabold text-[#111418] tabular-nums">{hwStats.mem}%</span>
+                                            <div className="flex items-center gap-8 bg-white/40 rounded-xl px-8 py-3 border border-white/60 shadow-inner backdrop-blur-md">
+                                                {/* GPU Gauge */}
+                                                <div className="flex flex-col items-center justify-center">
+                                                    <div className="relative w-16 h-8 overflow-hidden flex justify-center">
+                                                        <svg className="w-16 h-16 absolute top-0" viewBox="0 0 100 100">
+                                                            <path d="M 20 50 A 30 30 0 0 1 80 50" fill="none" stroke="#f3f4f6" strokeWidth="12" strokeLinecap="round" />
+                                                            <path d="M 20 50 A 30 30 0 0 1 80 50" fill="none" stroke="#ef4444" strokeWidth="12" strokeLinecap="round" strokeDasharray="94.2" strokeDashoffset={isNaN(hwStats.gpu) ? 94.2 : 94.2 - (hwStats.gpu / 100) * 94.2} className="transition-all duration-1000 ease-out drop-shadow-[0_1px_2px_rgba(239,68,68,0.3)]" />
+                                                        </svg>
+                                                        <div className="absolute bottom-0 w-full text-center flex flex-col items-center">
+                                                            <span className="text-[10px] font-extrabold text-[#111418] tabular-nums">{hwStats.gpu}%</span>
+                                                        </div>
                                                     </div>
+                                                    <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mt-1">GPU Load</span>
                                                 </div>
-                                                <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mt-1">Mem Usage</span>
-                                            </div>
 
-                                            <div className="w-px h-8 bg-gray-200"></div>
+                                                {/* MEM Gauge */}
+                                                <div className="flex flex-col items-center justify-center">
+                                                    <div className="relative w-16 h-8 overflow-hidden flex justify-center">
+                                                        <svg className="w-16 h-16 absolute top-0" viewBox="0 0 100 100">
+                                                            <path d="M 20 50 A 30 30 0 0 1 80 50" fill="none" stroke="#f3f4f6" strokeWidth="12" strokeLinecap="round" />
+                                                            <path d="M 20 50 A 30 30 0 0 1 80 50" fill="none" stroke="#f97316" strokeWidth="12" strokeLinecap="round" strokeDasharray="94.2" strokeDashoffset={isNaN(hwStats.mem) ? 94.2 : 94.2 - (hwStats.mem / 100) * 94.2} className="transition-all duration-1000 ease-out drop-shadow-[0_1px_2px_rgba(249,115,22,0.3)]" />
+                                                        </svg>
+                                                        <div className="absolute bottom-0 w-full text-center flex flex-col items-center">
+                                                            <span className="text-[10px] font-extrabold text-[#111418] tabular-nums">{hwStats.mem}%</span>
+                                                        </div>
+                                                    </div>
+                                                    <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mt-1">Mem Usage</span>
+                                                </div>
 
-                                            {/* Throughput */}
-                                            <div className="flex flex-col justify-center min-w-[80px]">
-                                                <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mb-0.5 flex items-center gap-1">
-                                                    <Zap className="size-2 text-yellow-500 fill-yellow-500" /> Throughput
-                                                </span>
-                                                <div className="text-xl font-mono uppercase font-extrabold text-[#111418] flex items-baseline gap-1">
-                                                    {hwStats.throughput} <span className="text-[9px] font-sans text-[#007db8] font-bold uppercase tracking-widest">t/s</span>
+                                                <div className="w-px h-8 bg-gray-200"></div>
+
+                                                {/* Throughput */}
+                                                <div className="flex flex-col justify-center min-w-[80px]">
+                                                    <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mb-0.5 flex items-center gap-1">
+                                                        <Zap className="size-2 text-yellow-500 fill-yellow-500" /> Throughput
+                                                    </span>
+                                                    <div className="text-xl font-mono uppercase font-extrabold text-[#111418] flex items-baseline gap-1">
+                                                        {hwStats.throughput} <span className="text-[9px] font-sans text-[#007db8] font-bold uppercase tracking-widest">t/s</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -2199,7 +2208,22 @@ function App() {
                                         <div className="flex-1 bg-gray-50/50 p-10 flex flex-col border-l md:border-l-0 overflow-y-auto">
 
                                             {/* Performance Monitor (Reloj / Gauge Pattern at top right) */}
-                                            <div className="w-full bg-white/90 rounded-3xl border border-black/5 p-6 shadow-sm backdrop-blur-xl mb-8 animate-in fade-in slide-in-from-top-4">
+                                            <div className="w-full bg-white/90 rounded-3xl border border-black/5 p-6 shadow-sm backdrop-blur-xl mb-8 animate-in fade-in slide-in-from-top-4 relative overflow-hidden group">
+                                                <div className="flex items-center justify-between mb-6">
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="size-8 rounded-xl bg-[#007db8]/10 text-[#007db8] flex items-center justify-center border border-[#007db8]/10">
+                                                            <span className="material-symbols-outlined text-[18px]">memory</span>
+                                                        </div>
+                                                        <div>
+                                                            <h3 className="text-sm font-extrabold text-[#111418] uppercase tracking-wider font-outfit">GB10 STATUS</h3>
+                                                            <p className="text-[10px] font-bold text-gray-400 tracking-wide mt-0.5 flex items-center gap-1">
+                                                                <span className="size-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                                                                Connected to Local Server
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <span className="text-[10px] font-bold bg-[#007db8]/5 text-[#007db8] px-2.5 py-1 rounded-lg border border-[#007db8]/10 backdrop-blur-sm shadow-sm whitespace-nowrap">Live Telemetry</span>
+                                                </div>
                                                 <div className="flex items-end justify-between w-full h-full gap-8">
 
                                                     {/* GPU Gauge */}
