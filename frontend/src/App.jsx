@@ -3,6 +3,7 @@ import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import { Upload, FileText, Activity, MessageSquare, Send, Server, Bot, User, RefreshCw, AlertCircle, Users, Clipboard, Eye, Cpu, Zap, Info, X, Key, Plus, Trash2, AlertTriangle, Loader2, Calendar, BarChart3, Download, PieChart, CheckCircle2, ChevronDown, Menu, Settings } from 'lucide-react';
 import './App.css';
+import PatientDetail from './components/PatientDetail';
 
 // Pathology capabilities data
 const XRAY_CAPABILITIES = [
@@ -440,6 +441,35 @@ function App() {
     // Vision Engine
     const [selectedEngine, setSelectedEngine] = useState("xray");
     const [activeTab, setActiveTab] = useState("dashboard");
+    const [isAnalyzingPatient, setIsAnalyzingPatient] = useState(false);
+
+    const handleDeepPatientAnalysis = async (patient) => {
+        if (!patient || !selectedModel) return;
+        setIsAnalyzingPatient(true);
+        try {
+            const context = `PATIENT: ${patient.name} (${patient.age}, ${patient.sex}). CURRENT HISTORY: ${patient.history}. REASON: ${patient.reason}.`;
+            const message = "Please expand this patient's medical history into a more detailed and structured clinical summary. Use professional medical terminology. Focus on potential risks and follow-up recommendations based on the current history.";
+
+            const resp = await axios.post(`${BACKEND_URL}/chat`, {
+                model: selectedModel,
+                message: message,
+                context: context,
+                ollama_url: ollamaUrl
+            });
+
+            if (resp.data && resp.data.response) {
+                const updatedPatient = { ...patient, history: resp.data.response };
+                setSelectedPatient(updatedPatient);
+                // Update in patients list as well
+                setPatients(prev => prev.map(p => p.id === patient.id ? updatedPatient : p));
+            }
+        } catch (err) {
+            console.error("Deep analysis failed:", err);
+            alert("Deep analysis failed. Check connection to GB10.");
+        } finally {
+            setIsAnalyzingPatient(false);
+        }
+    };
 
     // Triage State
     const [triageVitals, setTriageVitals] = useState({
@@ -1305,33 +1335,65 @@ function App() {
                                             <h2 className="text-4xl font-extrabold text-[#111418] tracking-tight font-outfit">Radiology Overview</h2>
                                             <p className="text-[#617289] mt-2 text-base">Efficiency metrics and study throughput for today.</p>
                                         </div>
-                                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 flex-1 max-w-5xl">
-                                            <div className="bg-white p-5 rounded-2xl border border-[#dbe0e6] shadow-sm">
-                                                <p className="text-[11px] font-bold text-[#617289] uppercase tracking-wider">Pending Review</p>
-                                                <div className="flex items-baseline gap-2 mt-2">
-                                                    <span className="text-3xl font-extrabold font-mono text-[#111418]">12</span>
-                                                    <span className="text-sm font-bold text-green-600 font-mono">+5%</span>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                                            <div className="glass-panel p-6 rounded-[2rem] border border-white/60 shadow-sm hover:shadow-md transition-all group">
+                                                <div className="flex items-center justify-between mb-2">
+                                                    <p className="text-[10px] font-extrabold text-[#617289] uppercase tracking-widest">Pending Review</p>
+                                                    <div className="size-8 rounded-lg bg-blue-50 text-[#007db8] flex items-center justify-center">
+                                                        <span className="material-symbols-outlined text-lg">pending_actions</span>
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-baseline gap-2">
+                                                    <span className="text-4xl font-extrabold font-mono text-[#111418] tracking-tighter">12</span>
+                                                    <span className="text-xs font-bold text-green-600 font-mono bg-green-50 px-1.5 rounded">+5%</span>
+                                                </div>
+                                                <div className="mt-4 h-1 bg-gray-100 rounded-full overflow-hidden">
+                                                    <div className="h-full w-[65%] bg-[#007db8] rounded-full"></div>
                                                 </div>
                                             </div>
-                                            <div className="bg-white p-5 rounded-2xl border border-[#dbe0e6] shadow-sm hover:shadow-md transition-shadow">
-                                                <p className="text-[11px] font-bold text-[#617289] uppercase tracking-wider">Completed</p>
-                                                <div className="flex items-baseline gap-2 mt-2">
-                                                    <span className="text-3xl font-extrabold font-mono text-[#111418]">48</span>
-                                                    <span className="text-sm font-bold text-red-500 font-mono">-2%</span>
+                                            <div className="glass-panel p-6 rounded-[2rem] border border-white/60 shadow-sm hover:shadow-md transition-all">
+                                                <div className="flex items-center justify-between mb-2">
+                                                    <p className="text-[10px] font-extrabold text-[#617289] uppercase tracking-widest">Completed</p>
+                                                    <div className="size-8 rounded-lg bg-green-50 text-green-600 flex items-center justify-center">
+                                                        <span className="material-symbols-outlined text-lg">check_circle</span>
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-baseline gap-2">
+                                                    <span className="text-4xl font-extrabold font-mono text-[#111418] tracking-tighter">48</span>
+                                                    <span className="text-xs font-bold text-red-500 font-mono bg-red-50 px-1.5 rounded">-2%</span>
+                                                </div>
+                                                <div className="mt-4 h-1 bg-gray-100 rounded-full overflow-hidden">
+                                                    <div className="h-full w-[85%] bg-green-500 rounded-full"></div>
                                                 </div>
                                             </div>
-                                            <div className="bg-white p-5 rounded-2xl border border-[#dbe0e6] shadow-sm hover:shadow-md transition-shadow">
-                                                <p className="text-[11px] font-bold text-[#617289] uppercase tracking-wider">Urgent Cases</p>
-                                                <div className="flex items-baseline gap-2 mt-2">
-                                                    <span className="text-3xl font-extrabold text-red-600 font-mono">03</span>
-                                                    <span className="text-sm font-bold text-green-600 uppercase tracking-widest">Active</span>
+                                            <div className="glass-panel p-6 rounded-[2rem] border border-white/60 shadow-sm hover:shadow-md transition-all">
+                                                <div className="flex items-center justify-between mb-2">
+                                                    <p className="text-[10px] font-extrabold text-[#617289] uppercase tracking-widest">Urgent Cases</p>
+                                                    <div className="size-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center animate-pulse">
+                                                        <span className="material-symbols-outlined text-lg">emergency</span>
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-baseline gap-2">
+                                                    <span className="text-4xl font-extrabold font-mono text-red-600 tracking-tighter">03</span>
+                                                    <span className="text-xs font-bold text-[#007db8] uppercase tracking-widest ml-2">Active</span>
+                                                </div>
+                                                <div className="mt-4 h-1 bg-gray-100 rounded-full overflow-hidden">
+                                                    <div className="h-full w-[30%] bg-red-500 rounded-full"></div>
                                                 </div>
                                             </div>
-                                            <div className="bg-white p-5 rounded-2xl border border-[#dbe0e6] shadow-sm hover:shadow-md transition-shadow">
-                                                <p className="text-[11px] font-bold text-[#617289] uppercase tracking-wider">Avg Turnaround</p>
-                                                <div className="flex items-baseline gap-2 mt-2">
-                                                    <span className="text-3xl font-extrabold font-mono text-[#111418]">14m</span>
-                                                    <span className="text-sm font-bold text-gray-400 uppercase tracking-widest">Stable</span>
+                                            <div className="glass-panel p-6 rounded-[2rem] border border-white/60 shadow-sm hover:shadow-md transition-all">
+                                                <div className="flex items-center justify-between mb-2">
+                                                    <p className="text-[10px] font-extrabold text-[#617289] uppercase tracking-widest">Avg Turnaround</p>
+                                                    <div className="size-8 rounded-lg bg-yellow-50 text-yellow-600 flex items-center justify-center">
+                                                        <span className="material-symbols-outlined text-lg">schedule</span>
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-baseline gap-2">
+                                                    <span className="text-4xl font-extrabold font-mono text-[#111418] tracking-tighter">14<span className="text-xl">m</span></span>
+                                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-2">Stable</span>
+                                                </div>
+                                                <div className="mt-4 h-1 bg-gray-100 rounded-full overflow-hidden">
+                                                    <div className="h-full w-[45%] bg-yellow-500 rounded-full"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1340,13 +1402,15 @@ function App() {
                                     {/* Main Grid: Studies & Diagnostic Tools */}
                                     <div className="grid grid-cols-12 gap-8">
                                         {/* Recent Studies (Left 7 Columns) */}
-                                        <div className="col-span-12 lg:col-span-12 xl:col-span-7 p-6 bg-white rounded-3xl shadow-sm border border-gray-200/80 space-y-6">
-                                            <div className="flex items-center justify-between border-b border-gray-100 pb-5">
-                                                <h3 className="text-xl font-extrabold text-[#111418] flex items-center gap-3 font-outfit">
-                                                    <span className="material-symbols-outlined text-[#007db8] bg-blue-50 p-3 rounded-xl text-2xl">analytics</span>
+                                        <div className="col-span-12 lg:col-span-12 xl:col-span-7 glass-panel p-10 rounded-[2.5rem] border border-white/60 space-y-8 shadow-sm">
+                                            <div className="flex items-center justify-between border-b border-gray-100 pb-6">
+                                                <h3 className="text-2xl font-extrabold text-[#111418] flex items-center gap-3 font-outfit">
+                                                    <div className="size-12 rounded-2xl bg-blue-50 text-[#007db8] flex items-center justify-center shadow-inner">
+                                                        <span className="material-symbols-outlined text-2xl">analytics</span>
+                                                    </div>
                                                     Recent Imaging Studies
                                                 </h3>
-                                                <button className="text-[11px] font-bold text-white bg-[#007db8] hover:bg-blue-600 transition-colors uppercase tracking-widest px-4 py-2 rounded-lg">View All Studies</button>
+                                                <button className="text-[10px] font-extrabold text-white bg-[#007db8] hover:bg-[#005a8a] transition-all uppercase tracking-widest px-6 py-2.5 rounded-xl shadow-lg shadow-blue-500/10">View Analysis Hub</button>
                                             </div>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                                 {/* Study Card 1 */}
@@ -1421,9 +1485,9 @@ function App() {
                                                                 <div className="size-6 rounded-full bg-gray-200 flex items-center justify-center">
                                                                     <span className="material-symbols-outlined text-[13px] text-gray-500">person</span>
                                                                 </div>
-                                                                <span className="text-[11px] font-bold text-[#617289]">Dr. GB10</span>
+                                                                <span className="text-[11px] font-bold text-[#617289]">AI-Assistant Node</span>
                                                             </div>
-                                                            <button onClick={() => alert('Patient details module currently under construction.')} className="text-[10px] font-extrabold uppercase tracking-widest text-[#617289] px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-200 hover:bg-gray-200 transition-colors cursor-pointer relative z-10 w-auto">Details</button>
+                                                            <button onClick={() => setActiveTab('patients')} className="text-[10px] font-extrabold uppercase tracking-widest text-[#007db8] px-3 py-1.5 rounded-lg bg-blue-50 border border-blue-100 hover:bg-[#007db8] hover:text-white transition-colors cursor-pointer relative z-10 w-auto">Medical Record</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1571,37 +1635,32 @@ function App() {
                                                 </div>
                                             </div>
 
-                                            <section className="space-y-4">
+                                            <section className="space-y-6">
                                                 <div className="flex justify-between items-center">
-                                                    <h3 className="text-sm font-bold text-[#111418] uppercase tracking-wider font-outfit">Waiting Room Queue</h3>
-                                                    <button className="text-[11px] text-[#007db8] bg-blue-50 hover:bg-blue-100 transition-colors shadow-sm rounded-lg px-3 py-1.5 font-bold flex items-center gap-1 border border-blue-100"><span className="material-symbols-outlined text-sm">refresh</span> Refresh</button>
+                                                    <h3 className="text-lg font-extrabold text-[#111418] uppercase tracking-wider font-outfit">Admission Queue</h3>
+                                                    <button className="text-[10px] text-[#007db8] font-extrabold bg-blue-50 hover:bg-blue-100 transition-all rounded-lg px-4 py-2 uppercase tracking-widest border border-blue-100">Live Sync</button>
                                                 </div>
-                                                <div className="bg-white rounded-xl border border-gray-200/80 p-0 shadow-sm overflow-hidden flex flex-col">
-                                                    <div className="grid grid-cols-12 gap-2 p-3 bg-gray-50/50 border-b border-gray-200/80 text-[9px] uppercase font-extrabold text-[#617289] tracking-widest">
+                                                <div className="glass-panel rounded-[2rem] border border-white/60 shadow-sm overflow-hidden flex flex-col">
+                                                    <div className="grid grid-cols-12 gap-2 p-4 bg-gray-50/80 border-b border-gray-200/50 text-[10px] uppercase font-extrabold text-[#617289] tracking-widest">
                                                         <div className="col-span-3">Urgency</div>
                                                         <div className="col-span-5">Patient Details</div>
-                                                        <div className="col-span-4">Vitals / Wait</div>
+                                                        <div className="col-span-4">Metrics</div>
                                                     </div>
                                                     <div className="flex flex-col">
-                                                        <div className="grid grid-cols-12 gap-2 p-4 border-b border-gray-200/80 items-center hover:bg-gray-50 transition-colors">
-                                                            <div className="col-span-3"><span className="px-2 py-1 bg-red-100/50 text-red-700 border border-red-200 text-[9px] font-extrabold rounded-lg uppercase tracking-widest flex items-center justify-center gap-1 w-full"><span className="size-1.5 rounded-full bg-red-500 animate-pulse"></span>Critical</span></div>
-                                                            <div className="col-span-5"><p className="text-xs font-bold text-[#111418]">Marcus Thompson</p><p className="text-[10px] text-[#617289] font-medium mt-0.5">M • 64y • ER-9921</p></div>
-                                                            <div className="col-span-4"><div className="flex flex-col gap-1"><span className="text-[10px] text-[#111418]"><span className="font-bold text-red-600">118</span> bpm</span><span className="text-[10px] text-[#111418]"><span className="font-bold text-red-600">02m</span> wait</span></div></div>
+                                                        <div className="grid grid-cols-12 gap-2 p-5 border-b border-gray-200/30 items-center hover:bg-white/60 transition-colors">
+                                                            <div className="col-span-3"><span className="px-3 py-1 bg-red-50 text-red-600 border border-red-100 text-[10px] font-extrabold rounded-full uppercase tracking-widest flex items-center justify-center gap-1.5"><span className="size-2 rounded-full bg-red-500 animate-pulse"></span>Critical</span></div>
+                                                            <div className="col-span-5"><p className="text-sm font-extrabold text-[#111418]">Marcus Thompson</p><p className="text-[11px] text-[#617289] font-bold uppercase tracking-wide mt-0.5">M • 64y • ER-9921</p></div>
+                                                            <div className="col-span-4"><div className="flex flex-col gap-1 tracking-tighter"><span className="text-[11px] font-bold text-[#111418]">HR: <span className="font-mono text-red-600 text-xs">118</span></span><span className="text-[11px] font-bold text-[#111418]">WAIT: <span className="font-mono text-xs">02m</span></span></div></div>
                                                         </div>
-                                                        <div className="grid grid-cols-12 gap-2 p-4 border-b border-gray-200/80 items-center hover:bg-gray-50 transition-colors">
-                                                            <div className="col-span-3"><span className="px-2 py-1 bg-orange-100/50 text-orange-700 border border-orange-200 text-[9px] font-extrabold rounded-lg uppercase tracking-widest flex items-center justify-center gap-1 w-full"><span className="size-1.5 rounded-full bg-orange-500"></span>Urgent</span></div>
-                                                            <div className="col-span-5"><p className="text-xs font-bold text-[#111418]">Elena Rodriguez</p><p className="text-[10px] text-[#617289] font-medium mt-0.5">F • 29y • ER-9945</p></div>
-                                                            <div className="col-span-4"><div className="flex flex-col gap-1"><span className="text-[10px] text-[#111418]"><span className="font-bold">94</span> bpm</span><span className="text-[10px] text-[#111418]"><span className="font-bold text-orange-600">14m</span> wait</span></div></div>
+                                                        <div className="grid grid-cols-12 gap-2 p-5 border-b border-gray-200/30 items-center hover:bg-white/60 transition-colors">
+                                                            <div className="col-span-3"><span className="px-3 py-1 bg-orange-50 text-orange-600 border border-orange-100 text-[10px] font-extrabold rounded-full uppercase tracking-widest flex items-center justify-center gap-1.5"><span className="size-2 rounded-full bg-orange-500"></span>Urgent</span></div>
+                                                            <div className="col-span-5"><p className="text-sm font-extrabold text-[#111418]">Elena Rodriguez</p><p className="text-[11px] text-[#617289] font-bold uppercase tracking-wide mt-0.5">F • 29y • ER-9945</p></div>
+                                                            <div className="col-span-4"><div className="flex flex-col gap-1 tracking-tighter"><span className="text-[11px] font-bold text-[#111418]">HR: <span className="font-mono text-xs">94</span></span><span className="text-[11px] font-bold text-[#111418]">WAIT: <span className="font-mono text-orange-600 text-xs">14m</span></span></div></div>
                                                         </div>
-                                                        <div className="grid grid-cols-12 gap-2 p-4 border-b border-gray-200/80 items-center hover:bg-gray-50 transition-colors">
-                                                            <div className="col-span-3"><span className="px-2 py-1 bg-green-100/50 text-green-700 border border-green-200 text-[9px] font-extrabold rounded-lg uppercase tracking-widest flex items-center justify-center gap-1 w-full"><span className="size-1.5 rounded-full bg-green-500"></span>Stable</span></div>
-                                                            <div className="col-span-5"><p className="text-xs font-bold text-[#111418]">David Miller</p><p className="text-[10px] text-[#617289] font-medium mt-0.5">M • 42y • ER-9912</p></div>
-                                                            <div className="col-span-4"><div className="flex flex-col gap-1"><span className="text-[10px] text-[#111418]"><span className="font-bold">72</span> bpm</span><span className="text-[10px] text-[#111418]"><span className="font-bold">32m</span> wait</span></div></div>
-                                                        </div>
-                                                        <div className="grid grid-cols-12 gap-2 p-4 items-center hover:bg-gray-50 transition-colors">
-                                                            <div className="col-span-3"><span className="px-2 py-1 bg-orange-100/50 text-orange-700 border border-orange-200 text-[9px] font-extrabold rounded-lg uppercase tracking-widest flex items-center justify-center gap-1 w-full"><span className="size-1.5 rounded-full bg-orange-500"></span>Urgent</span></div>
-                                                            <div className="col-span-5"><p className="text-xs font-bold text-[#111418]">Sophia Kim</p><p className="text-[10px] text-[#617289] font-medium mt-0.5">F • 5y • ER-9988</p></div>
-                                                            <div className="col-span-4"><div className="flex flex-col gap-1"><span className="text-[10px] text-[#111418]"><span className="font-bold">110</span> bpm</span><span className="text-[10px] text-[#111418]"><span className="font-bold text-orange-600">08m</span> wait</span></div></div>
+                                                        <div className="grid grid-cols-12 gap-2 p-5 border-b border-gray-200/30 items-center hover:bg-white/60 transition-colors">
+                                                            <div className="col-span-3"><span className="px-3 py-1 bg-green-50 text-green-600 border border-green-100 text-[10px] font-extrabold rounded-full uppercase tracking-widest flex items-center justify-center gap-1.5"><span className="size-2 rounded-full bg-green-500"></span>Stable</span></div>
+                                                            <div className="col-span-5"><p className="text-sm font-extrabold text-[#111418]">David Miller</p><p className="text-[11px] text-[#617289] font-bold uppercase tracking-wide mt-0.5">M • 42y • ER-9912</p></div>
+                                                            <div className="col-span-4"><div className="flex flex-col gap-1 tracking-tighter"><span className="text-[11px] font-bold text-[#111418]">HR: <span className="font-mono text-xs">72</span></span><span className="text-[11px] font-bold text-[#111418]">WAIT: <span className="font-mono text-xs">32m</span></span></div></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1710,7 +1769,7 @@ function App() {
                             )}
 
                             {activeTab === 'radiology' && (
-                                <div className="fade-in space-y-10">
+                                <div className="fade-in space-y-10 max-w-[1800px] mx-auto">
                                     {/* Page Title - Outside dark container */}
                                     <section className="flex items-center gap-6">
                                         <div className="size-16 rounded-[1.5rem] bg-blue-50 text-[#007db8] flex items-center justify-center shadow-sm">
@@ -1723,290 +1782,323 @@ function App() {
                                     </section>
 
                                     {/* Dark container - starts with controls */}
-                                    <div className="bg-[#111418] rounded-[2rem] border border-gray-800 p-6 shadow-2xl flex flex-col gap-5 min-h-[750px]">
-
-                                        {/* Controls toolbar + Stats Panel in Grid */}
-                                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 pb-5 border-b border-gray-800">
-                                            {/* Dropdowns + Button: 9 cols */}
-                                            <div className="lg:col-span-9 bg-[#121418] rounded-2xl p-2 border border-gray-800 flex flex-col md:flex-row gap-2">
-
-                                                <div className="relative group flex-1 bg-[#1A1D23] rounded-xl border border-gray-800/50 hover:border-[#007db8]/50 transition-colors">
-                                                    <div className="w-full text-left px-4 py-3 flex items-center gap-3">
-                                                        <span className="material-symbols-outlined text-blue-400 text-xl">hub</span>
-                                                        <div className="flex flex-col flex-1 min-w-0">
-                                                            <div className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">Server / Node</div>
+                                    {/* Neural Engine Control Bar - Redesigned to Light Glassmorphism */}
+                                    <div className="glass-panel rounded-2xl px-8 py-4 flex flex-wrap items-center justify-between gap-6 shadow-sm border border-white/60">
+                                        <div className="flex items-center gap-8 overflow-x-auto pb-1 sm:pb-0 flex-1">
+                                            {/* Server Node Selection */}
+                                            <div className="flex flex-col gap-1 min-w-[160px]">
+                                                <label className="text-[10px] uppercase tracking-wider text-[#617289] font-bold font-outfit">Server Node</label>
+                                                <div className="relative group">
+                                                    <div className="flex items-center gap-2 text-slate-800 font-bold text-sm transition-colors">
+                                                        <span className="material-symbols-outlined text-gray-400 group-hover:text-[#007db8] text-[20px] transition-colors">dns</span>
+                                                        <div className="relative flex-1">
                                                             <select
                                                                 value={selectedCredentialId}
                                                                 onChange={handleCredentialChange}
-                                                                className="bg-transparent border-none text-sm font-medium text-white focus:ring-0 outline-none cursor-pointer p-0 w-full truncate"
+                                                                className="bg-transparent border-none text-sm font-extrabold text-[#111418] focus:ring-0 outline-none cursor-pointer py-1.5 pl-0 pr-6 w-full truncate appearance-none font-outfit"
                                                             >
                                                                 {credentials.map(c => (
-                                                                    <option key={c.id} value={c.id} className="bg-[#1A1D23] text-gray-200">{c.name}</option>
+                                                                    <option key={c.id} value={c.id} className="text-slate-800 font-sans">{c.name}</option>
                                                                 ))}
-                                                                <option value="ADD_NEW" className="bg-[#1A1D23] text-gray-200">➕ Add Node</option>
+                                                                <option value="ADD_NEW">➕ Add Node</option>
                                                             </select>
+                                                            <span className="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 text-[18px] pointer-events-none">expand_more</span>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div className="w-px h-10 bg-gray-200"></div>
 
-                                                <div className="flex-1 bg-[#1A1D23] rounded-xl border border-gray-800/50 hover:border-[#007db8]/50 transition-colors">
-                                                    <div className="w-full text-left px-4 py-3 flex items-center gap-3">
-                                                        <span className="material-symbols-outlined text-cyan-400 text-xl">smart_toy</span>
-                                                        <div className="flex flex-col flex-1 min-w-0">
-                                                            <div className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">Report Model</div>
+                                            {/* Report Model Selection */}
+                                            <div className="flex flex-col gap-1 min-w-[180px]">
+                                                <label className="text-[10px] uppercase tracking-wider text-[#617289] font-bold font-outfit">Report Model</label>
+                                                <div className="relative group">
+                                                    <div className="flex items-center gap-2 text-slate-800 font-bold text-sm transition-colors">
+                                                        <span className="material-symbols-outlined text-gray-400 group-hover:text-[#007db8] text-[20px] transition-colors">psychology</span>
+                                                        <div className="relative flex-1">
                                                             <select
                                                                 value={selectedModel}
                                                                 onChange={e => setSelectedModel(e.target.value)}
-                                                                className="bg-transparent border-none text-sm font-medium text-white focus:ring-0 outline-none cursor-pointer p-0 w-full truncate"
+                                                                className="bg-transparent border-none text-sm font-extrabold text-[#111418] focus:ring-0 outline-none cursor-pointer py-1.5 pl-0 pr-6 w-full truncate appearance-none font-outfit"
                                                             >
-                                                                {models.map(mod => <option key={mod} value={mod} className="bg-[#1A1D23] text-gray-200">{mod}</option>)}
+                                                                {models.map(mod => <option key={mod} value={mod} className="font-sans">{mod}</option>)}
                                                             </select>
+                                                            <span className="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 text-[18px] pointer-events-none">expand_more</span>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div className="w-px h-10 bg-gray-200"></div>
 
-                                                <div className="flex-1 bg-[#1A1D23] rounded-xl border border-gray-800/50 hover:border-[#007db8]/50 transition-colors">
-                                                    <div className="w-full text-left px-4 py-3 flex items-center gap-3">
-                                                        <span className="material-symbols-outlined text-indigo-400 text-xl">memory</span>
-                                                        <div className="flex flex-col flex-1 min-w-0">
-                                                            <div className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">Vision Engine</div>
+                                            {/* Vision Engine Selection */}
+                                            <div className="flex flex-col gap-1 min-w-[160px]">
+                                                <label className="text-[10px] uppercase tracking-wider text-[#617289] font-bold font-outfit">Vision Engine</label>
+                                                <div className="relative group">
+                                                    <div className="flex items-center gap-2 text-slate-800 font-bold text-sm transition-colors">
+                                                        <span className="material-symbols-outlined text-gray-400 group-hover:text-[#007db8] text-[20px] transition-colors">visibility</span>
+                                                        <div className="relative flex-1">
                                                             <select
                                                                 value={selectedEngine}
                                                                 onChange={e => setSelectedEngine(e.target.value)}
-                                                                className="bg-transparent border-none text-sm font-medium text-white focus:ring-0 outline-none cursor-pointer p-0 w-full truncate"
+                                                                className="bg-transparent border-none text-sm font-extrabold text-[#111418] focus:ring-0 outline-none cursor-pointer py-1.5 pl-0 pr-6 w-full truncate appearance-none font-outfit"
                                                             >
-                                                                <option value="xray" className="bg-[#1A1D23] text-gray-200">XTraY (Chest Radiography)</option>
-                                                                <option value="yolo" className="bg-[#1A1D23] text-gray-200">YOLO v11 (General)</option>
+                                                                <option value="xray" className="font-sans">XTraY (Chest Radiography)</option>
+                                                                <option value="yolo" className="font-sans">YOLO v11 (General)</option>
                                                             </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="w-full md:w-auto">
-                                                    <button
-                                                        onClick={handleSubmit}
-                                                        disabled={!file || loading}
-                                                        className={`w-full h-full min-h-[60px] md:min-w-[180px] font-semibold rounded-xl flex items-center justify-center gap-2 border transition-all ${!file || loading ? 'bg-[#1F2937] text-gray-500 border-gray-800 cursor-not-allowed' : 'bg-[#1F2937] hover:bg-[#374151] text-gray-300 border-gray-800 hover:border-[#007db8]/50'}`}
-                                                    >
-                                                        {loading ? (
-                                                            <>
-                                                                <span className="size-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                                                                <span className="tracking-wide text-xs">PROCESSING...</span>
-                                                            </>
-                                                        ) : (
-                                                            <>
-                                                                <span className="material-symbols-outlined text-xl">play_circle</span>
-                                                                <span className="tracking-wide text-xs">RUN ANALYSIS</span>
-                                                            </>
-                                                        )}
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                            {/* Stats Panel: 3 cols - Dark Mode */}
-                                            <div className="lg:col-span-3 bg-[#1A1D23] rounded-2xl border border-gray-800 p-4 flex items-center justify-between gap-4">
-                                                <div className="flex gap-4 w-full">
-                                                    <div className="flex flex-col items-center gap-1 flex-1">
-                                                        <div className="relative w-3 h-10 bg-gray-800 rounded-full overflow-hidden">
-                                                            <div className="absolute bottom-0 left-0 w-full bg-blue-400 shadow-[0_0_10px_rgba(56,189,248,0.6)] transition-all duration-1000 rounded-full" style={{ height: `${hwStats.gpu}%` }}></div>
-                                                        </div>
-                                                        <span className="text-[10px] font-bold text-gray-500">GPU</span>
-                                                        <span className="text-[9px] font-mono uppercase text-blue-400 font-bold">{hwStats.gpu}%</span>
-                                                    </div>
-                                                    <div className="flex flex-col items-center gap-1 flex-1">
-                                                        <div className="relative w-3 h-10 bg-gray-800 rounded-full overflow-hidden">
-                                                            <div className="absolute bottom-0 left-0 w-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.6)] transition-all duration-1000 rounded-full" style={{ height: `${hwStats.mem}%` }}></div>
-                                                        </div>
-                                                        <span className="text-[10px] font-bold text-gray-500">MEM</span>
-                                                        <span className="text-[9px] font-mono uppercase text-cyan-400 font-bold">{hwStats.mem}%</span>
-                                                    </div>
-                                                    <div className="border-l border-gray-800 pl-4 flex flex-col justify-center flex-[3]">
-                                                        <span className="text-[10px] uppercase text-gray-500 font-semibold tracking-wider">Throughput</span>
-                                                        <div className="text-3xl font-mono uppercase font-bold text-white flex items-baseline gap-1.5 mt-1">
-                                                            {hwStats.throughput} <span className="text-xs font-sans text-[#007db8] font-bold bg-[#007db8]/10 px-1.5 py-0.5 rounded">tokens/s</span>
+                                                            <span className="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 text-[18px] pointer-events-none">expand_more</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        {/* Engine Info Bar */}
-                                        <div className="flex items-center justify-between bg-gray-900/50 rounded-xl px-4 py-2.5 border border-gray-800">
-                                            {selectedEngine === 'xray' ? (
-                                                <span className="flex items-center gap-2 text-[11px] font-semibold text-blue-300">
-                                                    <span className="material-symbols-outlined text-[14px]">memory</span>
-                                                    XTraY Engine · Specialized Chest Radiography · DenseNet121
-                                                </span>
-                                            ) : (
-                                                <span className="flex items-center gap-2 text-[11px] font-semibold text-yellow-300">
-                                                    <span className="material-symbols-outlined text-[14px]">bolt</span>
-                                                    YOLO v11 Nano · 80 Generic Classes (COCO) · Ideal for Objects & Scenes
-                                                </span>
-                                            )}
                                             <button
-                                                onClick={() => setShowCapabilities(true)}
-                                                className="flex items-center gap-1.5 text-[11px] font-bold text-[#007db8] hover:text-blue-300 transition-colors bg-[#007db8]/10 hover:bg-[#007db8]/20 px-3 py-1.5 rounded-lg border border-[#007db8]/20"
+                                                onClick={handleSubmit}
+                                                disabled={!file || loading}
+                                                className={`ml-auto h-12 px-8 font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-md ${!file || loading ? 'bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed' : 'bg-[#007db8] text-white hover:bg-[#00608d] shadow-blue-500/20 shadow-lg'}`}
                                             >
-                                                <span className="material-symbols-outlined text-[14px]">info</span>
-                                                Model Capabilities
+                                                {loading ? (
+                                                    <>
+                                                        <span className="size-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                                                        <span className="tracking-wide text-xs">PROCESSING...</span>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <span className="material-symbols-outlined text-xl">play_circle</span>
+                                                        <span className="tracking-wide text-xs">RUN ANALYSIS</span>
+                                                    </>
+                                                )}
                                             </button>
                                         </div>
 
-                                        {/* Main Body: Upload Left + Results Right */}
-                                        <div className="flex flex-col lg:flex-row gap-5 flex-1">
-
-                                            {/* Panel Izquierdo: Carga */}
-                                            <div className="flex-[5] flex flex-col justify-center">
-                                                <div
-                                                    onClick={() => document.getElementById('file-upload').click()}
-                                                    className="border-2 border-dashed border-gray-700 bg-gray-900/30 rounded-3xl h-full min-h-[400px] flex items-center justify-center p-8 text-center hover:border-blue-500 hover:bg-blue-900/10 transition-all cursor-pointer group"
-                                                >
-                                                    <input id="file-upload" type="file" className="hidden" onChange={handleFileChange} accept="image/*" />
-                                                    {preview ? (
-                                                        <div className="relative inline-block animate-in zoom-in-95 duration-500">
-                                                            <img src={preview} className="max-h-[350px] object-contain rounded-2xl shadow-2xl mx-auto ring-4 ring-gray-800 bg-black/50" />
-                                                            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-gray-800/90 text-white backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-gray-700 flex items-center gap-2 w-max">
-                                                                <span className="size-2 rounded-full bg-green-400 animate-pulse"></span>
-                                                                <span className="text-[10px] font-extrabold uppercase tracking-widest text-gray-200">Visual Context Loaded</span>
-                                                            </div>
-                                                        </div>
-                                                    ) : (
-                                                        <div className="flex flex-col items-center gap-6">
-                                                            <div className="size-24 rounded-full bg-gray-800/50 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-900/20 transition-all border border-gray-800 group-hover:border-blue-800">
-                                                                <span className="material-symbols-outlined text-5xl text-gray-500 group-hover:text-blue-400">add_photo_alternate</span>
-                                                            </div>
-                                                            <div>
-                                                                <p className="text-gray-300 font-bold text-sm tracking-wide">Drag DICOM or PNG files here</p>
-                                                                <p className="text-gray-600 font-medium text-[11px] uppercase tracking-widest mt-2">or click to browse your system</p>
-                                                            </div>
-                                                        </div>
-                                                    )}
+                                        <div className="flex items-center gap-8 bg-white/40 rounded-xl px-8 py-3 border border-white/60 shadow-inner ml-4 backdrop-blur-md">
+                                            {/* GPU Gauge */}
+                                            <div className="flex flex-col items-center justify-center">
+                                                <div className="relative w-16 h-8 overflow-hidden flex justify-center">
+                                                    <svg className="w-16 h-16 absolute top-0" viewBox="0 0 100 100">
+                                                        <path d="M 20 50 A 30 30 0 0 1 80 50" fill="none" stroke="#f3f4f6" strokeWidth="12" strokeLinecap="round" />
+                                                        <path d="M 20 50 A 30 30 0 0 1 80 50" fill="none" stroke="#ef4444" strokeWidth="12" strokeLinecap="round" strokeDasharray="94.2" strokeDashoffset={isNaN(hwStats.gpu) ? 94.2 : 94.2 - (hwStats.gpu / 100) * 94.2} className="transition-all duration-1000 ease-out drop-shadow-[0_1px_2px_rgba(239,68,68,0.3)]" />
+                                                    </svg>
+                                                    <div className="absolute bottom-0 w-full text-center flex flex-col items-center">
+                                                        <span className="text-[10px] font-extrabold text-[#111418] tabular-nums">{hwStats.gpu}%</span>
+                                                    </div>
                                                 </div>
+                                                <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mt-1">GPU Load</span>
                                             </div>
 
-                                            {/* Panel Derecho: Resultados */}
-                                            <div className="flex-[3] bg-gray-900/50 rounded-3xl border border-gray-800 p-8 flex flex-col relative overflow-hidden shadow-inner">
-
-                                                {!result && !loading && (
-                                                    <div className="flex-1 flex flex-col items-center justify-center text-center opacity-40">
-                                                        <div className="size-24 rounded-3xl bg-gray-800/50 flex items-center justify-center mb-6">
-                                                            <span className="material-symbols-outlined text-6xl text-gray-500">memory</span>
-                                                        </div>
-                                                        <h4 className="text-[13px] font-extrabold text-gray-300 uppercase tracking-widest">Awaiting Neural Inference</h4>
-                                                        <p className="text-[11px] text-gray-500 font-medium leading-relaxed mt-3 uppercase tracking-wide max-w-[250px]">
-                                                            Upload a radiological image and run analysis to view real-time findings processed by GB10.
-                                                        </p>
+                                            {/* MEM Gauge */}
+                                            <div className="flex flex-col items-center justify-center">
+                                                <div className="relative w-16 h-8 overflow-hidden flex justify-center">
+                                                    <svg className="w-16 h-16 absolute top-0" viewBox="0 0 100 100">
+                                                        <path d="M 20 50 A 30 30 0 0 1 80 50" fill="none" stroke="#f3f4f6" strokeWidth="12" strokeLinecap="round" />
+                                                        <path d="M 20 50 A 30 30 0 0 1 80 50" fill="none" stroke="#f97316" strokeWidth="12" strokeLinecap="round" strokeDasharray="94.2" strokeDashoffset={isNaN(hwStats.mem) ? 94.2 : 94.2 - (hwStats.mem / 100) * 94.2} className="transition-all duration-1000 ease-out drop-shadow-[0_1px_2px_rgba(249,115,22,0.3)]" />
+                                                    </svg>
+                                                    <div className="absolute bottom-0 w-full text-center flex flex-col items-center">
+                                                        <span className="text-[10px] font-extrabold text-[#111418] tabular-nums">{hwStats.mem}%</span>
                                                     </div>
-                                                )}
+                                                </div>
+                                                <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mt-1">Mem Usage</span>
+                                            </div>
 
-                                                {loading && (
-                                                    <div className="flex-1 flex flex-col items-center justify-center">
-                                                        <div className="relative size-32 mb-8">
-                                                            <div className="absolute inset-0 border-[6px] border-blue-900/30 border-t-blue-500 rounded-full animate-spin" style={{ animationDuration: '2s' }}></div>
-                                                            <div className="absolute inset-4 border-[6px] border-blue-900/20 border-b-blue-400 rounded-full animate-spin" style={{ animationDuration: '1.5s', animationDirection: 'reverse' }}></div>
-                                                            <div className="absolute inset-0 flex items-center justify-center">
-                                                                <span className="material-symbols-outlined text-blue-500 text-3xl animate-pulse">analytics</span>
-                                                            </div>
-                                                        </div>
-                                                        <h4 className="text-xs font-extrabold text-blue-400 uppercase tracking-widest mb-2 animate-pulse">Running Analytical Models</h4>
-                                                        <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Computing vectors and convolution layers...</p>
-                                                    </div>
-                                                )}
+                                            <div className="w-px h-8 bg-gray-200"></div>
 
-                                                {result && (
-                                                    <div className="flex-1 space-y-6 flex flex-col animate-in fade-in slide-in-from-right-8 duration-700">
-                                                        <div className="flex items-center justify-between border-b border-gray-700/50 pb-4 shrink-0">
-                                                            <div className="flex items-center gap-2">
-                                                                <span className="material-symbols-outlined text-blue-400">check_circle</span>
-                                                                <h4 className="text-[11px] font-extrabold text-white uppercase tracking-widest">Consolidated Results</h4>
-                                                            </div>
-                                                            <span className="px-3 py-1 bg-blue-500/10 text-blue-400 text-[9px] font-extrabold rounded-full uppercase tracking-widest border border-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.1)]">GB10 Processed</span>
-                                                        </div>
-
-                                                        <div className="flex-1 overflow-y-auto pr-2 space-y-6 custom-scrollbar">
-                                                            {/* XRay Pathologies Bar Chart Representation */}
-                                                            {selectedEngine === 'xray' && result.pathologies && (
-                                                                <div className="space-y-3">
-                                                                    <p className="text-[9px] font-extrabold text-gray-500 uppercase tracking-widest">Top 5 Anatomical Predictions</p>
-                                                                    <div className="space-y-3">
-                                                                        {Object.entries(result.pathologies)
-                                                                            .sort(([, a], [, b]) => b - a)
-                                                                            .slice(0, 5)
-                                                                            .map(([name, prob]) => (
-                                                                                <div key={name} className="space-y-1.5">
-                                                                                    <div className="flex justify-between items-center text-xs font-bold">
-                                                                                        <span className="uppercase tracking-wide text-[10px] text-gray-300">{name}</span>
-                                                                                        <span className={prob > 0.5 ? 'text-red-400' : 'text-blue-400'}>{(prob * 100).toFixed(1)}%</span>
-                                                                                    </div>
-                                                                                    <div className="h-1.5 w-full bg-gray-800 rounded-full overflow-hidden">
-                                                                                        <div
-                                                                                            className={`h-full rounded-full transition-all duration-1000 ${prob > 0.5 ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]' : 'bg-blue-500'}`}
-                                                                                            style={{ width: `${prob * 100}%` }}
-                                                                                        ></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            ))}
-                                                                    </div>
-                                                                </div>
-                                                            )}
-
-                                                            {/* Narrative Report */}
-                                                            <div className="space-y-3">
-                                                                <p className="text-[9px] font-extrabold text-gray-500 uppercase tracking-widest flex items-center gap-1.5">
-                                                                    <span className="material-symbols-outlined text-[14px]">edit_document</span>
-                                                                    Auto-Generated Clinical Summary
-                                                                </p>
-                                                                <div className="bg-gray-800/40 rounded-xl p-5 border border-gray-700/50 relative group hover:bg-gray-800/60 transition-colors">
-                                                                    <div className="text-[13px] text-gray-300 leading-relaxed font-medium markdown-body" style={{ whiteSpace: 'pre-wrap' }}>
-                                                                        <ReactMarkdown>{result.clinical_report}</ReactMarkdown>
-                                                                    </div>
-                                                                    <button className="absolute top-3 right-3 text-gray-500 hover:text-white opacity-0 group-hover:opacity-100 transition-all">
-                                                                        <span className="material-symbols-outlined text-sm">content_copy</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <button onClick={() => handleExportDocx(result)} className="w-full shrink-0 py-3 mt-auto bg-white text-black rounded-xl text-[10px] font-extrabold uppercase tracking-widest hover:bg-gray-200 transition-all flex items-center justify-center gap-2">
-                                                            <span className="material-symbols-outlined text-[16px]">picture_as_pdf</span>
-                                                            Export Official Report
-                                                        </button>
-                                                    </div>
-                                                )}
-
+                                            {/* Throughput */}
+                                            <div className="flex flex-col justify-center min-w-[80px]">
+                                                <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest mb-0.5 flex items-center gap-1">
+                                                    <Zap className="size-2 text-yellow-500 fill-yellow-500" /> Throughput
+                                                </span>
+                                                <div className="text-xl font-mono uppercase font-extrabold text-[#111418] flex items-baseline gap-1">
+                                                    {hwStats.throughput} <span className="text-[9px] font-sans text-[#007db8] font-bold uppercase tracking-widest">t/s</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    {/* Status Footer Bar */}
-                                    <div className="bg-white border border-gray-200 rounded-xl p-3 flex flex-wrap gap-4 items-center justify-between text-xs text-gray-500 shadow-sm relative">
-                                        <div className="flex items-center gap-6">
+                                    {/* Engine Info Bar */}
+                                    <div className="flex items-center justify-between bg-white/80 rounded-xl px-4 py-2.5 border border-white/60 shadow-sm">
+                                        {selectedEngine === 'xray' ? (
+                                            <span className="flex items-center gap-2 text-[11px] font-bold text-[#007db8]">
+                                                <span className="material-symbols-outlined text-[16px]">memory</span>
+                                                XTraY Engine · Specialized Chest Radiography · DenseNet121
+                                            </span>
+                                        ) : (
+                                            <span className="flex items-center gap-2 text-[11px] font-bold text-amber-600">
+                                                <span className="material-symbols-outlined text-[16px]">bolt</span>
+                                                YOLO v11 Nano · 80 Generic Classes (COCO) · Ideal for Objects & Scenes
+                                            </span>
+                                        )}
+                                        <button
+                                            onClick={() => setShowCapabilities(true)}
+                                            className="flex items-center gap-1.5 text-[11px] font-bold text-[#007db8] hover:text-blue-700 transition-colors bg-[#007db8]/10 hover:bg-[#007db8]/20 px-3 py-1.5 rounded-lg border border-[#007db8]/20"
+                                        >
+                                            <span className="material-symbols-outlined text-[14px]">info</span>
+                                            Model Capabilities
+                                        </button>
+                                    </div>
+
+                                    {/* Main Body: Upload Left + Results Right */}
+                                    <div className="flex flex-col lg:flex-row gap-8 flex-1">
+
+                                        {/* Panel Izquierdo: Carga */}
+                                        <div className="flex-[5] flex flex-col justify-center">
+                                            <div
+                                                onClick={() => document.getElementById('file-upload').click()}
+                                                className="glass-panel rounded-[2.5rem] h-full min-h-[500px] flex items-center justify-center p-12 text-center hover:border-[#007db8]/40 hover:bg-white/90 transition-all cursor-pointer group relative overflow-hidden shadow-lg border border-white/80"
+                                            >
+                                                <input id="file-upload" type="file" className="hidden" onChange={handleFileChange} accept="image/*" />
+                                                {preview ? (
+                                                    <div className="relative inline-block animate-in zoom-in-95 duration-500 w-full h-full flex items-center justify-center">
+                                                        <div className="bg-[#0a0c10] p-4 rounded-3xl shadow-2xl relative border border-white/5">
+                                                            <img src={preview} className="max-h-[500px] object-contain rounded-2xl mx-auto shadow-inner" />
+                                                            {/* AI Simulation Overlay (only for Xray) */}
+                                                            {selectedEngine === 'xray' && result && (
+                                                                <div className="absolute inset-4 pointer-events-none">
+                                                                    <div className="absolute top-1/4 left-1/4 w-32 h-32 border-2 border-[#007db8] rounded-lg bg-[#007db8]/10 animate-pulse">
+                                                                        <span className="absolute -top-6 left-0 text-[10px] font-extrabold text-[#007db8] bg-white px-2 py-0.5 rounded shadow-sm border border-[#007db8]/20">98% CONFIDENCE</span>
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 glass-panel text-slate-800 px-6 py-3 rounded-full shadow-xl border border-white/80 flex items-center gap-3">
+                                                            <span className="size-2.5 rounded-full bg-green-500 animate-pulse"></span>
+                                                            <span className="text-xs font-extrabold uppercase tracking-widest">Diagnostic Context Active</span>
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <div className="flex flex-col items-center gap-8">
+                                                        <div className="size-28 rounded-full bg-gray-50 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-50 transition-all border border-gray-100 group-hover:border-[#007db8]/30">
+                                                            <span className="material-symbols-outlined text-6xl text-gray-300 group-hover:text-[#007db8]">upload_file</span>
+                                                        </div>
+                                                        <div>
+                                                            <p className="text-[#111418] font-bold text-lg tracking-tight font-outfit">Drag DICOM or PNG files here</p>
+                                                            <p className="text-[#617289] font-bold text-sm uppercase tracking-widest mt-2">or click to browse your system</p>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        {/* Panel Derecho: Resultados */}
+                                        <div className="flex-[3] glass-panel rounded-[2.5rem] border border-white/60 p-10 flex flex-col relative overflow-hidden shadow-sm">
+
+                                            {!result && !loading && (
+                                                <div className="flex-1 flex flex-col items-center justify-center text-center opacity-60">
+                                                    <div className="size-24 rounded-[2rem] bg-gray-50 flex items-center justify-center mb-8 shadow-inner border border-gray-100">
+                                                        <span className="material-symbols-outlined text-6xl text-gray-300">smart_toy</span>
+                                                    </div>
+                                                    <h4 className="text-base font-extrabold text-[#111418] uppercase tracking-widest font-outfit">Awaiting Neural Inference</h4>
+                                                    <p className="text-sm text-[#617289] font-medium leading-relaxed mt-4 uppercase tracking-wide max-w-[250px]">
+                                                        Upload a radiological image and run analysis to view real-time findings processed by GB10.
+                                                    </p>
+                                                </div>
+                                            )}
+
+                                            {loading && (
+                                                <div className="flex-1 flex flex-col items-center justify-center">
+                                                    <div className="relative size-40 mb-10">
+                                                        <div className="absolute inset-0 border-[8px] border-blue-50 border-t-[#007db8] rounded-full animate-spin" style={{ animationDuration: '2s' }}></div>
+                                                        <div className="absolute inset-4 border-[8px] border-blue-50/50 border-b-[#007db8]/50 rounded-full animate-spin" style={{ animationDuration: '1.5s', animationDirection: 'reverse' }}></div>
+                                                        <div className="absolute inset-0 flex items-center justify-center">
+                                                            <span className="material-symbols-outlined text-[#007db8] text-4xl animate-pulse">analytics</span>
+                                                        </div>
+                                                    </div>
+                                                    <h4 className="text-sm font-extrabold text-[#007db8] uppercase tracking-widest mb-3 animate-pulse font-outfit">Running Analytical Models</h4>
+                                                    <p className="text-[11px] text-[#617289] font-bold uppercase tracking-widest">Computing vectors and convolution layers...</p>
+                                                </div>
+                                            )}
+
+                                            {result && (
+                                                <div className="flex-1 space-y-8 flex flex-col animate-in fade-in slide-in-from-right-8 duration-700">
+                                                    <div className="flex items-center justify-between border-b border-gray-100 pb-6 shrink-0">
+                                                        <div className="flex items-center gap-3">
+                                                            <span className="material-symbols-outlined text-[#007db8] text-2xl">check_circle</span>
+                                                            <h4 className="text-lg font-extrabold text-[#111418] uppercase tracking-widest font-outfit">Consolidated Results</h4>
+                                                        </div>
+                                                        <span className="px-4 py-1.5 bg-blue-50 text-[#007db8] text-[10px] font-extrabold rounded-full uppercase tracking-widest border border-blue-100">GB10 Processed</span>
+                                                    </div>
+
+                                                    <div className="flex-1 overflow-y-auto pr-3 space-y-8 custom-scrollbar">
+                                                        {/* XRay Pathologies Bar Chart Representation */}
+                                                        {selectedEngine === 'xray' && result.pathologies && (
+                                                            <div className="space-y-4">
+                                                                <p className="text-[11px] font-bold text-[#617289] uppercase tracking-widest font-outfit mb-4">Top Anatomical Predictions</p>
+                                                                <div className="space-y-5">
+                                                                    {Object.entries(result.pathologies)
+                                                                        .sort(([, a], [, b]) => b - a)
+                                                                        .slice(0, 5)
+                                                                        .map(([name, prob]) => (
+                                                                            <div key={name} className="space-y-2">
+                                                                                <div className="flex justify-between items-center text-sm font-bold">
+                                                                                    <span className="uppercase tracking-wide text-[11px] text-slate-700">{name}</span>
+                                                                                    <span className={`font-mono ${prob > 0.5 ? 'text-red-500' : 'text-[#007db8]'}`}>{(prob * 100).toFixed(1)}%</span>
+                                                                                </div>
+                                                                                <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                                                                                    <div
+                                                                                        className={`h-full rounded-full transition-all duration-1000 ${prob > 0.5 ? 'bg-red-500' : 'bg-[#007db8]'}`}
+                                                                                        style={{ width: `${prob * 100}%` }}
+                                                                                    ></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        ))}
+                                                                </div>
+                                                            </div>
+                                                        )}
+
+                                                        {/* Narrative Report */}
+                                                        <div className="space-y-4">
+                                                            <p className="text-[11px] font-bold text-[#617289] uppercase tracking-widest flex items-center gap-2 font-outfit">
+                                                                <span className="material-symbols-outlined text-[18px]">edit_document</span>
+                                                                Auto-Generated Clinical Summary
+                                                            </p>
+                                                            <div className="bg-blue-50/30 rounded-2xl p-6 border border-blue-100/50 relative group hover:bg-blue-50/50 transition-colors">
+                                                                <div className="text-[14px] text-slate-700 leading-relaxed font-semibold markdown-body" style={{ whiteSpace: 'pre-wrap' }}>
+                                                                    <ReactMarkdown>{result.clinical_report}</ReactMarkdown>
+                                                                </div>
+                                                                <button className="absolute top-4 right-4 text-gray-400 hover:text-[#007db8] opacity-0 group-hover:opacity-100 transition-all">
+                                                                    <span className="material-symbols-outlined text-sm">content_copy</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <button onClick={() => handleExportDocx(result)} className="w-full shrink-0 py-4 mt-auto bg-[#007db8] text-white rounded-2xl text-xs font-extrabold uppercase tracking-widest hover:bg-[#00608d] transition-all flex items-center justify-center gap-3 shadow-lg shadow-blue-500/20">
+                                                        <span className="material-symbols-outlined text-xl">picture_as_pdf</span>
+                                                        Export Official Report
+                                                    </button>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                    {/* Status Footer Bar - Moved inside Radiology for context */}
+                                    <div className="bg-white/70 backdrop-blur-md border border-white/60 rounded-2xl p-4 flex flex-wrap gap-6 items-center justify-between text-xs shadow-sm relative mt-4">
+                                        <div className="flex items-center gap-8">
                                             <div className="flex items-center gap-2">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-[#007db8]"></span>
-                                                <span className="font-semibold text-gray-700">GB10 Node Active</span>
+                                                <span className="size-2 rounded-full bg-[#007db8] animate-pulse"></span>
+                                                <span className="font-extrabold text-slate-800 uppercase tracking-widest text-[10px]">GB10 Node Active</span>
                                             </div>
                                             <div className="hidden md:flex items-center gap-2">
-                                                <span className="material-symbols-outlined text-[14px]">model_training</span>
-                                                <span>Model: {selectedModel}</span>
+                                                <span className="material-symbols-outlined text-[16px] text-gray-400">model_training</span>
+                                                <span className="font-bold text-gray-500 uppercase tracking-widest text-[9px]">Model:</span>
+                                                <span className="font-bold text-slate-700">{selectedModel}</span>
                                             </div>
                                             <div className="hidden md:flex items-center gap-2">
-                                                <span className="material-symbols-outlined text-[14px]">settings_system_daydream</span>
-                                                <span>Engine: {selectedEngine === 'xray' ? 'XTraY Specialized Chest' : 'YOLO v11'}</span>
+                                                <span className="material-symbols-outlined text-[16px] text-gray-400">settings_suggest</span>
+                                                <span className="font-bold text-gray-500 uppercase tracking-widest text-[9px]">Engine:</span>
+                                                <span className="font-bold text-slate-700">{selectedEngine === 'xray' ? 'XTraY Specialized Chest' : 'YOLO v11'}</span>
                                             </div>
                                         </div>
-                                        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center gap-4 z-40">
-                                            <div className="flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full border border-gray-200">
-                                                <span className="material-symbols-outlined text-[14px] text-blue-400">speed</span>
-                                                <span className="font-mono uppercase text-gray-600">Latency: <span className="font-bold text-gray-800">12ms</span></span>
+                                        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center gap-4">
+                                            <div className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-100">
+                                                <span className="material-symbols-outlined text-[14px] text-blue-500">speed</span>
+                                                <span className="font-mono uppercase text-[9px] font-bold text-gray-400">Latency: <span className="text-slate-800">12ms</span></span>
                                             </div>
-                                            <div className="flex items-center gap-2 bg-[#007db8]/10 px-3 py-1 rounded-full border border-[#007db8]/20">
+                                            <div className="flex items-center gap-2 bg-[#007db8]/5 px-3 py-1.5 rounded-full border border-[#007db8]/10">
                                                 <span className="material-symbols-outlined text-[14px] text-[#007db8]">bolt</span>
-                                                <span className="font-mono uppercase text-[#007db8]">Throughput: <span className="font-bold">{hwStats.throughput} tokens/s</span></span>
+                                                <span className="font-mono uppercase text-[9px] font-bold text-[#007db8]">Throughput: <span className="font-extrabold">{hwStats.throughput} T/S</span></span>
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-4 font-mono uppercase">
-                                            <span className="opacity-50">Batch: 1</span>
-                                            <div className="text-[#007db8] font-bold">READY</div>
+                                        <div className="flex items-center gap-4 font-mono">
+                                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Batch: 1</span>
+                                            <div className="text-[#007db8] font-extrabold text-[10px] tracking-widest border border-[#007db8]/20 bg-[#007db8]/5 px-2 py-0.5 rounded">READY</div>
                                         </div>
                                     </div>
                                 </div>
@@ -2148,9 +2240,9 @@ function App() {
                                             </div>
                                             {/* Status and Error Alerts */}
                                             {error && (
-                                                <div className="w-full max-w-lg mb-6 p-4 bg-red-50 border border-red-100 rounded-2xl flex items-center gap-3 animate-in fade-in slide-in-from-top-4">
-                                                    <AlertCircle className="text-red-500 size-5" />
-                                                    <p className="text-xs font-bold text-red-600">{error}</p>
+                                                <div className="w-full max-w-lg mb-6 p-4 bg-blue-50 border border-blue-100 rounded-2xl flex items-center gap-3 animate-in fade-in slide-in-from-top-4">
+                                                    <AlertCircle className="text-[#007db8] size-5" />
+                                                    <p className="text-xs font-bold text-[#007db8]">{error}</p>
                                                 </div>
                                             )}
 
@@ -2185,32 +2277,32 @@ function App() {
                                                     </div>
 
                                                     {/* Clinical Justification (Formato Imagen) */}
-                                                    <div className="bg-white rounded-xl shadow-sm border border-[#dbe0e6] overflow-hidden">
+                                                    <div className="glass-panel rounded-2xl overflow-hidden border border-white/60 shadow-sm">
                                                         <div className={`border-l-4 p-5 ${triageResult?.level === 1 ? 'border-red-500' :
                                                             triageResult?.level === 2 ? 'border-orange-500' :
-                                                                triageResult?.level === 3 ? 'border-yellow-500' : 'border-green-500'
+                                                                triageResult?.level === 3 ? 'border-yellow-500' : 'border-blue-500'
                                                             }`}>
-                                                            <div className="flex items-center gap-2 mb-4 text-gray-400">
+                                                            <div className="flex items-center gap-2 mb-4 text-[#617289]">
                                                                 <span className="material-symbols-outlined text-lg">content_paste</span>
                                                                 <h4 className="text-[10px] font-extrabold uppercase tracking-[0.1em]">Clinical Justification</h4>
                                                             </div>
-                                                            <div className="text-gray-700 text-sm font-medium leading-relaxed">
+                                                            <div className="text-[#111418] text-sm font-medium leading-relaxed">
                                                                 <ReactMarkdown>{triageResult?.justification || ''}</ReactMarkdown>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     {/* Immediate Actions (Formato Imagen) */}
-                                                    <div className="bg-white rounded-xl shadow-sm border border-[#dbe0e6] overflow-hidden">
+                                                    <div className="glass-panel rounded-2xl overflow-hidden border border-white/60 shadow-sm">
                                                         <div className={`border-l-4 p-5 ${triageResult?.level === 1 ? 'border-red-600' :
                                                             triageResult?.level === 2 ? 'border-orange-600' :
-                                                                triageResult?.level === 3 ? 'border-yellow-600' : 'border-green-600'
+                                                                triageResult?.level === 3 ? 'border-yellow-600' : 'border-[#007db8]'
                                                             }`}>
-                                                            <div className="flex items-center gap-2 mb-4 text-gray-400">
+                                                            <div className="flex items-center gap-2 mb-4 text-[#617289]">
                                                                 <span className="material-symbols-outlined text-lg">bolt</span>
                                                                 <h4 className="text-[10px] font-extrabold uppercase tracking-[0.1em]">Immediate Actions</h4>
                                                             </div>
-                                                            <div className="text-gray-700 text-sm font-medium leading-relaxed">
+                                                            <div className="text-[#111418] text-sm font-medium leading-relaxed">
                                                                 <ReactMarkdown>{triageResult?.actions || ''}</ReactMarkdown>
                                                             </div>
                                                         </div>
@@ -2223,7 +2315,17 @@ function App() {
                                                                 }`}></div>
                                                             <span className="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest font-bold">Inference via {triageAnalysisModel || 'N/A'}</span>
                                                         </div>
-                                                        <button onClick={() => { alert('Patient validated and admitted to emergency queue.'); setTriageResult(null); setTriageReason(''); }} className="bg-gray-900 text-white px-8 py-3 rounded-xl text-[10px] font-extrabold uppercase tracking-widest hover:bg-black transition-all shadow-lg active:scale-95">Validate & Admit</button>
+                                                        <button
+                                                            onClick={() => {
+                                                                setTriageResult(null);
+                                                                setTriageReason('');
+                                                                // Mock success feedback
+                                                                setActiveTab('patients');
+                                                            }}
+                                                            className="bg-[#007db8] text-white px-10 py-4 rounded-2xl text-xs font-extrabold uppercase tracking-widest hover:bg-[#00608d] transition-all shadow-xl shadow-blue-500/20 active:scale-95"
+                                                        >
+                                                            Validate & Admit Patient
+                                                        </button>
                                                     </div>
                                                 </div>
                                             )}
@@ -2276,7 +2378,16 @@ function App() {
                                                         </td>
                                                         <td className="px-8 py-6 text-sm font-medium max-w-xs truncate text-gray-600">{p.reason}</td>
                                                         <td className="px-8 py-6 text-right">
-                                                            <button onClick={() => alert(`Opening 360º Record for ${p.name}`)} className="text-[#007db8] font-extrabold text-[10px] uppercase tracking-widest bg-[#007db8]/5 border border-[#007db8]/10 px-5 py-2.5 rounded-xl hover:bg-[#007db8] hover:text-white transition-all shadow-sm">Open 360º Record</button>
+                                                            <button
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    setSelectedPatient(p);
+                                                                    setActiveTab('patient_detail');
+                                                                }}
+                                                                className="text-[#007db8] font-extrabold text-[10px] uppercase tracking-widest bg-[#007db8]/5 border border-[#007db8]/10 px-5 py-2.5 rounded-xl hover:bg-[#007db8] hover:text-white transition-all shadow-sm"
+                                                            >
+                                                                Open 360º Record
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                 ))}
@@ -2284,6 +2395,15 @@ function App() {
                                         </table>
                                     </div>
                                 </div>
+                            )}
+
+                            {activeTab === 'patient_detail' && (
+                                <PatientDetail
+                                    patient={selectedPatient}
+                                    onBack={() => setActiveTab('patients')}
+                                    onDeepAnalysis={handleDeepPatientAnalysis}
+                                    isAnalyzing={isAnalyzingPatient}
+                                />
                             )}
 
                             {activeTab === 'schedules' ? renderScheduleGrid() : false && (
@@ -2391,77 +2511,80 @@ function App() {
             </div>
 
             {/* CAPABILITIES MODAL */}
-            {showCapabilities && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4" onClick={() => setShowCapabilities(false)}>
-                    <div className="bg-white rounded-3xl shadow-2xl max-w-3xl w-full max-h-[80vh] overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
-                        <div className="flex items-center justify-between p-6 border-b border-gray-200">
-                            <h2 className="text-lg font-extrabold text-[#111418] flex items-center gap-3">
+            {
+                showCapabilities && (
+                    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4" onClick={() => setShowCapabilities(false)}>
+                        <div className="bg-white rounded-3xl shadow-2xl max-w-3xl w-full max-h-[80vh] overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
+                            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+                                <h2 className="text-lg font-extrabold text-[#111418] flex items-center gap-3">
+                                    {selectedEngine === 'xray' ? (
+                                        <><span className="material-symbols-outlined text-[#007db8]">memory</span> TorchXRayVision — Capabilities</>
+                                    ) : (
+                                        <><span className="material-symbols-outlined text-yellow-500">bolt</span> YOLOv11 — Capabilities</>
+                                    )}
+                                </h2>
+                                <button onClick={() => setShowCapabilities(false)} className="size-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                                    <span className="material-symbols-outlined text-gray-600">close</span>
+                                </button>
+                            </div>
+                            <div className="overflow-y-auto p-6 space-y-4">
                                 {selectedEngine === 'xray' ? (
-                                    <><span className="material-symbols-outlined text-[#007db8]">memory</span> TorchXRayVision — Capabilities</>
-                                ) : (
-                                    <><span className="material-symbols-outlined text-yellow-500">bolt</span> YOLOv11 — Capabilities</>
-                                )}
-                            </h2>
-                            <button onClick={() => setShowCapabilities(false)} className="size-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                                <span className="material-symbols-outlined text-gray-600">close</span>
-                            </button>
-                        </div>
-                        <div className="overflow-y-auto p-6 space-y-4">
-                            {selectedEngine === 'xray' ? (
-                                <>
-                                    <p className="text-sm text-gray-600 leading-relaxed">
-                                        <strong>DenseNet121-res224-all</strong> model trained on
-                                        NIH ChestX-ray14, CheXpert, MIMIC-CXR, PadChest, Google, and OpenI datasets.
-                                        Detects the following <strong>18 thoracic pathologies</strong>:
-                                    </p>
-                                    <div className="overflow-x-auto">
-                                        <table className="w-full text-sm border-collapse">
-                                            <thead>
-                                                <tr className="bg-gray-50 text-left">
-                                                    <th className="px-3 py-2 font-extrabold text-[10px] uppercase tracking-widest text-gray-500 border-b">#</th>
-                                                    <th className="px-3 py-2 font-extrabold text-[10px] uppercase tracking-widest text-gray-500 border-b">Pathology (EN)</th>
-                                                    <th className="px-3 py-2 font-extrabold text-[10px] uppercase tracking-widest text-gray-500 border-b">Name</th>
-                                                    <th className="px-3 py-2 font-extrabold text-[10px] uppercase tracking-widest text-gray-500 border-b">Description</th>
-                                                    <th className="px-3 py-2 font-extrabold text-[10px] uppercase tracking-widest text-gray-500 border-b">Severity</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {XRAY_CAPABILITIES.map((p, i) => (
-                                                    <tr key={p.name} className="border-b border-gray-100 hover:bg-blue-50/50 transition-colors">
-                                                        <td className="px-3 py-2 text-gray-400 font-mono uppercase font-bold text-xs">{i + 1}</td>
-                                                        <td className="px-3 py-2"><code className="text-[11px] bg-gray-100 px-1.5 py-0.5 rounded font-mono uppercase">{p.name}</code></td>
-                                                        <td className="px-3 py-2 font-semibold text-gray-700">{p.es}</td>
-                                                        <td className="px-3 py-2 text-gray-500">{p.desc}</td>
-                                                        <td className="px-3 py-2 font-semibold whitespace-nowrap">{p.severity}</td>
+                                    <>
+                                        <p className="text-sm text-gray-600 leading-relaxed">
+                                            <strong>DenseNet121-res224-all</strong> model trained on
+                                            NIH ChestX-ray14, CheXpert, MIMIC-CXR, PadChest, Google, and OpenI datasets.
+                                            Detects the following <strong>18 thoracic pathologies</strong>:
+                                        </p>
+                                        <div className="overflow-x-auto">
+                                            <table className="w-full text-sm border-collapse">
+                                                <thead>
+                                                    <tr className="bg-gray-50 text-left">
+                                                        <th className="px-3 py-2 font-extrabold text-[10px] uppercase tracking-widest text-gray-500 border-b">#</th>
+                                                        <th className="px-3 py-2 font-extrabold text-[10px] uppercase tracking-widest text-gray-500 border-b">Pathology (EN)</th>
+                                                        <th className="px-3 py-2 font-extrabold text-[10px] uppercase tracking-widest text-gray-500 border-b">Name</th>
+                                                        <th className="px-3 py-2 font-extrabold text-[10px] uppercase tracking-widest text-gray-500 border-b">Description</th>
+                                                        <th className="px-3 py-2 font-extrabold text-[10px] uppercase tracking-widest text-gray-500 border-b">Severity</th>
                                                     </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div className="flex items-center gap-2 p-3 bg-blue-50 rounded-xl text-sm text-blue-700">
-                                        <span className="material-symbols-outlined text-[16px]">info</span>
-                                        This model is optimized exclusively for <strong>Chest X-Ray images</strong>.
-                                    </div>
-                                </>
-                            ) : (
-                                <>
-                                    <p className="text-sm text-gray-600 leading-relaxed">
-                                        <strong>YOLOv11 Nano</strong> model trained on the COCO dataset.
-                                        Detects <strong>80 generic object classes</strong>.
-                                    </p>
-                                    <div className="flex flex-wrap gap-2">
-                                        {YOLO_CAPABILITIES_SUMMARY.map(cls => (
-                                            <span key={cls} className="px-3 py-1.5 bg-gray-100 border border-gray-200 text-gray-700 text-xs font-semibold rounded-full">{cls}</span>
-                                        ))}
-                                        <span className="px-3 py-1.5 bg-yellow-50 border border-yellow-200 text-yellow-700 text-xs font-semibold rounded-full">+50 more...</span>
-                                    </div>
-                                </>
-                            )}
+                                                </thead>
+                                                <tbody>
+                                                    {XRAY_CAPABILITIES.map((p, i) => (
+                                                        <tr key={p.name} className="border-b border-gray-100 hover:bg-blue-50/50 transition-colors">
+                                                            <td className="px-3 py-2 text-gray-400 font-mono uppercase font-bold text-xs">{i + 1}</td>
+                                                            <td className="px-3 py-2"><code className="text-[11px] bg-gray-100 px-1.5 py-0.5 rounded font-mono uppercase">{p.name}</code></td>
+                                                            <td className="px-3 py-2 font-semibold text-gray-700">{p.es}</td>
+                                                            <td className="px-3 py-2 text-gray-500">{p.desc}</td>
+                                                            <td className="px-3 py-2 font-semibold whitespace-nowrap">{p.severity}</td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div className="flex items-center gap-2 p-3 bg-blue-50 rounded-xl text-sm text-blue-700">
+                                            <span className="material-symbols-outlined text-[16px]">info</span>
+                                            This model is optimized exclusively for <strong>Chest X-Ray images</strong>.
+                                        </div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <p className="text-sm text-gray-600 leading-relaxed">
+                                            <strong>YOLOv11 Nano</strong> model trained on the COCO dataset.
+                                            Detects <strong>80 generic object classes</strong>.
+                                        </p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {YOLO_CAPABILITIES_SUMMARY.map(cls => (
+                                                <span key={cls} className="px-3 py-1.5 bg-gray-100 border border-gray-200 text-gray-700 text-xs font-semibold rounded-full">{cls}</span>
+                                            ))}
+                                            <span className="px-3 py-1.5 bg-yellow-50 border border-yellow-200 text-yellow-700 text-xs font-semibold rounded-full">+50 more...</span>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )
+            }
         </div>
     );
 }
+
 export default App;

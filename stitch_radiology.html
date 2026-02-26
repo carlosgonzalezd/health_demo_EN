@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dell AI Radiology Analysis Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#007ab8",
+                        "dell-blue": "#007db8",
+                        "dell-dark": "#0f1c23",
+                        "slate-dark": "#364356",
+                        "background-light": "#F5F6F7",
+                        "background-dark": "#0f1c23",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                        "display": ["Outfit", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .dark-glass {
+            background: rgba(15, 28, 35, 0.85);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="bg-background-light text-slate-dark font-sans min-h-screen flex flex-col">
+<!-- Header -->
+<header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+<div class="px-6 py-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="text-dell-blue">
+<!-- Dell Logo SVG substitute -->
+<svg class="h-8 w-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44ZM24 40C32.8366 40 40 32.8366 40 24C40 15.1634 32.8366 8 24 8C15.1634 8 8 15.1634 8 24C8 32.8366 15.1634 40 24 40Z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M24 14V34" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path>
+<path d="M14 24H34" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+</div>
+<h1 class="text-slate-900 text-xl font-bold font-display tracking-tight">Dell Technologies</h1>
+</div>
+<div class="flex-1 flex justify-center">
+<div class="bg-blue-50/50 px-6 py-1.5 rounded-full border border-blue-100 flex items-center gap-2">
+<span class="material-symbols-outlined text-dell-blue text-[20px]">medical_services</span>
+<span class="text-dell-blue text-sm font-bold tracking-wide font-display">AI HEALTHCARE ASSISTANT</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-lg border border-gray-200">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+</span>
+<span class="text-xs font-mono font-medium text-gray-600">SYSTEM ONLINE</span>
+</div>
+<button class="p-2 text-gray-500 hover:text-dell-blue transition-colors rounded-full hover:bg-gray-50">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-dell-blue text-white flex items-center justify-center font-bold text-sm">
+                    JD
+                </div>
+</div>
+</div>
+</header>
+<!-- Neural Engine Control Bar -->
+<div class="px-6 py-4">
+<div class="glass-panel rounded-xl px-6 py-3 flex flex-wrap items-center justify-between gap-4 shadow-sm">
+<div class="flex items-center gap-6 overflow-x-auto pb-1 sm:pb-0">
+<div class="flex flex-col gap-1 min-w-[140px]">
+<label class="text-[10px] uppercase tracking-wider text-gray-500 font-bold font-display">Server Node</label>
+<div class="flex items-center gap-2 text-slate-800 font-medium text-sm cursor-pointer group">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-dell-blue text-[18px]">dns</span>
+<span>GB10-Cluster-A</span>
+<span class="material-symbols-outlined text-gray-400 text-[16px] ml-auto">expand_more</span>
+</div>
+</div>
+<div class="w-px h-8 bg-gray-200"></div>
+<div class="flex flex-col gap-1 min-w-[160px]">
+<label class="text-[10px] uppercase tracking-wider text-gray-500 font-bold font-display">Report Model</label>
+<div class="flex items-center gap-2 text-slate-800 font-medium text-sm cursor-pointer group">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-dell-blue text-[18px]">psychology</span>
+<span>Llama-3-Med (80B)</span>
+<span class="material-symbols-outlined text-gray-400 text-[16px] ml-auto">expand_more</span>
+</div>
+</div>
+<div class="w-px h-8 bg-gray-200"></div>
+<div class="flex flex-col gap-1 min-w-[140px]">
+<label class="text-[10px] uppercase tracking-wider text-gray-500 font-bold font-display">Vision Engine</label>
+<div class="flex items-center gap-2 text-slate-800 font-medium text-sm cursor-pointer group">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-dell-blue text-[18px]">visibility</span>
+<span>XTraY-v4 (Pro)</span>
+<span class="material-symbols-outlined text-gray-400 text-[16px] ml-auto">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Hardware Stats Widget (Mini) -->
+<div class="flex items-center gap-4 bg-white/50 rounded-lg px-4 py-2 border border-white/60">
+<div class="flex flex-col">
+<span class="text-[10px] text-gray-500 font-mono">GPU LOAD</span>
+<div class="flex items-end gap-1">
+<span class="text-sm font-bold text-slate-800 font-mono">82%</span>
+<div class="flex gap-0.5 mb-1">
+<div class="w-0.5 h-1.5 bg-dell-blue rounded-full"></div>
+<div class="w-0.5 h-2 bg-dell-blue rounded-full"></div>
+<div class="w-0.5 h-1 bg-dell-blue/30 rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="w-px h-6 bg-gray-300"></div>
+<div class="flex flex-col">
+<span class="text-[10px] text-gray-500 font-mono">THROUGHPUT</span>
+<span class="text-sm font-bold text-slate-800 font-mono">142 t/s</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content -->
+<main class="flex-1 px-6 pb-6 flex flex-col lg:flex-row gap-6 h-[calc(100vh-180px)] min-h-[600px]">
+<!-- Left Column: Diagnostic Image Center -->
+<div class="lg:w-7/12 xl:w-2/3 flex flex-col gap-4">
+<div class="bg-black rounded-xl overflow-hidden shadow-lg border border-gray-800 flex-1 relative group">
+<!-- Toolbar Overlay -->
+<div class="absolute top-4 left-4 z-20 flex flex-col gap-2">
+<button class="w-10 h-10 rounded-lg dark-glass flex items-center justify-center text-white hover:bg-dell-blue transition-colors border border-white/10">
+<span class="material-symbols-outlined">contrast</span>
+</button>
+<button class="w-10 h-10 rounded-lg dark-glass flex items-center justify-center text-white hover:bg-dell-blue transition-colors border border-white/10">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<button class="w-10 h-10 rounded-lg dark-glass flex items-center justify-center text-white hover:bg-dell-blue transition-colors border border-white/10">
+<span class="material-symbols-outlined">pan_tool</span>
+</button>
+<button class="w-10 h-10 rounded-lg dark-glass flex items-center justify-center text-white hover:bg-dell-blue transition-colors border border-white/10">
+<span class="material-symbols-outlined">grid_on</span>
+</button>
+</div>
+<!-- Main DICOM Image Area -->
+<div class="w-full h-full relative bg-gray-900 flex items-center justify-center" data-alt="Dark abstract background representing an empty radiology viewer" style="background-image: radial-gradient(circle at center, #1a2730 0%, #000000 100%);">
+<!-- X-Ray Image Simulation -->
+<img alt="Chest X-Ray scan showing ribs and lungs in monochrome" class="max-h-[90%] max-w-[90%] opacity-90 object-contain mix-blend-screen grayscale contrast-125" data-alt="Chest X-Ray scan showing ribs and lungs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT_NtUwBAJ7CaM1nqzjqmHl6mrt8CgqntvtnqjOR5Rf5gNipkTFSko-Eb5n7unoDuAnWgRwGUS3PTPSP2n2IJxMXQzM1fDhhWPzjlaqADzx-7VCmQHIrr3iPNU9WURHdVdc0i_6KNfoM4ZmDZszuxiA-xKah-QBPp2zOXI_kHc3vszqRw6EAl-dcmVh4b9X-CXo9e6LW5En8V0OGIx89dVh22xD6SHhEhugWtcAP578ahouAziokeY85R5btZL76Eo6cpgNqKHZnY"/>
+<!-- AI Bounding Boxes (Simulated) -->
+<div class="absolute top-1/3 left-1/2 w-32 h-24 border-2 border-dell-blue/70 rounded bg-dell-blue/10 translate-x-[-80%] translate-y-[20%] flex items-start justify-end p-1">
+<span class="bg-dell-blue text-white text-[10px] font-bold px-1 rounded-sm">98%</span>
+</div>
+<div class="absolute top-1/2 left-1/2 w-20 h-20 border-2 border-yellow-500/70 rounded bg-yellow-500/10 translate-x-[20%] translate-y-[-10%] flex items-start justify-end p-1">
+<span class="bg-yellow-500 text-black text-[10px] font-bold px-1 rounded-sm">76%</span>
+</div>
+<!-- Drag & Drop Overlay -->
+<div class="absolute inset-0 bg-black/40 flex items-end justify-center pb-8 pointer-events-none group-hover:opacity-100 transition-opacity">
+<div class="glass-panel px-6 py-3 rounded-full flex items-center gap-3 animate-pulse">
+<span class="material-symbols-outlined text-dell-blue">upload_file</span>
+<span class="text-white font-medium tracking-wide font-display text-sm drop-shadow-md">Drag &amp; Drop DICOM Series</span>
+</div>
+</div>
+</div>
+<!-- Footer Info in Image -->
+<div class="absolute bottom-0 w-full bg-gradient-to-t from-black/90 to-transparent p-4 flex justify-between items-end text-white/80">
+<div class="text-xs font-mono">
+<p>SERIES: 1044-32A</p>
+<p>SLICE: 14/64</p>
+</div>
+<div class="text-xs font-mono text-right">
+<p>WW: 4096 WC: 2048</p>
+<p>ZOOM: 1.2x</p>
+</div>
+</div>
+</div>
+<!-- Timeline / Series Selector -->
+<div class="bg-white rounded-xl p-3 shadow-sm border border-gray-200 h-24 flex gap-3 overflow-x-auto items-center">
+<div class="min-w-[70px] h-full bg-slate-100 rounded border-2 border-dell-blue relative overflow-hidden cursor-pointer">
+<img alt="Thumbnail 1" class="w-full h-full object-cover opacity-80" data-alt="Small thumbnail of x-ray scan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_Dvn4PZpCoKWuULjmXwosmd7jPnsO9sdh3Qfl4sLsVr4JE7L513qI2N8B1PbiEsj7B82WNcGa1UC0TmBukZYD-Xpg2dMxNse1DjrXhcWTjpou_oT8KXR3L3OgYqY_mdP33xUH00mpC7JYWdVKuwx-jmw3LInj97TlQuITVFGqySjzIJ1yKof9RbtSppa-mbx4ppp8cZqOXNO-andHx7w4oDn3byQVahezJjFUVOym0txi2X65ivKkPW1WsgNWCWNZwoWHqim_mFk"/>
+</div>
+<div class="min-w-[70px] h-full bg-slate-100 rounded border border-gray-200 relative overflow-hidden cursor-pointer hover:border-gray-400">
+<img alt="Thumbnail 2" class="w-full h-full object-cover opacity-50 grayscale" data-alt="Small thumbnail of x-ray scan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyoZ8C8j9kvsWlO3Aob7-qG2iRubbxk3fLatBCP1oCErFs4j-nIretbXBIBETsPAtPlxMl_Eo0Dp45mXgYG1sT6hiNi-HLN5QXCroSM8PEoxDWlZdyOCRLXcoHUuFYr1FHXgt0oY9yKX2_yi2DRubFEpE5-JnuIBPp5hqKAZM3HNy6_FH80Jdvbxh-hl426ysJRt-i0-bpmqLK2fFTl8cvE6sYGlkzEibH2_9zPW-a-koW0Etai7NkWQaHAPC4JYbBdn1OA9sQC0Q"/>
+</div>
+<div class="min-w-[70px] h-full bg-slate-100 rounded border border-gray-200 relative overflow-hidden cursor-pointer hover:border-gray-400">
+<img alt="Thumbnail 3" class="w-full h-full object-cover opacity-50 grayscale" data-alt="Small thumbnail of x-ray scan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqpiCyGG0WMnBpRZ60q0A6SkNvOPpCPilix2PEcVHvt9TNfze52hhiHpHsstr_zQbXZD3zTbEKn46dKmSilU9hxoTf7peHwRcoQ7YKHn7vVQQOcuI7ysfLaHnPQ7tTRmOGzCd5jMF1cxv_VVwBhAuBnRr_Gcd1NPAicoym4BbUL5ay6TF_7h4TEh8hpZC7nN3XpS0CpTgHlf7l_V0fgbgxqExImNdphfzlO9A8vbdM6dOsuKuqVgdtmP-nT_W1cAmvjhE7ne0R-EE"/>
+</div>
+<div class="min-w-[70px] h-full bg-slate-100 rounded border border-gray-200 relative overflow-hidden cursor-pointer hover:border-gray-400 flex items-center justify-center text-gray-400">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Analytical Insights -->
+<div class="lg:w-5/12 xl:w-1/3 flex flex-col gap-4">
+<!-- Patient Info Card -->
+<div class="bg-white rounded-xl p-5 shadow-sm border border-gray-200 flex justify-between items-start">
+<div>
+<h2 class="text-2xl font-bold font-display text-slate-800">Sarah Connor</h2>
+<p class="text-sm text-gray-500 mt-1">ID: #4920-3921 • F • 42Y</p>
+</div>
+<div class="text-right">
+<div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-dell-blue">
+                        ICU - Bed 4
+                    </div>
+<p class="text-xs text-gray-400 mt-2 font-mono">2023-10-24 09:42 AM</p>
+</div>
+</div>
+<!-- Findings Panel -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 flex-1 flex flex-col overflow-hidden">
+<div class="p-5 border-b border-gray-100 flex justify-between items-center">
+<h3 class="font-bold font-display text-lg text-slate-800">Clinical Findings</h3>
+<span class="material-symbols-outlined text-gray-400 cursor-pointer hover:text-dell-blue">more_horiz</span>
+</div>
+<div class="p-5 flex-1 overflow-y-auto custom-scrollbar">
+<!-- Confidence Scores Chart -->
+<div class="mb-8">
+<div class="flex justify-between items-baseline mb-3">
+<h4 class="text-sm font-semibold text-gray-600 font-display uppercase tracking-wide">Anatomical Predictions</h4>
+<span class="text-xs text-dell-blue font-bold">XTraY-v4 Model</span>
+</div>
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="group">
+<div class="flex justify-between text-sm mb-1">
+<span class="font-medium text-slate-700">Cardiomegaly</span>
+<span class="font-mono font-bold text-dell-blue">94%</span>
+</div>
+<div class="w-full bg-gray-100 rounded-full h-2">
+<div class="bg-dell-blue h-2 rounded-full relative" style="width: 94%">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white border-2 border-dell-blue rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group">
+<div class="flex justify-between text-sm mb-1">
+<span class="font-medium text-slate-700">Pleural Effusion</span>
+<span class="font-mono font-bold text-yellow-600">76%</span>
+</div>
+<div class="w-full bg-gray-100 rounded-full h-2">
+<div class="bg-yellow-500 h-2 rounded-full relative" style="width: 76%"></div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="group">
+<div class="flex justify-between text-sm mb-1">
+<span class="font-medium text-slate-700">Pneumonia</span>
+<span class="font-mono font-bold text-gray-400">12%</span>
+</div>
+<div class="w-full bg-gray-100 rounded-full h-2">
+<div class="bg-gray-400 h-2 rounded-full relative" style="width: 12%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Generated Report -->
+<div>
+<div class="flex justify-between items-center mb-3">
+<h4 class="text-sm font-semibold text-gray-600 font-display uppercase tracking-wide">AI Impression</h4>
+<div class="flex gap-2">
+<button class="p-1 hover:bg-gray-100 rounded text-gray-400 hover:text-dell-blue">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+<button class="p-1 hover:bg-gray-100 rounded text-gray-400 hover:text-dell-blue">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+</div>
+<div class="bg-blue-50/50 p-4 rounded-lg border border-blue-100 text-sm leading-relaxed text-slate-700 relative">
+<span class="absolute top-0 right-0 p-1">
+<span class="material-symbols-outlined text-blue-200 text-[40px]">auto_awesome</span>
+</span>
+<p class="relative z-10"><span class="font-semibold text-dell-blue">Summary:</span> The cardiac silhouette is enlarged, suggestive of cardiomegaly. There is blunting of the right costophrenic angle consistent with small pleural effusion. No focal consolidation or pneumothorax is identified. Osseous structures are intact.</p>
+<div class="mt-3 flex gap-2">
+<span class="px-2 py-1 bg-white rounded border border-blue-200 text-xs text-blue-600 font-medium">#Cardiomegaly</span>
+<span class="px-2 py-1 bg-white rounded border border-blue-200 text-xs text-blue-600 font-medium">#Effusion</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-gray-100 bg-gray-50 flex gap-3">
+<button class="flex-1 bg-white border border-gray-300 text-slate-700 font-medium py-2 rounded-lg hover:bg-gray-50 transition-colors shadow-sm text-sm">Reject Analysis</button>
+<button class="flex-1 bg-dell-blue text-white font-medium py-2 rounded-lg hover:bg-blue-600 transition-colors shadow-sm text-sm">Approve Report</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Status Bar -->
+<footer class="bg-white border-t border-gray-200 py-1.5 px-6 text-[11px] font-mono text-gray-500 flex justify-between items-center z-40">
+<div class="flex gap-6">
+<span class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                NODE: ACTIVE (GB10)
+            </span>
+<span class="hidden sm:inline">LATENCY: 42ms</span>
+<span class="hidden sm:inline">UPTIME: 99.98%</span>
+</div>
+<div class="flex gap-6">
+<span>MODEL: XTraY v4.1</span>
+<span>BUILD: 2023.10.24-RC2</span>
+<span class="text-dell-blue font-bold">DELL TECHNOLOGIES</span>
+</div>
+</footer>
+</body></html>

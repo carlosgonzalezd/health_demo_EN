@@ -48,60 +48,74 @@ const TriageChat = ({ backendUrl, selectedModel, contextData }) => {
     };
 
     return (
-        <div className="planilla-chatbot-section" style={{ marginTop: '2rem' }}>
-            <div className="chat-smart-container">
-                <div className="chat-header-inline" style={{ borderBottom: '2px solid #0ea5e9', background: '#f8fafc' }}>
-                    <Activity size={20} style={{ color: '#0ea5e9' }} />
-                    <span style={{ fontWeight: '800', letterSpacing: '-0.02em', color: '#0f172a' }}>CLINICAL TRIAGE ASSISTANT</span>
+        <div className="flex flex-col h-[500px] glass-panel rounded-[2.5rem] border border-white/60 shadow-sm overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="px-8 py-5 border-b border-gray-100 bg-white/50 backdrop-blur-md flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                    <div className="size-10 rounded-xl bg-blue-50 text-[#007db8] flex items-center justify-center">
+                        <Activity size={20} />
+                    </div>
+                    <div>
+                        <h3 className="text-sm font-extrabold text-[#111418] uppercase tracking-wider font-outfit">Clinical Triage Assistant</h3>
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Powered by GB10 Neural Engine</p>
+                    </div>
                 </div>
+                <div className="flex items-center gap-2">
+                    <span className="size-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span className="text-[10px] font-extrabold text-[#007db8] uppercase tracking-widest">Active Inference</span>
+                </div>
+            </div>
 
-                <div className="chat-messages-inline" style={{ padding: '2rem 1.5rem', background: '#fefefe' }}>
-                    {messages.map((m, i) => (
+            <div className="flex-1 overflow-y-auto p-8 space-y-6 custom-scrollbar bg-slate-50/30">
+                {messages.map((m, i) => (
+                    <div
+                        key={i}
+                        className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
                         <div
-                            key={i}
-                            className={`chat-msg ${m.role}`}
-                            style={{
-                                lineHeight: '1.6',
-                                fontSize: '1rem',
-                                padding: '1.25rem',
-                                borderRadius: m.role === 'assistant' ? '0 1rem 1rem 1rem' : '1rem 1rem 0 1rem',
-                                marginBottom: '1.5rem',
-                                background: m.role === 'assistant' ? 'white' : '#e0f2fe',
-                                border: m.role === 'assistant' ? '1px solid #e2e8f0' : 'none',
-                                borderLeft: m.role === 'assistant' ? '4px solid #0ea5e9' : 'none',
-                                color: '#334155',
-                                boxShadow: m.role === 'assistant' ? '0 4px 6px -1px rgba(0,0,0,0.05)' : 'none',
-                                alignSelf: m.role === 'user' ? 'flex-end' : 'flex-start',
-                                maxWidth: '90%',
-                            }}
+                            className={`max-w-[85%] px-6 py-4 rounded-[1.5rem] text-sm font-medium leading-relaxed shadow-sm ${m.role === 'assistant'
+                                    ? 'bg-white border border-gray-100 text-slate-700 rounded-tl-none'
+                                    : 'bg-[#007db8] text-white rounded-br-none'
+                                }`}
                         >
                             {m.role === 'assistant' ? (
-                                <div className="markdown-content">
+                                <div className="markdown-content prose prose-sm prose-slate">
                                     <ReactMarkdown>{m.content}</ReactMarkdown>
                                 </div>
-                            ) : m.content}
+                            ) : (
+                                m.content
+                            )}
                         </div>
-                    ))}
-                    {loading && (
-                        <div className="chat-msg assistant" style={{ fontStyle: 'italic', color: '#0ea5e9', display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1rem' }}>
-                            <Loader2 className="spin" size={18} /> <strong>Analyzing Manchester Protocol...</strong>
+                    </div>
+                ))}
+                {loading && (
+                    <div className="flex justify-start">
+                        <div className="bg-white border border-gray-100 px-6 py-4 rounded-[1.5rem] rounded-tl-none shadow-sm flex items-center gap-3 text-slate-400">
+                            <Loader2 className="animate-spin" size={16} />
+                            <span className="text-xs font-extrabold uppercase tracking-widest">Reasoning Manchester Protocol...</span>
                         </div>
-                    )}
-                    <div ref={messagesEndRef} />
-                </div>
+                    </div>
+                )}
+                <div ref={messagesEndRef} />
+            </div>
 
-                <form className="chat-input-inline" onSubmit={handleSend}>
+            <form className="p-6 bg-white border-t border-gray-100" onSubmit={handleSend}>
+                <div className="relative group">
                     <input
-                        placeholder="e.g.: Why is 40°C fever Orange and not Red?"
+                        placeholder="Ask about Manchester criteria, vitals interpretation..."
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         disabled={loading}
+                        className="w-full bg-gray-50 border-2 border-transparent focus:border-[#007db8]/30 focus:bg-white rounded-2xl py-4 pl-6 pr-16 text-sm font-bold text-gray-800 outline-none transition-all shadow-inner"
                     />
-                    <button type="submit" disabled={loading || !input} className="btn-primary" style={{ width: 'auto', padding: '0 1.5rem' }}>
-                        <Send size={18} /> Send
+                    <button
+                        type="submit"
+                        disabled={loading || !input}
+                        className="absolute right-2 top-2 bottom-2 px-4 rounded-xl bg-[#007db8] text-white hover:bg-[#005a8a] transition-all disabled:opacity-30 disabled:hover:bg-[#007db8]"
+                    >
+                        <Send size={18} />
                     </button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     );
 };
