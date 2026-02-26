@@ -8,3 +8,4 @@ Detailed Inference Log
 Date/Time	Task Description	Model Used	Tokens
 2026-02-25 19:18	Generation of synthetic patients gpt-oss:20b	1598
 2026-02-26 13:30	Standardization of Performance Monitors & Code Extraction	gpt-oss:20b	12500
+2026-02-26 13:55\tFix Model Capabilities modal for CT/MRI\tgpt-oss:20b\t850

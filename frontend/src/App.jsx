@@ -56,6 +56,21 @@ const MRI_CAPABILITIES = [
     { name: "Volume Analytics", desc: "Total tumor burden calculation in cubic centimeters.", label: "Volume" }
 ];
 
+const RADIOLOGY_SAMPLES = {
+    xray: [
+        { name: "Chest PA Sample", url: "https://raw.githubusercontent.com/ieee8023/covid-chestxray-dataset/master/images/000001-2.jpg" },
+        { name: "Chest Lat Sample", url: "https://raw.githubusercontent.com/ieee8023/covid-chestxray-dataset/master/images/000001-4.jpg" }
+    ],
+    ct: [
+        { name: "Lung CT Sample", url: "https://raw.githubusercontent.com/ieee8023/covid-chestxray-dataset/master/images/000006.jpg" },
+        { name: "Brain CT Sample", url: "https://raw.githubusercontent.com/sharmisthasarkar/Brain-CT-Scan-Images-Dataset/master/test/Normal/1.jpg" }
+    ],
+    mri: [
+        { name: "Brain MRI Tumor", url: "https://raw.githubusercontent.com/giacomodeodato/BrainMRIDataset/master/example.png" },
+        { name: "Brain MRI Normal", url: "https://raw.githubusercontent.com/Sartaj007/Brain-Tumor-Classification-DataSet/master/Training/no_tumor/1.jpg" }
+    ]
+};
+
 // Dynamic Backend Configuration
 const BACKEND_PORT = window.location.port === "4101" ? "4201" : "4200";
 const IS_PRO = window.location.port === "4101";
@@ -740,6 +755,23 @@ function App() {
             setPreview(URL.createObjectURL(selected));
             setResult(null);
             setChatHistory([]);
+        }
+    };
+
+    const loadSampleImage = async (url) => {
+        setLoading(true);
+        try {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            const sampleFile = new File([blob], "sample_radiology.jpg", { type: blob.type });
+            setFile(sampleFile);
+            setPreview(URL.createObjectURL(sampleFile));
+            setResult(null);
+            setChatHistory([]);
+        } catch (e) {
+            alert("Error loading sample image from repository.");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -2068,6 +2100,41 @@ function App() {
                                                     </div>
                                                 )}
                                             </div>
+
+                                            {/* Quick Samples Section */}
+                                            {!preview && !loading && RADIOLOGY_SAMPLES[activeRadiologySubTab] && (
+                                                <div className="mt-8 flex flex-col items-center gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                                                    <p className="text-[10px] font-extrabold text-[#617289] uppercase tracking-widest flex items-center gap-2">
+                                                        <span className="material-symbols-outlined text-[14px]">auto_awesome</span>
+                                                        Or try a curated sample
+                                                    </p>
+                                                    <div className="flex gap-4 flex-wrap justify-center">
+                                                        {RADIOLOGY_SAMPLES[activeRadiologySubTab].map((sample, idx) => (
+                                                            <button
+                                                                key={idx}
+                                                                onClick={(e) => { e.stopPropagation(); loadSampleImage(sample.url); }}
+                                                                className="px-6 py-3 bg-white/60 backdrop-blur-md border border-white/80 rounded-2xl shadow-sm hover:shadow-md hover:border-[#007db8]/30 transition-all text-xs font-bold text-gray-700 flex items-center gap-3 active:scale-95 group"
+                                                            >
+                                                                <span className="material-symbols-outlined text-[18px] text-[#007db8] group-hover:scale-110 transition-transform">image_search</span>
+                                                                {sample.name}
+                                                            </button>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {/* Clear Action if preview is active */}
+                                            {preview && !loading && !result && (
+                                                <div className="mt-6 flex justify-center">
+                                                    <button
+                                                        onClick={() => { setFile(null); setPreview(null); setResult(null); }}
+                                                        className="flex items-center gap-2 text-[10px] font-extrabold text-[#617289] hover:text-red-500 uppercase tracking-widest transition-colors"
+                                                    >
+                                                        <span className="material-symbols-outlined text-[16px]">delete</span>
+                                                        Clear & Choose Another
+                                                    </button>
+                                                </div>
+                                            )}
                                         </div>
 
                                         {/* Panel Derecho: Resultados */}

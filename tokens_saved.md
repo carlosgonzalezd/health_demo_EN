@@ -9,3 +9,4 @@ By delegating heavy inference tasks (like generating UI structural prompts and m
 |-----------|------------------|------------|--------|
 | 2026-02-25 22:50 | Architecture Design for Deep Medical Summary Expansion | gpt-oss:20b | 2450 |
 | 2026-02-26 13:30 | Standardization of Performance Monitors & Code Extraction | gpt-oss:20b | 12500 |
+| 2026-02-26 13:58 | Fix Model Capabilities modal for CT/MRI | gpt-oss:20b | 850 |
