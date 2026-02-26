@@ -1795,14 +1795,15 @@ function App() {
                                                             <select
                                                                 value={selectedCredentialId}
                                                                 onChange={handleCredentialChange}
-                                                                className="bg-transparent border-none text-sm font-extrabold text-[#111418] focus:ring-0 outline-none cursor-pointer py-1.5 pl-0 pr-6 w-full truncate appearance-none font-outfit"
+                                                                className="bg-transparent border-none text-sm font-extrabold text-[#111418] focus:ring-0 outline-none cursor-pointer py-1.5 pl-0 pr-8 w-full truncate appearance-none font-outfit"
+                                                                style={{ background: 'none' }}
                                                             >
                                                                 {credentials.map(c => (
                                                                     <option key={c.id} value={c.id} className="text-slate-800 font-sans">{c.name}</option>
                                                                 ))}
                                                                 <option value="ADD_NEW">➕ Add Node</option>
                                                             </select>
-                                                            <span className="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 text-[18px] pointer-events-none">expand_more</span>
+                                                            <span className="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 text-[20px] pointer-events-none group-hover:text-[#007db8] transition-colors">keyboard_arrow_down</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1819,11 +1820,12 @@ function App() {
                                                             <select
                                                                 value={selectedModel}
                                                                 onChange={e => setSelectedModel(e.target.value)}
-                                                                className="bg-transparent border-none text-sm font-extrabold text-[#111418] focus:ring-0 outline-none cursor-pointer py-1.5 pl-0 pr-6 w-full truncate appearance-none font-outfit"
+                                                                className="bg-transparent border-none text-sm font-extrabold text-[#111418] focus:ring-0 outline-none cursor-pointer py-1.5 pl-0 pr-8 w-full truncate appearance-none font-outfit"
+                                                                style={{ background: 'none' }}
                                                             >
                                                                 {models.map(mod => <option key={mod} value={mod} className="font-sans">{mod}</option>)}
                                                             </select>
-                                                            <span className="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 text-[18px] pointer-events-none">expand_more</span>
+                                                            <span className="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 text-[20px] pointer-events-none group-hover:text-[#007db8] transition-colors">keyboard_arrow_down</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1840,12 +1842,13 @@ function App() {
                                                             <select
                                                                 value={selectedEngine}
                                                                 onChange={e => setSelectedEngine(e.target.value)}
-                                                                className="bg-transparent border-none text-sm font-extrabold text-[#111418] focus:ring-0 outline-none cursor-pointer py-1.5 pl-0 pr-6 w-full truncate appearance-none font-outfit"
+                                                                className="bg-transparent border-none text-sm font-extrabold text-[#111418] focus:ring-0 outline-none cursor-pointer py-1.5 pl-0 pr-8 w-full truncate appearance-none font-outfit"
+                                                                style={{ background: 'none' }}
                                                             >
                                                                 <option value="xray" className="font-sans">XTraY (Chest Radiography)</option>
                                                                 <option value="yolo" className="font-sans">YOLO v11 (General)</option>
                                                             </select>
-                                                            <span className="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 text-[18px] pointer-events-none">expand_more</span>
+                                                            <span className="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 text-[20px] pointer-events-none group-hover:text-[#007db8] transition-colors">keyboard_arrow_down</span>
                                                         </div>
                                                     </div>
                                                 </div>
