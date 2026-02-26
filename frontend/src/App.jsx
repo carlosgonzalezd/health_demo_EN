@@ -42,6 +42,20 @@ const YOLO_CAPABILITIES_SUMMARY = [
     "Book", "Clock", "Scissors", "Dog", "Cat", "Horse", "Sheep", "Cow"
 ];
 
+const CT_CAPABILITIES = [
+    { name: "Organ Segmentation", desc: "Automated masking of 117+ unique anatomical structures.", tech: "V-Net / UNet3D" },
+    { name: "Skeletal Map", desc: "206-bone identification and density overview.", tech: "TotalSeg-Bones" },
+    { name: "Vascular Routing", desc: "Aorta, Vena Cava and major arterial branch tracking.", tech: "TotalSeg-Vessels" },
+    { name: "Muscle Mass Index", desc: "Cross-sectional muscle area calculation for sarcopenia analysis.", tech: "TotalSeg-Muscles" }
+];
+
+const MRI_CAPABILITIES = [
+    { name: "NCR/NET", desc: "Necrotic and non-enhancing tumor core (Region 1).", label: "Necrosis" },
+    { name: "ED", desc: "Peritumoral edema (Region 2).", label: "Edema" },
+    { name: "ET", desc: "Enhancing tumor (Region 4).", label: "Enhancing" },
+    { name: "Volume Analytics", desc: "Total tumor burden calculation in cubic centimeters.", label: "Volume" }
+];
+
 // Dynamic Backend Configuration
 const BACKEND_PORT = window.location.port === "4101" ? "4201" : "4200";
 const IS_PRO = window.location.port === "4101";
@@ -2666,6 +2680,10 @@ function App() {
                                 <h2 className="text-lg font-extrabold text-[#111418] flex items-center gap-3">
                                     {selectedEngine === 'xray' ? (
                                         <><span className="material-symbols-outlined text-[#007db8]">memory</span> TorchXRayVision — Capabilities</>
+                                    ) : selectedEngine === 'ct_totalseg' ? (
+                                        <><span className="material-symbols-outlined text-green-500">body_system</span> TotalSegmentator — Capabilities</>
+                                    ) : selectedEngine === 'mri_brats' ? (
+                                        <><span className="material-symbols-outlined text-purple-500">psychology</span> BraTS Brain Tumor — Capabilities</>
                                     ) : (
                                         <><span className="material-symbols-outlined text-yellow-500">bolt</span> YOLOv11 — Capabilities</>
                                     )}
@@ -2709,6 +2727,45 @@ function App() {
                                         <div className="flex items-center gap-2 p-3 bg-blue-50 rounded-xl text-sm text-blue-700">
                                             <span className="material-symbols-outlined text-[16px]">info</span>
                                             This model is optimized exclusively for <strong>Chest X-Ray images</strong>.
+                                        </div>
+                                    </>
+                                ) : selectedEngine === 'ct_totalseg' ? (
+                                    <>
+                                        <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                                            <strong>TotalSegmentator</strong> is a robust tool for anatomical segmentation.
+                                            It provides highly accurate masks for 117+ structures.
+                                        </p>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            {CT_CAPABILITIES.map(cap => (
+                                                <div key={cap.name} className="p-4 bg-green-50/50 border border-green-100 rounded-2xl">
+                                                    <div className="flex items-center justify-between mb-2">
+                                                        <span className="text-[10px] font-extrabold text-green-600 uppercase tracking-widest">{cap.tech}</span>
+                                                        <span className="material-symbols-outlined text-green-500">check_circle</span>
+                                                    </div>
+                                                    <h4 className="font-bold text-gray-800 mb-1">{cap.name}</h4>
+                                                    <p className="text-xs text-gray-500 leading-relaxed">{cap.desc}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </>
+                                ) : selectedEngine === 'mri_brats' ? (
+                                    <>
+                                        <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                                            The <strong>BraTS</strong> (Brain Tumor Segmentation) model identifies sub-regions
+                                            of glioma tumors using multi-parametric MRI sequences (T1, T1c, T2, FLAIR).
+                                        </p>
+                                        <div className="space-y-3">
+                                            {MRI_CAPABILITIES.map(cap => (
+                                                <div key={cap.name} className="flex items-center gap-4 p-4 bg-purple-50/50 border border-purple-100 rounded-2xl group hover:bg-purple-50 transition-colors">
+                                                    <div className="size-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 group-hover:scale-110 transition-transform">
+                                                        <span className="material-symbols-outlined text-xl">biotech</span>
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="text-sm font-bold text-gray-800">{cap.name} — <span className="text-purple-600 uppercase tracking-tighter text-[10px]">{cap.label}</span></h4>
+                                                        <p className="text-[11px] text-gray-500">{cap.desc}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
                                     </>
                                 ) : (
