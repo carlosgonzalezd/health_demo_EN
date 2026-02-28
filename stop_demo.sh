@@ -14,4 +14,8 @@ echo "Working directory: $(pwd)"
 # Stop containers
 docker compose down
 
+# Stop performance monitor
+echo -e "${BLUE}Stopping Performance Monitor...${NC}"
+pkill -f host_stats_server.py
+
 echo -e "${RED}Health Demo EN stopped successfully.${NC}"
