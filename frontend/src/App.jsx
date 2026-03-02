@@ -1644,7 +1644,7 @@ function App() {
 
                                                     {/* GPU Gauge */}
                                                     <div className="flex flex-col items-center justify-end flex-1">
-                                                        <div className="relative w-28 h-14 overflow-hidden flex justify-center">
+                                                        <div className="relative w-28 h-16 shrink-0 overflow-hidden flex justify-center">
                                                             <svg className="w-28 h-28 absolute top-0" viewBox="0 0 100 100">
                                                                 {/* Background Arc */}
                                                                 <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#f3f4f6" strokeWidth="10" strokeLinecap="round" />
@@ -1660,7 +1660,7 @@ function App() {
 
                                                     {/* MEM Gauge */}
                                                     <div className="flex flex-col items-center justify-end flex-1">
-                                                        <div className="relative w-28 h-14 overflow-hidden flex justify-center">
+                                                        <div className="relative w-28 h-16 shrink-0 overflow-hidden flex justify-center">
                                                             <svg className="w-28 h-28 absolute top-0" viewBox="0 0 100 100">
                                                                 <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#f3f4f6" strokeWidth="10" strokeLinecap="round" />
                                                                 <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#f97316" strokeWidth="10" strokeLinecap="round" strokeDasharray="109.95" strokeDashoffset={isNaN(hwStats.mem) ? 109.95 : 109.95 - (hwStats.mem / 100) * 109.95} className="transition-all duration-1000 ease-out drop-shadow-[0_2px_4px_rgba(249,115,22,0.3)]" />
@@ -2480,7 +2480,7 @@ function App() {
 
                                                     {/* GPU Gauge */}
                                                     <div className="flex flex-col items-center justify-end flex-1">
-                                                        <div className="relative w-28 h-14 overflow-hidden flex justify-center">
+                                                        <div className="relative w-28 h-16 shrink-0 overflow-hidden flex justify-center">
                                                             <svg className="w-28 h-28 absolute top-0" viewBox="0 0 100 100">
                                                                 {/* Background Arc */}
                                                                 <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#f3f4f6" strokeWidth="10" strokeLinecap="round" />
@@ -2496,7 +2496,7 @@ function App() {
 
                                                     {/* MEM Gauge */}
                                                     <div className="flex flex-col items-center justify-end flex-1">
-                                                        <div className="relative w-28 h-14 overflow-hidden flex justify-center">
+                                                        <div className="relative w-28 h-16 shrink-0 overflow-hidden flex justify-center">
                                                             <svg className="w-28 h-28 absolute top-0" viewBox="0 0 100 100">
                                                                 <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#f3f4f6" strokeWidth="10" strokeLinecap="round" />
                                                                 <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#f97316" strokeWidth="10" strokeLinecap="round" strokeDasharray="109.95" strokeDashoffset={109.95 - (hwStats.mem / 100) * 109.95} className="transition-all duration-1000 ease-out drop-shadow-[0_2px_4px_rgba(249,115,22,0.3)]" />
