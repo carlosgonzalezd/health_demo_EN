@@ -34,10 +34,26 @@ def analyze_triage_notes(notes, model="biomistral", ollama_url="http://host.dock
         
         result_text = response.json().get("response", "")
         
-        # Clean up potential markdown
-        result_text = result_text.replace("```json", "").replace("```", "").strip()
-        
-        return json.loads(result_text)
+        # Robust JSON extraction
+        def extract_json_local(text):
+            text = text.strip()
+            # Try direct
+            try: return json.loads(text)
+            except: pass
+            # Try markdown cleanup
+            import re
+            clean = re.sub(r'^```(?:json)?\s*', '', text)
+            clean = re.sub(r'\s*```$', '', clean)
+            try: return json.loads(clean)
+            except: pass
+            # Try find { }
+            try:
+                match = re.search(r'\{.*\}', text, re.DOTALL)
+                if match: return json.loads(match.group())
+            except: pass
+            return {}
+
+        return extract_json_local(result_text)
         
     except Exception as e:
         print(f"Ollama Error: {e}"); import traceback; traceback.print_exc()

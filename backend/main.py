@@ -8,6 +8,40 @@ import io
 import json
 import uuid
 from typing import List, Optional
+import re
+
+def extract_json(text: str):
+    """
+    Robustly extract and parse JSON from a string that might contain
+    markdown blocks or preamble text.
+    """
+    if not text or not isinstance(text, str):
+        return {}
+    
+    # 1. Try direct parse
+    try:
+        return json.loads(text.strip())
+    except:
+        pass
+
+    # 2. Try cleaning markdown backticks
+    clean_text = re.sub(r'^```(?:json)?\s*', '', text.strip())
+    clean_text = re.sub(r'\s*```$', '', clean_text)
+    try:
+        return json.loads(clean_text)
+    except:
+        pass
+
+    # 3. Find first { and last }
+    try:
+        match = re.search(r'\{.*\}', text, re.DOTALL)
+        if match:
+            return json.loads(match.group())
+    except:
+        pass
+    
+    # 4. If everything fails, return empty
+    return {}
 
 app = FastAPI(title="Healthcare Demo API", version="1.6")
 
@@ -328,7 +362,10 @@ VISUAL FORMATTING RULES (CRITICAL):
 5. Use **double line breaks** between paragraphs to improve readability.
 6. Highlight key diagnoses and pathological values with **bold**.
 
-CLINICAL STANDARDS:
+CLINICAL STANDARDS & SAFETY (CRITICAL):
+- ANATOMICAL CONSISTENCY: Before analyzing, check if the image matches the expected anatomy (e.g., Chest X-ray).
+- REJECTION PROTOCOL: If the image is NOT a chest radiograph (e.g., it's a shoulder, arm, leg, or other joint), YOU MUST identify this mismatch. 
+- Do NOT report findings like 'Cardiomegaly' or 'Pneumonia' on a joint. If the vision engine suggests chest pathologies on a joint, discard them as artifacts and report 'INCOHERENT ANATOMY DETECTED'.
 - ALWAYS correlate image findings with the patient's medical history.
 - Write as a formal medical report: "Observed...", "Consistent with...", "Suggests...".
 - If the vision engine is generic (YOLO), warn that the detection is not clinical.
@@ -357,7 +394,7 @@ Generate a structured JSON report:
    - Avoid infantilizing the explanation; be objective and clear.
    (Use short, separate paragraphs)
 
-STRICTLY respond with a valid JSON object containing exactly these two keys with your generated content:
+STRICTLY respond with a SINGLE valid JSON object. Do not include any preamble, explanations, or code block markers outside the JSON. Ensure all newlines within the text values are correctly escaped as \n.
 
 {{
   "clinical_report": "...write the detailed technical report for the doctor here...",
@@ -384,17 +421,25 @@ STRICTLY respond with a valid JSON object containing exactly these two keys with
             llm_result = ollama_resp.json()
             response_text = llm_result.get("message", {}).get("content", "{}")
 
-            parsed = json.loads(response_text)
-            clin_rep = parsed.get("clinical_report", response_text)
-            if isinstance(clin_rep, dict):
-                clin_rep = json.dumps(clin_rep, ensure_ascii=False)
-            elif not isinstance(clin_rep, str):
-                clin_rep = str(clin_rep)
+            parsed = extract_json(response_text)
+            
+            # Fallback if extraction failed but we have text
+            if not parsed and len(response_text.strip()) > 10:
+                print(f"WARNING: Extraction failed for response: {response_text[:200]}...")
+                # Try simple key-value extraction for clinical_report/patient_explanation
+                clin_match = re.search(r'"clinical_report":\s*"(.*?)"', response_text, re.DOTALL)
+                pat_match = re.search(r'"patient_explanation":\s*"(.*?)"', response_text, re.DOTALL)
+                
+                clin_rep = clin_match.group(1) if clin_match else response_text
+                pat_exp = pat_match.group(1) if pat_match else "Analysis available in doctor's report."
+            else:
+                clin_rep = parsed.get("clinical_report", response_text)
+                pat_exp = parsed.get("patient_explanation", "")
 
-            pat_exp = parsed.get("patient_explanation", "")
-            if isinstance(pat_exp, dict):
-                pat_exp = json.dumps(pat_exp, ensure_ascii=False)
-            elif not isinstance(pat_exp, str):
+            # Ensure they are strings
+            if not isinstance(clin_rep, str):
+                clin_rep = str(clin_rep)
+            if not isinstance(pat_exp, str):
                 pat_exp = str(pat_exp)
 
             return AnalysisResponse(
@@ -407,6 +452,10 @@ STRICTLY respond with a valid JSON object containing exactly these two keys with
             )
         except Exception as e:
             print(f"Error in LLM Call: {e}")
+            # If it's a JSON error, log the response text for debugging
+            if "json" in str(e).lower() and 'response_text' in locals():
+                print(f"MALFORMED JSON RECEIVED: {response_text}")
+            
             return AnalysisResponse(
                 detections=detections,
                 clinical_report=f"Technical error in analysis: {str(e)}",
@@ -547,7 +596,7 @@ JSON:"""
             print(f"DEBUG TRIAGE [generate]: Raw response = {response_text[:500]}")
             
             clean_text = response_text.replace("```json", "").replace("```", "").strip()
-            parsed = json.loads(clean_text)
+            parsed = extract_json(clean_text)
             
             # Validate: check if it actually contains triage keys
             has_valid_keys = any(k in parsed for k in ["level", "triage_level", "Level", "priority_name", "priority"])
@@ -578,7 +627,7 @@ JSON:"""
                 print(f"DEBUG TRIAGE [chat]: Raw response = {response_text[:500]}")
                 
                 clean_text = response_text.replace("```json", "").replace("```", "").strip()
-                parsed = json.loads(clean_text)
+                parsed = extract_json(clean_text)
                 
                 has_valid_keys = any(k in parsed for k in ["level", "triage_level", "Level", "priority_name", "priority"])
                 if not has_valid_keys:

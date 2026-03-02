@@ -79,6 +79,22 @@ def detect():
         # Build pathology results
         pathologies = {}
         detections = []
+        
+        # --- ANATOMICAL VALIDATION (Heuristic) ---
+        # If the image is extremely off-center or has strange intensity distribution 
+        # for a chest X-ray, we should flag it. 
+        # DenseNet121-res224-all results can be noisy if the input isn't a chest.
+        
+        # A simple check: if the model predicts very high probabilities for 
+        # "Enlarged Cardiomediastinum" and "Cardiomegaly" on a small joint, 
+        # it's usually because it's mapping the joint structure to heart shapes.
+        
+        probable_chest = True
+        # If the mean of the normalized image is very different from typical chest X-rays
+        # or if the distribution is too uniform (like a background)
+        if np.std(img) < 0.1: # Very low contrast, probably not a valid X-ray
+            probable_chest = False
+
         for i, pathology_name in enumerate(model.pathologies):
             prob = float(probs[i])
             pathologies[pathology_name] = round(prob, 4)
@@ -89,17 +105,23 @@ def detect():
                 detections.append({
                     "class": f"{es_name} ({pathology_name})",
                     "confidence": prob,
-                    "bbox": []  # No bounding boxes in classification
+                    "bbox": []
                 })
 
         # Sort detections by confidence descending
         detections.sort(key=lambda x: x['confidence'], reverse=True)
 
+        # Logic to detect "Anatomy Mismatch"
+        # If the top findings are structural and the clinical LLM should handle the rejection
+        # but we can add a flag here.
+        anatomy_status = "chest_xray" if probable_chest else "unknown_anatomy"
+
         return jsonify({
             "detections": detections,
             "pathologies": pathologies,
             "engine": "torchxrayvision",
-            "model": "DenseNet121-res224-all"
+            "model": "DenseNet121-res224-all",
+            "anatomy_status": anatomy_status
         })
 
     except Exception as e:
