@@ -1640,7 +1640,7 @@ function App() {
                                                     <span className="text-[10px] font-bold bg-[#007db8]/5 text-[#007db8] px-2.5 py-1 rounded-lg border border-[#007db8]/10 backdrop-blur-sm shadow-sm whitespace-nowrap">Live Telemetry</span>
                                                 </div>
 
-                                                <div className="flex items-end justify-between w-full h-full gap-8">
+                                                <div className="flex items-end justify-between w-full gap-8">
 
                                                     {/* GPU Gauge */}
                                                     <div className="flex flex-col items-center justify-end flex-1">
@@ -2476,7 +2476,7 @@ function App() {
                                                     </div>
                                                     <span className="text-[10px] font-bold bg-[#007db8]/5 text-[#007db8] px-2.5 py-1 rounded-lg border border-[#007db8]/10 backdrop-blur-sm shadow-sm whitespace-nowrap">Live Telemetry</span>
                                                 </div>
-                                                <div className="flex items-end justify-between w-full h-full gap-8">
+                                                <div className="flex items-end justify-between w-full gap-8">
 
                                                     {/* GPU Gauge */}
                                                     <div className="flex flex-col items-center justify-end flex-1">
