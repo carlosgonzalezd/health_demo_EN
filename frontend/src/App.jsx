@@ -1955,7 +1955,7 @@ function App() {
                                             </button>
                                         </div>
 
-                                        <div className="flex flex-col gap-2 ml-4">
+                                        <div className="flex flex-col gap-2 ml-4 shrink-0 min-w-[280px]">
                                             <div className="flex items-center justify-between px-1">
                                                 <div className="flex items-center gap-2">
                                                     <span className="size-1 rounded-full bg-green-500 animate-pulse"></span>
@@ -2037,6 +2037,38 @@ function App() {
                                             <span className="material-symbols-outlined text-[14px]">info</span>
                                             Model Capabilities
                                         </button>
+                                    </div>
+
+                                    {/* Patient Context Section */}
+                                    <div className="flex flex-col md:flex-row items-start md:items-center gap-4 bg-white/80 rounded-xl px-6 py-4 border border-white/60 shadow-sm">
+                                        <div className="flex items-center gap-3 min-w-[220px] shrink-0">
+                                            <span className="material-symbols-outlined text-[#007db8] text-xl">person_search</span>
+                                            <div className="flex flex-col gap-1">
+                                                <label className="text-[10px] font-extrabold text-[#617289] uppercase tracking-widest font-outfit">Patient Context</label>
+                                                <select
+                                                    value={selectedPatient?.id || ""}
+                                                    onChange={e => handlePatientSelect(e)}
+                                                    className="bg-transparent border-none text-sm font-extrabold text-[#111418] focus:ring-0 outline-none cursor-pointer py-0.5 pl-0 pr-6 appearance-none font-outfit"
+                                                    style={{ background: 'none' }}
+                                                >
+                                                    <option value="">No patient selected</option>
+                                                    {patients.map(p => <option key={p.id} value={p.id}>{p.name} ({p.id})</option>)}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        {selectedPatient && (
+                                            <div className="flex-1 flex items-start gap-3 p-3 bg-blue-50/50 rounded-xl border border-blue-100/50 animate-in fade-in slide-in-from-left-4">
+                                                <span className="material-symbols-outlined text-[#007db8] text-lg mt-0.5">medical_information</span>
+                                                <div className="flex-1 min-w-0">
+                                                    <div className="flex items-center gap-2 mb-1">
+                                                        <span className="text-[10px] font-extrabold text-[#007db8] uppercase tracking-widest">Medical History</span>
+                                                        <span className="text-[9px] font-bold text-gray-400">{selectedPatient.age}y • {selectedPatient.sex}</span>
+                                                    </div>
+                                                    <p className="text-xs text-gray-600 font-medium leading-relaxed line-clamp-2">{selectedPatient.history}</p>
+                                                    <p className="text-[10px] text-gray-400 font-bold mt-1 uppercase tracking-wide">Reason: {selectedPatient.reason}</p>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
 
                                     {/* Main Body: Upload Left + Results Right */}
@@ -2351,6 +2383,17 @@ function App() {
                                                         <option value="">Select patient...</option>
                                                         {patients.map(p => <option key={p.id} value={p.id}>{p.name} ({p.id})</option>)}
                                                     </select>
+                                                    {selectedPatient && (
+                                                        <div className="mt-3 p-4 bg-blue-50/50 rounded-2xl border border-blue-100/50 animate-in fade-in slide-in-from-top-4">
+                                                            <div className="flex items-center gap-2 mb-2">
+                                                                <span className="material-symbols-outlined text-[#007db8] text-sm">medical_information</span>
+                                                                <span className="text-[10px] font-extrabold text-[#007db8] uppercase tracking-widest">Medical History</span>
+                                                                <span className="text-[9px] font-bold text-gray-400 ml-auto">{selectedPatient.age}y • {selectedPatient.sex}</span>
+                                                            </div>
+                                                            <p className="text-xs text-gray-600 font-medium leading-relaxed">{selectedPatient.history}</p>
+                                                            <p className="text-[10px] text-gray-400 font-bold mt-2 uppercase tracking-wide">Reason: {selectedPatient.reason}</p>
+                                                        </div>
+                                                    )}
                                                 </div>
 
                                                 <div className="p-5 bg-gray-50/50 rounded-2xl border border-gray-100 flex flex-col gap-4">
