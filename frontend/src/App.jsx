@@ -1463,8 +1463,8 @@ function App() {
                                                 {/* Study Card 1 */}
                                                 <div className="bg-gray-50/50 rounded-2xl border border-gray-200/80 overflow-hidden hover:border-[#007db8]/50 transition-all group shadow-sm">
                                                     <div className="h-40 bg-gray-200 relative overflow-hidden">
-                                                        <div className="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCx1W5NNnj4NLd2_K8K5I4yquw2Vm-oz6ssV7ostNjq2JBvOoswyRWGts30_tRwuwn8dYs-z6kUARNzOSZL81aJn3nsayVwteoHxTYauT7HgaIab0r0JlH2iEFQ8LD8ulJfRLGPV1wMkvEQrTqGoEyBWEFkTz1S9c0ccNb_oHqKPpLhAubbHAFiDTy5zNxjBMUBift_dw6Z7Kgi_6nbj0ITX9qsRLAtBsfdjEitc7D3J9kJCogyM-jQJnlzgVr1X5b_0tMdwki2Swk')" }}></div>
-                                                        <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-white/90 text-[#111418] border border-gray-200/50 shadow-sm text-[9px] font-extrabold uppercase tracking-widest backdrop-blur-md">MRI • Head</div>
+                                                        <div className="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: "url('/dashboard/brain_mri.png')" }}></div>
+                                                        <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-white/90 text-[#111418] border border-gray-200/50 shadow-sm text-[9px] font-extrabold uppercase tracking-widest backdrop-blur-md">MRI • Brain</div>
                                                         <div className="absolute top-3 right-3 px-2 py-1 rounded text-[9px] font-extrabold uppercase tracking-widest bg-red-100 text-red-700 border border-red-200 shadow-sm">Urgent</div>
                                                     </div>
                                                     <div className="p-4">
@@ -1489,7 +1489,7 @@ function App() {
                                                 {/* Study Card 2 */}
                                                 <div className="bg-gray-50/50 rounded-2xl border border-gray-200/80 overflow-hidden hover:border-[#007db8]/50 transition-all group shadow-sm">
                                                     <div className="h-40 bg-gray-200 relative overflow-hidden">
-                                                        <div className="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuClCB9sFQGr6u_WhW0yWSxxEzNenMA6yf3EwZq1J_XwbolVwmZiTaP0VXefmJ31K8rYDjkr2DN0Nz3QxBHT7lWArT2HmQMjqzGzYIocfI__w55pPhioPeVdecUjqn-gmbtIb0YPUtyRvanuJYJI0wf15sHILrXdac_86qja5ca8xsYt576Nga17ebdvTjbMBRM_kVvIN-Zbk4ClcmU7gs-q59MomxzucQTM8wfpfufAOhTwwc0aTAlWWeoUlUHYDBZf_lNF2RNZaVs')" }}></div>
+                                                        <div className="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: "url('/dashboard/chest_xray.png')" }}></div>
                                                         <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-white/90 text-[#111418] border border-gray-200/50 shadow-sm text-[9px] font-extrabold uppercase tracking-widest backdrop-blur-md">X-Ray • Chest</div>
                                                         <div className="absolute top-3 right-3 px-2 py-1 rounded text-[9px] font-extrabold uppercase tracking-widest bg-orange-100 text-orange-700 border border-orange-200 shadow-sm">Pending</div>
                                                     </div>
@@ -1515,7 +1515,7 @@ function App() {
                                                 {/* Study Card 3 */}
                                                 <div className="bg-gray-50/50 rounded-2xl border border-gray-200/80 overflow-hidden hover:border-[#007db8]/50 transition-all group shadow-sm">
                                                     <div className="h-40 bg-gray-200 relative overflow-hidden">
-                                                        <div className="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBFDW7FSOAS-UkZVxkBAqvsK0DVm5zqRzi4v_alNHocJibmCFeMr-WWh9iA6JjBH-oRI555O7NYVXyJFP0tGdMa2H4gfvaW84TvQqZXOkVf6tFNRbTXDsQzLIY8eE2qffEeQ-3ympx9RZxwxeoNAS5u1YHovPVSAiLwmGiKmPtKP_yOMhmIBjZMlnuSZdHXHJxR5lM6mnFj_n_SyGQ2eiYat1GEcAnZpkxDCkJLuSGbc-OupAwgghB0YJ4Rnhj7rsWZ3dP899zw6lg')" }}></div>
+                                                        <div className="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: "url('/dashboard/ct_abdomen.png')" }}></div>
                                                         <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-white/90 text-[#111418] border border-gray-200/50 shadow-sm text-[9px] font-extrabold uppercase tracking-widest backdrop-blur-md">CT • Abdomen</div>
                                                         <div className="absolute top-3 right-3 px-2 py-1 rounded text-[9px] font-extrabold uppercase tracking-widest bg-green-100 text-green-700 border border-green-200 shadow-sm">Reviewed</div>
                                                     </div>
@@ -1541,7 +1541,7 @@ function App() {
                                                 {/* Study Card 4 */}
                                                 <div className="bg-gray-50/50 rounded-2xl border border-gray-200/80 overflow-hidden hover:border-[#007db8]/50 transition-all group shadow-sm">
                                                     <div className="h-40 bg-gray-200 relative overflow-hidden">
-                                                        <div className="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1530497610245-94d3c16cda28?q=80&w=1000&auto=format&fit=crop')" }}></div>
+                                                        <div className="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: "url('/dashboard/hand_xray.png')" }}></div>
                                                         <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-white/90 text-[#111418] border border-gray-200/50 shadow-sm text-[9px] font-extrabold uppercase tracking-widest backdrop-blur-md">X-Ray • Hand</div>
                                                         <div className="absolute top-3 right-3 px-2 py-1 rounded text-[9px] font-extrabold uppercase tracking-widest bg-orange-100 text-orange-700 border border-orange-200 shadow-sm">Pending</div>
                                                     </div>
@@ -1567,7 +1567,7 @@ function App() {
                                                 {/* Study Card 5 */}
                                                 <div className="bg-gray-50/50 rounded-2xl border border-gray-200/80 overflow-hidden hover:border-[#007db8]/50 transition-all group shadow-sm">
                                                     <div className="h-40 bg-gray-200 relative overflow-hidden">
-                                                        <div className="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=1000&auto=format&fit=crop')" }}></div>
+                                                        <div className="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: "url('/dashboard/brain_mri.png')" }}></div>
                                                         <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-white/90 text-[#111418] border border-gray-200/50 shadow-sm text-[9px] font-extrabold uppercase tracking-widest backdrop-blur-md">MRI • Brain</div>
                                                         <div className="absolute top-3 right-3 px-2 py-1 rounded text-[9px] font-extrabold uppercase tracking-widest bg-red-100 text-red-700 border border-red-200 shadow-sm">Urgent</div>
                                                     </div>
@@ -1593,7 +1593,7 @@ function App() {
                                                 {/* Study Card 6 */}
                                                 <div className="bg-gray-50/50 rounded-2xl border border-gray-200/80 overflow-hidden hover:border-[#007db8]/50 transition-all group shadow-sm">
                                                     <div className="h-40 bg-gray-200 relative overflow-hidden">
-                                                        <div className="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1599045118108-bf9954418b76?q=80&w=1000&auto=format&fit=crop')" }}></div>
+                                                        <div className="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: "url('/dashboard/knee_xray.png')" }}></div>
                                                         <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-white/90 text-[#111418] border border-gray-200/50 shadow-sm text-[9px] font-extrabold uppercase tracking-widest backdrop-blur-md">X-Ray • Knee</div>
                                                         <div className="absolute top-3 right-3 px-2 py-1 rounded text-[9px] font-extrabold uppercase tracking-widest bg-green-100 text-green-700 border border-green-200 shadow-sm">Reviewed</div>
                                                     </div>
