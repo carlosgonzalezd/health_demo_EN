@@ -1622,7 +1622,7 @@ function App() {
                                         {/* Right Sidebar Content (Triage Queue) */}
                                         <div className="col-span-12 lg:col-span-12 xl:col-span-5 space-y-8">
                                             {/* Performance Monitor (Reloj / Gauge Pattern) */}
-                                            <div className="w-full bg-white/90 rounded-3xl border border-black/5 p-6 shadow-sm backdrop-blur-xl mb-4 animate-in fade-in slide-in-from-top-4 relative overflow-hidden group">
+                                            <div className="shrink-0 w-full bg-white/90 rounded-3xl border border-black/5 p-6 shadow-sm backdrop-blur-xl mb-4 animate-in fade-in slide-in-from-top-4 relative overflow-hidden group">
                                                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                                 <div className="flex items-center justify-between mb-6">
                                                     <div className="flex items-center gap-3">
@@ -2460,7 +2460,7 @@ function App() {
                                         <div className="flex-1 bg-gray-50/50 p-10 flex flex-col border-l md:border-l-0 overflow-y-auto">
 
                                             {/* Performance Monitor (Reloj / Gauge Pattern at top right) */}
-                                            <div className="w-full bg-white/90 rounded-3xl border border-black/5 p-6 shadow-sm backdrop-blur-xl mb-8 animate-in fade-in slide-in-from-top-4 relative overflow-hidden group">
+                                            <div className="shrink-0 w-full bg-white/90 rounded-3xl border border-black/5 p-6 shadow-sm backdrop-blur-xl mb-8 animate-in fade-in slide-in-from-top-4 relative overflow-hidden group">
                                                 <div className="flex items-center justify-between mb-6">
                                                     <div className="flex items-center gap-3">
                                                         <div className="size-8 rounded-xl bg-[#007db8]/10 text-[#007db8] flex items-center justify-center border border-[#007db8]/10">

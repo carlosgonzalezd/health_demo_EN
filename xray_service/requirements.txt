@@ -3,5 +3,5 @@ torchxrayvision
 torch
 torchvision
 scikit-image
-numpy
+numpy==1.26.4
 Pillow

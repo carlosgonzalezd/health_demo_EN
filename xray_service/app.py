@@ -11,7 +11,9 @@ app = Flask(__name__)
 
 # Load pre-trained DenseNet121 model (all datasets)
 print("Loading TorchXRayVision DenseNet121 model...")
-model = xrv.models.get_model(weights="densenet121-res224-all")
+device = "cuda" if torch.cuda.is_available() else "cpu"
+print(f"Using device: {device}")
+model = xrv.models.get_model(weights="densenet121-res224-all").to(device)
 model.eval()
 print(f"Model loaded. Pathologies: {model.pathologies}")
 
@@ -67,7 +69,7 @@ def detect():
         img = transform(img)
 
         # Convert to tensor and add batch dimension [1, 1, H, W]
-        img_tensor = torch.from_numpy(img).unsqueeze(0)
+        img_tensor = torch.from_numpy(img).unsqueeze(0).to(device)
 
         # Inference
         with torch.no_grad():

@@ -6,6 +6,15 @@ services:
       - "5002:5000"
     networks:
       - health_net
+    shm_size: '2gb'
+    ipc: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
     restart: unless-stopped
 
   xray-service:
@@ -15,6 +24,15 @@ services:
       - "5003:5001"
     networks:
       - health_net
+    shm_size: '2gb'
+    ipc: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
     restart: unless-stopped
 
   backend-service:
